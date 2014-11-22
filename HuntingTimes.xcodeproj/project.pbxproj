@@ -1,0 +1,437 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4CA156DB1A20413C00F95BA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */; };
+		4CA156DE1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DC1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld */; };
+		4CA156E01A20413C00F95BA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DF1A20413C00F95BA2 /* ViewController.swift */; };
+		4CA156E31A20413C00F95BA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA156E11A20413C00F95BA2 /* Main.storyboard */; };
+		4CA156E51A20413C00F95BA2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CA156E41A20413C00F95BA2 /* Images.xcassets */; };
+		4CA156E81A20413C00F95BA2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CA156E61A20413C00F95BA2 /* LaunchScreen.xib */; };
+		4CA156F41A20413C00F95BA2 /* HuntingTimesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156F31A20413C00F95BA2 /* HuntingTimesTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4CA156EE1A20413C00F95BA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4CA156CD1A20413C00F95BA2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4CA156D41A20413C00F95BA2;
+			remoteInfo = HuntingTimes;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4CA156D51A20413C00F95BA2 /* HuntingTimes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuntingTimes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CA156D91A20413C00F95BA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4CA156DD1A20413C00F95BA2 /* HuntingTimes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HuntingTimes.xcdatamodel; sourceTree = "<group>"; };
+		4CA156DF1A20413C00F95BA2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4CA156E21A20413C00F95BA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4CA156E41A20413C00F95BA2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		4CA156E71A20413C00F95BA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		4CA156ED1A20413C00F95BA2 /* HuntingTimesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HuntingTimesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CA156F21A20413C00F95BA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4CA156F31A20413C00F95BA2 /* HuntingTimesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntingTimesTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4CA156D21A20413C00F95BA2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CA156EA1A20413C00F95BA2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4CA156CC1A20413C00F95BA2 = {
+			isa = PBXGroup;
+			children = (
+				4CA156D71A20413C00F95BA2 /* HuntingTimes */,
+				4CA156F01A20413C00F95BA2 /* HuntingTimesTests */,
+				4CA156D61A20413C00F95BA2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4CA156D61A20413C00F95BA2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4CA156D51A20413C00F95BA2 /* HuntingTimes.app */,
+				4CA156ED1A20413C00F95BA2 /* HuntingTimesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4CA156D71A20413C00F95BA2 /* HuntingTimes */ = {
+			isa = PBXGroup;
+			children = (
+				4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */,
+				4CA156DF1A20413C00F95BA2 /* ViewController.swift */,
+				4CA156E11A20413C00F95BA2 /* Main.storyboard */,
+				4CA156E41A20413C00F95BA2 /* Images.xcassets */,
+				4CA156E61A20413C00F95BA2 /* LaunchScreen.xib */,
+				4CA156DC1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld */,
+				4CA156D81A20413C00F95BA2 /* Supporting Files */,
+			);
+			path = HuntingTimes;
+			sourceTree = "<group>";
+		};
+		4CA156D81A20413C00F95BA2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4CA156D91A20413C00F95BA2 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4CA156F01A20413C00F95BA2 /* HuntingTimesTests */ = {
+			isa = PBXGroup;
+			children = (
+				4CA156F31A20413C00F95BA2 /* HuntingTimesTests.swift */,
+				4CA156F11A20413C00F95BA2 /* Supporting Files */,
+			);
+			path = HuntingTimesTests;
+			sourceTree = "<group>";
+		};
+		4CA156F11A20413C00F95BA2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4CA156F21A20413C00F95BA2 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4CA156D41A20413C00F95BA2 /* HuntingTimes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4CA156F71A20413C00F95BA2 /* Build configuration list for PBXNativeTarget "HuntingTimes" */;
+			buildPhases = (
+				4CA156D11A20413C00F95BA2 /* Sources */,
+				4CA156D21A20413C00F95BA2 /* Frameworks */,
+				4CA156D31A20413C00F95BA2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HuntingTimes;
+			productName = HuntingTimes;
+			productReference = 4CA156D51A20413C00F95BA2 /* HuntingTimes.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4CA156EC1A20413C00F95BA2 /* HuntingTimesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4CA156FA1A20413C00F95BA2 /* Build configuration list for PBXNativeTarget "HuntingTimesTests" */;
+			buildPhases = (
+				4CA156E91A20413C00F95BA2 /* Sources */,
+				4CA156EA1A20413C00F95BA2 /* Frameworks */,
+				4CA156EB1A20413C00F95BA2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4CA156EF1A20413C00F95BA2 /* PBXTargetDependency */,
+			);
+			name = HuntingTimesTests;
+			productName = HuntingTimesTests;
+			productReference = 4CA156ED1A20413C00F95BA2 /* HuntingTimesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4CA156CD1A20413C00F95BA2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Ryan Norman";
+				TargetAttributes = {
+					4CA156D41A20413C00F95BA2 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					4CA156EC1A20413C00F95BA2 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 4CA156D41A20413C00F95BA2;
+					};
+				};
+			};
+			buildConfigurationList = 4CA156D01A20413C00F95BA2 /* Build configuration list for PBXProject "HuntingTimes" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4CA156CC1A20413C00F95BA2;
+			productRefGroup = 4CA156D61A20413C00F95BA2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4CA156D41A20413C00F95BA2 /* HuntingTimes */,
+				4CA156EC1A20413C00F95BA2 /* HuntingTimesTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4CA156D31A20413C00F95BA2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CA156E31A20413C00F95BA2 /* Main.storyboard in Resources */,
+				4CA156E81A20413C00F95BA2 /* LaunchScreen.xib in Resources */,
+				4CA156E51A20413C00F95BA2 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CA156EB1A20413C00F95BA2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4CA156D11A20413C00F95BA2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CA156E01A20413C00F95BA2 /* ViewController.swift in Sources */,
+				4CA156DE1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld in Sources */,
+				4CA156DB1A20413C00F95BA2 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4CA156E91A20413C00F95BA2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CA156F41A20413C00F95BA2 /* HuntingTimesTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4CA156EF1A20413C00F95BA2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4CA156D41A20413C00F95BA2 /* HuntingTimes */;
+			targetProxy = 4CA156EE1A20413C00F95BA2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4CA156E11A20413C00F95BA2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4CA156E21A20413C00F95BA2 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4CA156E61A20413C00F95BA2 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4CA156E71A20413C00F95BA2 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4CA156F51A20413C00F95BA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4CA156F61A20413C00F95BA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4CA156F81A20413C00F95BA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = HuntingTimes/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4CA156F91A20413C00F95BA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = HuntingTimes/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		4CA156FB1A20413C00F95BA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = HuntingTimesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HuntingTimes.app/HuntingTimes";
+			};
+			name = Debug;
+		};
+		4CA156FC1A20413C00F95BA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = HuntingTimesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HuntingTimes.app/HuntingTimes";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4CA156D01A20413C00F95BA2 /* Build configuration list for PBXProject "HuntingTimes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4CA156F51A20413C00F95BA2 /* Debug */,
+				4CA156F61A20413C00F95BA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4CA156F71A20413C00F95BA2 /* Build configuration list for PBXNativeTarget "HuntingTimes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4CA156F81A20413C00F95BA2 /* Debug */,
+				4CA156F91A20413C00F95BA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4CA156FA1A20413C00F95BA2 /* Build configuration list for PBXNativeTarget "HuntingTimesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4CA156FB1A20413C00F95BA2 /* Debug */,
+				4CA156FC1A20413C00F95BA2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4CA156DC1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4CA156DD1A20413C00F95BA2 /* HuntingTimes.xcdatamodel */,
+			);
+			currentVersion = 4CA156DD1A20413C00F95BA2 /* HuntingTimes.xcdatamodel */;
+			path = HuntingTimes.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 4CA156CD1A20413C00F95BA2 /* Project object */;
+}
