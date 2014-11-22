@@ -26,6 +26,8 @@ class ViewController: UIViewController, CountdownViewDelegate {
     var reversing      : Bool!
     var animating      : Bool!
     var dateLabel      : UILabel!
+    var downArrow      : UIImageView!
+    var upArrow        : UIImageView!
     
     let eventLabelOffset:CGFloat = 10.0
 
@@ -86,6 +88,20 @@ class ViewController: UIViewController, CountdownViewDelegate {
         dateLabel.alpha = 0.0
         view.addSubview(dateLabel)
         
+        let downArrowImage = UIImage(named: "down-arrow")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        downArrow = UIImageView(image: downArrowImage)
+        downArrow.center = CGPointMake(view.frame.width / 2, view.frame.height - 12)
+        downArrow.tintColor = .whiteColor()
+        downArrow.alpha = 0
+        view.addSubview(downArrow)
+        
+        let upArrowImage = UIImage(named: "up-arrow")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        upArrow = UIImageView(image: upArrowImage)
+        upArrow.center = CGPointMake(view.frame.width / 2, middleLine.frame.origin.y - 40)
+        upArrow.tintColor = .whiteColor()
+        upArrow.alpha = 0
+        view.addSubview(upArrow)
+        
         let nextDateGesture = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
         nextDateGesture.direction = .Down
         view.addGestureRecognizer(nextDateGesture)
@@ -93,6 +109,9 @@ class ViewController: UIViewController, CountdownViewDelegate {
         let previousDateGesture = UISwipeGestureRecognizer(target: self, action: "showNextDate")
         previousDateGesture.direction = .Up
         view.addGestureRecognizer(previousDateGesture)
+        
+        let touchDownGesture = UITapGestureRecognizer(target: self, action: "showSwipeHint")
+        view.addGestureRecognizer(touchDownGesture)
         
         view.alpha = 0
     }
@@ -105,6 +124,27 @@ class ViewController: UIViewController, CountdownViewDelegate {
             self.showEventLabels()
         }
         
+    }
+    
+    func showSwipeHint() {
+        UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+            self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, 5)
+            self.downArrow.alpha = 0.7
+            
+            self.upArrow.frame = CGRectOffset(self.upArrow.frame, 0, -5)
+            self.upArrow.alpha = 0.7
+        }) { (complete) -> Void in
+            UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, 5)
+                self.downArrow.alpha = 0.0
+                
+                self.upArrow.frame = CGRectOffset(self.upArrow.frame, 0, -5)
+                self.upArrow.alpha = 0.0
+                }, completion: { (complete) -> Void in
+                    self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, -10)
+                    self.upArrow.frame = CGRectOffset(self.upArrow.frame, 0, 10)
+            })
+        }
     }
     
     func currentState() -> String {

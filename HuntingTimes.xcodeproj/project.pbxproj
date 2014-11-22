@@ -16,6 +16,8 @@
 		4C46BE501A20E053005BB796 /* HuntingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE4F1A20E053005BB796 /* HuntingState.swift */; };
 		4C46BE521A2117EC005BB796 /* HuntingTimeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE511A2117EC005BB796 /* HuntingTimeParser.swift */; };
 		4C46BE541A21190C005BB796 /* hunting-times.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE531A21190C005BB796 /* hunting-times.csv */; };
+		4C46BE561A211F2C005BB796 /* down-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE551A211F2C005BB796 /* down-arrow@2x.png */; };
+		4C46BE581A21200B005BB796 /* up-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE571A21200B005BB796 /* up-arrow@2x.png */; };
 		4CA156DB1A20413C00F95BA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */; };
 		4CA156DE1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DC1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld */; };
 		4CA156E01A20413C00F95BA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DF1A20413C00F95BA2 /* ViewController.swift */; };
@@ -44,6 +46,8 @@
 		4C46BE4F1A20E053005BB796 /* HuntingState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingState.swift; sourceTree = "<group>"; };
 		4C46BE511A2117EC005BB796 /* HuntingTimeParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingTimeParser.swift; sourceTree = "<group>"; };
 		4C46BE531A21190C005BB796 /* hunting-times.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "hunting-times.csv"; sourceTree = "<group>"; };
+		4C46BE551A211F2C005BB796 /* down-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down-arrow@2x.png"; sourceTree = "<group>"; };
+		4C46BE571A21200B005BB796 /* up-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up-arrow@2x.png"; sourceTree = "<group>"; };
 		4CA156D51A20413C00F95BA2 /* HuntingTimes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuntingTimes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CA156D91A20413C00F95BA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -139,6 +143,8 @@
 		4CA156D81A20413C00F95BA2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4C46BE571A21200B005BB796 /* up-arrow@2x.png */,
+				4C46BE551A211F2C005BB796 /* down-arrow@2x.png */,
 				4C46BE531A21190C005BB796 /* hunting-times.csv */,
 				4CA156FF1A2041EB00F95BA2 /* background */,
 				4CA156D91A20413C00F95BA2 /* Info.plist */,
@@ -251,6 +257,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C46BE581A21200B005BB796 /* up-arrow@2x.png in Resources */,
+				4C46BE561A211F2C005BB796 /* down-arrow@2x.png in Resources */,
 				4CA156E31A20413C00F95BA2 /* Main.storyboard in Resources */,
 				4C46BE411A204686005BB796 /* forest@2x.jpg in Resources */,
 				4CA156E51A20413C00F95BA2 /* Images.xcassets in Resources */,
