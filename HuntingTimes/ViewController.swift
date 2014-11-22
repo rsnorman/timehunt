@@ -24,6 +24,7 @@ class ViewController: UIViewController, CountdownViewDelegate {
     var dates          : [[String:String]]!
     var currentPosition: Int!
     var reversing      : Bool!
+    var animating      : Bool!
     var dateLabel      : UILabel!
     
     let eventLabelOffset:CGFloat = 10.0
@@ -50,22 +51,15 @@ class ViewController: UIViewController, CountdownViewDelegate {
         
         currentPosition = 0
         reversing       = false
-        dates = [
-            [
-                "start" : "2014 Nov 22 6:59 AM",
-                "stop"  : "2014 Nov 22 5:36 PM"
-            ], [
-                "start" : "2014 Nov 23 7:01 AM",
-                "stop"  : "2014 Nov 23 5:36 PM"
-            ]
-        ]
+        animating     = false
+        dates = HuntingTimeParser.parse()
         
         huntStart  = dates[currentPosition]["start"]!
         huntStop   = dates[currentPosition]["stop"]!
         
         middleLine = UIView(frame: CGRectMake(view.frame.width / 2, 220, 1, view.frame.height - 240))
         middleLine.backgroundColor = .whiteColor()
-        middleLine.alpha           = 0.7
+        middleLine.alpha           = 0.0
         view.addSubview(middleLine)
         
         stateIndicator = UIView(frame: CGRectMake(view.frame.width / 2 - 5, 240, 11, 11))
@@ -73,7 +67,7 @@ class ViewController: UIViewController, CountdownViewDelegate {
         stateIndicator.layer.borderColor  = UIColor.whiteColor().CGColor
         stateIndicator.layer.borderWidth  = 1
         stateIndicator.backgroundColor    = .whiteColor()
-        stateIndicator.alpha              = 0.7
+        stateIndicator.alpha              = 0.0
         view.addSubview(stateIndicator)
         
         stateLabels               = [:]
@@ -89,9 +83,8 @@ class ViewController: UIViewController, CountdownViewDelegate {
         stateTimeLabels["ending"]     = addEventTimeLabel(timeToString(stopTime()),    y: 485)
         
         dateLabel = createLabel(dateToString(currentTime()), frame: CGRectMake(0, 185, view.frame.width, 30), fontSize: 18)
+        dateLabel.alpha = 0.0
         view.addSubview(dateLabel)
-        
-        addCountdown()
         
         let nextDateGesture = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
         nextDateGesture.direction = .Down
@@ -100,10 +93,18 @@ class ViewController: UIViewController, CountdownViewDelegate {
         let previousDateGesture = UISwipeGestureRecognizer(target: self, action: "showNextDate")
         previousDateGesture.direction = .Up
         view.addGestureRecognizer(previousDateGesture)
+        
+        view.alpha = 0
     }
     
     override func viewDidAppear(animated: Bool) {
-        showEventLabels()
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.view.alpha = 1
+        })  { (complete) -> Void in
+            self.addCountdown()
+            self.showEventLabels()
+        }
+        
     }
     
     func currentState() -> String {
@@ -269,9 +270,11 @@ class ViewController: UIViewController, CountdownViewDelegate {
     }
     
     func showNextDate() {
-        if currentPosition < dates.count - 1 {
+        if !animating && currentPosition < dates.count - 1 {
+            animating = true
             reversing = true
             hideEventLabels(reverse: true) { (complete) -> Void in
+                self.animating = false
                 self.currentPosition = self.currentPosition + 1
                 self.setTimes()
                 self.setCountdownTime()
@@ -282,9 +285,11 @@ class ViewController: UIViewController, CountdownViewDelegate {
     }
     
     func showPreviousDate() {
-        if currentPosition > 0 {
+        if !animating && currentPosition > 0 {
+            animating = true
             reversing = false
             hideEventLabels(reverse: false) { (complete) -> Void in
+                self.animating = false
                 self.currentPosition = self.currentPosition - 1
                 self.setTimes()
                 self.setCountdownTime()
@@ -311,6 +316,7 @@ class ViewController: UIViewController, CountdownViewDelegate {
             self.countdownLabel.alpha = 1
             self.dateLabel.alpha      = 1
             self.stateIndicator.alpha = 0.7
+            self.middleLine.alpha = 0.7
         }, completion)
     }
     
