@@ -20,6 +20,9 @@ class ViewController: UIViewController, CountdownViewDelegate {
     var stateLabels    : [String:UILabel]!
     var stateTimeLabels: [String:UILabel]!
     var stateIndicator : UIView!
+    var middleLine     : UIView!
+    
+    let eventLabelOffset:CGFloat = 10.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,10 +44,10 @@ class ViewController: UIViewController, CountdownViewDelegate {
         shadowView = ShadowView(frame: bgImageView.frame)
         view.addSubview(shadowView)
         
-        huntStart  = "2014 Nov 22 10:14 AM"
+        huntStart  = "2014 Nov 22 7:02 AM"
         huntStop   = "2014 Nov 22 5:35 PM"
         
-        let middleLine = UIView(frame: CGRectMake(view.frame.width / 2, 200, 1, view.frame.height - 250))
+        middleLine = UIView(frame: CGRectMake(view.frame.width / 2, 200, 1, view.frame.height - 250))
         middleLine.backgroundColor = .whiteColor()
         middleLine.alpha           = 0.7
         view.addSubview(middleLine)
@@ -70,6 +73,18 @@ class ViewController: UIViewController, CountdownViewDelegate {
         stateTimeLabels["ending"]     = addEventTimeLabel(dateToString(stopTime()), y: 460)
         
         addCountdown()
+        
+        let nextDateGesture = UISwipeGestureRecognizer(target: self, action: "showNextDate")
+        nextDateGesture.direction = .Down
+        view.addGestureRecognizer(nextDateGesture)
+        
+        let previousDateGesture = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
+        previousDateGesture.direction = .Up
+        view.addGestureRecognizer(previousDateGesture)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        showEventLabels()
     }
     
     func currentState() -> String {
@@ -89,9 +104,11 @@ class ViewController: UIViewController, CountdownViewDelegate {
     func addCountdown() {
         stateLabel = createLabel("", frame: CGRectMake(0, 30, view.frame.width, 40), fontSize: 16)
         stateLabel.font = UIFont(name: "HelveticaNeue", size: 16)
+        stateLabel.alpha = 0.0
         view.addSubview(stateLabel)
 
         countdownLabel = CountdownView(frame: CGRectMake(0, 50, view.frame.width, 120))
+        countdownLabel.alpha = 0.0
         view.addSubview(countdownLabel)
         
         countdownLabel.delegate = self
@@ -101,9 +118,7 @@ class ViewController: UIViewController, CountdownViewDelegate {
     
     func setCountdownTime() {
         stateLabel.text = events[currentState()]!
-        
         highlightState()
-        
         countdownLabel.startCountdown(currentTime())
     }
     
@@ -133,8 +148,8 @@ class ViewController: UIViewController, CountdownViewDelegate {
             stateLabel.layer.shadowColor = UIColor.whiteColor().CGColor
             stateLabel.layer.shadowOpacity = 0.8
             
-            UIView.animateWithDuration(0.4, animations: { () -> Void in
-                self.stateIndicator.center = CGPointMake(self.stateIndicator.center.x, stateLabel.center.y)
+            UIView.animateWithDuration(1.0, animations: { () -> Void in
+                self.stateIndicator.center = CGPointMake(self.stateIndicator.center.x, stateLabel.center.y + self.eventLabelOffset)
             })
         }
         
@@ -190,19 +205,92 @@ class ViewController: UIViewController, CountdownViewDelegate {
     }
     
     func addEventLabel(text: String, y: CGFloat) -> UILabel {
-        let eventLabel = createLabel(text, frame: CGRectMake(0, y, view.frame.width / 2 - 10, 30), fontSize: 24)
+        let eventLabel = createLabel(text, frame: CGRectMake(0, y - 10, view.frame.width / 2 - eventLabelOffset, 30), fontSize: 24)
         eventLabel.textAlignment = .Right
+        eventLabel.alpha         = 0
+        
         view.addSubview(eventLabel)
         
         return eventLabel
     }
     
     func addEventTimeLabel(text: String, y: CGFloat) -> UILabel {
-        let eventTimeLabel = createLabel(text, frame: CGRectMake(view.frame.width / 2 + 10, y, view.frame.width / 2 - 10, 30), fontSize: 24)
+        let eventTimeLabel = createLabel(text, frame: CGRectMake(view.frame.width / 2 + 10, y - eventLabelOffset, view.frame.width / 2 - 10, 30), fontSize: 24)
         eventTimeLabel.textAlignment = .Left
+        eventTimeLabel.alpha         = 0
+        
         view.addSubview(eventTimeLabel)
         
         return eventTimeLabel
+    }
+    
+    func showNextDate() {
+        hideEventLabels(reverse: false) { (complete) -> Void in
+            self.highlightState()
+            self.showEventLabels()
+        }
+    }
+    
+    func showPreviousDate() {
+        hideEventLabels(reverse: true) { (complete) -> Void in
+            self.highlightState()
+            self.showEventLabels(reverse: true)
+        }
+    }
+    
+    func showEventLabels(reverse: Bool = false, completion: ((Bool) -> Void)? = nil) {
+        let yOffset = reverse ? eventLabelOffset * -1 : eventLabelOffset
+        UIView.animateWithDuration(1.0, animations: { () -> Void in
+            for (state, label) in self.stateLabels {
+                label.frame = CGRectOffset(label.frame, 0, yOffset)
+                label.alpha = 1
+            }
+            
+            for (state, label) in self.stateTimeLabels {
+                label.frame = CGRectOffset(label.frame, 0, yOffset)
+                label.alpha = 1
+            }
+            
+            self.stateLabel.alpha     = 1
+            self.countdownLabel.alpha = 1
+            self.stateIndicator.alpha = 1
+        }, completion)
+    }
+    
+    func hideEventLabels(reverse: Bool = false, completion: ((Bool) -> Void)? = nil) {
+        let yOffset = reverse ? eventLabelOffset * -1 : eventLabelOffset
+        UIView.animateWithDuration(1.0, animations: { () -> Void in
+            
+            for (state, label) in self.stateLabels {
+                label.layer.shadowOpacity = 0.0
+                label.frame = CGRectOffset(label.frame, 0, yOffset)
+                label.alpha = 0
+            }
+            
+            for (state, label) in self.stateTimeLabels {
+                label.layer.shadowOpacity = 0.0
+                label.frame = CGRectOffset(label.frame, 0, yOffset)
+                label.alpha = 0
+            }
+            
+            self.stateLabel.alpha     = 0
+            self.countdownLabel.alpha = 0
+            self.stateIndicator.alpha = 0
+        }) { (complete) -> Void in
+            for (state, label) in self.stateLabels {
+                label.frame = CGRectOffset(label.frame, 0, yOffset * -2)
+            }
+            
+            for (state, label) in self.stateTimeLabels {
+                label.frame = CGRectOffset(label.frame, 0, yOffset * -2)
+            }
+            let indicatorYOffset = reverse ? self.middleLine.frame.origin.y + self.middleLine.frame.height : self.middleLine.frame.origin.y
+            self.stateIndicator.center = CGPointMake(self.stateIndicator.center.x, indicatorYOffset)
+            
+            if let completionClosure = completion {
+                completionClosure(complete)
+            }
+        }
     }
     
     func createLabel(text: String, frame: CGRect, fontSize: CGFloat) -> UILabel {
