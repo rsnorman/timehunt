@@ -16,6 +16,7 @@ protocol CountdownViewDelegate {
 class CountdownView : UILabel {
     var countdownToTime : NSDate!
     var delegate        : CountdownViewDelegate!
+    var timer           : NSTimer!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,6 +30,10 @@ class CountdownView : UILabel {
     func startCountdown(countdownToTime: NSDate) {
         self.countdownToTime = countdownToTime
         updateCountdown()
+    }
+    
+    func stopCountdown() {
+        timer = nil
     }
     
     func updateCountdown() {
@@ -68,7 +73,7 @@ class CountdownView : UILabel {
             delayInterval = delayInterval == 0 ? 60 : delayInterval
             println("Delay Interval: \(delayInterval)")
             
-            NSTimer.scheduledTimerWithTimeInterval(delayInterval, target: self, selector: "updateCountdown", userInfo: nil, repeats: false)
+            timer = NSTimer.scheduledTimerWithTimeInterval(delayInterval, target: self, selector: "updateCountdown", userInfo: nil, repeats: false)
             
             if hours == 0 && minutes == 1 && seconds == 1 {
                 if let del = delegate {
