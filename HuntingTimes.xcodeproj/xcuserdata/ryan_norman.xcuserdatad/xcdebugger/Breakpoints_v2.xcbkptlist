@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HuntingTimes/ViewController.swift"
-            timestampString = "438359610.3024"
+            timestampString = "438361978.936829"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "highlightState()"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,12 +26,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HuntingTimes/ViewController.swift"
-            timestampString = "438359610.3024"
+            timestampString = "438361978.936829"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "highlightState()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HuntingTimes/ViewController.swift"
+            timestampString = "438361978.936829"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "didFinishCountdown()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

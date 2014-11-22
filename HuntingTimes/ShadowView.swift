@@ -12,11 +12,10 @@ class ShadowView : UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 0.3)
+        backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 0.5)
     }
     
     required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
-    
 }

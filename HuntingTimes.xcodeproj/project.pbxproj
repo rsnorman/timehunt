@@ -12,6 +12,7 @@
 		4C46BE471A20484F005BB796 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE461A20484F005BB796 /* ShadowView.swift */; };
 		4C46BE491A206294005BB796 /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE481A206294005BB796 /* Delay.swift */; };
 		4C46BE4B1A20667B005BB796 /* TiltImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE4A1A20667B005BB796 /* TiltImageView.swift */; };
+		4C46BE4D1A20D7D1005BB796 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE4C1A20D7D1005BB796 /* CountdownView.swift */; };
 		4CA156DB1A20413C00F95BA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */; };
 		4CA156DE1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DC1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld */; };
 		4CA156E01A20413C00F95BA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DF1A20413C00F95BA2 /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 		4C46BE461A20484F005BB796 /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		4C46BE481A206294005BB796 /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
 		4C46BE4A1A20667B005BB796 /* TiltImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TiltImageView.swift; sourceTree = "<group>"; };
+		4C46BE4C1A20D7D1005BB796 /* CountdownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
 		4CA156D51A20413C00F95BA2 /* HuntingTimes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuntingTimes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CA156D91A20413C00F95BA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			children = (
 				4C46BE461A20484F005BB796 /* ShadowView.swift */,
 				4C46BE4A1A20667B005BB796 /* TiltImageView.swift */,
+				4C46BE4C1A20D7D1005BB796 /* CountdownView.swift */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 			files = (
 				4CA156E01A20413C00F95BA2 /* ViewController.swift in Sources */,
 				4C46BE4B1A20667B005BB796 /* TiltImageView.swift in Sources */,
+				4C46BE4D1A20D7D1005BB796 /* CountdownView.swift in Sources */,
 				4CA156DE1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld in Sources */,
 				4CA156DB1A20413C00F95BA2 /* AppDelegate.swift in Sources */,
 				4C46BE491A206294005BB796 /* Delay.swift in Sources */,

@@ -8,19 +8,18 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CountdownViewDelegate {
     var bgImageView    : TiltImageView!
     var shadowView     : ShadowView!
     var huntStart      : String!
     var huntStop       : String!
     var states         : [String]!
     var events         : [String:String]!
-    var countdownLabel : UILabel!
+    var countdownLabel : CountdownView!
     var stateLabel     : UILabel!
     var stateLabels    : [String:UILabel]!
     var stateTimeLabels: [String:UILabel]!
     var stateIndicator : UIView!
-    var timer          : NSTimer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +41,7 @@ class ViewController: UIViewController {
         shadowView = ShadowView(frame: bgImageView.frame)
         view.addSubview(shadowView)
         
-        huntStart  = "2014 Nov 22 9:33 AM"
+        huntStart  = "2014 Nov 22 10:14 AM"
         huntStop   = "2014 Nov 22 5:35 PM"
         
         let middleLine = UIView(frame: CGRectMake(view.frame.width / 2, 200, 1, view.frame.height - 250))
@@ -92,9 +91,10 @@ class ViewController: UIViewController {
         stateLabel.font = UIFont(name: "HelveticaNeue", size: 16)
         view.addSubview(stateLabel)
 
-        countdownLabel = createLabel("", frame: CGRectMake(0, 50, view.frame.width, 120), fontSize: 48)
-        countdownLabel.numberOfLines = 2
+        countdownLabel = CountdownView(frame: CGRectMake(0, 50, view.frame.width, 120))
         view.addSubview(countdownLabel)
+        
+        countdownLabel.delegate = self
         
         setCountdownTime()
     }
@@ -104,45 +104,20 @@ class ViewController: UIViewController {
         
         highlightState()
         
-        let timeLeft = currentTime().timeIntervalSinceNow
-        println("Time Left: \(timeLeft)")
-        let hours    = Int(ceil(timeLeft / 60) / 60)
-        let minutes  = Int(ceil(timeLeft / 60) % 60)
-        let seconds  = Int(timeLeft % 60)
-        
-        println("Hours: \(hours)")
-        println("Minutes: \(minutes)")
-        println("Seconds: \(seconds)")
-
-        var countdownText = ""
-        
-        if hours > 0 {
-            let hourLabel = hours > 1 ? "Hours" : "Hour"
-            countdownText += "\(hours) \(hourLabel)"
-        }
-        
-        if minutes > 1 {
-            if hours > 1 {
-                countdownText += "\n"
-            }
-            countdownText += "\(minutes) Minutes"
-        }
-            
-        if hours == 0 && minutes == 1 {
-            let secondLabel = seconds > 1 ? "Seconds" : "Second"
-            countdownText += "\(seconds) \(secondLabel)"
-        }
-        
-        countdownLabel.text = countdownText
-        
-        var delayInterval = NSTimeInterval(hours > 0 || minutes > 1 ? seconds + 1 : 1)
-        delayInterval = delayInterval == 0 ? 60 : delayInterval
-        println("Delay Interval: \(delayInterval)")
-        createTimer(delayInterval)
+        countdownLabel.startCountdown(currentTime())
     }
     
-    func createTimer(delayInterval : NSTimeInterval) {
-        timer = NSTimer.scheduledTimerWithTimeInterval(delayInterval, target: self, selector: "setCountdownTime", userInfo: nil, repeats: false)
+    func willFinishCountdown() {
+        UIView.animateWithDuration(0.5, delay: 0.9, options: nil, animations: { () -> Void in
+            self.countdownLabel.alpha = 0.0
+        }, completion: nil)
+    }
+    
+    func didFinishCountdown() {
+        setCountdownTime()
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.countdownLabel.alpha = 1.0
+        })
     }
     
     func highlightState() {
