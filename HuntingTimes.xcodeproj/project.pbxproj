@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C46BE411A204686005BB796 /* forest@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE401A204686005BB796 /* forest@2x.jpg */; };
+		4C46BE441A2046FE005BB796 /* StatusBarUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE431A2046FE005BB796 /* StatusBarUpdater.swift */; };
+		4C46BE471A20484F005BB796 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE461A20484F005BB796 /* ShadowView.swift */; };
+		4C46BE491A206294005BB796 /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE481A206294005BB796 /* Delay.swift */; };
+		4C46BE4B1A20667B005BB796 /* TiltImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE4A1A20667B005BB796 /* TiltImageView.swift */; };
 		4CA156DB1A20413C00F95BA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */; };
 		4CA156DE1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DC1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld */; };
 		4CA156E01A20413C00F95BA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DF1A20413C00F95BA2 /* ViewController.swift */; };
 		4CA156E31A20413C00F95BA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA156E11A20413C00F95BA2 /* Main.storyboard */; };
 		4CA156E51A20413C00F95BA2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CA156E41A20413C00F95BA2 /* Images.xcassets */; };
-		4CA156E81A20413C00F95BA2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CA156E61A20413C00F95BA2 /* LaunchScreen.xib */; };
 		4CA156F41A20413C00F95BA2 /* HuntingTimesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156F31A20413C00F95BA2 /* HuntingTimesTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +31,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C46BE401A204686005BB796 /* forest@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "forest@2x.jpg"; sourceTree = "<group>"; };
+		4C46BE431A2046FE005BB796 /* StatusBarUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarUpdater.swift; sourceTree = "<group>"; };
+		4C46BE461A20484F005BB796 /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
+		4C46BE481A206294005BB796 /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
+		4C46BE4A1A20667B005BB796 /* TiltImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TiltImageView.swift; sourceTree = "<group>"; };
 		4CA156D51A20413C00F95BA2 /* HuntingTimes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuntingTimes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CA156D91A20413C00F95BA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -34,7 +43,6 @@
 		4CA156DF1A20413C00F95BA2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4CA156E21A20413C00F95BA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4CA156E41A20413C00F95BA2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		4CA156E71A20413C00F95BA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		4CA156ED1A20413C00F95BA2 /* HuntingTimesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HuntingTimesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CA156F21A20413C00F95BA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CA156F31A20413C00F95BA2 /* HuntingTimesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntingTimesTests.swift; sourceTree = "<group>"; };
@@ -58,6 +66,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C46BE421A2046F3005BB796 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4C46BE431A2046FE005BB796 /* StatusBarUpdater.swift */,
+				4C46BE481A206294005BB796 /* Delay.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		4C46BE451A204840005BB796 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				4C46BE461A20484F005BB796 /* ShadowView.swift */,
+				4C46BE4A1A20667B005BB796 /* TiltImageView.swift */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
 		4CA156CC1A20413C00F95BA2 = {
 			isa = PBXGroup;
 			children = (
@@ -81,9 +107,10 @@
 			children = (
 				4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */,
 				4CA156DF1A20413C00F95BA2 /* ViewController.swift */,
+				4C46BE451A204840005BB796 /* Interface */,
+				4C46BE421A2046F3005BB796 /* Services */,
 				4CA156E11A20413C00F95BA2 /* Main.storyboard */,
 				4CA156E41A20413C00F95BA2 /* Images.xcassets */,
-				4CA156E61A20413C00F95BA2 /* LaunchScreen.xib */,
 				4CA156DC1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld */,
 				4CA156D81A20413C00F95BA2 /* Supporting Files */,
 			);
@@ -93,6 +120,7 @@
 		4CA156D81A20413C00F95BA2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4CA156FF1A2041EB00F95BA2 /* background */,
 				4CA156D91A20413C00F95BA2 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -113,6 +141,14 @@
 				4CA156F21A20413C00F95BA2 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4CA156FF1A2041EB00F95BA2 /* background */ = {
+			isa = PBXGroup;
+			children = (
+				4C46BE401A204686005BB796 /* forest@2x.jpg */,
+			);
+			name = background;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,7 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CA156E31A20413C00F95BA2 /* Main.storyboard in Resources */,
-				4CA156E81A20413C00F95BA2 /* LaunchScreen.xib in Resources */,
+				4C46BE411A204686005BB796 /* forest@2x.jpg in Resources */,
 				4CA156E51A20413C00F95BA2 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,8 +252,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CA156E01A20413C00F95BA2 /* ViewController.swift in Sources */,
+				4C46BE4B1A20667B005BB796 /* TiltImageView.swift in Sources */,
 				4CA156DE1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld in Sources */,
 				4CA156DB1A20413C00F95BA2 /* AppDelegate.swift in Sources */,
+				4C46BE491A206294005BB796 /* Delay.swift in Sources */,
+				4C46BE441A2046FE005BB796 /* StatusBarUpdater.swift in Sources */,
+				4C46BE471A20484F005BB796 /* ShadowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,14 +286,6 @@
 				4CA156E21A20413C00F95BA2 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		4CA156E61A20413C00F95BA2 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4CA156E71A20413C00F95BA2 /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -409,6 +441,7 @@
 				4CA156F91A20413C00F95BA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4CA156FA1A20413C00F95BA2 /* Build configuration list for PBXNativeTarget "HuntingTimesTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +450,7 @@
 				4CA156FC1A20413C00F95BA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
