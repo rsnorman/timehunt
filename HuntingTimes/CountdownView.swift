@@ -33,37 +33,41 @@ class CountdownView : UILabel {
     }
     
     func stopCountdown() {
-        timer = nil
+        if let _timer = timer {
+            _timer.invalidate()
+            timer = nil
+            text = "Ended"
+        }
     }
     
     func updateCountdown() {
         let timeLeft = countdownToTime.timeIntervalSinceNow
-        println("Time Left: \(timeLeft)")
         let hours    = Int(ceil(timeLeft / 60) / 60)
         let minutes  = Int(ceil(timeLeft / 60) % 60)
         let seconds  = Int(timeLeft % 60)
         
-        println("Hours: \(hours)")
-        println("Minutes: \(minutes)")
-        println("Seconds: \(seconds)")
-        
         var countdownText = ""
         
-        if hours > 0 {
-            let hourLabel = hours > 1 ? "Hours" : "Hour"
-            countdownText += "\(hours) \(hourLabel)"
-        }
         
-        if minutes > 1 {
-            if hours > 1 {
-                countdownText += "\n"
+        if hours > 48 {
+            countdownText = "\(Int(ceil(Double(hours) / 24))) Days"
+        } else {
+            if hours > 0 {
+                let hourLabel = hours > 1 ? "Hours" : "Hour"
+                countdownText += "\(hours) \(hourLabel)"
             }
-            countdownText += "\(minutes) Minutes"
-        }
-        
-        if hours == 0 && minutes == 1 {
-            let secondLabel = seconds > 1 ? "Seconds" : "Second"
-            countdownText += "\(seconds) \(secondLabel)"
+            
+            if minutes > 1 {
+                if hours >= 1 {
+                    countdownText += "\n"
+                }
+                countdownText += "\(minutes) Minutes"
+            }
+            
+            if hours == 0 && minutes == 1 {
+                let secondLabel = seconds > 1 ? "Seconds" : "Second"
+                countdownText += "\(seconds) \(secondLabel)"
+            }
         }
         
         text = countdownText
@@ -71,7 +75,6 @@ class CountdownView : UILabel {
         if (hours > 0 || minutes > 0 || seconds > 0) {
             var delayInterval = NSTimeInterval(hours > 0 || minutes > 1 ? seconds + 1 : 1)
             delayInterval = delayInterval == 0 ? 60 : delayInterval
-            println("Delay Interval: \(delayInterval)")
             
             timer = NSTimer.scheduledTimerWithTimeInterval(delayInterval, target: self, selector: "updateCountdown", userInfo: nil, repeats: false)
             
