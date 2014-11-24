@@ -11,8 +11,6 @@ import UIKit
 class ViewController: UIViewController, CountdownViewDelegate {
     var bgImageView    : TiltImageView!
     var shadowView     : ShadowView!
-    var huntStart      : String!
-    var huntStop       : String!
     var states         : [String]!
     var events         : [String:String]!
     var countdownLabel : CountdownView!
@@ -21,15 +19,15 @@ class ViewController: UIViewController, CountdownViewDelegate {
     var stateTimeLabels: [String:UILabel]!
     var stateIndicator : UIView!
     var middleLine     : UIView!
-    var dates          : [[String:String]]!
-    var currentPosition: Int!
     var reversing      : Bool!
     var animating      : Bool!
     var dateLabel      : UILabel!
     var downArrow      : UIImageView!
     var upArrow        : UIImageView!
+    var huntingTimes   : HuntingTimes!
     
-    let eventLabelOffset:CGFloat = 10.0
+    let dateTransitionTime:Double = 0.7
+    let eventLabelOffset:CGFloat  = 10.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,13 +50,10 @@ class ViewController: UIViewController, CountdownViewDelegate {
         shadowView = ShadowView(frame: bgImageView.frame)
         view.addSubview(shadowView)
         
-        currentPosition = 1
-        reversing       = false
-        animating       = false
-        dates           = HuntingTimeParser.parse()
+        reversing = false
+        animating = false
         
-        huntStart = dates[currentPosition]["start"]!
-        huntStop  = dates[currentPosition]["stop"]!
+        huntingTimes = HuntingTimes()
         
         middleLine = UIView(frame: CGRectMake(view.frame.width / 2, 220, 1, view.frame.height - 240))
         middleLine.backgroundColor = .whiteColor()
@@ -168,8 +163,6 @@ class ViewController: UIViewController, CountdownViewDelegate {
     }
     
     func setTimes() {
-        huntStart  = dates[currentPosition]["start"]!
-        huntStop   = dates[currentPosition]["stop"]!
         stateTimeLabels["starting"]?.text   = timeToString(startTime())
         stateTimeLabels["sunrising"]?.text  = timeToString(sunriseTime())
         stateTimeLabels["sunsetting"]?.text = timeToString(sunsetTime())
@@ -231,7 +224,7 @@ class ViewController: UIViewController, CountdownViewDelegate {
             stateLabel.layer.shadowOpacity = 0.8
             
             let indicatorYOffset = reversing == true ? eventLabelOffset * -1 : eventLabelOffset
-            UIView.animateWithDuration(1.0, animations: { () -> Void in
+            UIView.animateWithDuration(dateTransitionTime, animations: { () -> Void in
                 self.stateIndicator.center = CGPointMake(self.stateIndicator.center.x, stateLabel.center.y + indicatorYOffset)
             })
         }
@@ -255,7 +248,7 @@ class ViewController: UIViewController, CountdownViewDelegate {
     }
     
     func startTime() -> NSDate {
-        return parseTime(huntStart)
+        return huntingTimes.current().startTime
     }
     
     func sunriseTime() -> NSDate {
@@ -267,18 +260,11 @@ class ViewController: UIViewController, CountdownViewDelegate {
     }
     
     func stopTime() -> NSDate {
-        return parseTime(huntStop)
+        return huntingTimes.current().endTime
     }
     
     func endTime() -> NSDate {
         return stopTime()
-    }
-    
-    func parseTime(timeString: String) -> NSDate {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "YYYY MMM d h:mm a"
-        
-        return dateFormatter.dateFromString(timeString)!
     }
     
     func dateToString(dateTime: NSDate) -> String {
@@ -329,12 +315,12 @@ class ViewController: UIViewController, CountdownViewDelegate {
     }
     
     func showNextDate() {
-        if !animating && currentPosition < dates.count - 1 {
+        if !animating && !huntingTimes.last() {
             animating = true
             reversing = false
             hideEventLabels(reverse: false) { (complete) -> Void in
                 self.animating = false
-                self.currentPosition = self.currentPosition + 1
+                self.huntingTimes.next()
                 self.setTimes()
                 self.setCountdownTime()
                 self.highlightState()
@@ -344,12 +330,12 @@ class ViewController: UIViewController, CountdownViewDelegate {
     }
     
     func showPreviousDate() {
-        if !animating && currentPosition > 0 {
+        if !animating && !huntingTimes.first() {
             animating = true
             reversing = true
             hideEventLabels(reverse: true) { (complete) -> Void in
                 self.animating = false
-                self.currentPosition = self.currentPosition - 1
+                self.huntingTimes.previous()
                 self.setTimes()
                 self.setCountdownTime()
                 self.highlightState()
@@ -360,7 +346,7 @@ class ViewController: UIViewController, CountdownViewDelegate {
     
     func showEventLabels(reverse: Bool = false, completion: ((Bool) -> Void)? = nil) {
         let yOffset = reverse ? eventLabelOffset * -1 : eventLabelOffset
-        UIView.animateWithDuration(1.0, animations: { () -> Void in
+        UIView.animateWithDuration(dateTransitionTime, animations: { () -> Void in
             for (state, label) in self.stateLabels {
                 label.frame = CGRectOffset(label.frame, 0, yOffset)
                 label.alpha = 1
@@ -381,7 +367,7 @@ class ViewController: UIViewController, CountdownViewDelegate {
     
     func hideEventLabels(reverse: Bool = false, completion: ((Bool) -> Void)? = nil) {
         let yOffset = reverse ? eventLabelOffset * -1 : eventLabelOffset
-        UIView.animateWithDuration(1.0, animations: { () -> Void in
+        UIView.animateWithDuration(dateTransitionTime, animations: { () -> Void in
             
             for (state, label) in self.stateLabels {
                 label.layer.shadowOpacity = 0.0

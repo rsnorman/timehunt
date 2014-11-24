@@ -33,11 +33,11 @@ class CountdownView : UILabel {
     }
     
     func stopCountdown() {
-        if let _timer = timer {
-            _timer.invalidate()
+        if timer != nil {
+            timer.invalidate()
             timer = nil
-            text = "Ended"
         }
+        text = "Ended"
     }
     
     func updateCountdown() {
