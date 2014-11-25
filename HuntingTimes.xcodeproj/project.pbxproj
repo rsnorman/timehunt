@@ -18,6 +18,11 @@
 		4C46BE541A21190C005BB796 /* hunting-times.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE531A21190C005BB796 /* hunting-times.csv */; };
 		4C46BE561A211F2C005BB796 /* down-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE551A211F2C005BB796 /* down-arrow@2x.png */; };
 		4C46BE581A21200B005BB796 /* up-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE571A21200B005BB796 /* up-arrow@2x.png */; };
+		4C6EE1A21A242C5C00305115 /* ScrollLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A11A242C5C00305115 /* ScrollLineView.swift */; };
+		4C6EE1A41A24323D00305115 /* ColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A31A24323D00305115 /* ColumnView.swift */; };
+		4C6EE1A61A24477200305115 /* HuntingTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A51A24477200305115 /* HuntingTimesView.swift */; };
+		4C6EE1A81A2452DB00305115 /* dark-forest@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A71A2452DB00305115 /* dark-forest@2x.jpg */; };
+		4C6EE1AA1A24533E00305115 /* leaves-forest@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A91A24533E00305115 /* leaves-forest@2x.jpg */; };
 		4CA156DB1A20413C00F95BA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */; };
 		4CA156DE1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DC1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld */; };
 		4CA156E01A20413C00F95BA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DF1A20413C00F95BA2 /* ViewController.swift */; };
@@ -48,6 +53,11 @@
 		4C46BE531A21190C005BB796 /* hunting-times.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "hunting-times.csv"; sourceTree = "<group>"; };
 		4C46BE551A211F2C005BB796 /* down-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down-arrow@2x.png"; sourceTree = "<group>"; };
 		4C46BE571A21200B005BB796 /* up-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up-arrow@2x.png"; sourceTree = "<group>"; };
+		4C6EE1A11A242C5C00305115 /* ScrollLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollLineView.swift; sourceTree = "<group>"; };
+		4C6EE1A31A24323D00305115 /* ColumnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnView.swift; sourceTree = "<group>"; };
+		4C6EE1A51A24477200305115 /* HuntingTimesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingTimesView.swift; sourceTree = "<group>"; };
+		4C6EE1A71A2452DB00305115 /* dark-forest@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "dark-forest@2x.jpg"; sourceTree = "<group>"; };
+		4C6EE1A91A24533E00305115 /* leaves-forest@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "leaves-forest@2x.jpg"; sourceTree = "<group>"; };
 		4CA156D51A20413C00F95BA2 /* HuntingTimes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuntingTimes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CA156D91A20413C00F95BA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +104,9 @@
 				4C46BE461A20484F005BB796 /* ShadowView.swift */,
 				4C46BE4A1A20667B005BB796 /* TiltImageView.swift */,
 				4C46BE4C1A20D7D1005BB796 /* CountdownView.swift */,
+				4C6EE1A11A242C5C00305115 /* ScrollLineView.swift */,
+				4C6EE1A31A24323D00305115 /* ColumnView.swift */,
+				4C6EE1A51A24477200305115 /* HuntingTimesView.swift */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -172,6 +185,8 @@
 		4CA156FF1A2041EB00F95BA2 /* background */ = {
 			isa = PBXGroup;
 			children = (
+				4C6EE1A91A24533E00305115 /* leaves-forest@2x.jpg */,
+				4C6EE1A71A2452DB00305115 /* dark-forest@2x.jpg */,
 				4C46BE401A204686005BB796 /* forest@2x.jpg */,
 			);
 			name = background;
@@ -260,7 +275,9 @@
 				4C46BE581A21200B005BB796 /* up-arrow@2x.png in Resources */,
 				4C46BE561A211F2C005BB796 /* down-arrow@2x.png in Resources */,
 				4CA156E31A20413C00F95BA2 /* Main.storyboard in Resources */,
+				4C6EE1A81A2452DB00305115 /* dark-forest@2x.jpg in Resources */,
 				4C46BE411A204686005BB796 /* forest@2x.jpg in Resources */,
+				4C6EE1AA1A24533E00305115 /* leaves-forest@2x.jpg in Resources */,
 				4CA156E51A20413C00F95BA2 /* Images.xcassets in Resources */,
 				4C46BE541A21190C005BB796 /* hunting-times.csv in Resources */,
 			);
@@ -286,10 +303,13 @@
 				4C46BE501A20E053005BB796 /* HuntingState.swift in Sources */,
 				4CA156DE1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld in Sources */,
 				4C46BE521A2117EC005BB796 /* HuntingTimes.swift in Sources */,
+				4C6EE1A41A24323D00305115 /* ColumnView.swift in Sources */,
 				4CA156DB1A20413C00F95BA2 /* AppDelegate.swift in Sources */,
 				4C46BE491A206294005BB796 /* Delay.swift in Sources */,
 				4C46BE441A2046FE005BB796 /* StatusBarUpdater.swift in Sources */,
+				4C6EE1A61A24477200305115 /* HuntingTimesView.swift in Sources */,
 				4C46BE471A20484F005BB796 /* ShadowView.swift in Sources */,
+				4C6EE1A21A242C5C00305115 /* ScrollLineView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

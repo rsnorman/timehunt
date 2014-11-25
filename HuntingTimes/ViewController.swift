@@ -15,19 +15,27 @@ class ViewController: UIViewController, CountdownViewDelegate {
     var events         : [String:String]!
     var countdownLabel : CountdownView!
     var stateLabel     : UILabel!
-    var stateLabels    : [String:UILabel]!
-    var stateTimeLabels: [String:UILabel]!
-    var stateIndicator : UIView!
-    var middleLine     : UIView!
     var reversing      : Bool!
     var animating      : Bool!
     var dateLabel      : UILabel!
     var downArrow      : UIImageView!
     var upArrow        : UIImageView!
     var huntingTimes   : HuntingTimes!
-    
+    var monthLabels    : [UILabel]!
+    var scrollingDates : Bool!
     let dateTransitionTime:Double = 0.7
     let eventLabelOffset:CGFloat  = 10.0
+    
+    var dateTimeScroller : ScrollLineView!
+    var huntingTimesView : HuntingTimesView!
+    var monthColumnView  : ColumnView!
+    
+    var nextDateGesture: UISwipeGestureRecognizer!
+    var previousDateGesture: UISwipeGestureRecognizer!
+    var swipeRightGesture: UISwipeGestureRecognizer!
+    var swipeLeftGesture: UISwipeGestureRecognizer!
+    var panDatesGesture: UIPanGestureRecognizer!
+    var hintTapGesture: UITapGestureRecognizer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +51,7 @@ class ViewController: UIViewController, CountdownViewDelegate {
             "ended"      : "Ended"
         ]
         
-        let bgImage = UIImage(named: "forest.jpg")!
+        let bgImage = UIImage(named: "dark-forest.jpg")!
         bgImageView = TiltImageView(image: bgImage, frame: view.frame)
         view.addSubview(bgImageView)
         
@@ -55,30 +63,21 @@ class ViewController: UIViewController, CountdownViewDelegate {
         
         huntingTimes = HuntingTimes()
         
-        middleLine = UIView(frame: CGRectMake(view.frame.width / 2, 220, 1, view.frame.height - 240))
-        middleLine.backgroundColor = .whiteColor()
-        middleLine.alpha           = 0.0
-        view.addSubview(middleLine)
+        dateTimeScroller = ScrollLineView(frame: CGRectMake(view.frame.width / 2, 220, 1, view.frame.height - 240))
+        dateTimeScroller.alpha           = 0.0
+        dateTimeScroller.animateDuration = dateTransitionTime
+        view.addSubview(dateTimeScroller)
         
-        stateIndicator = UIView(frame: CGRectMake(view.frame.width / 2 - 5, 240, 11, 11))
-        stateIndicator.layer.cornerRadius = 5.5
-        stateIndicator.layer.borderColor  = UIColor.whiteColor().CGColor
-        stateIndicator.layer.borderWidth  = 1
-        stateIndicator.backgroundColor    = .whiteColor()
-        stateIndicator.alpha              = 0.0
-        view.addSubview(stateIndicator)
+        huntingTimesView = HuntingTimesView(frame: CGRectMake(0, 210, view.frame.width, view.frame.height - 240))
+        huntingTimesView.setTimes(getHuntingTimes())
+        huntingTimesView.alpha = 0.0
+        view.addSubview(huntingTimesView)
         
-        stateLabels               = [:]
-        stateLabels["starting"]   = addEventLabel("Start",   y: 245)
-        stateLabels["sunrising"]  = addEventLabel("Sunrise", y: 325)
-        stateLabels["sunsetting"] = addEventLabel("Sunset",  y: 405)
-        stateLabels["ending"]     = addEventLabel("Stop",    y: 485)
-        
-        stateTimeLabels               = [:]
-        stateTimeLabels["starting"]   = addEventTimeLabel(timeToString(startTime()),   y: 245)
-        stateTimeLabels["sunrising"]  = addEventTimeLabel(timeToString(sunriseTime()), y: 325)
-        stateTimeLabels["sunsetting"] = addEventTimeLabel(timeToString(sunsetTime()),  y: 405)
-        stateTimeLabels["ending"]     = addEventTimeLabel(timeToString(stopTime()),    y: 485)
+        monthColumnView = ColumnView(labels: ["September", "October", "November", "December"], frame: CGRectMake(0, 220, view.frame.width / 2.0 - 10, view.frame.height - 240))
+        monthColumnView.setTextAlignment(NSTextAlignment.Right)
+        monthColumnView.alpha  = 0.0
+        monthColumnView.hidden = true
+        view.addSubview(monthColumnView)
         
         dateLabel       = createLabel(dateToString(currentTime()), frame: CGRectMake(0, 185, view.frame.width, 30), fontSize: 18)
         dateLabel.alpha = 0.0
@@ -93,28 +92,32 @@ class ViewController: UIViewController, CountdownViewDelegate {
         
         let upArrowImage  = UIImage(named: "up-arrow")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         upArrow           = UIImageView(image: upArrowImage)
-        upArrow.center    = CGPointMake(view.frame.width / 2, middleLine.frame.origin.y - 40)
+        upArrow.center    = CGPointMake(view.frame.width / 2, dateTimeScroller.frame.origin.y - 40)
         upArrow.tintColor = .whiteColor()
         upArrow.alpha     = 0
         view.addSubview(upArrow)
         
-        let nextDateGesture       = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
+        nextDateGesture           = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
         nextDateGesture.direction = .Up
         view.addGestureRecognizer(nextDateGesture)
         
-        let previousDateGesture       = UISwipeGestureRecognizer(target: self, action: "showNextDate")
+        previousDateGesture           = UISwipeGestureRecognizer(target: self, action: "showNextDate")
         previousDateGesture.direction = .Down
         view.addGestureRecognizer(previousDateGesture)
         
-        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
+        swipeRightGesture = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
         swipeRightGesture.direction = .Right
-        let swipeLeftGesture  = UISwipeGestureRecognizer(target: self, action: "showNextDate")
+        swipeLeftGesture  = UISwipeGestureRecognizer(target: self, action: "showNextDate")
         swipeLeftGesture.direction = .Left
-        let touchDownGesture  = UITapGestureRecognizer(target: self, action: "showSwipeHint")
+        
+        hintTapGesture  = UITapGestureRecognizer(target: self, action: "showSwipeHint")
         view.addGestureRecognizer(swipeRightGesture)
         view.addGestureRecognizer(swipeLeftGesture)
-        view.addGestureRecognizer(touchDownGesture)
+        view.addGestureRecognizer(hintTapGesture)
+
+        scrollingDates = false
         
+        view.userInteractionEnabled = true
         view.alpha = 0
     }
     
@@ -124,6 +127,75 @@ class ViewController: UIViewController, CountdownViewDelegate {
         })  { (complete) -> Void in
             self.addCountdown()
             self.showEventLabels()
+        }
+    }
+    
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        scrollingDates = true
+        delay(0.3) {
+            if self.scrollingDates == true {
+                self.startScrollDates()
+            }
+        }
+    }
+    
+    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+        scrollingDates = false
+        delay(0.3) {
+            self.stopScrollDates()
+        }
+    }
+    
+    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
+        scrollingDates = false
+        delay(0.3) {
+            self.stopScrollDates()
+        }
+    }
+    
+    override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+        if scrollingDates == true {
+            for touch in touches {
+                println(touch.locationInView(view).y)
+            }
+        }
+    }
+    
+    func startScrollDates() {
+        if monthColumnView.hidden == true {
+            nextDateGesture.enabled = false
+            previousDateGesture.enabled = false
+            swipeLeftGesture.enabled = false
+            swipeRightGesture.enabled = false
+            hintTapGesture.enabled = false
+            monthColumnView.hidden = false
+            
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.huntingTimesView.alpha = 0.0
+            }) { (complete) -> Void in
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.monthColumnView.alpha = 1.0
+                })
+            }
+        }
+    }
+    
+    func stopScrollDates() {
+        if monthColumnView.hidden == false {
+            nextDateGesture.enabled = true
+            previousDateGesture.enabled = true
+            swipeLeftGesture.enabled = true
+            swipeRightGesture.enabled = true
+            hintTapGesture.enabled = true
+            
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.monthColumnView.alpha = 0.0
+            }) { (complete) -> Void in
+                self.monthColumnView.hidden = true
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.huntingTimesView.alpha = 1.0
+                })
+            }
         }
     }
     
@@ -143,7 +215,7 @@ class ViewController: UIViewController, CountdownViewDelegate {
                 self.upArrow.alpha = 0.0
                 }, completion: { (complete) -> Void in
                     self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, -10)
-                    self.upArrow.frame = CGRectOffset(self.upArrow.frame, 0, 10)
+                    self.upArrow.frame   = CGRectOffset(self.upArrow.frame, 0, 10)
             })
         }
     }
@@ -163,12 +235,12 @@ class ViewController: UIViewController, CountdownViewDelegate {
     }
     
     func setTimes() {
-        stateTimeLabels["starting"]?.text   = timeToString(startTime())
-        stateTimeLabels["sunrising"]?.text  = timeToString(sunriseTime())
-        stateTimeLabels["sunsetting"]?.text = timeToString(sunsetTime())
-        stateTimeLabels["ending"]?.text     = timeToString(stopTime())
-        
+        huntingTimesView.setTimes(getHuntingTimes())
         dateLabel.text = dateToString(currentTime())
+    }
+    
+    func getHuntingTimes() -> [NSDate] {
+        return [startTime(), sunriseTime(), sunsetTime(), endTime()]
     }
     
     func addCountdown() {
@@ -211,28 +283,31 @@ class ViewController: UIViewController, CountdownViewDelegate {
     }
     
     func highlightState() {
-        for (state, label) in stateLabels {
-            label.layer.shadowOpacity = 0.0
-        }
+//        for (state, label) in stateLabels {
+//            label.layer.shadowOpacity = 0.0
+//        }
         
-        for (state, label) in stateTimeLabels {
-            label.layer.shadowOpacity = 0.0
-        }
+//        for (state, label) in stateTimeLabels {
+//            label.layer.shadowOpacity = 0.0
+//        }
         
-        if let stateLabel = stateLabels[currentState()] {
-            stateLabel.layer.shadowColor = UIColor.whiteColor().CGColor
-            stateLabel.layer.shadowOpacity = 0.8
-            
+//        if let stateLabel = stateLabels[currentState()] {
+//            stateLabel.layer.shadowColor = UIColor.whiteColor().CGColor
+//            stateLabel.layer.shadowOpacity = 0.8
+        
             let indicatorYOffset = reversing == true ? eventLabelOffset * -1 : eventLabelOffset
-            UIView.animateWithDuration(dateTransitionTime, animations: { () -> Void in
-                self.stateIndicator.center = CGPointMake(self.stateIndicator.center.x, stateLabel.center.y + indicatorYOffset)
-            })
-        }
+            
+//            UIView.animateWithDuration(dateTransitionTime, animations: { () -> Void in
+//                self.stateIndicator.center = CGPointMake(self.stateIndicator.center.x, stateLabel.center.y + indicatorYOffset)
+//            })
+            
+//            dateTimeScroller.setPosition(<#percent: CGFloat#>, animate: <#Bool#>)
+//        }
         
-        if let stateTimeLabel = stateTimeLabels[currentState()] {
-            stateTimeLabel.layer.shadowColor = UIColor.whiteColor().CGColor
-            stateTimeLabel.layer.shadowOpacity = 0.8
-        }
+//        if let stateTimeLabel = stateTimeLabels[currentState()] {
+//            stateTimeLabel.layer.shadowColor = UIColor.whiteColor().CGColor
+//            stateTimeLabel.layer.shadowOpacity = 0.8
+//        }
     }
     
     func currentTime() -> NSDate {
@@ -294,16 +369,6 @@ class ViewController: UIViewController, CountdownViewDelegate {
         return dateTime.timeIntervalSinceNow
     }
     
-    func addEventLabel(text: String, y: CGFloat) -> UILabel {
-        let eventLabel = createLabel(text, frame: CGRectMake(0, y - 10, view.frame.width / 2 - eventLabelOffset, 30), fontSize: 24)
-        eventLabel.textAlignment = .Right
-        eventLabel.alpha         = 0
-        
-        view.addSubview(eventLabel)
-        
-        return eventLabel
-    }
-    
     func addEventTimeLabel(text: String, y: CGFloat) -> UILabel {
         let eventTimeLabel = createLabel(text, frame: CGRectMake(view.frame.width / 2 + 10, y - eventLabelOffset, view.frame.width / 2 - 10, 30), fontSize: 24)
         eventTimeLabel.textAlignment = .Left
@@ -346,55 +411,35 @@ class ViewController: UIViewController, CountdownViewDelegate {
     
     func showEventLabels(reverse: Bool = false, completion: ((Bool) -> Void)? = nil) {
         let yOffset = reverse ? eventLabelOffset * -1 : eventLabelOffset
+        
         UIView.animateWithDuration(dateTransitionTime, animations: { () -> Void in
-            for (state, label) in self.stateLabels {
-                label.frame = CGRectOffset(label.frame, 0, yOffset)
-                label.alpha = 1
-            }
+            self.stateLabel.alpha       = 1
+            self.countdownLabel.alpha   = 1
+            self.dateLabel.alpha        = 1
+            self.dateTimeScroller.alpha = 0.7
             
-            for (state, label) in self.stateTimeLabels {
-                label.frame = CGRectOffset(label.frame, 0, yOffset)
-                label.alpha = 1
-            }
-            
-            self.stateLabel.alpha     = 1
-            self.countdownLabel.alpha = 1
-            self.dateLabel.alpha      = 1
-            self.stateIndicator.alpha = 0.7
-            self.middleLine.alpha     = 0.7
+            self.huntingTimesView.frame = CGRectOffset(self.huntingTimesView.frame, 0, yOffset)
+            self.huntingTimesView.alpha = 1.0
         }, completion)
     }
     
     func hideEventLabels(reverse: Bool = false, completion: ((Bool) -> Void)? = nil) {
         let yOffset = reverse ? eventLabelOffset * -1 : eventLabelOffset
+        
         UIView.animateWithDuration(dateTransitionTime, animations: { () -> Void in
+            self.stateLabel.alpha       = 0
+            self.countdownLabel.alpha   = 0
+            self.dateLabel.alpha        = 0
+            self.dateTimeScroller.alpha = 0
+//            self.stateIndicator.alpha = 0
             
-            for (state, label) in self.stateLabels {
-                label.layer.shadowOpacity = 0.0
-                label.frame = CGRectOffset(label.frame, 0, yOffset)
-                label.alpha = 0
-            }
-            
-            for (state, label) in self.stateTimeLabels {
-                label.layer.shadowOpacity = 0.0
-                label.frame = CGRectOffset(label.frame, 0, yOffset)
-                label.alpha = 0
-            }
-            
-            self.stateLabel.alpha     = 0
-            self.countdownLabel.alpha = 0
-            self.dateLabel.alpha      = 0
-            self.stateIndicator.alpha = 0
+            self.huntingTimesView.frame = CGRectOffset(self.huntingTimesView.frame, 0, yOffset)
+            self.huntingTimesView.alpha = 0.0
         }) { (complete) -> Void in
-            for (state, label) in self.stateLabels {
-                label.frame = CGRectOffset(label.frame, 0, yOffset * -2)
-            }
             
-            for (state, label) in self.stateTimeLabels {
-                label.frame = CGRectOffset(label.frame, 0, yOffset * -2)
-            }
-            let indicatorYOffset = reverse ? self.middleLine.frame.origin.y + self.middleLine.frame.height : self.middleLine.frame.origin.y
-            self.stateIndicator.center = CGPointMake(self.stateIndicator.center.x, indicatorYOffset)
+            self.huntingTimesView.frame = CGRectOffset(self.huntingTimesView.frame, 0, yOffset * -2)
+//            let indicatorYOffset = reverse ? self.middleLine.frame.origin.y + self.middleLine.frame.height : self.middleLine.frame.origin.y
+//            self.stateIndicator.center = CGPointMake(self.stateIndicator.center.x, indicatorYOffset)
             
             if let completionClosure = completion {
                 completionClosure(complete)

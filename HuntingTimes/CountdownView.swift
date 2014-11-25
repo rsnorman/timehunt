@@ -48,7 +48,6 @@ class CountdownView : UILabel {
         
         var countdownText = ""
         
-        
         if hours > 48 {
             countdownText = "\(Int(ceil(Double(hours) / 24))) Days"
         } else {
