@@ -17,13 +17,6 @@ class HuntingTimeProgress {
         self.huntingTimesColumn = huntingTimesColumn
     }
     
-    func setHuntingTimes(times: [NSDate]) {
-        let calendar = NSCalendar.currentCalendar()
-        let dayStart = calendar.dateBySettingHour(0, minute: 0, second: 0, ofDate: times[0], options: nil)
-        let dayEnd   = calendar.dateBySettingHour(23, minute: 59, second: 59, ofDate: times[0], options: nil)
-        huntingTimes = [dayStart!, times[0], times[1], times[2], times[3], dayEnd!]
-    }
-    
     func getProgressPercent() -> CGFloat {
         let lastTime = getLastTime(NSDate())
         let nextTime = getNextTime(NSDate())
@@ -75,7 +68,6 @@ class HuntingTimeProgress {
     
     func getLastTime(nextTime: NSDate) -> NSDate {
         for time in getHuntingTimes().reverse() {
-            println("time \(time), nextTime \(nextTime), timeSince \(time.timeIntervalSinceDate(nextTime))")
             if time.timeIntervalSinceDate(nextTime) < 0 {
                 return time
             }

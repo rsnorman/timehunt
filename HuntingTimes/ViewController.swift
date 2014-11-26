@@ -160,7 +160,7 @@ class ViewController: UIViewController, CountdownViewDelegate {
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
         if scrollingDates == true {
             for touch in touches {
-                println(touch.locationInView(view).y)
+//                println(touch.locationInView(view).y)
             }
         }
     }
@@ -341,10 +341,12 @@ class ViewController: UIViewController, CountdownViewDelegate {
         if !animating && !huntingTimes.last() {
             animating = true
             reversing = false
+            self.dateTimeScroller.setPosition(1, animate: true)
             hideEventLabels(reverse: false) { (complete) -> Void in
                 self.animating = false
                 self.huntingTimes.next()
                 self.setTimes()
+                self.dateTimeScroller.setPosition(0, animate: false)
                 self.setCountdownTime()
                 self.showEventLabels(reverse: false)
             }
@@ -355,10 +357,12 @@ class ViewController: UIViewController, CountdownViewDelegate {
         if !animating && !huntingTimes.first() {
             animating = true
             reversing = true
+            self.dateTimeScroller.setPosition(0, animate: true)
             hideEventLabels(reverse: true) { (complete) -> Void in
                 self.animating = false
                 self.huntingTimes.previous()
                 self.setTimes()
+                self.dateTimeScroller.setPosition(1, animate: false)
                 self.setCountdownTime()
                 self.showEventLabels(reverse: true)
             }
