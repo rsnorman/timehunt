@@ -26,6 +26,8 @@ class ViewController: UIViewController, CountdownViewDelegate {
     let dateTransitionTime:Double = 0.7
     let eventLabelOffset:CGFloat  = 10.0
     
+    var touchDelay : dispatch_cancelable_closure!
+    
     var dateTimeScroller : ScrollLineView!
     var huntingTimesView : HuntingTimesView!
     var monthColumnView  : ColumnView!
@@ -135,25 +137,32 @@ class ViewController: UIViewController, CountdownViewDelegate {
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        scrollingDates = true
-        delay(0.3) {
-            if self.scrollingDates == true {
-                self.startScrollDates()
-            }
+        touchDelay = delay(0.3) {
+            self.touchDelay = nil
+            self.scrollingDates = true
+            self.startScrollDates()
         }
     }
     
     override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
-        scrollingDates = false
-        delay(0.3) {
-            self.stopScrollDates()
+        if touchDelay != nil {
+            touchDelay(cancel: true)
+        } else {
+            delay(0.1) {
+                self.scrollingDates = true
+                self.stopScrollDates()
+            }
         }
     }
     
     override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
-        scrollingDates = false
-        delay(0.3) {
-            self.stopScrollDates()
+        if touchDelay != nil {
+            touchDelay(cancel: true)
+        } else {
+            delay(0.1) {
+                self.scrollingDates = true
+                self.stopScrollDates()
+            }
         }
     }
     
