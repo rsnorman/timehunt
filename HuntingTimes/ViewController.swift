@@ -9,37 +9,35 @@
 import UIKit
 
 class ViewController: UIViewController, CountdownViewDelegate {
-    var bgImageView    : TiltImageView!
-    var shadowView     : ShadowView!
-    var states         : [String]!
-    var events         : [String:String]!
-    var countdownLabel : CountdownView!
-    var stateLabel     : UILabel!
-    var reversing      : Bool!
-    var animating      : Bool!
-    var dateLabel      : UILabel!
-    var downArrow      : UIImageView!
-    var upArrow        : UIImageView!
-    var huntingTimes   : HuntingTimes!
-    var monthLabels    : [UILabel]!
-    var scrollingDates : Bool!
-    let dateTransitionTime:Double = 0.7
-    let eventLabelOffset:CGFloat  = 10.0
+    var reversing            : Bool!
+    var animating            : Bool!
+    var states               : [String]!
+    var events               : [String:String]!
+    let dateTransitionTime   : Double  = 0.7
+    let eventLabelOffset     : CGFloat = 10.0
     
-    var touchDelay : dispatch_cancelable_closure!
+    var bgImageView          : TiltImageView!
+    var shadowView           : ShadowView!
+    var countdownLabel       : CountdownView!
+    var dateLabel            : UILabel!
+    var downArrow            : UIImageView!
+    var upArrow              : UIImageView!
+    var dateTimeScroller     : ScrollLineView!
+    var huntingTimesView     : HuntingTimesView!
+    var monthColumnView      : ColumnView!
+    var monthLabels          : [UILabel]!
+    var stateLabel           : UILabel!
     
-    var dateTimeScroller : ScrollLineView!
-    var huntingTimesView : HuntingTimesView!
-    var monthColumnView  : ColumnView!
-    
+    var touchDelay           : dispatch_cancelable_closure!
+    var huntingTimes         : HuntingTimes!
     var huntingTimesProgress : HuntingTimeProgress!
     
-    var nextDateGesture: UISwipeGestureRecognizer!
-    var previousDateGesture: UISwipeGestureRecognizer!
-    var swipeRightGesture: UISwipeGestureRecognizer!
-    var swipeLeftGesture: UISwipeGestureRecognizer!
-    var panDatesGesture: UIPanGestureRecognizer!
-    var hintTapGesture: UITapGestureRecognizer!
+    var nextDateGesture      : UISwipeGestureRecognizer!
+    var previousDateGesture  : UISwipeGestureRecognizer!
+    var swipeRightGesture    : UISwipeGestureRecognizer!
+    var swipeLeftGesture     : UISwipeGestureRecognizer!
+    var panDatesGesture      : UIPanGestureRecognizer!
+    var hintTapGesture       : UITapGestureRecognizer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,40 +53,64 @@ class ViewController: UIViewController, CountdownViewDelegate {
             "ended"      : "Ended"
         ]
         
-        let bgImage = UIImage(named: "dark-forest.jpg")!
-        bgImageView = TiltImageView(image: bgImage, frame: view.frame)
-        view.addSubview(bgImageView)
-        
-        shadowView = ShadowView(frame: bgImageView.frame)
-        view.addSubview(shadowView)
-        
         reversing = false
         animating = false
         
         huntingTimes = HuntingTimes()
         
-        dateTimeScroller = ScrollLineView(frame: CGRectMake(view.frame.width / 2, 220, 1, view.frame.height - 240))
-        dateTimeScroller.alpha           = 0.0
-        dateTimeScroller.animateDuration = dateTransitionTime
-        view.addSubview(dateTimeScroller)
+        addBackground()
+        addDateLabel()
+        addDateTimeScroller()
+        addHuntingTimesView()
+        addDatePicker()
+        addHints()
+        addDateGestures()
         
+        view.userInteractionEnabled = true
+        view.alpha = 0
+    }
+    
+    func addBackground() {
+        let bgImage = UIImage(named: "dark-forest.jpg")!
+        bgImageView = TiltImageView(image: bgImage, frame: view.frame)
+        view.addSubview(bgImageView)
+        
+        shadowView = ShadowView(frame: bgImageView.frame)
+        shadowView.setDarkness(0.5)
+        view.addSubview(shadowView)
+    }
+    
+    func addDateLabel() {
+        dateLabel       = createLabel(dateToString(currentTime()), frame: CGRectMake(0, 185, view.frame.width, 30), fontSize: 18)
+        dateLabel.alpha = 0.0
+        view.addSubview(dateLabel)
+    }
+    
+    func addHuntingTimesView() {
         huntingTimesView = HuntingTimesView(frame: CGRectMake(0, 210, view.frame.width, view.frame.height - 240))
         huntingTimesView.setTimes(getHuntingTimes())
         huntingTimesView.alpha = 0.0
         view.addSubview(huntingTimesView)
         
+        huntingTimesProgress = HuntingTimeProgress(huntingTimes: getHuntingTimes(), huntingTimesColumn: huntingTimesView.timeColumnView)
+    }
+    
+    func addDateTimeScroller() {
+        dateTimeScroller = ScrollLineView(frame: CGRectMake(view.frame.width / 2, 220, 1, view.frame.height - 240))
+        dateTimeScroller.alpha           = 0.0
+        dateTimeScroller.animateDuration = dateTransitionTime
+        view.addSubview(dateTimeScroller)
+    }
+    
+    func addDatePicker() {
         monthColumnView = ColumnView(labels: ["September", "October", "November", "December"], frame: CGRectMake(0, 220, view.frame.width / 2.0 - 10, view.frame.height - 240))
         monthColumnView.setTextAlignment(NSTextAlignment.Right)
         monthColumnView.alpha  = 0.0
         monthColumnView.hidden = true
         view.addSubview(monthColumnView)
-        
-        huntingTimesProgress = HuntingTimeProgress(huntingTimes: getHuntingTimes(), huntingTimesColumn: huntingTimesView.timeColumnView)
-        
-        dateLabel       = createLabel(dateToString(currentTime()), frame: CGRectMake(0, 185, view.frame.width, 30), fontSize: 18)
-        dateLabel.alpha = 0.0
-        view.addSubview(dateLabel)
-        
+    }
+    
+    func addHints() {
         let downArrowImage  = UIImage(named: "down-arrow")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         downArrow           = UIImageView(image: downArrowImage)
         downArrow.center    = CGPointMake(view.frame.width / 2, view.frame.height - 20)
@@ -103,6 +125,11 @@ class ViewController: UIViewController, CountdownViewDelegate {
         upArrow.alpha     = 0
         view.addSubview(upArrow)
         
+        hintTapGesture  = UITapGestureRecognizer(target: self, action: "showSwipeHint")
+        view.addGestureRecognizer(hintTapGesture)
+    }
+    
+    func addDateGestures() {
         nextDateGesture           = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
         nextDateGesture.direction = .Up
         view.addGestureRecognizer(nextDateGesture)
@@ -116,15 +143,8 @@ class ViewController: UIViewController, CountdownViewDelegate {
         swipeLeftGesture  = UISwipeGestureRecognizer(target: self, action: "showNextDate")
         swipeLeftGesture.direction = .Left
         
-        hintTapGesture  = UITapGestureRecognizer(target: self, action: "showSwipeHint")
         view.addGestureRecognizer(swipeRightGesture)
         view.addGestureRecognizer(swipeLeftGesture)
-        view.addGestureRecognizer(hintTapGesture)
-
-        scrollingDates = false
-        
-        view.userInteractionEnabled = true
-        view.alpha = 0
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -139,7 +159,6 @@ class ViewController: UIViewController, CountdownViewDelegate {
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         touchDelay = delay(0.3) {
             self.touchDelay = nil
-            self.scrollingDates = true
             self.startScrollDates()
         }
     }
@@ -148,10 +167,7 @@ class ViewController: UIViewController, CountdownViewDelegate {
         if touchDelay != nil {
             touchDelay(cancel: true)
         } else {
-            delay(0.1) {
-                self.scrollingDates = true
-                self.stopScrollDates()
-            }
+            stopScrollDates()
         }
     }
     
@@ -159,28 +175,24 @@ class ViewController: UIViewController, CountdownViewDelegate {
         if touchDelay != nil {
             touchDelay(cancel: true)
         } else {
-            delay(0.1) {
-                self.scrollingDates = true
-                self.stopScrollDates()
-            }
+            stopScrollDates()
         }
     }
     
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
-        if scrollingDates == true {
+        if monthColumnView.hidden == false {
             for touch in touches {
-//                println(touch.locationInView(view).y)
+                println(touch.locationInView(view).y)
             }
         }
     }
     
     func startScrollDates() {
         if monthColumnView.hidden == true {
-            nextDateGesture.enabled = false
-            previousDateGesture.enabled = false
-            swipeLeftGesture.enabled = false
-            swipeRightGesture.enabled = false
-            hintTapGesture.enabled = false
+            for gesture in self.view.gestureRecognizers as [UIGestureRecognizer] {
+                gesture.enabled = false
+            }
+            
             monthColumnView.hidden = false
             
             UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -195,13 +207,11 @@ class ViewController: UIViewController, CountdownViewDelegate {
     
     func stopScrollDates() {
         if monthColumnView.hidden == false {
-            nextDateGesture.enabled = true
-            previousDateGesture.enabled = true
-            swipeLeftGesture.enabled = true
-            swipeRightGesture.enabled = true
-            hintTapGesture.enabled = true
+            for gesture in self.view.gestureRecognizers as [UIGestureRecognizer] {
+                gesture.enabled = true
+            }
             
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
+            UIView.animateWithDuration(0.3, delay: 0.1, options: nil, animations: { () -> Void in
                 self.monthColumnView.alpha = 0.0
             }) { (complete) -> Void in
                 self.monthColumnView.hidden = true

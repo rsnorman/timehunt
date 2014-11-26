@@ -11,12 +11,13 @@ import UIKit
 class HuntingTimesView : UIView {
     let eventColumnView : ColumnView
     let timeColumnView  : ColumnView
+    let padding         : CGFloat = 15
     
     override init(frame: CGRect) {
-        eventColumnView = ColumnView(labels: ["Start", "Sunrise", "Sunset", "Stop"], frame: CGRectMake(0, 0, frame.width / 2.0 - 10, frame.height))
+        eventColumnView = ColumnView(labels: ["Start", "Sunrise", "Sunset", "Stop"], frame: CGRectMake(0, 0, frame.width / 2.0 - padding, frame.height))
         eventColumnView.setTextAlignment(NSTextAlignment.Right)
         
-        timeColumnView = ColumnView(labels: [], frame: CGRectMake(frame.width / 2.0 + 10, 0, frame.width / 2.0 - 10, frame.height))
+        timeColumnView = ColumnView(labels: [], frame: CGRectMake(frame.width / 2.0 + padding, 0, frame.width / 2.0 - padding, frame.height))
         timeColumnView.setTextAlignment(NSTextAlignment.Left)
         
         super.init(frame: frame)

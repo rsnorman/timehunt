@@ -12,7 +12,11 @@ class ShadowView : UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 0.4)
+        setDarkness(0.4)
+    }
+    
+    func setDarkness(darkness: CGFloat) {
+        backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: darkness)
     }
     
     required init(coder aDecoder: NSCoder) {

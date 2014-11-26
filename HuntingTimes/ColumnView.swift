@@ -40,7 +40,7 @@ class ColumnView : UIView {
             let label = UILabel(frame: CGRectMake(0, 0, frame.width, 30))
             label.text          = text
             label.textColor     = .whiteColor()
-            label.font          = UIFont(name: "HelveticaNeue-Thin", size: 24)
+            label.font          = UIFont(name: "HelveticaNeue-Thin", size: 28)
             label.textAlignment = textAlignment
             label.center        = CGPointMake(label.center.x, startOffset + (offset * CGFloat(index)))
             addSubview(label)
