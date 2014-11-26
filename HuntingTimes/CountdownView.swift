@@ -11,6 +11,7 @@ import UIKit
 protocol CountdownViewDelegate {
     func willFinishCountdown()
     func didFinishCountdown()
+    func didTickCountdown()
 }
 
 class CountdownView : UILabel {
@@ -70,6 +71,10 @@ class CountdownView : UILabel {
         }
         
         text = countdownText
+        
+        if let del = delegate {
+            del.didTickCountdown()
+        }
         
         if (hours > 0 || minutes > 0 || seconds > 0) {
             var delayInterval = NSTimeInterval(hours > 0 || minutes > 1 ? seconds + 1 : 1)

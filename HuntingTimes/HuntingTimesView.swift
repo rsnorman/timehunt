@@ -28,13 +28,6 @@ class HuntingTimesView : UIView {
     func setTimes(huntingTimes: [NSDate]) {
         timeColumnView.setLabels([timeToString(huntingTimes[0]), timeToString(huntingTimes[1]), timeToString(huntingTimes[2]), timeToString(huntingTimes[3])])
     }
-    
-    func timeToString(dateTime: NSDate) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "h:mm"
-        
-        return dateFormatter.stringFromDate(dateTime)
-    }
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

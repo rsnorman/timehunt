@@ -23,6 +23,8 @@
 		4C6EE1A61A24477200305115 /* HuntingTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A51A24477200305115 /* HuntingTimesView.swift */; };
 		4C6EE1A81A2452DB00305115 /* dark-forest@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A71A2452DB00305115 /* dark-forest@2x.jpg */; };
 		4C6EE1AA1A24533E00305115 /* leaves-forest@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A91A24533E00305115 /* leaves-forest@2x.jpg */; };
+		4C6EE1AC1A2590F100305115 /* HuntingTimeProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1AB1A2590F100305115 /* HuntingTimeProgress.swift */; };
+		4C6EE1AE1A25967C00305115 /* DateTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1AD1A25967C00305115 /* DateTimeHelper.swift */; };
 		4CA156DB1A20413C00F95BA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */; };
 		4CA156DE1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DC1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld */; };
 		4CA156E01A20413C00F95BA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DF1A20413C00F95BA2 /* ViewController.swift */; };
@@ -58,6 +60,8 @@
 		4C6EE1A51A24477200305115 /* HuntingTimesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingTimesView.swift; sourceTree = "<group>"; };
 		4C6EE1A71A2452DB00305115 /* dark-forest@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "dark-forest@2x.jpg"; sourceTree = "<group>"; };
 		4C6EE1A91A24533E00305115 /* leaves-forest@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "leaves-forest@2x.jpg"; sourceTree = "<group>"; };
+		4C6EE1AB1A2590F100305115 /* HuntingTimeProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingTimeProgress.swift; sourceTree = "<group>"; };
+		4C6EE1AD1A25967C00305115 /* DateTimeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeHelper.swift; sourceTree = "<group>"; };
 		4CA156D51A20413C00F95BA2 /* HuntingTimes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuntingTimes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CA156D91A20413C00F95BA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +98,8 @@
 				4C46BE431A2046FE005BB796 /* StatusBarUpdater.swift */,
 				4C46BE481A206294005BB796 /* Delay.swift */,
 				4C46BE511A2117EC005BB796 /* HuntingTimes.swift */,
+				4C6EE1AB1A2590F100305115 /* HuntingTimeProgress.swift */,
+				4C6EE1AD1A25967C00305115 /* DateTimeHelper.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -300,12 +306,14 @@
 				4CA156E01A20413C00F95BA2 /* ViewController.swift in Sources */,
 				4C46BE4B1A20667B005BB796 /* TiltImageView.swift in Sources */,
 				4C46BE4D1A20D7D1005BB796 /* CountdownView.swift in Sources */,
+				4C6EE1AC1A2590F100305115 /* HuntingTimeProgress.swift in Sources */,
 				4C46BE501A20E053005BB796 /* HuntingState.swift in Sources */,
 				4CA156DE1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld in Sources */,
 				4C46BE521A2117EC005BB796 /* HuntingTimes.swift in Sources */,
 				4C6EE1A41A24323D00305115 /* ColumnView.swift in Sources */,
 				4CA156DB1A20413C00F95BA2 /* AppDelegate.swift in Sources */,
 				4C46BE491A206294005BB796 /* Delay.swift in Sources */,
+				4C6EE1AE1A25967C00305115 /* DateTimeHelper.swift in Sources */,
 				4C46BE441A2046FE005BB796 /* StatusBarUpdater.swift in Sources */,
 				4C6EE1A61A24477200305115 /* HuntingTimesView.swift in Sources */,
 				4C46BE471A20484F005BB796 /* ShadowView.swift in Sources */,
