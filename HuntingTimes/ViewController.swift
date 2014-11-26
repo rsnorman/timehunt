@@ -30,6 +30,8 @@ class ViewController: UIViewController, CountdownViewDelegate {
     var huntingTimesView : HuntingTimesView!
     var monthColumnView  : ColumnView!
     
+    var huntingTimesProgress : HuntingTimeProgress!
+    
     var nextDateGesture: UISwipeGestureRecognizer!
     var previousDateGesture: UISwipeGestureRecognizer!
     var swipeRightGesture: UISwipeGestureRecognizer!
@@ -78,6 +80,8 @@ class ViewController: UIViewController, CountdownViewDelegate {
         monthColumnView.alpha  = 0.0
         monthColumnView.hidden = true
         view.addSubview(monthColumnView)
+        
+        huntingTimesProgress = HuntingTimeProgress(huntingTimes: getHuntingTimes(), huntingTimesColumn: huntingTimesView.timeColumnView)
         
         dateLabel       = createLabel(dateToString(currentTime()), frame: CGRectMake(0, 185, view.frame.width, 30), fontSize: 18)
         dateLabel.alpha = 0.0
@@ -236,6 +240,7 @@ class ViewController: UIViewController, CountdownViewDelegate {
     
     func setTimes() {
         huntingTimesView.setTimes(getHuntingTimes())
+        huntingTimesProgress.huntingTimes = getHuntingTimes()
         dateLabel.text = dateToString(currentTime())
     }
     
@@ -259,14 +264,18 @@ class ViewController: UIViewController, CountdownViewDelegate {
     }
     
     func setCountdownTime() {
-        highlightState()
         countdownLabel.stopCountdown()
         if currentTime().timeIntervalSinceNow > 0 {
             countdownLabel.startCountdown(currentTime())
             stateLabel.text = events[currentState()]!
         } else {
             stateLabel.text = ""
+            dateTimeScroller.setPosition(1, animate: true)
         }
+    }
+    
+    func didTickCountdown() {
+        dateTimeScroller.setPosition(huntingTimesProgress.getProgressPercent(), animate: true)
     }
     
     func willFinishCountdown() {
@@ -280,34 +289,6 @@ class ViewController: UIViewController, CountdownViewDelegate {
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.countdownLabel.alpha = 1.0
         })
-    }
-    
-    func highlightState() {
-//        for (state, label) in stateLabels {
-//            label.layer.shadowOpacity = 0.0
-//        }
-        
-//        for (state, label) in stateTimeLabels {
-//            label.layer.shadowOpacity = 0.0
-//        }
-        
-//        if let stateLabel = stateLabels[currentState()] {
-//            stateLabel.layer.shadowColor = UIColor.whiteColor().CGColor
-//            stateLabel.layer.shadowOpacity = 0.8
-        
-            let indicatorYOffset = reversing == true ? eventLabelOffset * -1 : eventLabelOffset
-            
-//            UIView.animateWithDuration(dateTransitionTime, animations: { () -> Void in
-//                self.stateIndicator.center = CGPointMake(self.stateIndicator.center.x, stateLabel.center.y + indicatorYOffset)
-//            })
-            
-//            dateTimeScroller.setPosition(<#percent: CGFloat#>, animate: <#Bool#>)
-//        }
-        
-//        if let stateTimeLabel = stateTimeLabels[currentState()] {
-//            stateTimeLabel.layer.shadowColor = UIColor.whiteColor().CGColor
-//            stateTimeLabel.layer.shadowOpacity = 0.8
-//        }
     }
     
     func currentTime() -> NSDate {
@@ -342,29 +323,6 @@ class ViewController: UIViewController, CountdownViewDelegate {
         return stopTime()
     }
     
-    func dateToString(dateTime: NSDate) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MMMM d"
-        let dateString = dateFormatter.stringFromDate(dateTime)
-        
-        if dateFormatter.stringFromDate(NSDate()) == dateString {
-            return "Today"
-        } else if dateTime.timeIntervalSinceNow < 0 && dateTime.timeIntervalSinceNow > -60 * 60 * 24 {
-            return "Yesterday"
-        } else if dateTime.timeIntervalSinceNow > 0 && dateTime.timeIntervalSinceNow < 60 * 60 * 24 {
-            return "Tomorrow"
-        }
-        
-        return dateString
-    }
-    
-    func timeToString(dateTime: NSDate) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "h:mm"
-        
-        return dateFormatter.stringFromDate(dateTime)
-    }
-    
     func timeLeft(dateTime: NSDate) -> NSTimeInterval {
         return dateTime.timeIntervalSinceNow
     }
@@ -388,7 +346,6 @@ class ViewController: UIViewController, CountdownViewDelegate {
                 self.huntingTimes.next()
                 self.setTimes()
                 self.setCountdownTime()
-                self.highlightState()
                 self.showEventLabels(reverse: false)
             }
         }
@@ -403,7 +360,6 @@ class ViewController: UIViewController, CountdownViewDelegate {
                 self.huntingTimes.previous()
                 self.setTimes()
                 self.setCountdownTime()
-                self.highlightState()
                 self.showEventLabels(reverse: true)
             }
         }
@@ -417,7 +373,6 @@ class ViewController: UIViewController, CountdownViewDelegate {
             self.countdownLabel.alpha   = 1
             self.dateLabel.alpha        = 1
             self.dateTimeScroller.alpha = 0.7
-            
             self.huntingTimesView.frame = CGRectOffset(self.huntingTimesView.frame, 0, yOffset)
             self.huntingTimesView.alpha = 1.0
         }, completion)
@@ -431,16 +386,11 @@ class ViewController: UIViewController, CountdownViewDelegate {
             self.countdownLabel.alpha   = 0
             self.dateLabel.alpha        = 0
             self.dateTimeScroller.alpha = 0
-//            self.stateIndicator.alpha = 0
-            
             self.huntingTimesView.frame = CGRectOffset(self.huntingTimesView.frame, 0, yOffset)
             self.huntingTimesView.alpha = 0.0
         }) { (complete) -> Void in
             
             self.huntingTimesView.frame = CGRectOffset(self.huntingTimesView.frame, 0, yOffset * -2)
-//            let indicatorYOffset = reverse ? self.middleLine.frame.origin.y + self.middleLine.frame.height : self.middleLine.frame.origin.y
-//            self.stateIndicator.center = CGPointMake(self.stateIndicator.center.x, indicatorYOffset)
-            
             if let completionClosure = completion {
                 completionClosure(complete)
             }

@@ -9,10 +9,12 @@
 import UIKit
 
 class ColumnView : UIView {
-    var textAlignment     : NSTextAlignment
+    var textAlignment : NSTextAlignment
+    let labels        : [String]
     
     init(labels: [String], frame: CGRect) {
         textAlignment = .Center
+        self.labels   = labels
         
         super.init(frame: frame)
         
@@ -43,6 +45,16 @@ class ColumnView : UIView {
             label.center        = CGPointMake(label.center.x, startOffset + (offset * CGFloat(index)))
             addSubview(label)
         }
+    }
+    
+    func getPosition(labelText: String) -> CGPoint? {
+        for label in subviews as [UILabel] {
+            if label.text == labelText {
+                return label.center
+            }
+        }
+        
+        return nil
     }
 
     required init(coder aDecoder: NSCoder) {
