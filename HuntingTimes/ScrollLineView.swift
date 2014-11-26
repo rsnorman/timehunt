@@ -13,10 +13,11 @@ protocol ScrollLineViewDelegate {
 }
 
 class ScrollLineView : UIView {
-    let middleLine        : UIView
-    let positionIndicator : UIView
-    var animateDuration   : NSTimeInterval
-    var delegate          : ScrollLineViewDelegate!
+    let middleLine               : UIView
+    let positionIndicator        : UIView
+    let currentPositionIndicator : UIView
+    var animateDuration          : NSTimeInterval
+    var delegate                 : ScrollLineViewDelegate!
     
     override init(frame: CGRect) {
         middleLine = UIView(frame: CGRectMake(frame.width / 2, 0, 1, frame.height))
@@ -28,12 +29,20 @@ class ScrollLineView : UIView {
         positionIndicator.layer.borderWidth  = 1
         positionIndicator.backgroundColor    = .whiteColor()
         
+        currentPositionIndicator = UIView(frame: CGRectMake(frame.width / 2 - 5, 0, 11, 11))
+        currentPositionIndicator.layer.cornerRadius = 5.5
+        currentPositionIndicator.layer.borderColor  = UIColor.whiteColor().CGColor
+        currentPositionIndicator.layer.borderWidth  = 1
+        currentPositionIndicator.backgroundColor    = UIColor(white: 1, alpha: 0.7)
+        currentPositionIndicator.alpha              = 0.0
+        
         animateDuration = 0.3
         
         super.init(frame: frame)
         
         addSubview(middleLine)
         addSubview(positionIndicator)
+        addSubview(currentPositionIndicator)
     }
     
     func setPosition(percent: CGFloat, animate: Bool = false) {
@@ -45,6 +54,19 @@ class ScrollLineView : UIView {
         } else {
             positionIndicator.frame = CGRectMake(frame.origin.x, self.frame.height * percent, frame.width, frame.height)
         }
+    }
+    
+    func markCurrentPosition(percent: CGFloat) {
+        let cpFrame = currentPositionIndicator.frame
+        currentPositionIndicator.frame = CGRectMake(cpFrame.origin.x, frame.height * percent, cpFrame.width, cpFrame.height)
+    }
+    
+    func showCurrentPosition() {
+        currentPositionIndicator.alpha = 0.8
+    }
+    
+    func hideCurrentPosition() {
+        currentPositionIndicator.alpha = 0.0
     }
     
     func setOffsetPosition(y: CGFloat) {

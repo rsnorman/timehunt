@@ -30,7 +30,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     var stateLabel           : UILabel!
     
     var touchDelay           : dispatch_cancelable_closure!
-    var huntingTimes         : HuntingTimes!
+    var huntingSeason        : HuntingSeason!
     var huntingTimesProgress : HuntingTimeProgress!
     
     var nextDateGesture      : UISwipeGestureRecognizer!
@@ -57,7 +57,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         reversing = false
         animating = false
         
-        huntingTimes = HuntingTimes()
+        huntingSeason = HuntingSeason()
         
         addBackground()
         addDateLabel()
@@ -66,6 +66,9 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         addDatePicker()
         addHints()
         addDateGestures()
+        
+        huntingTimesProgress = HuntingTimeProgress(huntingTimes: getHuntingTimes(), huntingTimesColumn: huntingTimesView.timeColumnView)
+        dateTimeScroller.markCurrentPosition(huntingSeason.percentComplete())
         
         view.userInteractionEnabled = true
         view.alpha = 0
@@ -92,8 +95,6 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         huntingTimesView.setTimes(getHuntingTimes())
         huntingTimesView.alpha = 0.0
         view.addSubview(huntingTimesView)
-        
-        huntingTimesProgress = HuntingTimeProgress(huntingTimes: getHuntingTimes(), huntingTimesColumn: huntingTimesView.timeColumnView)
     }
     
     func addDateTimeScroller() {
@@ -204,8 +205,8 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
             countdownLabel.text    = self.dateLabel.text
             
             UIView.animateWithDuration(0.3, animations: { () -> Void in
-                let percentSeasonComplete = CGFloat(self.huntingTimes.currentPosition) / CGFloat(self.huntingTimes.count())
-                self.dateTimeScroller.setPosition(percentSeasonComplete, animate: false)
+                self.dateTimeScroller.setPosition(self.huntingSeason.percentComplete(), animate: false)
+                self.dateTimeScroller.showCurrentPosition()
                 self.huntingTimesView.alpha = 0.0
                 self.dateLabel.alpha        = 0.0
             }) { (complete) -> Void in
@@ -226,6 +227,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
 
             UIView.animateWithDuration(0.3, delay: 0.1, options: nil, animations: { () -> Void in
                 self.monthColumnView.alpha = 0.0
+                self.dateTimeScroller.hideCurrentPosition()
             }) { (complete) -> Void in
                 self.monthColumnView.hidden = true
                 self.setTimes()
@@ -239,9 +241,9 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func didPositionIndicator(percent: CGFloat) {
-        let totalDays  = huntingTimes.count()
-        let currentDay = Int(CGFloat(totalDays - 1) * percent)
-        huntingTimes.currentPosition = currentDay
+        let totalDays  = huntingSeason.length()
+        let currentDay = Int(round(CGFloat(totalDays - 1) * percent))
+        huntingSeason.setCurrentDay(currentDay)
         countdownLabel.text = dateToString(currentTime())
     }
     
@@ -346,7 +348,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func startTime() -> NSDate {
-        return huntingTimes.current().startTime
+        return huntingSeason.current().startTime
     }
     
     func sunriseTime() -> NSDate {
@@ -358,7 +360,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func stopTime() -> NSDate {
-        return huntingTimes.current().endTime
+        return huntingSeason.current().endTime
     }
     
     func endTime() -> NSDate {
@@ -380,13 +382,13 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func showNextDate() {
-        if !animating && !huntingTimes.last() {
+        if !animating && !huntingSeason.last() {
             animating = true
             reversing = false
             self.dateTimeScroller.setPosition(1, animate: true)
             hideEventLabels(reverse: false) { (complete) -> Void in
                 self.animating = false
-                self.huntingTimes.next()
+                self.huntingSeason.next()
                 self.setTimes()
                 self.dateTimeScroller.setPosition(0, animate: false)
                 self.setCountdownTime()
@@ -396,13 +398,13 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func showPreviousDate() {
-        if !animating && !huntingTimes.first() {
+        if !animating && !huntingSeason.first() {
             animating = true
             reversing = true
             self.dateTimeScroller.setPosition(0, animate: true)
             hideEventLabels(reverse: true) { (complete) -> Void in
                 self.animating = false
-                self.huntingTimes.previous()
+                self.huntingSeason.previous()
                 self.setTimes()
                 self.dateTimeScroller.setPosition(1, animate: false)
                 self.setCountdownTime()

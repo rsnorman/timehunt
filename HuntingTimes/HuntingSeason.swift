@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Ryan Norman. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class HuntingTimes {
+class HuntingSeason {
     let dates           : [(startTime: NSDate, endTime: NSDate)]
     var currentPosition : Int!
     
@@ -38,7 +38,7 @@ class HuntingTimes {
         return dates
     }
     
-    func count() -> Int {
+    func length() -> Int {
         return dates.count
     }
     
@@ -62,6 +62,14 @@ class HuntingTimes {
     
     func last() -> Bool {
         return currentPosition == dates.count - 1
+    }
+    
+    func setCurrentDay(currentDay: Int) {
+        currentPosition = currentDay
+    }
+    
+    func percentComplete() -> CGFloat {
+        return CGFloat(currentPosition) / CGFloat(dates.count)
     }
     
     private
