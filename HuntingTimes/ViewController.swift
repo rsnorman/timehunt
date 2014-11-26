@@ -348,7 +348,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func startTime() -> NSDate {
-        return huntingSeason.current().startTime
+        return huntingSeason.currentDay().startTime
     }
     
     func sunriseTime() -> NSDate {
@@ -360,7 +360,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func stopTime() -> NSDate {
-        return huntingSeason.current().endTime
+        return huntingSeason.currentDay().endTime
     }
     
     func endTime() -> NSDate {
@@ -382,13 +382,13 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func showNextDate() {
-        if !animating && !huntingSeason.last() {
+        if !animating && !huntingSeason.closingDay() {
             animating = true
             reversing = false
             self.dateTimeScroller.setPosition(1, animate: true)
             hideEventLabels(reverse: false) { (complete) -> Void in
                 self.animating = false
-                self.huntingSeason.next()
+                self.huntingSeason.nextDay()
                 self.setTimes()
                 self.dateTimeScroller.setPosition(0, animate: false)
                 self.setCountdownTime()
@@ -398,13 +398,13 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func showPreviousDate() {
-        if !animating && !huntingSeason.first() {
+        if !animating && !huntingSeason.openingDay() {
             animating = true
             reversing = true
             self.dateTimeScroller.setPosition(0, animate: true)
             hideEventLabels(reverse: true) { (complete) -> Void in
                 self.animating = false
-                self.huntingSeason.previous()
+                self.huntingSeason.previousDay()
                 self.setTimes()
                 self.dateTimeScroller.setPosition(1, animate: false)
                 self.setCountdownTime()

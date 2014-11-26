@@ -34,7 +34,7 @@ class HuntingSeason {
         
     }
     
-    func all() -> [(startTime: NSDate, endTime: NSDate)] {
+    func allDays() -> [(startTime: NSDate, endTime: NSDate)] {
         return dates
     }
     
@@ -42,25 +42,25 @@ class HuntingSeason {
         return dates.count
     }
     
-    func current() -> (startTime: NSDate, endTime: NSDate) {
+    func currentDay() -> (startTime: NSDate, endTime: NSDate) {
         return dates[currentPosition]
     }
     
-    func next() -> (startTime: NSDate, endTime: NSDate) {
+    func nextDay() -> (startTime: NSDate, endTime: NSDate) {
         currentPosition = currentPosition + 1
-        return current()
+        return currentDay()
     }
     
-    func previous() -> (startTime: NSDate, endTime: NSDate) {
+    func previousDay() -> (startTime: NSDate, endTime: NSDate) {
         currentPosition = currentPosition - 1
-        return current()
+        return currentDay()
     }
     
-    func first() -> Bool {
+    func openingDay() -> Bool {
         return currentPosition == 0
     }
     
-    func last() -> Bool {
+    func closingDay() -> Bool {
         return currentPosition == dates.count - 1
     }
     
