@@ -8,11 +8,15 @@
 
 import UIKit
 
+protocol ScrollLineViewDelegate {
+    func didPositionIndicator(percent: CGFloat)
+}
+
 class ScrollLineView : UIView {
-    
     let middleLine        : UIView
     let positionIndicator : UIView
     var animateDuration   : NSTimeInterval
+    var delegate          : ScrollLineViewDelegate!
     
     override init(frame: CGRect) {
         middleLine = UIView(frame: CGRectMake(frame.width / 2, 0, 1, frame.height))
@@ -40,6 +44,25 @@ class ScrollLineView : UIView {
             })
         } else {
             positionIndicator.frame = CGRectMake(frame.origin.x, self.frame.height * percent, frame.width, frame.height)
+        }
+    }
+    
+    func setOffsetPosition(y: CGFloat) {
+        let piFrame = self.positionIndicator.frame
+        var yOffset = y
+        
+        if piFrame.origin.y + yOffset < 0 {
+            yOffset = piFrame.origin.y * -1
+        }
+        
+        if piFrame.origin.y + yOffset > frame.height {
+            yOffset = frame.height - piFrame.origin.y
+        }
+        
+        positionIndicator.frame = CGRectOffset(piFrame, 0, yOffset)
+        
+        if let del = delegate {
+            del.didPositionIndicator(piFrame.origin.y / frame.height)
         }
     }
 

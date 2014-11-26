@@ -8,13 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController, CountdownViewDelegate {
+class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDelegate {
     var reversing            : Bool!
     var animating            : Bool!
     var states               : [String]!
     var events               : [String:String]!
     let dateTransitionTime   : Double  = 0.7
     let eventLabelOffset     : CGFloat = 10.0
+    var startScrollPosition  : CGPoint!
     
     var bgImageView          : TiltImageView!
     var shadowView           : ShadowView!
@@ -99,6 +100,7 @@ class ViewController: UIViewController, CountdownViewDelegate {
         dateTimeScroller = ScrollLineView(frame: CGRectMake(view.frame.width / 2, 220, 1, view.frame.height - 240))
         dateTimeScroller.alpha           = 0.0
         dateTimeScroller.animateDuration = dateTransitionTime
+        dateTimeScroller.delegate        = self
         view.addSubview(dateTimeScroller)
     }
     
@@ -158,6 +160,9 @@ class ViewController: UIViewController, CountdownViewDelegate {
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         touchDelay = delay(0.3) {
+            for touch in touches {
+                self.startScrollPosition = touch.locationInView(self.view)
+            }
             self.touchDelay = nil
             self.startScrollDates()
         }
@@ -182,7 +187,8 @@ class ViewController: UIViewController, CountdownViewDelegate {
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
         if monthColumnView.hidden == false {
             for touch in touches {
-                println(touch.locationInView(view).y)
+                dateTimeScroller.setOffsetPosition((touch.locationInView(view).y - startScrollPosition.y))
+                startScrollPosition = touch.locationInView(view)
             }
         }
     }
@@ -194,9 +200,14 @@ class ViewController: UIViewController, CountdownViewDelegate {
             }
             
             monthColumnView.hidden = false
+            countdownLabel.stopCountdown()
+            countdownLabel.text    = self.dateLabel.text
             
             UIView.animateWithDuration(0.3, animations: { () -> Void in
+                let percentSeasonComplete = CGFloat(self.huntingTimes.currentPosition) / CGFloat(self.huntingTimes.count())
+                self.dateTimeScroller.setPosition(percentSeasonComplete, animate: false)
                 self.huntingTimesView.alpha = 0.0
+                self.dateLabel.alpha        = 0.0
             }) { (complete) -> Void in
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
                     self.monthColumnView.alpha = 1.0
@@ -211,15 +222,27 @@ class ViewController: UIViewController, CountdownViewDelegate {
                 gesture.enabled = true
             }
             
+            startScrollPosition = nil
+
             UIView.animateWithDuration(0.3, delay: 0.1, options: nil, animations: { () -> Void in
                 self.monthColumnView.alpha = 0.0
             }) { (complete) -> Void in
                 self.monthColumnView.hidden = true
+                self.setTimes()
+                self.setCountdownTime()
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
                     self.huntingTimesView.alpha = 1.0
+                    self.dateLabel.alpha        = 1.0
                 })
             }
         }
+    }
+    
+    func didPositionIndicator(percent: CGFloat) {
+        let totalDays  = huntingTimes.count()
+        let currentDay = Int(CGFloat(totalDays - 1) * percent)
+        huntingTimes.currentPosition = currentDay
+        countdownLabel.text = dateToString(currentTime())
     }
     
     func showSwipeHint() {
