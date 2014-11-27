@@ -25,7 +25,7 @@ class HuntingSeason {
             let cells = dateLine.componentsSeparatedByString(",")
             
             let startTime = timeFormatter.dateFromString("\(cells[0]) \(cells[1]) AM")!
-            let endTime = timeFormatter.dateFromString("\(cells[0]) \(cells[2]) AM")!
+            let endTime = timeFormatter.dateFromString("\(cells[0]) \(cells[2]) PM")!
             
             dates.append((startTime: startTime, endTime: endTime))
         }

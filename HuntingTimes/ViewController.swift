@@ -92,7 +92,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func addMessageLabel() {
-        messageLabel = createLabel("", frame: CGRectMake(10, 75, view.frame.width - 20, 100), fontSize: 32)
+        messageLabel = createLabel("", frame: CGRectMake(10, 75, view.frame.width - 20, 100), fontSize: 30)
         messageLabel.alpha = 0.0
         messageLabel.numberOfLines = 2
         view.addSubview(messageLabel)
@@ -260,6 +260,8 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
                 self.monthColumnView.hidden = true
                 self.setTimes()
                 self.setCountdownTime()
+                self.setNotifications()
+                
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
                     self.huntingTimesView.alpha = 1.0
                     self.dateLabel.alpha        = 1.0
