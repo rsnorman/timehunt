@@ -109,6 +109,10 @@ class NotificationManager {
     }
     
     func removeAllNotifications(huntingTime: (time: NSDate, event: String)) {
+        if huntingTime.time.timeIntervalSinceNow < 0 {
+            return
+        }
+        
         for notification in getAllNotifications(huntingTime) {
             UIApplication.sharedApplication().cancelLocalNotification(notification)
         }
@@ -131,7 +135,7 @@ class NotificationManager {
     }
     
     func canAddNotifications(huntingTime: (time: NSDate, event: String)) -> Bool {
-        return getAllNotifications(huntingTime).count < 3
+        return huntingTime.time.timeIntervalSinceNow > 0 && getAllNotifications(huntingTime).count < 3
     }
     
     private
