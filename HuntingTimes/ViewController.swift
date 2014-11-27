@@ -405,7 +405,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
             stateLabel.text = events[currentState()]!
         } else {
             stateLabel.text = ""
-            dateTimeScroller.setPosition(1, animate: true)
+            dateTimeScroller.setPosition(huntingTimesProgress.getProgressPercent(), animate: true)
         }
     }
     
