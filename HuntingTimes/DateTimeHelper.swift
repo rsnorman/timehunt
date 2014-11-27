@@ -14,11 +14,13 @@ func dateToString(dateTime: NSDate, useRelativeString: Bool = true) -> String {
     let dateString = dateFormatter.stringFromDate(dateTime)
     
     if useRelativeString {
-        if dateFormatter.stringFromDate(NSDate()) == dateString {
+        let today       = clearTime(NSDate())
+        let compareDate = clearTime(dateTime)
+        if dateFormatter.stringFromDate(today) == dateString {
             return "Today"
-        } else if dateTime.timeIntervalSinceNow < 0 && dateTime.timeIntervalSinceNow > -60 * 60 * 24 {
+        } else if compareDate.timeIntervalSinceDate(today) < 0 && compareDate.timeIntervalSinceDate(today) >= -60 * 60 * 24 {
             return "Yesterday"
-        } else if dateTime.timeIntervalSinceNow > 0 && dateTime.timeIntervalSinceNow < 60 * 60 * 24 {
+        } else if compareDate.timeIntervalSinceDate(today) > 0 && compareDate.timeIntervalSinceDate(today) <= 60 * 60 * 24 {
             return "Tomorrow"
         }
     }
