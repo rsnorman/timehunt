@@ -30,6 +30,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     var monthLabels          : [UILabel]!
     var stateLabel           : UILabel!
     var messageLabel         : UILabel!
+    var datepickerLabel      : UILabel!
     
     var touchDelay           : dispatch_cancelable_closure!
     var huntingSeason        : HuntingSeason!
@@ -65,7 +66,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         NotificationManager.sharedInstance.addDelegate(self)
         
         addBackground()
-        addDateLabel()
+        addDateLabels()
         addDateTimeScroller()
         addHuntingTimesView()
         addDatePicker()
@@ -98,10 +99,13 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         view.addSubview(messageLabel)
     }
     
-    func addDateLabel() {
-        dateLabel       = createLabel(dateToString(currentTime()), frame: CGRectMake(0, 185, view.frame.width, 30), fontSize: 18)
-        dateLabel.alpha = 0.0
+    func addDateLabels() {
+        dateLabel             = createLabel(dateToString(currentTime()), frame: CGRectMake(0, 185, view.frame.width, 30), fontSize: 18)
+        dateLabel.alpha       = 0.0
+        datepickerLabel       = createLabel(dateToString(currentTime()), frame: CGRectMake(0, 60, view.frame.width, 120), fontSize: 48)
+        datepickerLabel.alpha = 0.0
         view.addSubview(dateLabel)
+        view.addSubview(datepickerLabel)
     }
     
     func addHuntingTimesView() {
@@ -138,7 +142,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         
         let upArrowImage  = UIImage(named: "up-arrow")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         upArrow           = UIImageView(image: upArrowImage)
-        upArrow.center    = CGPointMake(view.frame.width / 2, dateTimeScroller.frame.origin.y - 40)
+        upArrow.center    = CGPointMake(view.frame.width / 2, dateTimeScroller.frame.origin.y - 35)
         upArrow.tintColor = .whiteColor()
         upArrow.alpha     = 0
         view.addSubview(upArrow)
@@ -216,14 +220,14 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
             }
             
             monthColumnView.hidden = false
-            countdownLabel.stopCountdown()
-            countdownLabel.text    = self.dateLabel.text
+            datepickerLabel.text   = self.dateLabel.text
             
             UIView.animateWithDuration(0.3, animations: { () -> Void in
                 self.dateTimeScroller.setPosition(self.huntingSeason.percentComplete(), animate: false)
                 self.dateTimeScroller.showCurrentPosition()
                 self.huntingTimesView.alpha = 0.0
                 self.dateLabel.alpha        = 0.0
+                self.countdownLabel.alpha   = 0.0
                 
                 self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, 5)
                 self.downArrow.alpha = 0.7
@@ -231,8 +235,10 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
                 self.upArrow.frame = CGRectOffset(self.upArrow.frame, 0, -5)
                 self.upArrow.alpha = 0.7
             }) { (complete) -> Void in
+                self.countdownLabel.stopCountdown()
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
                     self.monthColumnView.alpha = 1.0
+                    self.datepickerLabel.alpha = 1.0
                 })
             }
         }
@@ -248,6 +254,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
 
             UIView.animateWithDuration(0.3, delay: 0.1, options: nil, animations: { () -> Void in
                 self.monthColumnView.alpha = 0.0
+                self.datepickerLabel.alpha = 0.0
                 self.dateTimeScroller.hideCurrentPosition()
                 self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, 5)
                 self.downArrow.alpha = 0.0
@@ -265,6 +272,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
                     self.huntingTimesView.alpha = 1.0
                     self.dateLabel.alpha        = 1.0
+                    self.countdownLabel.alpha   = 1.0
                 })
             }
         }
@@ -274,7 +282,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         let totalDays  = huntingSeason.length()
         let currentDay = Int(round(CGFloat(totalDays - 1) * percent))
         huntingSeason.setCurrentDay(currentDay)
-        countdownLabel.text = dateToString(currentTime())
+        datepickerLabel.text = dateToString(currentTime())
     }
     
     func didTapHuntingTime(huntingTime: NSDate, huntingEvent: String) {
@@ -391,7 +399,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         stateLabel.alpha = 0.0
         view.addSubview(stateLabel)
 
-        countdownLabel = CountdownView(frame: CGRectMake(0, 50, view.frame.width, 120))
+        countdownLabel = CountdownView(frame: CGRectMake(0, 55, view.frame.width, 120))
         countdownLabel.alpha = 0.0
         view.addSubview(countdownLabel)
         
