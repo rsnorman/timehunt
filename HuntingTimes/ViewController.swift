@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDelegate, HuntingTimesViewDelegate {
+class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDelegate, HuntingTimesViewDelegate, NotificationManagerDelegate {
     var reversing            : Bool!
     var animating            : Bool!
     var states               : [String]!
@@ -69,6 +69,8 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         
         huntingTimesProgress = HuntingTimeProgress(huntingTimes: getHuntingTimes(), huntingTimesColumn: huntingTimesView.timeColumnView)
         dateTimeScroller.markCurrentPosition(huntingSeason.percentComplete())
+        
+        NotificationManager.sharedInstance.addDelegate(self)
         
         view.userInteractionEnabled = true
         view.alpha = 0
@@ -248,8 +250,21 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         countdownLabel.text = dateToString(currentTime())
     }
     
-    func didTapHuntingTime(huntingTime: NSDate) {
-        huntingTimesView.addNotificationIcon(huntingTime)
+    func didTapHuntingTime(huntingTime: NSDate, huntingEvent: String) {
+        let notificationManager = NotificationManager.sharedInstance
+        if notificationManager.canAddNotifications((time: huntingTime, event: huntingEvent)) {
+            notificationManager.addNotification((time: huntingTime, event: huntingEvent))
+        } else {
+            notificationManager.removeAllNotifications((time: huntingTime, event: huntingEvent))
+        }
+    }
+    
+    func didAddNotification(notification: Notification) {
+        huntingTimesView.addNotificationIcon(notification.huntingTime.time)
+    }
+    
+    func didRemoveAllNotifications(huntingTime: (time: NSDate, event: String)) {
+        huntingTimesView.removeNotificationIcons(huntingTime.time)
     }
     
     func showSwipeHint() {

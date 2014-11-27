@@ -9,7 +9,7 @@
 import UIKit
 
 protocol HuntingTimesViewDelegate {
-    func didTapHuntingTime(huntingTime: NSDate)
+    func didTapHuntingTime(huntingTime: NSDate, huntingEvent: String)
 }
 
 class HuntingTimesView : UIView {
@@ -50,7 +50,7 @@ class HuntingTimesView : UIView {
                 let time  = times[find(events, event!)!]
                 
                 if let del = delegate {
-                    del.didTapHuntingTime(time)
+                    del.didTapHuntingTime(time, huntingEvent: event!)
                 }
             }
         }
@@ -63,9 +63,10 @@ class HuntingTimesView : UIView {
             if let times = huntingTimes {
                 let timesString = times.map(timeToString)
                 let time  = times[find(timesString, timeString!)!]
-                
+                let event = events[find(timesString, timeString!)!]
+                    
                 if let del = delegate {
-                    del.didTapHuntingTime(time)
+                    del.didTapHuntingTime(time, huntingEvent: event)
                 }
             }
         }

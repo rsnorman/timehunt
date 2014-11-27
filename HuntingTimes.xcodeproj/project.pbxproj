@@ -18,6 +18,7 @@
 		4C46BE541A21190C005BB796 /* hunting-times.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE531A21190C005BB796 /* hunting-times.csv */; };
 		4C46BE561A211F2C005BB796 /* down-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE551A211F2C005BB796 /* down-arrow@2x.png */; };
 		4C46BE581A21200B005BB796 /* up-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE571A21200B005BB796 /* up-arrow@2x.png */; };
+		4C56B3CD1A26D2CC00B8BD82 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C56B3CC1A26D2CC00B8BD82 /* NotificationManager.swift */; };
 		4C6EE1A21A242C5C00305115 /* ScrollLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A11A242C5C00305115 /* ScrollLineView.swift */; };
 		4C6EE1A41A24323D00305115 /* ColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A31A24323D00305115 /* ColumnView.swift */; };
 		4C6EE1A61A24477200305115 /* HuntingTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A51A24477200305115 /* HuntingTimesView.swift */; };
@@ -55,6 +56,7 @@
 		4C46BE531A21190C005BB796 /* hunting-times.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "hunting-times.csv"; sourceTree = "<group>"; };
 		4C46BE551A211F2C005BB796 /* down-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down-arrow@2x.png"; sourceTree = "<group>"; };
 		4C46BE571A21200B005BB796 /* up-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up-arrow@2x.png"; sourceTree = "<group>"; };
+		4C56B3CC1A26D2CC00B8BD82 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		4C6EE1A11A242C5C00305115 /* ScrollLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollLineView.swift; sourceTree = "<group>"; };
 		4C6EE1A31A24323D00305115 /* ColumnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnView.swift; sourceTree = "<group>"; };
 		4C6EE1A51A24477200305115 /* HuntingTimesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingTimesView.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				4C46BE511A2117EC005BB796 /* HuntingSeason.swift */,
 				4C6EE1AB1A2590F100305115 /* HuntingTimeProgress.swift */,
 				4C6EE1AD1A25967C00305115 /* DateTimeHelper.swift */,
+				4C56B3CC1A26D2CC00B8BD82 /* NotificationManager.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				4C6EE1AC1A2590F100305115 /* HuntingTimeProgress.swift in Sources */,
 				4C46BE501A20E053005BB796 /* HuntingState.swift in Sources */,
 				4CA156DE1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld in Sources */,
+				4C56B3CD1A26D2CC00B8BD82 /* NotificationManager.swift in Sources */,
 				4C46BE521A2117EC005BB796 /* HuntingSeason.swift in Sources */,
 				4C6EE1A41A24323D00305115 /* ColumnView.swift in Sources */,
 				4CA156DB1A20413C00F95BA2 /* AppDelegate.swift in Sources */,
