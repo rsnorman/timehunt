@@ -212,6 +212,12 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
                 self.dateTimeScroller.showCurrentPosition()
                 self.huntingTimesView.alpha = 0.0
                 self.dateLabel.alpha        = 0.0
+                
+                self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, 5)
+                self.downArrow.alpha = 0.7
+                
+                self.upArrow.frame = CGRectOffset(self.upArrow.frame, 0, -5)
+                self.upArrow.alpha = 0.7
             }) { (complete) -> Void in
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
                     self.monthColumnView.alpha = 1.0
@@ -231,7 +237,14 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
             UIView.animateWithDuration(0.3, delay: 0.1, options: nil, animations: { () -> Void in
                 self.monthColumnView.alpha = 0.0
                 self.dateTimeScroller.hideCurrentPosition()
+                self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, 5)
+                self.downArrow.alpha = 0.0
+                
+                self.upArrow.frame = CGRectOffset(self.upArrow.frame, 0, -5)
+                self.upArrow.alpha = 0.0
             }) { (complete) -> Void in
+                self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, -10)
+                self.upArrow.frame   = CGRectOffset(self.upArrow.frame, 0, 10)
                 self.monthColumnView.hidden = true
                 self.setTimes()
                 self.setCountdownTime()
