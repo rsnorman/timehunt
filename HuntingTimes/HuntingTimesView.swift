@@ -88,7 +88,7 @@ class HuntingTimesView : UIView {
         return nil
     }
     
-    func addNotificationIcon(time: NSDate) {
+    func addNotificationIcon(time: NSDate, animate: Bool = true) {
         if let label = findEventLabelFromTime(time) {
             let eventText = label.text!
 
@@ -96,25 +96,25 @@ class HuntingTimesView : UIView {
                 notificationIcons[eventText] = []
             }
             
-            if notificationIcons[eventText]!.count >= 3 {
-                removeNotificationIcons(time)
-                return
-            }
-            
-            let xOffset                         = CGFloat(14 * notificationIcons[eventText]!.count)
-            let notificationIcon                = UIView(frame: CGRectMake(label.frame.origin.x - 20 - xOffset, label.center.y - 3, 8, 8))
+            let xOffset                         = CGFloat(14 * notificationIcons[eventText]!.count) + 15
+            let notificationIcon                = UIView(frame: CGRectMake(label.frame.origin.x - xOffset, label.center.y - 3, 8, 8))
             notificationIcon.backgroundColor    = .whiteColor()
             notificationIcon.layer.cornerRadius = 4
-            notificationIcon.alpha              = 0.0
+            notificationIcon.alpha              = 0.6
             
             notificationIcons[eventText]!.append(notificationIcon)
             
             addSubview(notificationIcon)
             
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                notificationIcon.alpha = 0.6
-                notificationIcon.frame = CGRectOffset(notificationIcon.frame, 8, 0)
-            })
+            if animate {
+                notificationIcon.alpha = 0.0
+                notificationIcon.frame = CGRectOffset(notificationIcon.frame, -8, 0)
+                
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    notificationIcon.alpha = 0.6
+                    notificationIcon.frame = CGRectOffset(notificationIcon.frame, 8, 0)
+                })
+            }
         }
     }
     
@@ -134,9 +134,19 @@ class HuntingTimesView : UIView {
         }
     }
     
+    func removeAllNotifications() {
+        for (event, nIcons) in notificationIcons {
+            for nIcon in nIcons {
+                nIcon.removeFromSuperview()
+            }
+        }
+        notificationIcons = [:]
+    }
+    
     func setTimes(huntingTimes: [NSDate]) {
         self.huntingTimes = huntingTimes
         timeColumnView.setLabels([timeToString(huntingTimes[0]), timeToString(huntingTimes[1]), timeToString(huntingTimes[2]), timeToString(huntingTimes[3])])
+        removeAllNotifications()
         
         for view in timeColumnView.subviews as [UIView] {
             let tapGesture = UITapGestureRecognizer(target: self, action: "didTapTime:")

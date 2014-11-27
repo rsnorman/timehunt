@@ -14,18 +14,62 @@ protocol NotificationManagerDelegate {
 }
 
 class Notification {
-    let huntingTime  : (time: NSDate, event: String)
+    let huntingTime        : (time: NSDate, event: String)
+    let additionalInterval : NSTimeInterval
     
-    init(huntingTime: (time: NSDate, event: String), scheduleTime: NSDate) {
-        self.huntingTime       = huntingTime
-        let localNotif         = UILocalNotification()
-        localNotif.fireDate    = scheduleTime
-        localNotif.alertBody   = "\(huntingTime.event) is starting"
-        localNotif.alertAction = "View Details"
-        localNotif.userInfo    = [ "key" : Notification.key(huntingTime), "time" : huntingTime.time, "event" : huntingTime.event ]
+    init(huntingTime: (time: NSDate, event: String), additionalInterval: NSTimeInterval) {
+        self.huntingTime        = huntingTime
+        self.additionalInterval = additionalInterval
         
-        println("Schedule notification: \(Notification.key(huntingTime))")
+        let localNotif          = UILocalNotification()
+        localNotif.fireDate     = huntingTime.time.dateByAddingTimeInterval(additionalInterval)
+        localNotif.alertBody    = createAlert()
+        localNotif.alertAction  = "View Details"
+        localNotif.userInfo     = [ "key" : Notification.key(huntingTime), "time" : huntingTime.time, "event" : huntingTime.event ]
+
         UIApplication.sharedApplication().scheduleLocalNotification(localNotif)
+    }
+    
+    func createAlert() -> String {
+        if additionalInterval == 0 {
+            switch huntingTime.event {
+            case "Start":
+                return "Start hunting!"
+            case "Sunrise":
+                return "The sun has risen"
+            case "Sunset":
+                return "The sun has set"
+            default:
+                return "Hunting is over for the day"
+            }
+        } else {
+            switch huntingTime.event {
+            case "Start":
+                return "Hunting starts in \(getTime().lowercaseString)"
+            case "Sunrise":
+                return "The sun rises in \(getTime().lowercaseString)"
+            case "Sunset":
+                return "The sun sets in \(getTime().lowercaseString)"
+            default:
+                return "Hunting ends in \(getTime().lowercaseString)"
+            }
+        }
+    }
+    
+    func getTime() -> String {
+        if additionalInterval == 60 * 60 {
+            return "1 Hour"
+        } else {
+            return "\(Int(additionalInterval / 60)) Minutes"
+        }
+    }
+    
+    func getMessage() -> String {
+        if additionalInterval == 0 {
+            return "Added \(huntingTime.event) Notification"
+        } else {
+            return "Added \(getTime()) Until \(huntingTime.event) Notification"
+        }
     }
     
     class func key(huntingTime: (time: NSDate, event: String)) -> String {
@@ -50,14 +94,14 @@ class NotificationManager {
     func addNotification(huntingTime: (time: NSDate, event: String)) {
         if canAddNotifications(huntingTime) {
             let count = getAllNotifications(huntingTime).count
-            var scheduleTime = huntingTime.time
+            var additionalInterval : NSTimeInterval = 0
             if count == 1 {
-                scheduleTime = scheduleTime.dateByAddingTimeInterval(60 * 15)
+                additionalInterval = 60 * 15
             } else if count == 2 {
-                scheduleTime = scheduleTime.dateByAddingTimeInterval(60 * 60)
+                additionalInterval = 60 * 60
             }
             
-            let huntingNotification = Notification(huntingTime: huntingTime, scheduleTime: scheduleTime)
+            let huntingNotification = Notification(huntingTime: huntingTime, additionalInterval: additionalInterval)
             for del in delegates {
                 del.didAddNotification(huntingNotification)
             }
@@ -65,7 +109,6 @@ class NotificationManager {
     }
     
     func removeAllNotifications(huntingTime: (time: NSDate, event: String)) {
-        println("Remove all notifications")
         for notification in getAllNotifications(huntingTime) {
             UIApplication.sharedApplication().cancelLocalNotification(notification)
         }
