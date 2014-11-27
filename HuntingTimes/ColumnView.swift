@@ -24,7 +24,7 @@ class ColumnView : UIView {
     func setTextAlignment(alignment: NSTextAlignment) {
         textAlignment = alignment
         for label in self.subviews as [UILabel] {
-            label.textAlignment = alignment
+            setPositionOfLabel(label)
         }
     }
     
@@ -37,13 +37,27 @@ class ColumnView : UIView {
         }
         
         for (index, text) in enumerate(labels) {
-            let label = UILabel(frame: CGRectMake(0, 0, frame.width, 30))
-            label.text          = text
-            label.textColor     = .whiteColor()
-            label.font          = UIFont(name: "HelveticaNeue-Thin", size: 28)
-            label.textAlignment = textAlignment
-            label.center        = CGPointMake(label.center.x, startOffset + (offset * CGFloat(index)))
+            let label = UILabel(frame: CGRectMake(0, 0, frame.width, 35))
+            label.text              = text
+            label.textColor         = .whiteColor()
+            label.font              = UIFont(name: "HelveticaNeue-Thin", size: 28)
+//            label.layer.borderColor = UIColor.whiteColor().CGColor
+//            label.layer.borderWidth = 1
+            label.center            = CGPointMake(label.center.x, startOffset + (offset * CGFloat(index)))
+            label.sizeToFit()
+            setPositionOfLabel(label)
             addSubview(label)
+        }
+    }
+    
+    func setPositionOfLabel(label: UILabel) {
+        let lFrame = label.frame
+        if NSTextAlignment.Center == textAlignment {
+            label.center = CGPointMake(frame.width / 2, label.center.y)
+        } else if NSTextAlignment.Left == textAlignment {
+            label.frame = CGRectMake(0, lFrame.origin.y, lFrame.width, lFrame.height)
+        } else {
+            label.frame = CGRectMake(frame.width - lFrame.width, lFrame.origin.y, lFrame.width, lFrame.height)
         }
     }
     

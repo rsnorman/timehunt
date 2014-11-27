@@ -10,13 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HuntingTimes/ViewController.swift"
-            timestampString = "438737915.972971"
+            timestampString = "438743024.191238"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "330"
-            endingLineNumber = "330"
-            landmarkName = "ViewController"
-            landmarkType = "3">
+            startingLineNumber = "334"
+            endingLineNumber = "334"
+            landmarkName = "willFinishCountdown()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HuntingTimes/ViewController.swift"
-            timestampString = "438737915.972971"
+            timestampString = "438743024.191238"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
             landmarkName = "addCountdown()"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HuntingTimes/ViewController.swift"
-            timestampString = "438737915.972971"
+            timestampString = "438743024.191238"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "392"
-            endingLineNumber = "392"
+            startingLineNumber = "396"
+            endingLineNumber = "396"
             landmarkName = "showNextDate()"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HuntingTimes/ColumnView.swift"
-            timestampString = "438671360.589909"
+            timestampString = "438745148.149538"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "getPosition(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HuntingTimes/ColumnView.swift"
-            timestampString = "438671400.450184"
+            timestampString = "438745148.149538"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "getPosition(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -207,8 +207,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "153"
             endingLineNumber = "153"
-            landmarkName = "viewDidAppear(_:)"
-            landmarkType = "5">
+            landmarkName = "ViewController"
+            landmarkType = "3">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -276,13 +276,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HuntingTimes/ViewController.swift"
-            timestampString = "438737915.972971"
+            timestampString = "438743024.191238"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "415"
-            endingLineNumber = "415"
-            landmarkName = "ViewController"
-            landmarkType = "3">
+            startingLineNumber = "419"
+            endingLineNumber = "419"
+            landmarkName = "showPreviousDate()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -297,7 +297,87 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "243"
             endingLineNumber = "243"
-            landmarkName = "didPositionIndicator(_:)"
+            landmarkName = "ViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HuntingTimes/HuntingTimesView.swift"
+            timestampString = "438745696.99976"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "init(frame:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HuntingTimes/HuntingTimesView.swift"
+            timestampString = "438745696.99976"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "init(frame:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HuntingTimes/HuntingTimesView.swift"
+            timestampString = "438745696.99976"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "init(frame:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HuntingTimes/HuntingTimesView.swift"
+            timestampString = "438745696.99976"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "didTapTime(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HuntingTimes/HuntingTimesView.swift"
+            timestampString = "438746581.261203"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "addNotificationIcon(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

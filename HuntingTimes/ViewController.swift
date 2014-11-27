@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDelegate {
+class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDelegate, HuntingTimesViewDelegate {
     var reversing            : Bool!
     var animating            : Bool!
     var states               : [String]!
@@ -91,14 +91,15 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func addHuntingTimesView() {
-        huntingTimesView = HuntingTimesView(frame: CGRectMake(0, 210, view.frame.width, view.frame.height - 240))
+        huntingTimesView = HuntingTimesView(frame: CGRectMake(0, 210, view.frame.width, view.frame.height - 260))
         huntingTimesView.setTimes(getHuntingTimes())
         huntingTimesView.alpha = 0.0
+        huntingTimesView.delegate = self
         view.addSubview(huntingTimesView)
     }
     
     func addDateTimeScroller() {
-        dateTimeScroller = ScrollLineView(frame: CGRectMake(view.frame.width / 2, 220, 1, view.frame.height - 240))
+        dateTimeScroller = ScrollLineView(frame: CGRectMake(view.frame.width / 2, 220, 1, view.frame.height - 260))
         dateTimeScroller.alpha           = 0.0
         dateTimeScroller.animateDuration = dateTransitionTime
         dateTimeScroller.delegate        = self
@@ -106,7 +107,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func addDatePicker() {
-        monthColumnView = ColumnView(labels: ["September", "October", "November", "December"], frame: CGRectMake(0, 220, view.frame.width / 2.0 - 10, view.frame.height - 240))
+        monthColumnView = ColumnView(labels: ["September", "October", "November", "December"], frame: CGRectMake(0, 220, view.frame.width / 2.0 - 10, view.frame.height - 260))
         monthColumnView.setTextAlignment(NSTextAlignment.Right)
         monthColumnView.alpha  = 0.0
         monthColumnView.hidden = true
@@ -245,6 +246,10 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         let currentDay = Int(round(CGFloat(totalDays - 1) * percent))
         huntingSeason.setCurrentDay(currentDay)
         countdownLabel.text = dateToString(currentTime())
+    }
+    
+    func didTapHuntingTime(huntingTime: NSDate) {
+        huntingTimesView.addNotificationIcon(huntingTime)
     }
     
     func showSwipeHint() {
