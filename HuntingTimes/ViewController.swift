@@ -10,9 +10,6 @@ import UIKit
 import AudioToolbox
 
 class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDelegate, HuntingTimesViewDelegate, NotificationManagerDelegate, MessageViewDelegate {
-    var reversing            : Bool!
-    let dateTransitionTime   : Double  = 0.7
-    let eventLabelOffset     : CGFloat = 10.0
     var startScrollPosition  : CGPoint!
     
     var mainView : MainView!
@@ -32,10 +29,6 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        StatusBarUpdater.white(animated: false)
-        
-        reversing = false
-        
         huntingSeason = HuntingSeason()
         
         NotificationManager.sharedInstance.addDelegate(self)
@@ -43,6 +36,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         mainView = MainView(frame: view.frame)
         mainView.setDelegate(self)
         view.addSubview(mainView)
+        
         animator = MainViewAnimations(mainView: mainView)
         
         addDateGestures()
@@ -127,26 +121,24 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     
     func showNextDate() {
         if !animator.isAnimating() && !huntingSeason.closingDay() {
-            reversing = false
             self.mainView.dateTimeScroller.setPosition(1, animate: true)
-            animator.hideHuntingTimes(reverse: false) { (complete) -> Void in
+            animator.hideHuntingTimes(reverse: false) { (reverse, complete) -> Void in
                 self.mainView.dateTimeScroller.setPosition(0, animate: false)
                 self.huntingSeason.nextDay()
                 self.setHuntingDay()
-                self.animator.showHuntingTimes(reverse: false)
+                self.animator.showHuntingTimes(reverse: reverse)
             }
         }
     }
     
     func showPreviousDate() {
         if !animator.isAnimating() && !huntingSeason.openingDay() {
-            reversing = true
             self.mainView.dateTimeScroller.setPosition(0, animate: true)
-            animator.hideHuntingTimes(reverse: true) { (complete) -> Void in
+            animator.hideHuntingTimes(reverse: true) { (reverse, complete) -> Void in
                 self.mainView.dateTimeScroller.setPosition(1, animate: false)
                 self.huntingSeason.previousDay()
                 self.setHuntingDay()
-                self.animator.showHuntingTimes(reverse: true)
+                self.animator.showHuntingTimes(reverse: reverse)
             }
         }
     }

@@ -64,7 +64,7 @@ class MainViewAnimations : NSObject {
         }
     }
     
-    func showHuntingTimes(reverse: Bool = false, completion: ((Bool) -> Void)? = nil) {
+    func showHuntingTimes(reverse: Bool = false, completion: ((reversing: Bool, complete: Bool) -> Void)? = nil) {
         animating = true
         let yOffset = reverse ? eventLabelOffset * -1 : eventLabelOffset
         
@@ -73,11 +73,11 @@ class MainViewAnimations : NSObject {
             self.mainView.huntingTimesView.frame = CGRectOffset(self.mainView.huntingTimesView.frame, 0, yOffset)
         }) { (complete) -> Void in
             self.animating = false
-            completion?(complete)
+            completion?(reversing: reverse, complete: complete)
         }
     }
     
-    func hideHuntingTimes(reverse: Bool = false, completion: ((Bool) -> Void)? = nil) {
+    func hideHuntingTimes(reverse: Bool = false, completion: ((reversing: Bool, complete: Bool) -> Void)? = nil) {
         animating = true
         let yOffset = reverse ? eventLabelOffset * -1 : eventLabelOffset
         
@@ -87,7 +87,7 @@ class MainViewAnimations : NSObject {
         }) { (complete) -> Void in
             self.animating = false
             self.mainView.huntingTimesView.frame = CGRectOffset(self.mainView.huntingTimesView.frame, 0, yOffset * -2)
-            completion?(complete)
+            completion?(reversing: reverse, complete: complete)
         }
     }
     
