@@ -29,6 +29,7 @@
 		4C6EE1AC1A2590F100305115 /* HuntingTimeProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1AB1A2590F100305115 /* HuntingTimeProgress.swift */; };
 		4C6EE1AE1A25967C00305115 /* DateTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1AD1A25967C00305115 /* DateTimeHelper.swift */; };
 		4C8987F31A290D35001B7B74 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8987F21A290D35001B7B74 /* MainView.swift */; };
+		4C8987F51A291FDC001B7B74 /* MainViewAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8987F41A291FDC001B7B74 /* MainViewAnimations.swift */; };
 		4CA156DB1A20413C00F95BA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */; };
 		4CA156DE1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DC1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld */; };
 		4CA156E01A20413C00F95BA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DF1A20413C00F95BA2 /* ViewController.swift */; };
@@ -72,6 +73,7 @@
 		4C6EE1AB1A2590F100305115 /* HuntingTimeProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingTimeProgress.swift; sourceTree = "<group>"; };
 		4C6EE1AD1A25967C00305115 /* DateTimeHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeHelper.swift; sourceTree = "<group>"; };
 		4C8987F21A290D35001B7B74 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		4C8987F41A291FDC001B7B74 /* MainViewAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewAnimations.swift; sourceTree = "<group>"; };
 		4CA156D51A20413C00F95BA2 /* HuntingTimes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuntingTimes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CA156D91A20413C00F95BA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				4C6EE1A51A24477200305115 /* HuntingTimesView.swift */,
 				4CDE49421A282934002CF42A /* MessageView.swift */,
 				4C8987F21A290D35001B7B74 /* MainView.swift */,
+				4C8987F41A291FDC001B7B74 /* MainViewAnimations.swift */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				4CA156DB1A20413C00F95BA2 /* AppDelegate.swift in Sources */,
 				4CDE49451A282B3B002CF42A /* InterfaceHelper.swift in Sources */,
 				4C46BE491A206294005BB796 /* Delay.swift in Sources */,
+				4C8987F51A291FDC001B7B74 /* MainViewAnimations.swift in Sources */,
 				4C6EE1AE1A25967C00305115 /* DateTimeHelper.swift in Sources */,
 				4C46BE441A2046FE005BB796 /* StatusBarUpdater.swift in Sources */,
 				4C3D49AA1A28E71700AFF111 /* Constants.swift in Sources */,
