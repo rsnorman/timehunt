@@ -58,7 +58,9 @@ class HuntingTimesView : UIView {
         let loc   = sender.locationInView(self)
         if let label = self.hitTest(loc, withEvent: nil) as? UILabel {
             let timeString = label.text
-            let timesString = huntingDay.allTimes().map(timeToString)
+            let timesString = huntingDay.allTimes().map {
+                $0.toTimeString()
+            }
             let time  = huntingDay.allTimes()[find(timesString, timeString!)!]
             let event = events[find(timesString, timeString!)!]
                 
@@ -69,7 +71,9 @@ class HuntingTimesView : UIView {
     }
     
     func getPositionOfTime(time: NSDate) -> Int? {
-        let timesString = huntingDay.allTimes().map(timeToString)
+        let timesString = huntingDay.allTimes().map {
+            $0.toTimeString()
+        }
         return find(timesString, timeToString(time))
     }
     
