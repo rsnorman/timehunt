@@ -41,8 +41,6 @@ class ColumnView : UIView {
             label.text              = text
             label.textColor         = .whiteColor()
             label.font              = UIFont(name: "HelveticaNeue-Thin", size: 28)
-//            label.layer.borderColor = UIColor.whiteColor().CGColor
-//            label.layer.borderWidth = 1
             label.center            = CGPointMake(label.center.x, startOffset + (offset * CGFloat(index)))
             label.sizeToFit()
             setPositionOfLabel(label)

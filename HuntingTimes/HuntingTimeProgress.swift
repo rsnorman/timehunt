@@ -44,9 +44,13 @@ class HuntingTimeProgress {
         
         let percentOfTime = CGFloat(timeSinceNow / timeSinceNext)
         
-        let currentPosition = lastPoint!.y + (nextPoint!.y - lastPoint!.y) * percentOfTime
-        
-        return currentPosition / huntingTimesColumn.frame.height
+        if lastPoint != nil && nextPoint != nil {
+            let currentPosition = lastPoint!.y + (nextPoint!.y - lastPoint!.y) * percentOfTime
+            
+            return currentPosition / huntingTimesColumn.frame.height
+        } else {
+            return 0.0
+        }
     }
     
     private

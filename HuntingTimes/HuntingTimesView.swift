@@ -71,10 +71,13 @@ class HuntingTimesView : UIView {
     }
     
     func getPositionOfTime(time: NSDate) -> Int? {
-        let timesString = huntingDay.allTimes().map {
-            $0.toTimeString()
+        if let day = huntingDay {
+            let timesString = huntingDay.allTimes().map {
+                $0.toTimeString()
+            }
+            return find(timesString, timeToString(time))
         }
-        return find(timesString, timeToString(time))
+        return nil
     }
     
     func findEventLabelFromTime(time: NSDate) -> UILabel? {

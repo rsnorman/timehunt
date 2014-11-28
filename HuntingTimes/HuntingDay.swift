@@ -31,8 +31,8 @@ class HuntingDay {
         return[startTime, sunriseTime, sunsetTime, endTime]
     }
     
-    func getTimeFromState(state: String) -> HuntingTime {
-        switch state {
+    func getCurrentTime() -> HuntingTime {
+        switch getCurrentState() {
             case "starting":
                 return startTime
             case "sunrising":
