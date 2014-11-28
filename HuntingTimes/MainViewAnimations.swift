@@ -11,7 +11,7 @@ import UIKit
 class MainViewAnimations : NSObject {
     let mainView          : MainView
     let eventLabelOffset  : CGFloat = 10.0
-    private var animating : Bool = true
+    private var animating : Bool = false
     
     init(mainView: MainView) {
         self.mainView = mainView
@@ -22,100 +22,114 @@ class MainViewAnimations : NSObject {
     }
     
     func hideDailyView(completion: ((Bool) -> Void)?) {
-        animating = true
-        for gesture in mainView.superview!.gestureRecognizers as [UIGestureRecognizer] {
-            gesture.enabled = false
-        }
-        
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.mainView.dateTimeScroller.showCurrentPosition()
-            self.mainView.hideDailyView(hideIndicator: false)
+        if !animating {
+            animating = true
+            for gesture in mainView.superview!.gestureRecognizers as [UIGestureRecognizer] {
+                gesture.enabled = false
+            }
             
-            self.mainView.showHints()
-        }) { (complete) -> Void in
-            self.animating = false
-            completion?(complete)
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.mainView.dateTimeScroller.showCurrentPosition()
+                self.mainView.hideDailyView(hideIndicator: false)
+                
+                self.mainView.showHints()
+            }) { (complete) -> Void in
+                self.animating = false
+                completion?(complete)
+            }
         }
     }
     
     func showDailyView() {
-        animating = true
-        for gesture in mainView.superview!.gestureRecognizers as [UIGestureRecognizer] {
-            gesture.enabled = true
+        if !animating {
+            animating = true
+            for gesture in mainView.superview!.gestureRecognizers as [UIGestureRecognizer] {
+                gesture.enabled = true
+            }
+            
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.animating = false
+                self.mainView.showDailyView()
+            })
         }
-        
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.animating = false
-            self.mainView.showDailyView()
-        })
     }
     
     func showDatePicker(percentComplete: CGFloat) {
-        animating = true
-        mainView.countdownLabel.stopCountdown()
-        mainView.monthColumnView.hidden = false
-        mainView.datepickerLabel.text   = self.mainView.dateLabel.text
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.animating = false
-            self.mainView.dateTimeScroller.setPosition(percentComplete, animate: false)
-            self.mainView.showDatePicker()
-        }) { (complete) -> Void in
-            self.animating = false
+        if !animating {
+            animating = true
+            mainView.countdownLabel.stopCountdown()
+            mainView.monthColumnView.hidden = false
+            mainView.datepickerLabel.text   = self.mainView.dateLabel.text
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.animating = false
+                self.mainView.dateTimeScroller.setPosition(percentComplete, animate: false)
+                self.mainView.showDatePicker()
+            }) { (complete) -> Void in
+                self.animating = false
+            }
         }
     }
     
     func showHuntingTimes(reverse: Bool = false, completion: ((reversing: Bool, complete: Bool) -> Void)? = nil) {
-        animating = true
-        let yOffset = reverse ? eventLabelOffset * -1 : eventLabelOffset
-        
-        UIView.animateWithDuration(DAY_TRANSITION_TIME, animations: { () -> Void in
-            self.mainView.showDailyView()
-            self.mainView.huntingTimesView.frame = CGRectOffset(self.mainView.huntingTimesView.frame, 0, yOffset)
-        }) { (complete) -> Void in
-            self.animating = false
-            completion?(reversing: reverse, complete: complete)
+        if !animating {
+            animating = true
+            let yOffset = reverse ? eventLabelOffset * -1 : eventLabelOffset
+            
+            UIView.animateWithDuration(DAY_TRANSITION_TIME, animations: { () -> Void in
+                self.mainView.showDailyView()
+                self.mainView.huntingTimesView.frame = CGRectOffset(self.mainView.huntingTimesView.frame, 0, yOffset)
+            }) { (complete) -> Void in
+                self.animating = false
+                completion?(reversing: reverse, complete: complete)
+            }
         }
     }
     
     func hideHuntingTimes(reverse: Bool = false, completion: ((reversing: Bool, complete: Bool) -> Void)? = nil) {
-        animating = true
-        let yOffset = reverse ? eventLabelOffset * -1 : eventLabelOffset
-        
-        UIView.animateWithDuration(DAY_TRANSITION_TIME, animations: { () -> Void in
-            self.mainView.hideDailyView()
-            self.mainView.huntingTimesView.frame = CGRectOffset(self.mainView.huntingTimesView.frame, 0, yOffset)
-        }) { (complete) -> Void in
-            self.animating = false
-            self.mainView.huntingTimesView.frame = CGRectOffset(self.mainView.huntingTimesView.frame, 0, yOffset * -2)
-            completion?(reversing: reverse, complete: complete)
+        if !animating {
+            animating = true
+            let yOffset = reverse ? eventLabelOffset * -1 : eventLabelOffset
+            
+            UIView.animateWithDuration(DAY_TRANSITION_TIME, animations: { () -> Void in
+                self.mainView.hideDailyView()
+                self.mainView.huntingTimesView.frame = CGRectOffset(self.mainView.huntingTimesView.frame, 0, yOffset)
+            }) { (complete) -> Void in
+                self.animating = false
+                self.mainView.huntingTimesView.frame = CGRectOffset(self.mainView.huntingTimesView.frame, 0, yOffset * -2)
+                completion?(reversing: reverse, complete: complete)
+            }
         }
     }
     
     func hideDatePicker(completion: ((complete: Bool) -> Void)?) {
-        animating = true
-        UIView.animateWithDuration(0.3, delay: 0.1, options: nil, animations: { () -> Void in
-            self.mainView.hideDatePicker()
-            self.mainView.dateTimeScroller.hideCurrentPosition()
-            self.mainView.hideHints()
-        }) { (complete) -> Void in
-            self.animating = false
-            self.mainView.resetHints()
-            self.mainView.monthColumnView.hidden = true
-            completion?(complete: complete)
+        if !animating {
+            animating = true
+            UIView.animateWithDuration(0.3, delay: 0.1, options: nil, animations: { () -> Void in
+                self.mainView.hideDatePicker()
+                self.mainView.dateTimeScroller.hideCurrentPosition()
+                self.mainView.hideHints()
+            }) { (complete) -> Void in
+                self.animating = false
+                self.mainView.resetHints()
+                self.mainView.monthColumnView.hidden = true
+                completion?(complete: complete)
+            }
         }
     }
     
     func showSwipeHint() {
-        animating = true
-        UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
-            self.mainView.showHints()
-        }) { (complete) -> Void in
-            UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-                self.mainView.hideHints()
-            }, completion: { (complete) -> Void in
-                self.animating = false
-                self.mainView.resetHints()
-            })
+        if !animating {
+            animating = true
+            UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+                self.mainView.showHints()
+            }) { (complete) -> Void in
+                UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                    self.mainView.hideHints()
+                }, completion: { (complete) -> Void in
+                    self.animating = false
+                    self.mainView.resetHints()
+                })
+            }
         }
     }
 }

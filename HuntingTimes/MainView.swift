@@ -110,6 +110,10 @@ class MainView : UIView {
         dateTimeScroller.positionIndicator.alpha = 1.0
     }
     
+    func isDatePickerVisible() -> Bool {
+        return monthColumnView.hidden
+    }
+    
     func showDatePicker() {
         monthColumnView.alpha = 1.0
         datepickerLabel.alpha = 1.0

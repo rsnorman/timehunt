@@ -91,7 +91,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func startScrollDates() {
-        if mainView.monthColumnView.hidden == true {
+        if mainView.isDatePickerVisible() {
             animator.hideDailyView() { (complete) -> Void in
                 self.animator.showDatePicker(self.huntingSeason.percentComplete())
             }
@@ -99,7 +99,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func stopScrollDates() {
-        if mainView.monthColumnView.hidden == false {
+        if !mainView.isDatePickerVisible() {
             animator.hideDatePicker() { (complete) -> Void in
                 self.setHuntingDay()
                 self.startScrollPosition = nil
