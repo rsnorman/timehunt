@@ -59,6 +59,10 @@ class HuntingDay {
             return "ended"
         }
     }
+    
+    func isEnded() -> Bool {
+        return endTime.timeIntervalSinceNow() <= 0
+    }
 }
 
 

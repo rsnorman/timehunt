@@ -383,7 +383,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     
     func setCountdownTime() {
         countdownLabel.stopCountdown()
-        if currentTime().timeIntervalSinceNow() > 0 {
+        if !currentDay().isEnded() {
             countdownLabel.startCountdown(currentTime().time)
             stateLabel.text = currentTime().event
         } else {
