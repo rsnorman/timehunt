@@ -10,47 +10,35 @@ import UIKit
 import AudioToolbox
 
 class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDelegate, HuntingTimesViewDelegate, NotificationManagerDelegate, MessageViewDelegate {
-    var startScrollPosition  : CGPoint!
     
     var mainView : MainView!
     var animator : MainViewAnimations!
     
     var touchDelay           : dispatch_cancelable_closure!
+    var startScrollPosition  : CGPoint!
     var huntingSeason        : HuntingSeason!
     var huntingTimesProgress : HuntingTimeProgress!
-    
-    var nextDateGesture      : UISwipeGestureRecognizer!
-    var previousDateGesture  : UISwipeGestureRecognizer!
-    var swipeRightGesture    : UISwipeGestureRecognizer!
-    var swipeLeftGesture     : UISwipeGestureRecognizer!
-    var panDatesGesture      : UIPanGestureRecognizer!
-    var hintTapGesture       : UITapGestureRecognizer!
 
     override func viewDidLoad() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showCountdown", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setNotifications", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        
         super.viewDidLoad()
-        
-        huntingSeason = HuntingSeason()
-        
-        NotificationManager.sharedInstance.addDelegate(self)
+        view.userInteractionEnabled = true
+        view.alpha                  = 0
         
         mainView = MainView(frame: view.frame)
         mainView.setDelegate(self)
         view.addSubview(mainView)
         
+        huntingSeason = HuntingSeason()
         animator = MainViewAnimations(mainView: mainView)
-        
         addDateGestures()
-        
+        NotificationManager.sharedInstance.addDelegate(self)
         huntingTimesProgress = HuntingTimeProgress(huntingDay: currentDay(), huntingTimesColumn: mainView.huntingTimesView.timeColumnView)
-        mainView.dateTimeScroller.markCurrentPosition(huntingSeason.percentComplete())
+        
         
         setHuntingDay()
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showCountdown", name: UIApplicationDidBecomeActiveNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setNotifications", name: UIApplicationDidBecomeActiveNotification, object: nil)
-        
-        view.userInteractionEnabled = true
-        view.alpha = 0
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -92,6 +80,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     
     func startScrollDates() {
         if mainView.isDatePickerVisible() {
+            mainView.dateTimeScroller.markCurrentPosition(huntingSeason.percentComplete())
             animator.hideDailyView() { (complete) -> Void in
                 self.animator.showDatePicker(self.huntingSeason.percentComplete())
             }
@@ -269,23 +258,22 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     /* Gestures */
     
     func addDateGestures() {
-        nextDateGesture           = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
+        let nextDateGesture       = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
         nextDateGesture.direction = .Up
         view.addGestureRecognizer(nextDateGesture)
         
-        previousDateGesture           = UISwipeGestureRecognizer(target: self, action: "showNextDate")
+        let previousDateGesture       = UISwipeGestureRecognizer(target: self, action: "showNextDate")
         previousDateGesture.direction = .Down
         view.addGestureRecognizer(previousDateGesture)
         
-        swipeRightGesture = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
+        let swipeRightGesture       = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
         swipeRightGesture.direction = .Right
-        swipeLeftGesture  = UISwipeGestureRecognizer(target: self, action: "showNextDate")
-        swipeLeftGesture.direction = .Left
-        
+        let swipeLeftGesture        = UISwipeGestureRecognizer(target: self, action: "showNextDate")
+        swipeLeftGesture.direction  = .Left
         view.addGestureRecognizer(swipeRightGesture)
         view.addGestureRecognizer(swipeLeftGesture)
         
-        hintTapGesture  = UITapGestureRecognizer(target: animator, action: "showSwipeHint")
+        let hintTapGesture  = UITapGestureRecognizer(target: animator, action: "showSwipeHint")
         view.addGestureRecognizer(hintTapGesture)
     }
     
