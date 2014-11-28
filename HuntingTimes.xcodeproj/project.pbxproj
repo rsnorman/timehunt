@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		4C3D49A41A28347800AFF111 /* HuntingDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3D49A31A28347800AFF111 /* HuntingDay.swift */; };
 		4C3D49A61A28545800AFF111 /* HuntingTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3D49A51A28545800AFF111 /* HuntingTime.swift */; };
+		4C3D49AA1A28E71700AFF111 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3D49A91A28E71700AFF111 /* Constants.swift */; };
 		4C46BE411A204686005BB796 /* forest@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE401A204686005BB796 /* forest@2x.jpg */; };
 		4C46BE441A2046FE005BB796 /* StatusBarUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE431A2046FE005BB796 /* StatusBarUpdater.swift */; };
 		4C46BE471A20484F005BB796 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE461A20484F005BB796 /* ShadowView.swift */; };
 		4C46BE491A206294005BB796 /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE481A206294005BB796 /* Delay.swift */; };
 		4C46BE4B1A20667B005BB796 /* TiltImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE4A1A20667B005BB796 /* TiltImageView.swift */; };
 		4C46BE4D1A20D7D1005BB796 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE4C1A20D7D1005BB796 /* CountdownView.swift */; };
-		4C46BE501A20E053005BB796 /* HuntingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE4F1A20E053005BB796 /* HuntingState.swift */; };
 		4C46BE521A2117EC005BB796 /* HuntingSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE511A2117EC005BB796 /* HuntingSeason.swift */; };
 		4C46BE541A21190C005BB796 /* hunting-times.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE531A21190C005BB796 /* hunting-times.csv */; };
 		4C46BE561A211F2C005BB796 /* down-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE551A211F2C005BB796 /* down-arrow@2x.png */; };
@@ -51,13 +51,13 @@
 /* Begin PBXFileReference section */
 		4C3D49A31A28347800AFF111 /* HuntingDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingDay.swift; sourceTree = "<group>"; };
 		4C3D49A51A28545800AFF111 /* HuntingTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingTime.swift; sourceTree = "<group>"; };
+		4C3D49A91A28E71700AFF111 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4C46BE401A204686005BB796 /* forest@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "forest@2x.jpg"; sourceTree = "<group>"; };
 		4C46BE431A2046FE005BB796 /* StatusBarUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarUpdater.swift; sourceTree = "<group>"; };
 		4C46BE461A20484F005BB796 /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		4C46BE481A206294005BB796 /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
 		4C46BE4A1A20667B005BB796 /* TiltImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TiltImageView.swift; sourceTree = "<group>"; };
 		4C46BE4C1A20D7D1005BB796 /* CountdownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
-		4C46BE4F1A20E053005BB796 /* HuntingState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingState.swift; sourceTree = "<group>"; };
 		4C46BE511A2117EC005BB796 /* HuntingSeason.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingSeason.swift; sourceTree = "<group>"; };
 		4C46BE531A21190C005BB796 /* hunting-times.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "hunting-times.csv"; sourceTree = "<group>"; };
 		4C46BE551A211F2C005BB796 /* down-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down-arrow@2x.png"; sourceTree = "<group>"; };
@@ -132,14 +132,6 @@
 			name = Interface;
 			sourceTree = "<group>";
 		};
-		4C46BE4E1A20E040005BB796 /* States */ = {
-			isa = PBXGroup;
-			children = (
-				4C46BE4F1A20E053005BB796 /* HuntingState.swift */,
-			);
-			name = States;
-			sourceTree = "<group>";
-		};
 		4CA156CC1A20413C00F95BA2 = {
 			isa = PBXGroup;
 			children = (
@@ -161,7 +153,7 @@
 		4CA156D71A20413C00F95BA2 /* HuntingTimes */ = {
 			isa = PBXGroup;
 			children = (
-				4C46BE4E1A20E040005BB796 /* States */,
+				4C3D49A91A28E71700AFF111 /* Constants.swift */,
 				4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */,
 				4CA156DF1A20413C00F95BA2 /* ViewController.swift */,
 				4C46BE451A204840005BB796 /* Interface */,
@@ -323,7 +315,6 @@
 				4C46BE4B1A20667B005BB796 /* TiltImageView.swift in Sources */,
 				4C46BE4D1A20D7D1005BB796 /* CountdownView.swift in Sources */,
 				4C6EE1AC1A2590F100305115 /* HuntingTimeProgress.swift in Sources */,
-				4C46BE501A20E053005BB796 /* HuntingState.swift in Sources */,
 				4CDE49431A282934002CF42A /* MessageView.swift in Sources */,
 				4CA156DE1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld in Sources */,
 				4C56B3CD1A26D2CC00B8BD82 /* NotificationManager.swift in Sources */,
@@ -335,6 +326,7 @@
 				4C46BE491A206294005BB796 /* Delay.swift in Sources */,
 				4C6EE1AE1A25967C00305115 /* DateTimeHelper.swift in Sources */,
 				4C46BE441A2046FE005BB796 /* StatusBarUpdater.swift in Sources */,
+				4C3D49AA1A28E71700AFF111 /* Constants.swift in Sources */,
 				4C6EE1A61A24477200305115 /* HuntingTimesView.swift in Sources */,
 				4C3D49A41A28347800AFF111 /* HuntingDay.swift in Sources */,
 				4C46BE471A20484F005BB796 /* ShadowView.swift in Sources */,

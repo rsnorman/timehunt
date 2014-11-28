@@ -34,6 +34,7 @@ class Notification {
             localNotification.fireDate         = notificationable.scheduleTime().dateByAddingTimeInterval(additionalInterval * -1)
             localNotification.alertBody        = notificationable.alert(getTime())
             localNotification.alertAction      = "View Details"
+            localNotification.soundName        = "silence.mp3"
             localNotification.userInfo         = notificationable.userInfo()
             localNotification.userInfo!["key"] = notificationable.key()
 
@@ -77,9 +78,9 @@ class NotificationManager {
             let count = getAllNotificationsForKey(notificationable.key()).count
             var additionalInterval : NSTimeInterval = 0
             if count == 1 {
-                additionalInterval = 60 * 15
+                additionalInterval = SECOND_NOTIFICATION_INTERVAL
             } else if count == 2 {
-                additionalInterval = 60 * 60
+                additionalInterval = THIRD_NOTIFICATION_INTERVAL
             }
             
             let notification = Notification(notificationable: notificationable, additionalInterval: additionalInterval)
@@ -115,14 +116,14 @@ class NotificationManager {
     }
     
     func canAddNotificationsForKey(key: String) -> Bool {
-        return getAllNotificationsForKey(key).count < 3
+        return getAllNotificationsForKey(key).count < MAX_NOTIFICATIONS
     }
     
     private
     
     init() {
         delegates = []
-        let notificationTypes = UIUserNotificationType.Alert
+        let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Sound
         let settings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
     }
