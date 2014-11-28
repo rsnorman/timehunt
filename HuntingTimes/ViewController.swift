@@ -299,30 +299,32 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     
     func didTapHuntingTime(huntingTime: HuntingTime) {
         let notificationManager = NotificationManager.sharedInstance
-        if notificationManager.canAddNotifications((time: huntingTime.time, event: huntingTime.event)) {
-            notificationManager.addNotification((time: huntingTime.time, event: huntingTime.event))
+        if notificationManager.canAddNotificationsForKey(huntingTime.key()) {
+            notificationManager.addNotification(huntingTime)
         } else {
-            notificationManager.removeAllNotifications((time: huntingTime.time, event: huntingTime.event))
+            notificationManager.removeAllNotifications(huntingTime)
         }
     }
     
     func setNotifications() {
         for (index, time) in enumerate(getHuntingTimes()) {
-            let notifications = NotificationManager.sharedInstance.getAllNotifications((time: time.time, event: time.event))
+            let notifications = NotificationManager.sharedInstance.getAllNotificationsForKey(time.key())
             for notification in notifications {
                 huntingTimesView.addNotificationIcon(time.time, animate: false)
             }
         }
     }
     
-    func didAddNotification(notification: Notification) {
+    func didAddNotification(notificationable: NotificationInterface, notification: Notification) {
         messageLabel.addMessage(notification.getMessage())
-        huntingTimesView.addNotificationIcon(notification.huntingTime.time)
+        huntingTimesView.addNotificationIcon(notificationable.userInfo()["time"] as NSDate)
     }
     
-    func didRemoveAllNotifications(huntingTime: (time: NSDate, event: String)) {
-        messageLabel.addMessage("Removed All \(huntingTime.event) Notifications")
-        huntingTimesView.removeNotificationIcons(huntingTime.time)
+    func didRemoveAllNotifications(notificationable: NotificationInterface) {
+        let event = notificationable.userInfo()["event"] as String
+        let time  = notificationable.userInfo()["time"] as NSDate
+        messageLabel.addMessage("Removed All \(event) Notifications")
+        huntingTimesView.removeNotificationIcons(time)
     }
     
     func showSwipeHint() {

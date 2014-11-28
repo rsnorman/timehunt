@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct HuntingTime {
+struct HuntingTime : NotificationInterface {
     let time  : NSDate
     let event : String
     
@@ -31,5 +31,51 @@ struct HuntingTime {
     
     func toDateString() -> String {
         return dateToString(time)
+    }
+    
+    func alert(additionalAlertTime: String) -> String {
+        if additionalAlertTime == "0 Minutes" {
+            switch event {
+            case "Start":
+                return "Start hunting!"
+            case "Sunrise":
+                return "The sun has risen"
+            case "Sunset":
+                return "The sun has set"
+            default:
+                return "Hunting is over for the day"
+            }
+        } else {
+            switch event {
+            case "Start":
+                return "Hunting starts in \(additionalAlertTime)"
+            case "Sunrise":
+                return "The sun rises in  \(additionalAlertTime)"
+            case "Sunset":
+                return "The sun sets in  \(additionalAlertTime)"
+            default:
+                return "Hunting ends in  \(additionalAlertTime)"
+            }
+        }
+    }
+    
+    func message(additionalAlertTime: String) -> String {
+        if additionalAlertTime == "0 Minutes" {
+            return "Added \(event) Notification"
+        } else {
+            return "Added \(additionalAlertTime) Until \(event) Notification"
+        }
+    }
+    
+    func scheduleTime() -> NSDate {
+        return time
+    }
+    
+    func key() -> String {
+        return "\(event):\(dateToString(clearTime(time), useRelativeString: false))"
+    }
+    
+    func userInfo() -> [NSObject : AnyObject] {
+        return [ "time" : time, "event" : event ]
     }
 }
