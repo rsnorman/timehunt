@@ -22,7 +22,7 @@ class Notification {
         self.additionalInterval = additionalInterval
         
         let localNotif          = UILocalNotification()
-        localNotif.fireDate     = huntingTime.time.dateByAddingTimeInterval(additionalInterval)
+        localNotif.fireDate     = huntingTime.time.dateByAddingTimeInterval(additionalInterval * -1)
         localNotif.alertBody    = createAlert()
         localNotif.alertAction  = "View Details"
         localNotif.userInfo     = [ "key" : Notification.key(huntingTime), "time" : huntingTime.time, "event" : huntingTime.event ]
