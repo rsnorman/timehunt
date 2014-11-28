@@ -20,7 +20,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     var huntingTimesProgress : HuntingTimeProgress!
 
     override func viewDidLoad() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "showCountdown", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setCountdownTime", name: UIApplicationDidBecomeActiveNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "setNotifications", name: UIApplicationDidBecomeActiveNotification, object: nil)
         
         super.viewDidLoad()
@@ -74,9 +74,6 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     
     /* Action Methods */
     
-    func showCountdown() {
-        self.setCountdownTime()
-    }
     
     func startScrollDates() {
         if mainView.isDatePickerVisible() {
