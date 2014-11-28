@@ -32,6 +32,8 @@
 		4CA156E31A20413C00F95BA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA156E11A20413C00F95BA2 /* Main.storyboard */; };
 		4CA156E51A20413C00F95BA2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CA156E41A20413C00F95BA2 /* Images.xcassets */; };
 		4CA156F41A20413C00F95BA2 /* HuntingTimesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156F31A20413C00F95BA2 /* HuntingTimesTests.swift */; };
+		4CDE49431A282934002CF42A /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDE49421A282934002CF42A /* MessageView.swift */; };
+		4CDE49451A282B3B002CF42A /* InterfaceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDE49441A282B3B002CF42A /* InterfaceHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,8 @@
 		4CA156ED1A20413C00F95BA2 /* HuntingTimesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HuntingTimesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CA156F21A20413C00F95BA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CA156F31A20413C00F95BA2 /* HuntingTimesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntingTimesTests.swift; sourceTree = "<group>"; };
+		4CDE49421A282934002CF42A /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		4CDE49441A282B3B002CF42A /* InterfaceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,7 @@
 				4C6EE1AB1A2590F100305115 /* HuntingTimeProgress.swift */,
 				4C6EE1AD1A25967C00305115 /* DateTimeHelper.swift */,
 				4C56B3CC1A26D2CC00B8BD82 /* NotificationManager.swift */,
+				4CDE49441A282B3B002CF42A /* InterfaceHelper.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -116,6 +121,7 @@
 				4C6EE1A11A242C5C00305115 /* ScrollLineView.swift */,
 				4C6EE1A31A24323D00305115 /* ColumnView.swift */,
 				4C6EE1A51A24477200305115 /* HuntingTimesView.swift */,
+				4CDE49421A282934002CF42A /* MessageView.swift */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -312,11 +318,13 @@
 				4C46BE4D1A20D7D1005BB796 /* CountdownView.swift in Sources */,
 				4C6EE1AC1A2590F100305115 /* HuntingTimeProgress.swift in Sources */,
 				4C46BE501A20E053005BB796 /* HuntingState.swift in Sources */,
+				4CDE49431A282934002CF42A /* MessageView.swift in Sources */,
 				4CA156DE1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld in Sources */,
 				4C56B3CD1A26D2CC00B8BD82 /* NotificationManager.swift in Sources */,
 				4C46BE521A2117EC005BB796 /* HuntingSeason.swift in Sources */,
 				4C6EE1A41A24323D00305115 /* ColumnView.swift in Sources */,
 				4CA156DB1A20413C00F95BA2 /* AppDelegate.swift in Sources */,
+				4CDE49451A282B3B002CF42A /* InterfaceHelper.swift in Sources */,
 				4C46BE491A206294005BB796 /* Delay.swift in Sources */,
 				4C6EE1AE1A25967C00305115 /* DateTimeHelper.swift in Sources */,
 				4C46BE441A2046FE005BB796 /* StatusBarUpdater.swift in Sources */,

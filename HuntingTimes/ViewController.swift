@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDelegate, HuntingTimesViewDelegate, NotificationManagerDelegate {
+class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDelegate, HuntingTimesViewDelegate, NotificationManagerDelegate, MessageViewDelegate {
     var reversing            : Bool!
     var animating            : Bool!
     var states               : [String]!
@@ -16,7 +16,6 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     let dateTransitionTime   : Double  = 0.7
     let eventLabelOffset     : CGFloat = 10.0
     var startScrollPosition  : CGPoint!
-    var messages             : [String]!
     
     var bgImageView          : TiltImageView!
     var shadowView           : ShadowView!
@@ -29,8 +28,8 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     var monthColumnView      : ColumnView!
     var monthLabels          : [UILabel]!
     var stateLabel           : UILabel!
-    var messageLabel         : UILabel!
     var datepickerLabel      : UILabel!
+    var messageLabel         : MessageView!
     
     var touchDelay           : dispatch_cancelable_closure!
     var huntingSeason        : HuntingSeason!
@@ -59,7 +58,6 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         
         reversing = false
         animating = false
-        messages  = []
         
         huntingSeason = HuntingSeason()
         
@@ -93,16 +91,24 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func addMessageLabel() {
-        messageLabel = createLabel("", frame: CGRectMake(10, 75, view.frame.width - 20, 100), fontSize: 30)
-        messageLabel.alpha = 0.0
-        messageLabel.numberOfLines = 2
+        messageLabel = MessageView(frame: CGRectMake(10, 75, view.frame.width - 20, 100))
+        messageLabel.alpha    = 0.0
+        messageLabel.delegate = self
         view.addSubview(messageLabel)
     }
     
+    func willShowMessage() {
+        self.countdownLabel.alpha = 0.0
+    }
+    
+    func didHideMessage() {
+        self.countdownLabel.alpha = 1.0
+    }
+    
     func addDateLabels() {
-        dateLabel             = createLabel(dateToString(currentTime()), frame: CGRectMake(0, 185, view.frame.width, 30), fontSize: 18)
+        dateLabel             = createLabel(dateToString(currentTime()), CGRectMake(0, 185, view.frame.width, 30), 18)
         dateLabel.alpha       = 0.0
-        datepickerLabel       = createLabel(dateToString(currentTime()), frame: CGRectMake(0, 60, view.frame.width, 120), fontSize: 48)
+        datepickerLabel       = createLabel(dateToString(currentTime()), CGRectMake(0, 60, view.frame.width, 120), 48)
         datepickerLabel.alpha = 0.0
         view.addSubview(dateLabel)
         view.addSubview(datepickerLabel)
@@ -303,48 +309,13 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         }
     }
     
-    func addMessage(message: String) {
-        messages.append(message)
-        
-        if messages.count == 1 {
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.countdownLabel.alpha = 0.0
-                }) { (complete) -> Void in
-                    
-                self.showMessages(self.messages[0], completion: { () -> () in
-                    UIView.animateWithDuration(0.3, animations: { () -> Void in
-                        self.countdownLabel.alpha = 1.0
-                    })
-                })
-            }
-        }
-    }
-    
-    func showMessages(message: String, completion: () -> ()) {
-        self.messageLabel.text = message
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.messageLabel.alpha = 1.0
-            }, completion: { (complete) -> Void in
-                UIView.animateWithDuration(0.3, delay: 1.5, options: nil, animations: { () -> Void in
-                    self.messageLabel.alpha = 0.0
-                    }, completion: { (complete) -> Void in
-                        self.messages.removeAtIndex(0)
-                        if !self.messages.isEmpty {
-                            self.showMessages(self.messages[0], completion: completion)
-                        } else {
-                            completion()
-                        }
-                })
-        })
-    }
-    
     func didAddNotification(notification: Notification) {
-        addMessage(notification.getMessage())
+        messageLabel.addMessage(notification.getMessage())
         huntingTimesView.addNotificationIcon(notification.huntingTime.time)
     }
     
     func didRemoveAllNotifications(huntingTime: (time: NSDate, event: String)) {
-        addMessage("Removed All \(huntingTime.event) Notifications")
+        messageLabel.addMessage("Removed All \(huntingTime.event) Notifications")
         huntingTimesView.removeNotificationIcons(huntingTime.time)
     }
     
@@ -394,7 +365,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func addCountdown() {
-        stateLabel = createLabel("", frame: CGRectMake(0, 30, view.frame.width, 40), fontSize: 16)
+        stateLabel = createLabel("", CGRectMake(0, 30, view.frame.width, 40), 16)
         stateLabel.font = UIFont(name: "HelveticaNeue", size: 16)
         stateLabel.alpha = 0.0
         view.addSubview(stateLabel)
@@ -473,7 +444,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func addEventTimeLabel(text: String, y: CGFloat) -> UILabel {
-        let eventTimeLabel = createLabel(text, frame: CGRectMake(view.frame.width / 2 + 10, y - eventLabelOffset, view.frame.width / 2 - 10, 30), fontSize: 24)
+        let eventTimeLabel = createLabel(text, CGRectMake(view.frame.width / 2 + 10, y - eventLabelOffset, view.frame.width / 2 - 10, 30), 24)
         eventTimeLabel.textAlignment = .Left
         eventTimeLabel.alpha         = 0
         
@@ -546,16 +517,6 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
                 completionClosure(complete)
             }
         }
-    }
-    
-    func createLabel(text: String, frame: CGRect, fontSize: CGFloat) -> UILabel {
-        let label = UILabel(frame: frame)
-        label.text = text
-        label.textColor = .whiteColor()
-        label.font = UIFont(name: "HelveticaNeue-Thin", size: fontSize)
-        label.textAlignment = .Center
-        
-        return label
     }
 }
 
