@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDelegate, HuntingTimesViewDelegate, NotificationManagerDelegate, MessageViewDelegate {
     var reversing            : Bool!
@@ -290,6 +291,15 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         }
     }
     
+    func setNotifications() {
+        for (index, time) in enumerate(getHuntingTimes()) {
+            let notifications = NotificationManager.sharedInstance.getAllNotificationsForKey(time.key())
+            for notification in notifications {
+                huntingTimesView.addNotificationIcon(time.time, animate: false)
+            }
+        }
+    }
+    
     /* End Action Methods */
     
     
@@ -331,6 +341,15 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         huntingTimesView.removeNotificationIcons(time)
     }
     
+    func didReceiveNotification(userInfo: [NSObject : AnyObject]) {
+        let event = userInfo["event"] as String
+        let time  = userInfo["time"] as NSDate
+        
+        huntingTimesView.removeNotificationIcon(time, event: event)
+        
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+    }
+    
     func didTickCountdown() {
         dateTimeScroller.setPosition(huntingTimesProgress.getProgressPercent(), animate: true)
     }
@@ -347,15 +366,8 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
             self.countdownLabel.alpha = 1.0
         })
     }
-    
-    func setNotifications() {
-        for (index, time) in enumerate(getHuntingTimes()) {
-            let notifications = NotificationManager.sharedInstance.getAllNotificationsForKey(time.key())
-            for notification in notifications {
-                huntingTimesView.addNotificationIcon(time.time, animate: false)
-            }
-        }
-    }
+
+
     /* End Delegate Methods*/
     
     

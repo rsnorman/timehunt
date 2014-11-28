@@ -11,6 +11,7 @@ import UIKit
 protocol NotificationManagerDelegate {
     func didAddNotification(notificationable: NotificationInterface, notification: Notification)
     func didRemoveAllNotifications(notificationable: NotificationInterface)
+    func didReceiveNotification(userInfo: [NSObject : AnyObject])
 }
 
 protocol NotificationInterface {
@@ -117,6 +118,12 @@ class NotificationManager {
     
     func canAddNotificationsForKey(key: String) -> Bool {
         return getAllNotificationsForKey(key).count < MAX_NOTIFICATIONS
+    }
+    
+    func receivedNotification(notification: UILocalNotification) {
+        for del in delegates {
+            del.didReceiveNotification(notification.userInfo!)
+        }
     }
     
     private
