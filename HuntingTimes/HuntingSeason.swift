@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol HuntingSeasonDelegate {
+    func willChangeDay()
+    func didChangeDay(currentDay: HuntingDay)
+}
+
 class HuntingSeason {
     let dates           : [HuntingDay]
     var currentPosition : Int!
+    var delegate        : HuntingSeasonDelegate!
     
     init() {
         let path = NSBundle.mainBundle().pathForResource("hunting-times", ofType: "csv")
@@ -65,7 +71,9 @@ class HuntingSeason {
     }
     
     func setCurrentDay(currentDay: Int) {
+        delegate?.willChangeDay()
         currentPosition = currentDay
+        delegate?.didChangeDay(self.currentDay())
     }
     
     func percentComplete() -> CGFloat {

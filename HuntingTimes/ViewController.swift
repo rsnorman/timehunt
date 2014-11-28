@@ -50,6 +50,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         animating = false
         
         huntingSeason = HuntingSeason()
+//        huntingSeason.delegate = self
         
         NotificationManager.sharedInstance.addDelegate(self)
         
@@ -91,6 +92,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         return huntingSeason.currentDay()
     }
     
+
     func currentTime() -> HuntingTime {
         return currentDay().getTimeFromState(currentState())
     }
@@ -103,8 +105,8 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         return currentDay().allTimes()
     }
     
-    func setHuntingTimes() {
-        huntingTimesView.setTimes(currentDay())
+    func setHuntingDay() {
+        huntingTimesView.setDay(currentDay())
         huntingTimesProgress.huntingDay = currentDay()
         dateLabel.text = currentTime().toDateString()
     }
@@ -184,7 +186,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
                 self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, -10)
                 self.upArrow.frame   = CGRectOffset(self.upArrow.frame, 0, 10)
                 self.monthColumnView.hidden = true
-                self.setHuntingTimes()
+                self.setHuntingDay()
                 self.setCountdownTime()
                 self.setNotifications()
                 
@@ -237,7 +239,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
             hideEventLabels(reverse: false) { (complete) -> Void in
                 self.animating = false
                 self.huntingSeason.nextDay()
-                self.setHuntingTimes()
+                self.setHuntingDay()
                 self.dateTimeScroller.setPosition(0, animate: false)
                 self.setCountdownTime()
                 self.setNotifications()
@@ -254,7 +256,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
             hideEventLabels(reverse: true) { (complete) -> Void in
                 self.animating = false
                 self.huntingSeason.previousDay()
-                self.setHuntingTimes()
+                self.setHuntingDay()
                 self.dateTimeScroller.setPosition(1, animate: false)
                 self.setCountdownTime()
                 self.setNotifications()
@@ -463,7 +465,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     
     func addHuntingTimesView() {
         huntingTimesView = HuntingTimesView(frame: CGRectMake(0, 210, view.frame.width, view.frame.height - 260))
-        huntingTimesView.setTimes(currentDay())
+        huntingTimesView.setDay(currentDay())
         huntingTimesView.alpha = 0.0
         huntingTimesView.delegate = self
         view.addSubview(huntingTimesView)

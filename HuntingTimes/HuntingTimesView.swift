@@ -153,7 +153,7 @@ class HuntingTimesView : UIView {
         notificationIcons = [:]
     }
     
-    func setTimes(huntingDay: HuntingDay) {
+    func setDay(huntingDay: HuntingDay) {
         self.huntingDay = huntingDay
         timeColumnView.setLabels([huntingDay.startTime.toTimeString(), huntingDay.sunriseTime.toTimeString(), huntingDay.sunsetTime.toTimeString(), huntingDay.endTime.toTimeString()])
         removeAllNotifications()
