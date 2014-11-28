@@ -68,6 +68,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "hideCountdown", name: UIApplicationWillResignActiveNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "showCountdown", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setNotifications", name: UIApplicationDidBecomeActiveNotification, object: nil)
         
         view.userInteractionEnabled = true
         view.alpha = 0
@@ -124,8 +125,11 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func hideCountdown() {
-        countdownLabel.alpha = 0.0
-        countdownLabel.stopCountdown()
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
+            self.countdownLabel.alpha = 0.0
+        }) { (complete) -> Void in
+            self.countdownLabel.stopCountdown()
+        }
     }
     
     func startScrollDates() {
@@ -292,6 +296,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func setNotifications() {
+        huntingTimesView.removeAllNotifications()
         for (index, time) in enumerate(getHuntingTimes()) {
             let notifications = NotificationManager.sharedInstance.getAllNotificationsForKey(time.key())
             for notification in notifications {
