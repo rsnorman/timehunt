@@ -72,6 +72,337 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         view.alpha = 0
     }
     
+    override func viewDidAppear(animated: Bool) {
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.view.alpha = 1
+        })  { (complete) -> Void in
+            self.addCountdown()
+            self.showEventLabels()
+        }
+    }
+    
+    
+    
+    /* Helper Methods */
+    
+    func currentDay() -> HuntingDay {
+        return huntingSeason.currentDay()
+    }
+    
+    func currentTime() -> HuntingTime {
+        return currentDay().getTimeFromState(currentState())
+    }
+    
+    func currentState() -> String {
+        return currentDay().getCurrentState()
+    }
+    
+    func getHuntingTimes() -> [HuntingTime] {
+        return currentDay().allTimes()
+    }
+    
+    func setHuntingTimes() {
+        huntingTimesView.setTimes(currentDay())
+        huntingTimesProgress.huntingDay = currentDay()
+        dateLabel.text = currentTime().toDateString()
+    }
+    
+    /* End Helper Methods */
+    
+    
+    
+    /* Action Methods */
+    
+    func showCountdown() {
+        if let cLabel = self.countdownLabel {
+            self.setCountdownTime()
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                cLabel.alpha = 1.0
+            })
+        }
+    }
+    
+    func hideCountdown() {
+        countdownLabel.alpha = 0.0
+        countdownLabel.stopCountdown()
+    }
+    
+    func startScrollDates() {
+        if monthColumnView.hidden == true {
+            for gesture in self.view.gestureRecognizers as [UIGestureRecognizer] {
+                gesture.enabled = false
+            }
+            
+            monthColumnView.hidden = false
+            datepickerLabel.text   = self.dateLabel.text
+            
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.dateTimeScroller.setPosition(self.huntingSeason.percentComplete(), animate: false)
+                self.dateTimeScroller.showCurrentPosition()
+                self.huntingTimesView.alpha = 0.0
+                self.dateLabel.alpha        = 0.0
+                self.countdownLabel.alpha   = 0.0
+                
+                self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, 5)
+                self.downArrow.alpha = 0.7
+                
+                self.upArrow.frame = CGRectOffset(self.upArrow.frame, 0, -5)
+                self.upArrow.alpha = 0.7
+            }) { (complete) -> Void in
+                self.countdownLabel.stopCountdown()
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.monthColumnView.alpha = 1.0
+                    self.datepickerLabel.alpha = 1.0
+                })
+            }
+        }
+    }
+    
+    func stopScrollDates() {
+        if monthColumnView.hidden == false {
+            for gesture in self.view.gestureRecognizers as [UIGestureRecognizer] {
+                gesture.enabled = true
+            }
+            
+            startScrollPosition = nil
+
+            UIView.animateWithDuration(0.3, delay: 0.1, options: nil, animations: { () -> Void in
+                self.monthColumnView.alpha = 0.0
+                self.datepickerLabel.alpha = 0.0
+                self.dateTimeScroller.hideCurrentPosition()
+                self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, 5)
+                self.downArrow.alpha = 0.0
+                
+                self.upArrow.frame = CGRectOffset(self.upArrow.frame, 0, -5)
+                self.upArrow.alpha = 0.0
+            }) { (complete) -> Void in
+                self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, -10)
+                self.upArrow.frame   = CGRectOffset(self.upArrow.frame, 0, 10)
+                self.monthColumnView.hidden = true
+                self.setHuntingTimes()
+                self.setCountdownTime()
+                self.setNotifications()
+                
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.huntingTimesView.alpha = 1.0
+                    self.dateLabel.alpha        = 1.0
+                    self.countdownLabel.alpha   = 1.0
+                })
+            }
+        }
+    }
+    
+    func showSwipeHint() {
+        UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+            self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, 5)
+            self.downArrow.alpha = 0.7
+            
+            self.upArrow.frame = CGRectOffset(self.upArrow.frame, 0, -5)
+            self.upArrow.alpha = 0.7
+            }) { (complete) -> Void in
+                UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                    self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, 5)
+                    self.downArrow.alpha = 0.0
+                    
+                    self.upArrow.frame = CGRectOffset(self.upArrow.frame, 0, -5)
+                    self.upArrow.alpha = 0.0
+                    }, completion: { (complete) -> Void in
+                        self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, -10)
+                        self.upArrow.frame   = CGRectOffset(self.upArrow.frame, 0, 10)
+                })
+        }
+    }
+    
+    func setCountdownTime() {
+        countdownLabel.stopCountdown()
+        if currentTime().timeIntervalSinceNow() > 0 {
+            countdownLabel.startCountdown(currentTime().time)
+            stateLabel.text = currentTime().event
+        } else {
+            stateLabel.text = ""
+            dateTimeScroller.setPosition(huntingTimesProgress.getProgressPercent(), animate: true)
+        }
+    }
+    
+    func showNextDate() {
+        if !animating && !huntingSeason.closingDay() {
+            animating = true
+            reversing = false
+            self.dateTimeScroller.setPosition(1, animate: true)
+            hideEventLabels(reverse: false) { (complete) -> Void in
+                self.animating = false
+                self.huntingSeason.nextDay()
+                self.setHuntingTimes()
+                self.dateTimeScroller.setPosition(0, animate: false)
+                self.setCountdownTime()
+                self.setNotifications()
+                self.showEventLabels(reverse: false)
+            }
+        }
+    }
+    
+    func showPreviousDate() {
+        if !animating && !huntingSeason.openingDay() {
+            animating = true
+            reversing = true
+            self.dateTimeScroller.setPosition(0, animate: true)
+            hideEventLabels(reverse: true) { (complete) -> Void in
+                self.animating = false
+                self.huntingSeason.previousDay()
+                self.setHuntingTimes()
+                self.dateTimeScroller.setPosition(1, animate: false)
+                self.setCountdownTime()
+                self.setNotifications()
+                self.showEventLabels(reverse: true)
+            }
+        }
+    }
+    
+    func showEventLabels(reverse: Bool = false, completion: ((Bool) -> Void)? = nil) {
+        let yOffset = reverse ? eventLabelOffset * -1 : eventLabelOffset
+        
+        UIView.animateWithDuration(dateTransitionTime, animations: { () -> Void in
+            self.stateLabel.alpha       = 1
+            self.countdownLabel.alpha   = 1
+            self.dateLabel.alpha        = 1
+            self.dateTimeScroller.alpha = 0.7
+            self.huntingTimesView.frame = CGRectOffset(self.huntingTimesView.frame, 0, yOffset)
+            self.huntingTimesView.alpha = 1.0
+            }, completion)
+    }
+    
+    func hideEventLabels(reverse: Bool = false, completion: ((Bool) -> Void)? = nil) {
+        let yOffset = reverse ? eventLabelOffset * -1 : eventLabelOffset
+        
+        UIView.animateWithDuration(dateTransitionTime, animations: { () -> Void in
+            self.stateLabel.alpha       = 0
+            self.countdownLabel.alpha   = 0
+            self.dateLabel.alpha        = 0
+            self.dateTimeScroller.alpha = 0
+            self.huntingTimesView.frame = CGRectOffset(self.huntingTimesView.frame, 0, yOffset)
+            self.huntingTimesView.alpha = 0.0
+            }) { (complete) -> Void in
+                
+                self.huntingTimesView.frame = CGRectOffset(self.huntingTimesView.frame, 0, yOffset * -2)
+                if let completionClosure = completion {
+                    completionClosure(complete)
+                }
+        }
+    }
+    
+    /* End Action Methods */
+    
+    
+    /* Delegate Methods */
+    
+    func willShowMessage() {
+        self.countdownLabel.alpha = 0.0
+    }
+    
+    func didHideMessage() {
+        self.countdownLabel.alpha = 1.0
+    }
+    
+    func didPositionIndicator(percent: CGFloat) {
+        let totalDays  = huntingSeason.length()
+        let currentDay = Int(round(CGFloat(totalDays - 1) * percent))
+        huntingSeason.setCurrentDay(currentDay)
+        datepickerLabel.text = currentTime().toDateString()
+    }
+    
+    func didTapHuntingTime(huntingTime: HuntingTime) {
+        let notificationManager = NotificationManager.sharedInstance
+        if notificationManager.canAddNotificationsForKey(huntingTime.key()) {
+            notificationManager.addNotification(huntingTime)
+        } else {
+            notificationManager.removeAllNotifications(huntingTime)
+        }
+    }
+    
+    func didAddNotification(notificationable: NotificationInterface, notification: Notification) {
+        messageLabel.addMessage(notification.getMessage())
+        huntingTimesView.addNotificationIcon(notificationable.userInfo()["time"] as NSDate)
+    }
+    
+    func didRemoveAllNotifications(notificationable: NotificationInterface) {
+        let event = notificationable.userInfo()["event"] as String
+        let time  = notificationable.userInfo()["time"] as NSDate
+        messageLabel.addMessage("Removed All \(event) Notifications")
+        huntingTimesView.removeNotificationIcons(time)
+    }
+    
+    func didTickCountdown() {
+        dateTimeScroller.setPosition(huntingTimesProgress.getProgressPercent(), animate: true)
+    }
+    
+    func willFinishCountdown() {
+        UIView.animateWithDuration(0.5, delay: 0.9, options: nil, animations: { () -> Void in
+            self.countdownLabel.alpha = 0.0
+            }, completion: nil)
+    }
+    
+    func didFinishCountdown() {
+        setCountdownTime()
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.countdownLabel.alpha = 1.0
+        })
+    }
+    
+    func setNotifications() {
+        for (index, time) in enumerate(getHuntingTimes()) {
+            let notifications = NotificationManager.sharedInstance.getAllNotificationsForKey(time.key())
+            for notification in notifications {
+                huntingTimesView.addNotificationIcon(time.time, animate: false)
+            }
+        }
+    }
+    /* End Delegate Methods*/
+    
+    
+    
+    /* Touch Delegates */
+    
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        touchDelay = delay(0.3) {
+            for touch in touches {
+                self.startScrollPosition = touch.locationInView(self.view)
+            }
+            self.touchDelay = nil
+            self.startScrollDates()
+        }
+    }
+    
+    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+        if touchDelay != nil {
+            touchDelay(cancel: true)
+        } else {
+            stopScrollDates()
+        }
+    }
+    
+    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
+        if touchDelay != nil {
+            touchDelay(cancel: true)
+        } else {
+            stopScrollDates()
+        }
+    }
+    
+    override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+        if monthColumnView.hidden == false {
+            for touch in touches {
+                dateTimeScroller.setOffsetPosition((touch.locationInView(view).y - startScrollPosition.y))
+                startScrollPosition = touch.locationInView(view)
+            }
+        }
+    }
+    
+    /* End Touch Delegates */
+
+    
+    
+    /* Interface Builders */
+    
     func addBackground() {
         let bgImage = UIImage(named: "dark-forest.jpg")!
         bgImageView = TiltImageView(image: bgImage, frame: view.frame)
@@ -89,12 +420,19 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         view.addSubview(messageLabel)
     }
     
-    func willShowMessage() {
-        self.countdownLabel.alpha = 0.0
-    }
-    
-    func didHideMessage() {
-        self.countdownLabel.alpha = 1.0
+    func addCountdown() {
+        stateLabel = createLabel("", CGRectMake(0, 30, view.frame.width, 40), 16)
+        stateLabel.font = UIFont(name: "HelveticaNeue", size: 16)
+        stateLabel.alpha = 0.0
+        view.addSubview(stateLabel)
+        
+        countdownLabel = CountdownView(frame: CGRectMake(0, 55, view.frame.width, 120))
+        countdownLabel.alpha = 0.0
+        view.addSubview(countdownLabel)
+        
+        countdownLabel.delegate = self
+        
+        setCountdownTime()
     }
     
     func addDateLabels() {
@@ -167,316 +505,6 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         view.addGestureRecognizer(swipeLeftGesture)
     }
     
-    override func viewDidAppear(animated: Bool) {
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.view.alpha = 1
-        })  { (complete) -> Void in
-            self.addCountdown()
-            self.showEventLabels()
-        }
-    }
-    
-    func showCountdown() {
-        if let cLabel = self.countdownLabel {
-            self.setCountdownTime()
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                cLabel.alpha = 1.0
-            })
-        }
-    }
-    
-    func hideCountdown() {
-        countdownLabel.alpha = 0.0
-        countdownLabel.stopCountdown()
-    }
-    
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        touchDelay = delay(0.3) {
-            for touch in touches {
-                self.startScrollPosition = touch.locationInView(self.view)
-            }
-            self.touchDelay = nil
-            self.startScrollDates()
-        }
-    }
-    
-    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
-        if touchDelay != nil {
-            touchDelay(cancel: true)
-        } else {
-            stopScrollDates()
-        }
-    }
-    
-    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
-        if touchDelay != nil {
-            touchDelay(cancel: true)
-        } else {
-            stopScrollDates()
-        }
-    }
-    
-    override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
-        if monthColumnView.hidden == false {
-            for touch in touches {
-                dateTimeScroller.setOffsetPosition((touch.locationInView(view).y - startScrollPosition.y))
-                startScrollPosition = touch.locationInView(view)
-            }
-        }
-    }
-    
-    func startScrollDates() {
-        if monthColumnView.hidden == true {
-            for gesture in self.view.gestureRecognizers as [UIGestureRecognizer] {
-                gesture.enabled = false
-            }
-            
-            monthColumnView.hidden = false
-            datepickerLabel.text   = self.dateLabel.text
-            
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.dateTimeScroller.setPosition(self.huntingSeason.percentComplete(), animate: false)
-                self.dateTimeScroller.showCurrentPosition()
-                self.huntingTimesView.alpha = 0.0
-                self.dateLabel.alpha        = 0.0
-                self.countdownLabel.alpha   = 0.0
-                
-                self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, 5)
-                self.downArrow.alpha = 0.7
-                
-                self.upArrow.frame = CGRectOffset(self.upArrow.frame, 0, -5)
-                self.upArrow.alpha = 0.7
-            }) { (complete) -> Void in
-                self.countdownLabel.stopCountdown()
-                UIView.animateWithDuration(0.3, animations: { () -> Void in
-                    self.monthColumnView.alpha = 1.0
-                    self.datepickerLabel.alpha = 1.0
-                })
-            }
-        }
-    }
-    
-    func stopScrollDates() {
-        if monthColumnView.hidden == false {
-            for gesture in self.view.gestureRecognizers as [UIGestureRecognizer] {
-                gesture.enabled = true
-            }
-            
-            startScrollPosition = nil
-
-            UIView.animateWithDuration(0.3, delay: 0.1, options: nil, animations: { () -> Void in
-                self.monthColumnView.alpha = 0.0
-                self.datepickerLabel.alpha = 0.0
-                self.dateTimeScroller.hideCurrentPosition()
-                self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, 5)
-                self.downArrow.alpha = 0.0
-                
-                self.upArrow.frame = CGRectOffset(self.upArrow.frame, 0, -5)
-                self.upArrow.alpha = 0.0
-            }) { (complete) -> Void in
-                self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, -10)
-                self.upArrow.frame   = CGRectOffset(self.upArrow.frame, 0, 10)
-                self.monthColumnView.hidden = true
-                self.setTimes()
-                self.setCountdownTime()
-                self.setNotifications()
-                
-                UIView.animateWithDuration(0.3, animations: { () -> Void in
-                    self.huntingTimesView.alpha = 1.0
-                    self.dateLabel.alpha        = 1.0
-                    self.countdownLabel.alpha   = 1.0
-                })
-            }
-        }
-    }
-    
-    func didPositionIndicator(percent: CGFloat) {
-        let totalDays  = huntingSeason.length()
-        let currentDay = Int(round(CGFloat(totalDays - 1) * percent))
-        huntingSeason.setCurrentDay(currentDay)
-        datepickerLabel.text = currentTime().toDateString()
-    }
-    
-    func didTapHuntingTime(huntingTime: HuntingTime) {
-        let notificationManager = NotificationManager.sharedInstance
-        if notificationManager.canAddNotificationsForKey(huntingTime.key()) {
-            notificationManager.addNotification(huntingTime)
-        } else {
-            notificationManager.removeAllNotifications(huntingTime)
-        }
-    }
-    
-    func setNotifications() {
-        for (index, time) in enumerate(getHuntingTimes()) {
-            let notifications = NotificationManager.sharedInstance.getAllNotificationsForKey(time.key())
-            for notification in notifications {
-                huntingTimesView.addNotificationIcon(time.time, animate: false)
-            }
-        }
-    }
-    
-    func didAddNotification(notificationable: NotificationInterface, notification: Notification) {
-        messageLabel.addMessage(notification.getMessage())
-        huntingTimesView.addNotificationIcon(notificationable.userInfo()["time"] as NSDate)
-    }
-    
-    func didRemoveAllNotifications(notificationable: NotificationInterface) {
-        let event = notificationable.userInfo()["event"] as String
-        let time  = notificationable.userInfo()["time"] as NSDate
-        messageLabel.addMessage("Removed All \(event) Notifications")
-        huntingTimesView.removeNotificationIcons(time)
-    }
-    
-    func showSwipeHint() {
-        UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
-            self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, 5)
-            self.downArrow.alpha = 0.7
-            
-            self.upArrow.frame = CGRectOffset(self.upArrow.frame, 0, -5)
-            self.upArrow.alpha = 0.7
-        }) { (complete) -> Void in
-            UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-                self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, 5)
-                self.downArrow.alpha = 0.0
-                
-                self.upArrow.frame = CGRectOffset(self.upArrow.frame, 0, -5)
-                self.upArrow.alpha = 0.0
-                }, completion: { (complete) -> Void in
-                    self.downArrow.frame = CGRectOffset(self.downArrow.frame, 0, -10)
-                    self.upArrow.frame   = CGRectOffset(self.upArrow.frame, 0, 10)
-            })
-        }
-    }
-    
-    func currentDay() -> HuntingDay {
-        return huntingSeason.currentDay()
-    }
-    
-    func currentState() -> String {
-        return currentDay().getCurrentState()
-    }
-    
-    func setTimes() {
-        huntingTimesView.setTimes(currentDay())
-        huntingTimesProgress.huntingDay = currentDay()
-        dateLabel.text = currentTime().toDateString()
-    }
-    
-    func getHuntingTimes() -> [HuntingTime] {
-        return currentDay().allTimes()
-    }
-    
-    func addCountdown() {
-        stateLabel = createLabel("", CGRectMake(0, 30, view.frame.width, 40), 16)
-        stateLabel.font = UIFont(name: "HelveticaNeue", size: 16)
-        stateLabel.alpha = 0.0
-        view.addSubview(stateLabel)
-
-        countdownLabel = CountdownView(frame: CGRectMake(0, 55, view.frame.width, 120))
-        countdownLabel.alpha = 0.0
-        view.addSubview(countdownLabel)
-        
-        countdownLabel.delegate = self
-        
-        setCountdownTime()
-    }
-    
-    func setCountdownTime() {
-        countdownLabel.stopCountdown()
-        if currentTime().timeIntervalSinceNow() > 0 {
-            countdownLabel.startCountdown(currentTime().time)
-            stateLabel.text = currentTime().event
-        } else {
-            stateLabel.text = ""
-            dateTimeScroller.setPosition(huntingTimesProgress.getProgressPercent(), animate: true)
-        }
-    }
-    
-    func didTickCountdown() {
-        dateTimeScroller.setPosition(huntingTimesProgress.getProgressPercent(), animate: true)
-    }
-    
-    func willFinishCountdown() {
-        UIView.animateWithDuration(0.5, delay: 0.9, options: nil, animations: { () -> Void in
-            self.countdownLabel.alpha = 0.0
-        }, completion: nil)
-    }
-    
-    func didFinishCountdown() {
-        setCountdownTime()
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.countdownLabel.alpha = 1.0
-        })
-    }
-    
-    func currentTime() -> HuntingTime {
-        return currentDay().getTimeFromState(currentState())
-    }
-    
-    func showNextDate() {
-        if !animating && !huntingSeason.closingDay() {
-            animating = true
-            reversing = false
-            self.dateTimeScroller.setPosition(1, animate: true)
-            hideEventLabels(reverse: false) { (complete) -> Void in
-                self.animating = false
-                self.huntingSeason.nextDay()
-                self.setTimes()
-                self.dateTimeScroller.setPosition(0, animate: false)
-                self.setCountdownTime()
-                self.setNotifications()
-                self.showEventLabels(reverse: false)
-            }
-        }
-    }
-    
-    func showPreviousDate() {
-        if !animating && !huntingSeason.openingDay() {
-            animating = true
-            reversing = true
-            self.dateTimeScroller.setPosition(0, animate: true)
-            hideEventLabels(reverse: true) { (complete) -> Void in
-                self.animating = false
-                self.huntingSeason.previousDay()
-                self.setTimes()
-                self.dateTimeScroller.setPosition(1, animate: false)
-                self.setCountdownTime()
-                self.setNotifications()
-                self.showEventLabels(reverse: true)
-            }
-        }
-    }
-    
-    func showEventLabels(reverse: Bool = false, completion: ((Bool) -> Void)? = nil) {
-        let yOffset = reverse ? eventLabelOffset * -1 : eventLabelOffset
-        
-        UIView.animateWithDuration(dateTransitionTime, animations: { () -> Void in
-            self.stateLabel.alpha       = 1
-            self.countdownLabel.alpha   = 1
-            self.dateLabel.alpha        = 1
-            self.dateTimeScroller.alpha = 0.7
-            self.huntingTimesView.frame = CGRectOffset(self.huntingTimesView.frame, 0, yOffset)
-            self.huntingTimesView.alpha = 1.0
-        }, completion)
-    }
-    
-    func hideEventLabels(reverse: Bool = false, completion: ((Bool) -> Void)? = nil) {
-        let yOffset = reverse ? eventLabelOffset * -1 : eventLabelOffset
-        
-        UIView.animateWithDuration(dateTransitionTime, animations: { () -> Void in
-            self.stateLabel.alpha       = 0
-            self.countdownLabel.alpha   = 0
-            self.dateLabel.alpha        = 0
-            self.dateTimeScroller.alpha = 0
-            self.huntingTimesView.frame = CGRectOffset(self.huntingTimesView.frame, 0, yOffset)
-            self.huntingTimesView.alpha = 0.0
-        }) { (complete) -> Void in
-            
-            self.huntingTimesView.frame = CGRectOffset(self.huntingTimesView.frame, 0, yOffset * -2)
-            if let completionClosure = completion {
-                completionClosure(complete)
-            }
-        }
-    }
+    /* End Interface Builders */
 }
 
