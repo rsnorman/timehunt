@@ -9,7 +9,7 @@
 import UIKit
 
 protocol HuntingTimesViewDelegate {
-    func didTapHuntingTime(huntingTime: NSDate, huntingEvent: String)
+    func didTapHuntingTime(huntingTime: HuntingTime)
 }
 
 class HuntingTimesView : UIView {
@@ -17,7 +17,7 @@ class HuntingTimesView : UIView {
     let timeColumnView    : ColumnView
     let padding           : CGFloat = 15
     let events            : [String] = ["Start", "Sunrise", "Sunset", "Stop"]
-    var huntingTimes      : [NSDate]!
+    var huntingDay        : HuntingDay!
     var delegate          : HuntingTimesViewDelegate!
     var notificationIcons : [String : [UIView]]
     
@@ -46,12 +46,10 @@ class HuntingTimesView : UIView {
         let loc   = sender.locationInView(self)
         if let label = self.hitTest(loc, withEvent: nil) as? UILabel {
             let event = label.text
-            if let times = huntingTimes {
-                let time  = times[find(events, event!)!]
-                
-                if let del = delegate {
-                    del.didTapHuntingTime(time, huntingEvent: event!)
-                }
+            let time  = huntingDay.allTimes()[find(events, event!)!]
+            
+            if let del = delegate {
+                del.didTapHuntingTime(time)
             }
         }
     }
@@ -60,25 +58,23 @@ class HuntingTimesView : UIView {
         let loc   = sender.locationInView(self)
         if let label = self.hitTest(loc, withEvent: nil) as? UILabel {
             let timeString = label.text
-            if let times = huntingTimes {
-                let timesString = times.map(timeToString)
-                let time  = times[find(timesString, timeString!)!]
-                let event = events[find(timesString, timeString!)!]
-                    
-                if let del = delegate {
-                    del.didTapHuntingTime(time, huntingEvent: event)
-                }
+            let timesString = huntingDay.allTimes().map {
+                $0.toTimeString()
+            }
+            let time  = huntingDay.allTimes()[find(timesString, timeString!)!]
+            let event = events[find(timesString, timeString!)!]
+                
+            if let del = delegate {
+                del.didTapHuntingTime(time)
             }
         }
     }
     
     func getPositionOfTime(time: NSDate) -> Int? {
-        if let times = huntingTimes {
-            let timesString = times.map(timeToString)
-            return find(timesString, timeToString(time))
-        } else {
-            return nil
+        let timesString = huntingDay.allTimes().map {
+            $0.toTimeString()
         }
+        return find(timesString, timeToString(time))
     }
     
     func findEventLabelFromTime(time: NSDate) -> UILabel? {
@@ -143,9 +139,9 @@ class HuntingTimesView : UIView {
         notificationIcons = [:]
     }
     
-    func setTimes(huntingTimes: [NSDate]) {
-        self.huntingTimes = huntingTimes
-        timeColumnView.setLabels([timeToString(huntingTimes[0]), timeToString(huntingTimes[1]), timeToString(huntingTimes[2]), timeToString(huntingTimes[3])])
+    func setTimes(huntingDay: HuntingDay) {
+        self.huntingDay = huntingDay
+        timeColumnView.setLabels([huntingDay.startTime.toTimeString(), huntingDay.sunriseTime.toTimeString(), huntingDay.sunsetTime.toTimeString(), huntingDay.endTime.toTimeString()])
         removeAllNotifications()
         
         for view in timeColumnView.subviews as [UIView] {

@@ -45,7 +45,6 @@ class MessageView : UILabel {
                             if let del = self.delegate {
                                 del.didHideMessage()
                             }
-//                            self.countdownLabel.alpha = 1.0
                         })
                     })
             }

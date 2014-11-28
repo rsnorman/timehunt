@@ -9,7 +9,7 @@
 import UIKit
 
 class HuntingSeason {
-    let dates           : [(startTime: NSDate, endTime: NSDate)]
+    let dates           : [HuntingDay]
     var currentPosition : Int!
     
     init() {
@@ -27,14 +27,14 @@ class HuntingSeason {
             let startTime = timeFormatter.dateFromString("\(cells[0]) \(cells[1]) AM")!
             let endTime = timeFormatter.dateFromString("\(cells[0]) \(cells[2]) PM")!
             
-            dates.append((startTime: startTime, endTime: endTime))
+            dates.append(HuntingDay(startTime: startTime, endTime: endTime))
         }
         
         self.currentPosition = getCurrentPosition()
         
     }
     
-    func allDays() -> [(startTime: NSDate, endTime: NSDate)] {
+    func allDays() -> [HuntingDay] {
         return dates
     }
     
@@ -42,16 +42,16 @@ class HuntingSeason {
         return dates.count
     }
     
-    func currentDay() -> (startTime: NSDate, endTime: NSDate) {
+    func currentDay() -> HuntingDay {
         return dates[currentPosition]
     }
     
-    func nextDay() -> (startTime: NSDate, endTime: NSDate) {
+    func nextDay() -> HuntingDay {
         currentPosition = currentPosition + 1
         return currentDay()
     }
     
-    func previousDay() -> (startTime: NSDate, endTime: NSDate) {
+    func previousDay() -> HuntingDay {
         currentPosition = currentPosition - 1
         return currentDay()
     }
@@ -79,11 +79,11 @@ class HuntingSeason {
         dateFormatter.dateFormat = "YYYY-MM-d"
         let today = dateFormatter.stringFromDate(NSDate())
         
-        if dates[0].startTime.timeIntervalSinceNow > 0 {
+        if dates[0].startTime.timeIntervalSinceNow() > 0 {
             return 0
-        } else if dates.last?.endTime.timeIntervalSinceNow > 0 {
-            for (index, (startTime, endTime)) in enumerate(dates) {
-                if today == dateFormatter.stringFromDate(startTime) {
+        } else if dates.last?.endTime.timeIntervalSinceNow() > 0 {
+            for (index, huntingDay) in enumerate(dates) {
+                if today == dateFormatter.stringFromDate(huntingDay.startTime.time) {
                     return index
                 }
             }
