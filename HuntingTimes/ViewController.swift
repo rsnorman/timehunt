@@ -109,6 +109,8 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         huntingTimesView.setDay(currentDay())
         huntingTimesProgress.huntingDay = currentDay()
         dateLabel.text = currentTime().toDateString()
+        self.setCountdownTime()
+        self.setNotifications()
     }
     
     /* End Helper Methods */
@@ -187,8 +189,6 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
                 self.upArrow.frame   = CGRectOffset(self.upArrow.frame, 0, 10)
                 self.monthColumnView.hidden = true
                 self.setHuntingDay()
-                self.setCountdownTime()
-                self.setNotifications()
                 
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
                     self.huntingTimesView.alpha = 1.0
@@ -238,11 +238,9 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
             self.dateTimeScroller.setPosition(1, animate: true)
             hideEventLabels(reverse: false) { (complete) -> Void in
                 self.animating = false
+                self.dateTimeScroller.setPosition(0, animate: false)
                 self.huntingSeason.nextDay()
                 self.setHuntingDay()
-                self.dateTimeScroller.setPosition(0, animate: false)
-                self.setCountdownTime()
-                self.setNotifications()
                 self.showEventLabels(reverse: false)
             }
         }
@@ -255,11 +253,9 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
             self.dateTimeScroller.setPosition(0, animate: true)
             hideEventLabels(reverse: true) { (complete) -> Void in
                 self.animating = false
+                self.dateTimeScroller.setPosition(1, animate: false)
                 self.huntingSeason.previousDay()
                 self.setHuntingDay()
-                self.dateTimeScroller.setPosition(1, animate: false)
-                self.setCountdownTime()
-                self.setNotifications()
                 self.showEventLabels(reverse: true)
             }
         }
