@@ -114,6 +114,20 @@ class HuntingTimesView : UIView {
         }
     }
     
+    func removeNotificationIcon(time: NSDate, event: String) {
+        if let icons = notificationIcons[event] {
+            if let removeIcon = icons.last {
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    removeIcon.frame = CGRectOffset(removeIcon.frame, 0, 15)
+                    removeIcon.alpha = 0.0
+                    }, completion: { (complete) -> Void in
+                        removeIcon.removeFromSuperview()
+                        self.notificationIcons[event]!.removeLast()
+                })
+            }
+        }
+    }
+    
     func removeNotificationIcons(time: NSDate) {
         if let label = findEventLabelFromTime(time) {
             let eventText = label.text!
