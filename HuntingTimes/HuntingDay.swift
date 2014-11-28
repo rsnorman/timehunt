@@ -8,47 +8,30 @@
 
 import UIKit
 
-struct HuntingTime {
-    var time  : NSDate
-    var event : String
-}
-
 class HuntingDay {
-    
-    let states : [String] = ["Start", "Sunrise", "Sunset", "Stop", "Ended"]
-    let events : [String:String] = [
-        "starting"   : "Start",
-        "sunrising"  : "Sunrise",
-        "sunsetting" : "Sunset",
-        "ending"     : "Stop",
-        "ended"      : "Ended"
-    ]
-    
-    let startTime   : NSDate
-    let endTime     : NSDate
-    let sunriseTime : NSDate
-    let sunsetTime  : NSDate
+    let startTime    : HuntingTime
+    let endTime      : HuntingTime
+    let sunriseTime  : HuntingTime
+    let sunsetTime   : HuntingTime
+    lazy var dayBeginning : HuntingTime = {
+        return HuntingTime(time: NSCalendar.currentCalendar().dateBySettingHour(0, minute: 0, second: 0, ofDate: self.startTime.time, options: nil)!, event: "DayStart")
+    }()
+    lazy var dayEnd : HuntingTime = {
+        return HuntingTime(time: NSCalendar.currentCalendar().dateBySettingHour(23, minute: 59, second: 59, ofDate: self.endTime.time, options: nil)!, event: "DayEnd")
+    }()
     
     init(startTime: NSDate, endTime: NSDate) {
-        self.startTime   = startTime
-        self.endTime     = endTime
-        sunriseTime = startTime.dateByAddingTimeInterval(60 * 60)
-        sunsetTime  = endTime.dateByAddingTimeInterval(60 * 30 * -1)
+        self.startTime = HuntingTime(time: startTime, event: "Start")
+        self.endTime   = HuntingTime(time: endTime, event: "Stop")
+        sunriseTime    = HuntingTime(time: startTime.dateByAddingTimeInterval(60 * 60), event: "Sunrise")
+        sunsetTime     = HuntingTime(time: endTime.dateByAddingTimeInterval(60 * 30 * -1), event: "Sunset")
     }
     
-    func getBeginningOfDay() -> NSDate {
-        return NSCalendar.currentCalendar().dateBySettingHour(0, minute: 0, second: 0, ofDate: startTime, options: nil)!
-    }
-    
-    func getEndOfDay() -> NSDate {
-        return NSCalendar.currentCalendar().dateBySettingHour(23, minute: 59, second: 59, ofDate: endTime, options: nil)!
-    }
-    
-    func allTimes() -> [NSDate] {
+    func allTimes() -> [HuntingTime] {
         return[startTime, sunriseTime, sunsetTime, endTime]
     }
     
-    func getTimeFromState(state: String) -> NSDate {
+    func getTimeFromState(state: String) -> HuntingTime {
         switch state {
             case "starting":
                 return startTime
@@ -59,18 +42,18 @@ class HuntingDay {
             case "ending":
                 return endTime
             default:
-                return getEndOfDay()
+                return dayEnd
         }
     }
     
     func getCurrentState() -> String {
-        if startTime.timeIntervalSinceNow > 0 {
+        if startTime.timeIntervalSinceNow() > 0 {
             return "starting"
-        } else if sunriseTime.timeIntervalSinceNow > 0 {
+        } else if sunriseTime.timeIntervalSinceNow() > 0 {
             return "sunrising"
-        } else if sunsetTime.timeIntervalSinceNow > 0 {
+        } else if sunsetTime.timeIntervalSinceNow() > 0 {
             return "sunsetting"
-        } else if endTime.timeIntervalSinceNow > 0 {
+        } else if endTime.timeIntervalSinceNow() > 0 {
             return "ending"
         } else {
             return "ended"

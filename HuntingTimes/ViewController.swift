@@ -98,9 +98,9 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func addDateLabels() {
-        dateLabel             = createLabel(dateToString(currentTime()), CGRectMake(0, 185, view.frame.width, 30), 18)
+        dateLabel             = createLabel(currentTime().toDateString(), CGRectMake(0, 185, view.frame.width, 30), 18)
         dateLabel.alpha       = 0.0
-        datepickerLabel       = createLabel(dateToString(currentTime()), CGRectMake(0, 60, view.frame.width, 120), 48)
+        datepickerLabel       = createLabel(currentTime().toDateString(), CGRectMake(0, 60, view.frame.width, 120), 48)
         datepickerLabel.alpha = 0.0
         view.addSubview(dateLabel)
         view.addSubview(datepickerLabel)
@@ -108,7 +108,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     
     func addHuntingTimesView() {
         huntingTimesView = HuntingTimesView(frame: CGRectMake(0, 210, view.frame.width, view.frame.height - 260))
-        huntingTimesView.setTimes(getHuntingTimes())
+        huntingTimesView.setTimes(currentDay())
         huntingTimesView.alpha = 0.0
         huntingTimesView.delegate = self
         view.addSubview(huntingTimesView)
@@ -294,23 +294,23 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         let totalDays  = huntingSeason.length()
         let currentDay = Int(round(CGFloat(totalDays - 1) * percent))
         huntingSeason.setCurrentDay(currentDay)
-        datepickerLabel.text = dateToString(currentTime())
+        datepickerLabel.text = currentTime().toDateString()
     }
     
-    func didTapHuntingTime(huntingTime: NSDate, huntingEvent: String) {
+    func didTapHuntingTime(huntingTime: HuntingTime) {
         let notificationManager = NotificationManager.sharedInstance
-        if notificationManager.canAddNotifications((time: huntingTime, event: huntingEvent)) {
-            notificationManager.addNotification((time: huntingTime, event: huntingEvent))
+        if notificationManager.canAddNotifications((time: huntingTime.time, event: huntingTime.event)) {
+            notificationManager.addNotification((time: huntingTime.time, event: huntingTime.event))
         } else {
-            notificationManager.removeAllNotifications((time: huntingTime, event: huntingEvent))
+            notificationManager.removeAllNotifications((time: huntingTime.time, event: huntingTime.event))
         }
     }
     
     func setNotifications() {
         for (index, time) in enumerate(getHuntingTimes()) {
-            let notifications = NotificationManager.sharedInstance.getAllNotifications((time: time, event: currentDay().states[index]))
+            let notifications = NotificationManager.sharedInstance.getAllNotifications((time: time.time, event: time.event))
             for notification in notifications {
-                huntingTimesView.addNotificationIcon(time, animate: false)
+                huntingTimesView.addNotificationIcon(time.time, animate: false)
             }
         }
     }
@@ -355,12 +355,12 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     }
     
     func setTimes() {
-        huntingTimesView.setTimes(getHuntingTimes())
+        huntingTimesView.setTimes(currentDay())
         huntingTimesProgress.huntingDay = currentDay()
-        dateLabel.text = dateToString(currentTime())
+        dateLabel.text = currentTime().toDateString()
     }
     
-    func getHuntingTimes() -> [NSDate] {
+    func getHuntingTimes() -> [HuntingTime] {
         return currentDay().allTimes()
     }
     
@@ -381,9 +381,9 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     
     func setCountdownTime() {
         countdownLabel.stopCountdown()
-        if currentTime().timeIntervalSinceNow > 0 {
-            countdownLabel.startCountdown(currentTime())
-            stateLabel.text = currentDay().events[currentState()]!
+        if currentTime().timeIntervalSinceNow() > 0 {
+            countdownLabel.startCountdown(currentTime().time)
+            stateLabel.text = currentTime().event
         } else {
             stateLabel.text = ""
             dateTimeScroller.setPosition(huntingTimesProgress.getProgressPercent(), animate: true)
@@ -407,7 +407,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         })
     }
     
-    func currentTime() -> NSDate {
+    func currentTime() -> HuntingTime {
         return currentDay().getTimeFromState(currentState())
     }
     

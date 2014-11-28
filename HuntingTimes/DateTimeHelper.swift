@@ -28,11 +28,19 @@ func dateToString(dateTime: NSDate, useRelativeString: Bool = true) -> String {
     return dateString
 }
 
+func dateToString(huntingTime: HuntingTime, useRelativeString: Bool = true) -> String {
+    return dateToString(huntingTime.time, useRelativeString: useRelativeString)
+}
+
 func timeToString(dateTime: NSDate) -> String {
     let dateFormatter = NSDateFormatter()
     dateFormatter.dateFormat = "h:mm"
     
     return dateFormatter.stringFromDate(dateTime)
+}
+
+func timeToString(huntingTime: HuntingTime) -> String {
+    return timeToString(huntingTime.time)
 }
 
 func clearTime(dateTime: NSDate) -> NSDate {

@@ -79,11 +79,11 @@ class HuntingSeason {
         dateFormatter.dateFormat = "YYYY-MM-d"
         let today = dateFormatter.stringFromDate(NSDate())
         
-        if dates[0].startTime.timeIntervalSinceNow > 0 {
+        if dates[0].startTime.timeIntervalSinceNow() > 0 {
             return 0
-        } else if dates.last?.endTime.timeIntervalSinceNow > 0 {
+        } else if dates.last?.endTime.timeIntervalSinceNow() > 0 {
             for (index, huntingDay) in enumerate(dates) {
-                if today == dateFormatter.stringFromDate(huntingDay.startTime) {
+                if today == dateFormatter.stringFromDate(huntingDay.startTime.time) {
                     return index
                 }
             }
