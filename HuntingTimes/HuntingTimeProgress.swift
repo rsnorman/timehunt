@@ -9,11 +9,11 @@
 import UIKit
 
 class HuntingTimeProgress {
-    var huntingTimes       : [NSDate]
+    var huntingDay         : HuntingDay
     let huntingTimesColumn : ColumnView
     
-    init(huntingTimes: [NSDate], huntingTimesColumn: ColumnView) {
-        self.huntingTimes = huntingTimes
+    init(huntingDay: HuntingDay, huntingTimesColumn: ColumnView) {
+        self.huntingDay = huntingDay
         self.huntingTimesColumn = huntingTimesColumn
     }
     
@@ -22,7 +22,7 @@ class HuntingTimeProgress {
         let nextTime = getNextTime(NSDate())
         
         if lastTime == nextTime {
-            return 0.0
+            return isFirstTime(lastTime) ? 0.0 : 1.0
         }
         
         var lastPoint : CGPoint?
@@ -52,18 +52,19 @@ class HuntingTimeProgress {
     private
     
     func getHuntingTimes() -> [NSDate] {
-        let calendar = NSCalendar.currentCalendar()
-        let dayStart = calendar.dateBySettingHour(0, minute: 0, second: 0, ofDate: huntingTimes[0], options: nil)
-        let dayEnd   = calendar.dateBySettingHour(23, minute: 59, second: 59, ofDate: huntingTimes[0], options: nil)
-        return [dayStart!, huntingTimes[0], huntingTimes[1], huntingTimes[2], huntingTimes[3], dayEnd!]
+        var times = huntingDay.allTimes()
+        times.insert(huntingDay.getBeginningOfDay(), atIndex: 0)
+        times.append(huntingDay.getEndOfDay())
+        
+        return times
     }
     
     func isFirstTime(time: NSDate) -> Bool {
-        return getHuntingTimes()[0] == time
+        return huntingDay.getBeginningOfDay() == time
     }
     
     func isLastTime(time: NSDate) -> Bool {
-        return getHuntingTimes().last == time
+        return huntingDay.getEndOfDay() == time
     }
     
     func getLastTime(nextTime: NSDate) -> NSDate {
