@@ -107,7 +107,7 @@ class MainView : UIView {
         dateLabel.alpha        = 1
         huntingTimesView.alpha = 1.0
         dateTimeScroller.alpha = 0.7
-        dateTimeScroller.positionIndicator.alpha = 1.0
+        dateTimeScroller.positionIndicator.alpha = 0.7
     }
     
     func isDatePickerVisible() -> Bool {

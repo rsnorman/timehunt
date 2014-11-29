@@ -54,22 +54,6 @@ class MainViewAnimations : NSObject {
         }
     }
     
-    func showDatePicker(percentComplete: CGFloat) {
-        if !animating {
-            animating = true
-            mainView.countdownLabel.stopCountdown()
-            mainView.monthColumnView.hidden = false
-            mainView.datepickerLabel.text   = self.mainView.dateLabel.text
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.animating = false
-                self.mainView.dateTimeScroller.setPosition(percentComplete, animate: false)
-                self.mainView.showDatePicker()
-            }) { (complete) -> Void in
-                self.animating = false
-            }
-        }
-    }
-    
     func showHuntingTimes(reverse: Bool = false, completion: ((reversing: Bool, complete: Bool) -> Void)? = nil) {
         if !animating {
             animating = true
@@ -97,6 +81,22 @@ class MainViewAnimations : NSObject {
                 self.animating = false
                 self.mainView.huntingTimesView.frame = CGRectOffset(self.mainView.huntingTimesView.frame, 0, yOffset * -2)
                 completion?(reversing: reverse, complete: complete)
+            }
+        }
+    }
+    
+    func showDatePicker(percentComplete: CGFloat) {
+        if !animating {
+            animating = true
+            mainView.countdownLabel.stopCountdown()
+            mainView.monthColumnView.hidden = false
+            mainView.datepickerLabel.text   = self.mainView.dateLabel.text
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.animating = false
+                self.mainView.dateTimeScroller.setPosition(percentComplete, animate: false)
+                self.mainView.showDatePicker()
+                }) { (complete) -> Void in
+                    self.animating = false
             }
         }
     }

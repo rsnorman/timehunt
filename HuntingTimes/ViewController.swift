@@ -36,6 +36,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         addDateGestures()
         NotificationManager.sharedInstance.addDelegate(self)
         huntingTimesProgress = HuntingTimeProgress(huntingDay: currentDay(), huntingTimesColumn: mainView.huntingTimesView.timeColumnView)
+        mainView.dateTimeScroller.markCurrentPosition(huntingSeason.percentComplete())
         
         
         setHuntingDay()
@@ -77,7 +78,6 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     
     func startScrollDates() {
         if mainView.isDatePickerVisible() {
-            mainView.dateTimeScroller.markCurrentPosition(huntingSeason.percentComplete())
             animator.hideDailyView() { (complete) -> Void in
                 self.animator.showDatePicker(self.huntingSeason.percentComplete())
             }
