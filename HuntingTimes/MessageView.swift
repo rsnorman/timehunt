@@ -34,14 +34,14 @@ class MessageView : UILabel {
         messages.append(message)
         
         if messages.count == 1 {
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
                 if let del = self.delegate {
                     del.willShowMessage()
                 }
                 }) { (complete) -> Void in
                     
                     self.showMessages(self.messages[0], completion: { () -> () in
-                        UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        UIView.animateWithDuration(0.2, animations: { () -> Void in
                             if let del = self.delegate {
                                 del.didHideMessage()
                             }
@@ -53,10 +53,10 @@ class MessageView : UILabel {
     
     func showMessages(message: String, completion: () -> ()) {
         text = message
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
             self.alpha = 1.0
             }, completion: { (complete) -> Void in
-                UIView.animateWithDuration(0.3, delay: 1.5, options: nil, animations: { () -> Void in
+                UIView.animateWithDuration(0.2, delay: 1.0, options: nil, animations: { () -> Void in
                     self.alpha = 0.0
                     }, completion: { (complete) -> Void in
                         self.messages.removeAtIndex(0)

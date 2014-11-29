@@ -9,7 +9,7 @@
 import UIKit
 
 protocol HuntingSeasonDelegate {
-    func willChangeDay()
+    func willChangeDay(currentDay: HuntingDay)
     func didChangeDay(currentDay: HuntingDay)
 }
 
@@ -71,7 +71,7 @@ class HuntingSeason {
     }
     
     func setCurrentDay(currentDay: Int) {
-        delegate?.willChangeDay()
+        delegate?.willChangeDay(self.currentDay())
         currentPosition = currentDay
         delegate?.didChangeDay(self.currentDay())
     }
