@@ -9,7 +9,7 @@
 import UIKit
 import AudioToolbox
 
-class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDelegate, HuntingTimesViewDelegate, NotificationManagerDelegate, MessageViewDelegate, MenuIconViewDelegate {
+class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDelegate, HuntingTimesViewDelegate, NotificationManagerDelegate, MessageViewDelegate, MenuIconViewDelegate, MenuControllerDelegate {
     
     var mainView : MainView!
     var animator : MainViewAnimations!
@@ -24,6 +24,8 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     override func viewDidLoad() {
         
         menuController = MenuController()
+        menuController.delegate           = self
+        menuController.selectedBackground = "dark-forest.jpg"
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "setCountdownTime", name: UIApplicationDidBecomeActiveNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "setNotifications", name: UIApplicationDidBecomeActiveNotification, object: nil)
@@ -42,7 +44,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         NotificationManager.sharedInstance.addDelegate(self)
         huntingTimesProgress = HuntingTimeProgress(huntingDay: currentDay(), huntingTimesColumn: mainView.huntingTimesView.timeColumnView)
         mainView.dateTimeScroller.markCurrentPosition(huntingSeason.percentComplete())
-        
+
         
         setHuntingDay()
     }
@@ -223,6 +225,10 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
             self.menuController.view.removeFromSuperview()
             self.menuController.removeFromParentViewController()
         }
+    }
+    
+    func didSelectBackground(backgroundImage: String) {
+        mainView.bgImageView.setImage(UIImage(named: backgroundImage)!)
     }
 
 

@@ -40,10 +40,6 @@ class MenuIconView : UIView {
         
         super.init(frame: frame)
         
-        self.layer.borderWidth  = 1.0
-        self.layer.cornerRadius = frame.width / 2.0
-        self.layer.borderColor  = UIColor.whiteColor().CGColor
-        
         addSubview(topLine)
         addSubview(middleLine)
         addSubview(bottomLine)
