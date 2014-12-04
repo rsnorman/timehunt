@@ -21,6 +21,7 @@ class MainView : UIView {
     let stateLabel       : UILabel
     let datepickerLabel  : UILabel
     let messageLabel     : MessageView
+    let menuIcon         : MenuIconView
     
     override init(frame: CGRect) {
         let bgImage = UIImage(named: "dark-forest.jpg")!
@@ -66,6 +67,9 @@ class MainView : UIView {
         upArrow.center    = CGPointMake(frame.width / 2, dateTimeScroller.frame.origin.y - 35)
         upArrow.tintColor = .whiteColor()
         upArrow.alpha     = 0
+        
+        menuIcon       = MenuIconView(frame: CGRectMake(10, 25, 30, 30))
+        menuIcon.alpha = 0
 
         super.init(frame: frame)
         
@@ -81,6 +85,7 @@ class MainView : UIView {
         addSubview(monthColumnView)
         addSubview(downArrow)
         addSubview(upArrow)
+        addSubview(menuIcon)
     }
     
     func setDelegate(viewController: ViewController) {
@@ -102,11 +107,12 @@ class MainView : UIView {
     }
     
     func showDailyView() {
-        stateLabel.alpha       = 1
-        countdownLabel.alpha   = 1
-        dateLabel.alpha        = 1
+        stateLabel.alpha       = 1.0
+        countdownLabel.alpha   = 1.0
+        dateLabel.alpha        = 1.0
         huntingTimesView.alpha = 1.0
         dateTimeScroller.alpha = 0.7
+        menuIcon.alpha         = 1.0
         dateTimeScroller.positionIndicator.alpha = 0.7
     }
     

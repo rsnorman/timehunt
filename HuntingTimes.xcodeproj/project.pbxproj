@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C20E7351A2FE825008A9F5B /* MenuIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C20E7341A2FE825008A9F5B /* MenuIconView.swift */; };
 		4C3D49A41A28347800AFF111 /* HuntingDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3D49A31A28347800AFF111 /* HuntingDay.swift */; };
 		4C3D49A61A28545800AFF111 /* HuntingTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3D49A51A28545800AFF111 /* HuntingTime.swift */; };
 		4C3D49AA1A28E71700AFF111 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3D49A91A28E71700AFF111 /* Constants.swift */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C20E7341A2FE825008A9F5B /* MenuIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuIconView.swift; sourceTree = "<group>"; };
 		4C3D49A31A28347800AFF111 /* HuntingDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingDay.swift; sourceTree = "<group>"; };
 		4C3D49A51A28545800AFF111 /* HuntingTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingTime.swift; sourceTree = "<group>"; };
 		4C3D49A91A28E71700AFF111 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				4CDE49421A282934002CF42A /* MessageView.swift */,
 				4C8987F21A290D35001B7B74 /* MainView.swift */,
 				4C8987F41A291FDC001B7B74 /* MainViewAnimations.swift */,
+				4C20E7341A2FE825008A9F5B /* MenuIconView.swift */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				4C3D49AA1A28E71700AFF111 /* Constants.swift in Sources */,
 				4C6EE1A61A24477200305115 /* HuntingTimesView.swift in Sources */,
 				4C3D49A41A28347800AFF111 /* HuntingDay.swift in Sources */,
+				4C20E7351A2FE825008A9F5B /* MenuIconView.swift in Sources */,
 				4C46BE471A20484F005BB796 /* ShadowView.swift in Sources */,
 				4C6EE1A21A242C5C00305115 /* ScrollLineView.swift in Sources */,
 			);
