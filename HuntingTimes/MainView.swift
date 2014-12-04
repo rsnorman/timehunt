@@ -68,7 +68,7 @@ class MainView : UIView {
         upArrow.tintColor = .whiteColor()
         upArrow.alpha     = 0
         
-        menuIcon       = MenuIconView(frame: CGRectMake(10, 25, 30, 30))
+        menuIcon       = MenuIconView(frame: CGRectMake(10, 25, 40, 40))
         menuIcon.alpha = 0
 
         super.init(frame: frame)
@@ -89,10 +89,11 @@ class MainView : UIView {
     }
     
     func setDelegate(viewController: ViewController) {
-        messageLabel.delegate = viewController
-        countdownLabel.delegate = viewController
+        messageLabel.delegate     = viewController
+        countdownLabel.delegate   = viewController
         huntingTimesView.delegate = viewController
         dateTimeScroller.delegate = viewController
+        menuIcon.delegate         = viewController
     }
     
     func hideDailyView(hideIndicator: Bool = true) {

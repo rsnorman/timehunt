@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4C20E7351A2FE825008A9F5B /* MenuIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C20E7341A2FE825008A9F5B /* MenuIconView.swift */; };
+		4C20E7371A2FF12F008A9F5B /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C20E7361A2FF12F008A9F5B /* MenuController.swift */; };
 		4C3D49A41A28347800AFF111 /* HuntingDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3D49A31A28347800AFF111 /* HuntingDay.swift */; };
 		4C3D49A61A28545800AFF111 /* HuntingTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3D49A51A28545800AFF111 /* HuntingTime.swift */; };
 		4C3D49AA1A28E71700AFF111 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3D49A91A28E71700AFF111 /* Constants.swift */; };
@@ -53,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		4C20E7341A2FE825008A9F5B /* MenuIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuIconView.swift; sourceTree = "<group>"; };
+		4C20E7361A2FF12F008A9F5B /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		4C3D49A31A28347800AFF111 /* HuntingDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingDay.swift; sourceTree = "<group>"; };
 		4C3D49A51A28545800AFF111 /* HuntingTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingTime.swift; sourceTree = "<group>"; };
 		4C3D49A91A28E71700AFF111 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				4C3D49A91A28E71700AFF111 /* Constants.swift */,
 				4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */,
 				4CA156DF1A20413C00F95BA2 /* ViewController.swift */,
+				4C20E7361A2FF12F008A9F5B /* MenuController.swift */,
 				4C46BE451A204840005BB796 /* Interface */,
 				4C46BE421A2046F3005BB796 /* Services */,
 				4CA156E11A20413C00F95BA2 /* Main.storyboard */,
@@ -321,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CA156E01A20413C00F95BA2 /* ViewController.swift in Sources */,
+				4C20E7371A2FF12F008A9F5B /* MenuController.swift in Sources */,
 				4C8987F31A290D35001B7B74 /* MainView.swift in Sources */,
 				4C46BE4B1A20667B005BB796 /* TiltImageView.swift in Sources */,
 				4C46BE4D1A20D7D1005BB796 /* CountdownView.swift in Sources */,

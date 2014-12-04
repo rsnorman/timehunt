@@ -9,10 +9,12 @@
 import UIKit
 import AudioToolbox
 
-class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDelegate, HuntingTimesViewDelegate, NotificationManagerDelegate, MessageViewDelegate {
+class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDelegate, HuntingTimesViewDelegate, NotificationManagerDelegate, MessageViewDelegate, MenuIconViewDelegate {
     
     var mainView : MainView!
     var animator : MainViewAnimations!
+    
+    var menuController : MenuController!
     
     var touchDelay           : dispatch_cancelable_closure!
     var startScrollPosition  : CGPoint!
@@ -20,6 +22,9 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     var huntingTimesProgress : HuntingTimeProgress!
 
     override func viewDidLoad() {
+        
+        menuController = MenuController()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "setCountdownTime", name: UIApplicationDidBecomeActiveNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "setNotifications", name: UIApplicationDidBecomeActiveNotification, object: nil)
         
@@ -204,6 +209,20 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.mainView.countdownLabel.alpha = 1.0
         })
+    }
+    
+    func didOpenMenu() {
+        addChildViewController(menuController)
+        mainView.insertSubview(menuController.view, belowSubview: mainView.menuIcon)
+    }
+    
+    func didCloseMenu() {
+        UIView.animateWithDuration(0.4, animations: { () -> Void in
+            self.menuController.view.alpha = 0.0
+        }) { (complete) -> Void in
+            self.menuController.view.removeFromSuperview()
+            self.menuController.removeFromParentViewController()
+        }
     }
 
 
