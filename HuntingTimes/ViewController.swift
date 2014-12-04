@@ -108,7 +108,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     func showNextDate() {
         if !animator.isAnimating() && !huntingSeason.closingDay() {
             self.mainView.dateTimeScroller.setPosition(1, animate: true)
-            animator.hideHuntingTimes(reverse: false) { (reverse, complete) -> Void in
+            animator.hideHuntingTimes(reverse: true) { (reverse, complete) -> Void in
                 self.mainView.dateTimeScroller.setPosition(0, animate: false)
                 self.huntingSeason.nextDay()
                 self.setHuntingDay()
@@ -120,7 +120,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     func showPreviousDate() {
         if !animator.isAnimating() && !huntingSeason.openingDay() {
             self.mainView.dateTimeScroller.setPosition(0, animate: true)
-            animator.hideHuntingTimes(reverse: true) { (reverse, complete) -> Void in
+            animator.hideHuntingTimes(reverse: false) { (reverse, complete) -> Void in
                 self.mainView.dateTimeScroller.setPosition(1, animate: false)
                 self.huntingSeason.previousDay()
                 self.setHuntingDay()
@@ -255,11 +255,11 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     /* Gestures */
     
     func addDateGestures() {
-        let nextDateGesture       = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
+        let nextDateGesture       = UISwipeGestureRecognizer(target: self, action: "showNextDate")
         nextDateGesture.direction = .Up
         view.addGestureRecognizer(nextDateGesture)
         
-        let previousDateGesture       = UISwipeGestureRecognizer(target: self, action: "showNextDate")
+        let previousDateGesture       = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
         previousDateGesture.direction = .Down
         view.addGestureRecognizer(previousDateGesture)
         
