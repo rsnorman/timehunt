@@ -117,6 +117,29 @@ class MainViewAnimations : NSObject {
         }
     }
     
+    func slideOutDailyView(completion: ((complete: Bool) -> Void)?) {
+        if !animating {
+            animating = true
+            UIView.animateWithDuration(0.1, animations: { () -> Void in
+                self.mainView.huntingTimesView.timeColumnView.alpha = 0.0
+            }) { (complete) -> Void in
+                self.mainView.huntingTimesView.timeColumnView.setTextAlignment(NSTextAlignment.Right)
+                UIView.animateWithDuration(0.1, delay: 0.1, options: nil, animations: { () -> Void in
+                    self.mainView.huntingTimesView.timeColumnView.alpha = 1.0
+                }, completion: nil)
+            }
+            
+            UIView.animateWithDuration(0.3, delay: 0.0, options: nil, animations: { () -> Void in
+                let frame = self.mainView.huntingTimesView.frame
+                self.mainView.huntingTimesView.frame = CGRectOffset(frame, frame.width / 2 * -1 - 15, 0)
+                self.mainView.huntingTimesView.eventColumnView.alpha = 0.0
+                }) { (complete) -> Void in
+                    self.animating = false
+                    completion?(complete: complete)
+            }
+        }
+    }
+    
     func showSwipeHint() {
         if !animating {
             animating = true

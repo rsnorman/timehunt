@@ -292,13 +292,20 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         
         let swipeRightGesture       = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
         swipeRightGesture.direction = .Right
-        let swipeLeftGesture        = UISwipeGestureRecognizer(target: self, action: "showNextDate")
+//        let swipeLeftGesture        = UISwipeGestureRecognizer(target: self, action: "showNextDate")
+        let swipeLeftGesture        = UISwipeGestureRecognizer(target: self, action: "slideOutDailyView")
         swipeLeftGesture.direction  = .Left
         view.addGestureRecognizer(swipeRightGesture)
         view.addGestureRecognizer(swipeLeftGesture)
         
         let hintTapGesture  = UITapGestureRecognizer(target: animator, action: "showSwipeHint")
         view.addGestureRecognizer(hintTapGesture)
+    }
+    
+    func slideOutDailyView() {
+        animator.slideOutDailyView { (complete) -> Void in
+            
+        }
     }
     
     /* End Gestures */
