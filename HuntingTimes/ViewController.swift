@@ -231,10 +231,6 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     func didSelectBackground(backgroundImage: String) {
         mainView.bgImageView.setImage(UIImage(named: backgroundImage)!)
         UserSettings.setBackgroundImage(backgroundImage)
-        
-//        var userDefaults = NSUserDefaults.standardUserDefaults()
-//        userDefaults.setValue(backgroundImage, forKey: "backgroundImage")
-//        userDefaults.synchronize()
     }
 
 
