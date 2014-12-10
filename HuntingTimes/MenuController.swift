@@ -15,17 +15,29 @@ protocol MenuControllerDelegate {
 class MenuController : UIViewController {
     
     let backgroundImages = ["dark-forest.jpg", "leaves-forest.jpg", "forest.jpg"]
+    var backgroundView     : UIView!
     var imageViews         : [UIImageView]!
     var selectedBackground : String!
     var delegate           : MenuControllerDelegate!
     
     override func viewDidLoad() {
-        view.backgroundColor = .blackColor()
-        view.alpha           = 0.0
+        view.alpha = 0.0
+        
+        backgroundView = UIView(frame: view.frame)
+        backgroundView.backgroundColor = .blackColor()
+        backgroundView.alpha           = 0.8
+        view.addSubview(backgroundView)
+        
+        let backgroundLabel = UILabel(frame: CGRectMake(0, 170, view.frame.width, 20))
+        backgroundLabel.text = "Choose Background"
+        backgroundLabel.textColor = .whiteColor()
+        backgroundLabel.font = UIFont.systemFontOfSize(18)
+        backgroundLabel.textAlignment = .Center
+        view.addSubview(backgroundLabel)
         
         imageViews = []
         for (index, backgroundImage) in enumerate(backgroundImages) {
-            let imageView                     = UIImageView(frame: CGRectMake(10 + (115 * CGFloat(index)), 90, 70, 70))
+            let imageView                     = UIImageView(frame: CGRectMake(10 + (115 * CGFloat(index)), 210, 70, 70))
             imageView.image                   = UIImage(named: backgroundImage)
             imageView.layer.borderColor       = UIColor(white: 1, alpha: 1).CGColor
             imageView.layer.borderWidth       = 2.0
@@ -41,7 +53,7 @@ class MenuController : UIViewController {
     
     override func viewDidAppear(animate: Bool) {
         UIView.animateWithDuration(0.4) {
-            self.view.alpha = 0.8
+            self.view.alpha = 1.0
             
             if let selectedBG = self.selectedBackground {
                 for (index, imageView) in enumerate(self.imageViews) {
