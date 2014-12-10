@@ -21,9 +21,10 @@ class MainView : UIView {
     let stateLabel       : UILabel
     let datepickerLabel  : UILabel
     let messageLabel     : MessageView
+    let menuIcon         : MenuIconView
     
     override init(frame: CGRect) {
-        let bgImage = UIImage(named: "dark-forest.jpg")!
+        let bgImage = UIImage(named: UserSettings.getBackgroundImage())!
         bgImageView = TiltImageView(image: bgImage, frame: frame)
         shadowView = ShadowView(frame: frame)
         shadowView.setDarkness(0.5)
@@ -66,6 +67,9 @@ class MainView : UIView {
         upArrow.center    = CGPointMake(frame.width / 2, dateTimeScroller.frame.origin.y - 35)
         upArrow.tintColor = .whiteColor()
         upArrow.alpha     = 0
+        
+        menuIcon       = MenuIconView(frame: CGRectMake(0, 15, 60, 60))
+        menuIcon.alpha = 0
 
         super.init(frame: frame)
         
@@ -81,13 +85,15 @@ class MainView : UIView {
         addSubview(monthColumnView)
         addSubview(downArrow)
         addSubview(upArrow)
+        addSubview(menuIcon)
     }
     
     func setDelegate(viewController: ViewController) {
-        messageLabel.delegate = viewController
-        countdownLabel.delegate = viewController
+        messageLabel.delegate     = viewController
+        countdownLabel.delegate   = viewController
         huntingTimesView.delegate = viewController
         dateTimeScroller.delegate = viewController
+        menuIcon.delegate         = viewController
     }
     
     func hideDailyView(hideIndicator: Bool = true) {
@@ -102,11 +108,12 @@ class MainView : UIView {
     }
     
     func showDailyView() {
-        stateLabel.alpha       = 1
-        countdownLabel.alpha   = 1
-        dateLabel.alpha        = 1
+        stateLabel.alpha       = 1.0
+        countdownLabel.alpha   = 1.0
+        dateLabel.alpha        = 1.0
         huntingTimesView.alpha = 1.0
         dateTimeScroller.alpha = 0.7
+        menuIcon.alpha         = 1.0
         dateTimeScroller.positionIndicator.alpha = 0.7
     }
     

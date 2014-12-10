@@ -27,6 +27,25 @@ class TiltImageView: UIImageView {
         initMotionManager()
     }
     
+    func setImage(image : UIImage) {
+        let currentSubviews = scrollView.subviews
+        
+        var imageView = UIImageView(image: image)
+        var imageWidth = frame.height * image.size.width / image.size.height
+        imageView.frame = CGRectMake((frame.width - imageWidth) / 2, 0, imageWidth, scrollView.frame.height)
+        imageView.alpha = 0.0
+        scrollView.addSubview(imageView)
+        
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.scrollView.addSubview(imageView)
+            imageView.alpha = 1.0
+        }) { (complete) -> Void in
+            for view in currentSubviews as [UIView] {
+                view.removeFromSuperview()
+            }
+        }
+    }
+    
     deinit {
         motionManager.stopDeviceMotionUpdates()
     }
