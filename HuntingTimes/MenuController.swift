@@ -41,7 +41,7 @@ class MenuController : UIViewController {
     
     override func viewDidAppear(animate: Bool) {
         UIView.animateWithDuration(0.4) {
-            self.view.alpha = 0.9
+            self.view.alpha = 0.8
             
             if let selectedBG = self.selectedBackground {
                 for (index, imageView) in enumerate(self.imageViews) {

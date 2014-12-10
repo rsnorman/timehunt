@@ -36,17 +36,9 @@ class TiltImageView: UIImageView {
         imageView.alpha = 0.0
         scrollView.addSubview(imageView)
         
-        UIView.animateWithDuration(0.3) {
-            for view in currentSubviews as [UIView] {
-                view.alpha = 0.0
-            }
-            
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
             self.scrollView.addSubview(imageView)
             imageView.alpha = 1.0
-        }
-        
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-            
         }) { (complete) -> Void in
             for view in currentSubviews as [UIView] {
                 view.removeFromSuperview()

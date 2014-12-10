@@ -68,7 +68,7 @@ class MainView : UIView {
         upArrow.tintColor = .whiteColor()
         upArrow.alpha     = 0
         
-        menuIcon       = MenuIconView(frame: CGRectMake(10, 25, 40, 40))
+        menuIcon       = MenuIconView(frame: CGRectMake(0, 15, 60, 60))
         menuIcon.alpha = 0
 
         super.init(frame: frame)
