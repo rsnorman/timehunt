@@ -25,7 +25,8 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         
         menuController = MenuController()
         menuController.delegate           = self
-        menuController.selectedBackground = "dark-forest.jpg"
+        
+        menuController.selectedBackground = UserSettings.getBackgroundImage()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "setCountdownTime", name: UIApplicationDidBecomeActiveNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "setNotifications", name: UIApplicationDidBecomeActiveNotification, object: nil)
@@ -229,6 +230,11 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     
     func didSelectBackground(backgroundImage: String) {
         mainView.bgImageView.setImage(UIImage(named: backgroundImage)!)
+        UserSettings.setBackgroundImage(backgroundImage)
+        
+//        var userDefaults = NSUserDefaults.standardUserDefaults()
+//        userDefaults.setValue(backgroundImage, forKey: "backgroundImage")
+//        userDefaults.synchronize()
     }
 
 

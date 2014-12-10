@@ -24,7 +24,7 @@ class MainView : UIView {
     let menuIcon         : MenuIconView
     
     override init(frame: CGRect) {
-        let bgImage = UIImage(named: "dark-forest.jpg")!
+        let bgImage = UIImage(named: UserSettings.getBackgroundImage())!
         bgImageView = TiltImageView(image: bgImage, frame: frame)
         shadowView = ShadowView(frame: frame)
         shadowView.setDarkness(0.5)

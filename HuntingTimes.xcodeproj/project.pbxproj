@@ -23,6 +23,7 @@
 		4C46BE561A211F2C005BB796 /* down-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE551A211F2C005BB796 /* down-arrow@2x.png */; };
 		4C46BE581A21200B005BB796 /* up-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE571A21200B005BB796 /* up-arrow@2x.png */; };
 		4C56B3CD1A26D2CC00B8BD82 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C56B3CC1A26D2CC00B8BD82 /* NotificationManager.swift */; };
+		4C64369D1A37F79600017338 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64369C1A37F79600017338 /* UserSettings.swift */; };
 		4C6EE1A21A242C5C00305115 /* ScrollLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A11A242C5C00305115 /* ScrollLineView.swift */; };
 		4C6EE1A41A24323D00305115 /* ColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A31A24323D00305115 /* ColumnView.swift */; };
 		4C6EE1A61A24477200305115 /* HuntingTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A51A24477200305115 /* HuntingTimesView.swift */; };
@@ -69,6 +70,7 @@
 		4C46BE551A211F2C005BB796 /* down-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down-arrow@2x.png"; sourceTree = "<group>"; };
 		4C46BE571A21200B005BB796 /* up-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up-arrow@2x.png"; sourceTree = "<group>"; };
 		4C56B3CC1A26D2CC00B8BD82 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		4C64369C1A37F79600017338 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		4C6EE1A11A242C5C00305115 /* ScrollLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollLineView.swift; sourceTree = "<group>"; };
 		4C6EE1A31A24323D00305115 /* ColumnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnView.swift; sourceTree = "<group>"; };
 		4C6EE1A51A24477200305115 /* HuntingTimesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingTimesView.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				4CDE49441A282B3B002CF42A /* InterfaceHelper.swift */,
 				4C3D49A31A28347800AFF111 /* HuntingDay.swift */,
 				4C3D49A51A28545800AFF111 /* HuntingTime.swift */,
+				4C64369C1A37F79600017338 /* UserSettings.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				4C3D49A41A28347800AFF111 /* HuntingDay.swift in Sources */,
 				4C20E7351A2FE825008A9F5B /* MenuIconView.swift in Sources */,
 				4C46BE471A20484F005BB796 /* ShadowView.swift in Sources */,
+				4C64369D1A37F79600017338 /* UserSettings.swift in Sources */,
 				4C6EE1A21A242C5C00305115 /* ScrollLineView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
