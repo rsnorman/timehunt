@@ -71,6 +71,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
 
     func setHuntingDay() {
         mainView.huntingTimesView.setDay(currentDay())
+        mainView.huntingWeatherView.setDay(currentDay())
         huntingTimesProgress.huntingDay = currentDay()
         mainView.dateLabel.text = currentTime().toDateString()
         self.setCountdownTime()
@@ -290,7 +291,8 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         previousDateGesture.direction = .Down
         view.addGestureRecognizer(previousDateGesture)
         
-        let swipeRightGesture       = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
+//        let swipeRightGesture       = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
+        let swipeRightGesture        = UISwipeGestureRecognizer(target: self, action: "slideInDailyView")
         swipeRightGesture.direction = .Right
 //        let swipeLeftGesture        = UISwipeGestureRecognizer(target: self, action: "showNextDate")
         let swipeLeftGesture        = UISwipeGestureRecognizer(target: self, action: "slideOutDailyView")
@@ -304,6 +306,12 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     
     func slideOutDailyView() {
         animator.slideOutDailyView { (complete) -> Void in
+            
+        }
+    }
+    
+    func slideInDailyView() {
+        animator.slideInDailyView { (complete) -> Void in
             
         }
     }
