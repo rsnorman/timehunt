@@ -14,9 +14,10 @@ protocol HuntingSeasonDelegate {
 }
 
 class HuntingSeason {
-    let dates           : [HuntingDay]
-    var currentPosition : Int!
-    var delegate        : HuntingSeasonDelegate!
+    let dates             : [HuntingDay]
+    var currentPosition   : Int!
+    var delegate          : HuntingSeasonDelegate!
+    var location          : CLLocation!
     
     init() {
         let path = NSBundle.mainBundle().pathForResource("hunting-times", ofType: "csv")
@@ -37,7 +38,11 @@ class HuntingSeason {
         }
         
         self.currentPosition = getCurrentPosition()
-        
+    }
+    
+    convenience init(location: CLLocation) {
+        self.init()
+        self.location = location
     }
     
     func allDays() -> [HuntingDay] {
@@ -46,6 +51,15 @@ class HuntingSeason {
     
     func length() -> Int {
         return dates.count
+    }
+    
+    func fetchDay(completion: (huntingDay: HuntingDay) -> ()) {
+        WeatherParser.sharedInstance.fetch(location, date: currentDay().startTime.time, success: { (dailyWeather) -> () in
+            self.currentDay().weather = dailyWeather
+            completion(huntingDay: self.currentDay())
+        }) { () -> () in
+            
+        }
     }
     
     func currentDay() -> HuntingDay {

@@ -9,7 +9,7 @@
 import UIKit
 import AudioToolbox
 
-class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDelegate, HuntingTimesViewDelegate, NotificationManagerDelegate, MessageViewDelegate, MenuIconViewDelegate, MenuControllerDelegate {
+class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDelegate, HuntingTimesViewDelegate, NotificationManagerDelegate, MessageViewDelegate, MenuIconViewDelegate, MenuControllerDelegate, FCLocationManagerDelegate {
     
     var mainView : MainView!
     var animator : MainViewAnimations!
@@ -20,6 +20,8 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     var startScrollPosition  : CGPoint!
     var huntingSeason        : HuntingSeason!
     var huntingTimesProgress : HuntingTimeProgress!
+    var locationManager      : FCLocationManager!
+    var currentDay           : HuntingDay!
 
     override func viewDidLoad() {
         
@@ -27,9 +29,6 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         menuController.delegate           = self
         
         menuController.selectedBackground = UserSettings.getBackgroundImage()
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setCountdownTime", name: UIApplicationDidBecomeActiveNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setNotifications", name: UIApplicationDidBecomeActiveNotification, object: nil)
         
         super.viewDidLoad()
         view.userInteractionEnabled = true
@@ -39,15 +38,15 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         mainView.setDelegate(self)
         view.addSubview(mainView)
         
-        huntingSeason = HuntingSeason()
         animator = MainViewAnimations(mainView: mainView)
         addDateGestures()
         NotificationManager.sharedInstance.addDelegate(self)
-        huntingTimesProgress = HuntingTimeProgress(huntingDay: currentDay(), huntingTimesColumn: mainView.huntingTimesView.timeColumnView)
-        mainView.dateTimeScroller.markCurrentPosition(huntingSeason.percentComplete())
-
         
-        setHuntingDay()
+        locationManager = FCLocationManager.sharedManager() as FCLocationManager
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
+        
+        huntingTimesProgress = HuntingTimeProgress(huntingTimesColumn: mainView.huntingTimesView.timeColumnView)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -61,21 +60,19 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     
     /* Helper Methods */
     
-    func currentDay() -> HuntingDay {
-        return huntingSeason.currentDay()
-    }
 
     func currentTime() -> HuntingTime {
-        return currentDay().getCurrentTime()
+        return currentDay.getCurrentTime()
     }
 
-    func setHuntingDay() {
-        mainView.huntingTimesView.setDay(currentDay())
-        mainView.huntingWeatherView.setDay(currentDay())
-        huntingTimesProgress.huntingDay = currentDay()
+    func setHuntingDay(huntingDay: HuntingDay) {
+        currentDay = huntingDay
+        mainView.huntingTimesView.setDay(huntingDay)
+        mainView.huntingWeatherView.setDay(huntingDay)
+        huntingTimesProgress.huntingDay = huntingDay
         mainView.dateLabel.text = currentTime().toDateString()
-        self.setCountdownTime()
-        self.setNotifications()
+        setCountdownTime()
+        setNotifications()
     }
     
     /* End Helper Methods */
@@ -96,16 +93,18 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     func stopScrollDates() {
         if !mainView.isDatePickerVisible() {
             animator.hideDatePicker() { (complete) -> Void in
-                self.setHuntingDay()
-                self.startScrollPosition = nil
-                self.animator.showDailyView()
+                self.huntingSeason.fetchDay({ (huntingDay) -> () in
+                    self.setHuntingDay(huntingDay)
+                    self.startScrollPosition = nil
+                    self.animator.showDailyView()
+                })
             }
         }
     }
     
     func setCountdownTime() {
         mainView.countdownLabel.stopCountdown()
-        if !currentDay().isEnded() {
+        if !currentDay.isEnded() {
             mainView.countdownLabel.startCountdown(currentTime().time)
             mainView.stateLabel.text = currentTime().event
         } else {
@@ -120,8 +119,11 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
             animator.hideHuntingTimes(reverse: true) { (reverse, complete) -> Void in
                 self.mainView.dateTimeScroller.setPosition(0, animate: false)
                 self.huntingSeason.nextDay()
-                self.setHuntingDay()
-                self.animator.showHuntingTimes(reverse: reverse)
+                
+                self.huntingSeason.fetchDay({ (huntingDay) -> () in
+                    self.setHuntingDay(huntingDay)
+                    self.animator.showHuntingTimes(reverse: reverse)
+                })
             }
         }
     }
@@ -132,15 +134,18 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
             animator.hideHuntingTimes(reverse: false) { (reverse, complete) -> Void in
                 self.mainView.dateTimeScroller.setPosition(1, animate: false)
                 self.huntingSeason.previousDay()
-                self.setHuntingDay()
-                self.animator.showHuntingTimes(reverse: reverse)
+                
+                self.huntingSeason.fetchDay({ (huntingDay) -> () in
+                    self.setHuntingDay(huntingDay)
+                    self.animator.showHuntingTimes(reverse: reverse)
+                })
             }
         }
     }
     
     func setNotifications() {
         mainView.huntingTimesView.removeAllNotifications()
-        for (index, time) in enumerate(currentDay().allTimes()) {
+        for (index, time) in enumerate(currentDay.allTimes()) {
             let notifications = NotificationManager.sharedInstance.getAllNotificationsForKey(time.key())
             for notification in notifications {
                 mainView.huntingTimesView.addNotificationIcon(time.time, animate: false)
@@ -233,6 +238,22 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         mainView.bgImageView.setImage(UIImage(named: backgroundImage)!)
         UserSettings.setBackgroundImage(backgroundImage)
     }
+    
+    func didAcquireLocation(location: CLLocation!) {
+        huntingSeason = HuntingSeason(location: location)
+        mainView.dateTimeScroller.markCurrentPosition(huntingSeason.percentComplete())
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setCountdownTime", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setNotifications", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        
+        huntingSeason.fetchDay { (huntingDay) -> () in
+            self.setHuntingDay(huntingDay)
+        }
+    }
+    
+    func didFailToAcquireLocationWithErrorMsg(errorMsg: String!) {
+        println("Failed to aquire location!!!!")
+    }
 
 
     /* End Delegate Methods*/
@@ -291,10 +312,8 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         previousDateGesture.direction = .Down
         view.addGestureRecognizer(previousDateGesture)
         
-//        let swipeRightGesture       = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
         let swipeRightGesture        = UISwipeGestureRecognizer(target: self, action: "slideInDailyView")
         swipeRightGesture.direction = .Right
-//        let swipeLeftGesture        = UISwipeGestureRecognizer(target: self, action: "showNextDate")
         let swipeLeftGesture        = UISwipeGestureRecognizer(target: self, action: "slideOutDailyView")
         swipeLeftGesture.direction  = .Left
         view.addGestureRecognizer(swipeRightGesture)

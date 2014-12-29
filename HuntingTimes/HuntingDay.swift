@@ -20,6 +20,8 @@ class HuntingDay {
         return HuntingTime(time: NSCalendar.currentCalendar().dateBySettingHour(23, minute: 59, second: 59, ofDate: self.endTime.time, options: nil)!, event: "DayEnd")
     }()
     
+    var weather : DailyWeather!
+    
     init(startTime: NSDate, endTime: NSDate) {
         self.startTime = HuntingTime(time: startTime, event: "Start")
         self.endTime   = HuntingTime(time: endTime, event: "Stop")
@@ -33,6 +35,7 @@ class HuntingDay {
         startTime        = HuntingTime(time: sunriseTime.dateByAddingTimeInterval(60 * 30 * -1), event: "Start")
         endTime          = HuntingTime(time: sunsetTime.dateByAddingTimeInterval(60 * 30), event: "Stop")
     }
+    
     
     func allTimes() -> [HuntingTime] {
         return[startTime, sunriseTime, sunsetTime, endTime]
