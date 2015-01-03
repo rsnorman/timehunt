@@ -26,8 +26,7 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
     override func viewDidLoad() {
         
         menuController = MenuController()
-        menuController.delegate           = self
-        
+        menuController.delegate = self
         menuController.selectedBackground = UserSettings.getBackgroundImage()
         
         super.viewDidLoad()
@@ -243,11 +242,11 @@ class ViewController: UIViewController, CountdownViewDelegate, ScrollLineViewDel
         huntingSeason = HuntingSeason(location: location)
         mainView.dateTimeScroller.markCurrentPosition(huntingSeason.percentComplete())
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setCountdownTime", name: UIApplicationDidBecomeActiveNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setNotifications", name: UIApplicationDidBecomeActiveNotification, object: nil)
-        
         huntingSeason.fetchDay { (huntingDay) -> () in
             self.setHuntingDay(huntingDay)
+            
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "setCountdownTime", name: UIApplicationDidBecomeActiveNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "setNotifications", name: UIApplicationDidBecomeActiveNotification, object: nil)
         }
     }
     

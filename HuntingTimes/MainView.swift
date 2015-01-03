@@ -50,8 +50,9 @@ class MainView : UIView {
         huntingTimesView = HuntingTimesView(frame: CGRectMake(0, 230, frame.width, frame.height - 285))
         huntingTimesView.alpha = 0.0
         
-        huntingWeatherView = HuntingWeatherView(frame: CGRectMake(0, 230, frame.width, frame.height - 285))
-        huntingWeatherView.alpha = 0.0
+        huntingWeatherView = HuntingWeatherView(frame: CGRectMake(0, 240, frame.width, frame.height - 285))
+        huntingWeatherView.alpha  = 0.0
+        huntingWeatherView.hidden = true
         
         dateTimeScroller = ScrollLineView(frame: CGRectMake(frame.width / 2, 230, 1, frame.height - 285))
         dateTimeScroller.alpha           = 0.0
