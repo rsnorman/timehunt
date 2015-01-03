@@ -23,6 +23,10 @@
 		4C46BE561A211F2C005BB796 /* down-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE551A211F2C005BB796 /* down-arrow@2x.png */; };
 		4C46BE581A21200B005BB796 /* up-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE571A21200B005BB796 /* up-arrow@2x.png */; };
 		4C56B3CD1A26D2CC00B8BD82 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C56B3CC1A26D2CC00B8BD82 /* NotificationManager.swift */; };
+		4C5B10EE1A585E260077DFFD /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B10ED1A585E260077DFFD /* WeatherViewController.swift */; };
+		4C5B10F01A585E580077DFFD /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B10EF1A585E580077DFFD /* WeatherView.swift */; };
+		4C5B10F21A585E9B0077DFFD /* TimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B10F11A585E9B0077DFFD /* TimesViewController.swift */; };
+		4C5B10F41A585EBB0077DFFD /* TimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B10F31A585EBB0077DFFD /* TimesView.swift */; };
 		4C64369D1A37F79600017338 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64369C1A37F79600017338 /* UserSettings.swift */; };
 		4C64369F1A3AAA6700017338 /* HuntingWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64369E1A3AAA6700017338 /* HuntingWeatherView.swift */; };
 		4C6436B41A3AB69500017338 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6436A21A3AB69500017338 /* AFHTTPRequestOperation.m */; };
@@ -92,6 +96,10 @@
 		4C46BE551A211F2C005BB796 /* down-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down-arrow@2x.png"; sourceTree = "<group>"; };
 		4C46BE571A21200B005BB796 /* up-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up-arrow@2x.png"; sourceTree = "<group>"; };
 		4C56B3CC1A26D2CC00B8BD82 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		4C5B10ED1A585E260077DFFD /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		4C5B10EF1A585E580077DFFD /* WeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
+		4C5B10F11A585E9B0077DFFD /* TimesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimesViewController.swift; sourceTree = "<group>"; };
+		4C5B10F31A585EBB0077DFFD /* TimesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimesView.swift; sourceTree = "<group>"; };
 		4C64369C1A37F79600017338 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		4C64369E1A3AAA6700017338 /* HuntingWeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingWeatherView.swift; sourceTree = "<group>"; };
 		4C6436A11A3AB69500017338 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -206,6 +214,8 @@
 				4C8987F21A290D35001B7B74 /* MainView.swift */,
 				4C8987F41A291FDC001B7B74 /* MainViewAnimations.swift */,
 				4C20E7341A2FE825008A9F5B /* MenuIconView.swift */,
+				4C5B10EF1A585E580077DFFD /* WeatherView.swift */,
+				4C5B10F31A585EBB0077DFFD /* TimesView.swift */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -288,6 +298,8 @@
 				4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */,
 				4CA156DF1A20413C00F95BA2 /* ViewController.swift */,
 				4C20E7361A2FF12F008A9F5B /* MenuController.swift */,
+				4C5B10ED1A585E260077DFFD /* WeatherViewController.swift */,
+				4C5B10F11A585E9B0077DFFD /* TimesViewController.swift */,
 				4C46BE451A204840005BB796 /* Interface */,
 				4C46BE421A2046F3005BB796 /* Services */,
 				4CA156E11A20413C00F95BA2 /* Main.storyboard */,
@@ -486,6 +498,9 @@
 				4C7EFBF21A509ACB006B2DEF /* Temperature.swift in Sources */,
 				4C6436BA1A3AB69500017338 /* AFURLRequestSerialization.m in Sources */,
 				4CDE49451A282B3B002CF42A /* InterfaceHelper.swift in Sources */,
+				4C5B10F41A585EBB0077DFFD /* TimesView.swift in Sources */,
+				4C5B10F21A585E9B0077DFFD /* TimesViewController.swift in Sources */,
+				4C5B10EE1A585E260077DFFD /* WeatherViewController.swift in Sources */,
 				4C46BE491A206294005BB796 /* Delay.swift in Sources */,
 				4C8987F51A291FDC001B7B74 /* MainViewAnimations.swift in Sources */,
 				4C6436B51A3AB69500017338 /* AFHTTPRequestOperationManager.m in Sources */,
@@ -493,6 +508,7 @@
 				4C46BE441A2046FE005BB796 /* StatusBarUpdater.swift in Sources */,
 				4C7EFBF91A509CEC006B2DEF /* DailyWeather.swift in Sources */,
 				4C6436B71A3AB69500017338 /* AFNetworkReachabilityManager.m in Sources */,
+				4C5B10F01A585E580077DFFD /* WeatherView.swift in Sources */,
 				4C3D49AA1A28E71700AFF111 /* Constants.swift in Sources */,
 				4C6EE1A61A24477200305115 /* HuntingTimesView.swift in Sources */,
 				4C3D49A41A28347800AFF111 /* HuntingDay.swift in Sources */,
