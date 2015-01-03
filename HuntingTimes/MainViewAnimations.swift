@@ -117,6 +117,54 @@ class MainViewAnimations : NSObject {
         }
     }
     
+    func slideOutDailyView(completion: ((complete: Bool) -> Void)?) {
+        if !animating && self.mainView.huntingWeatherView.hidden {
+            animating = true
+            let frame = self.mainView.huntingTimesView.frame
+            
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                let frame = self.mainView.huntingTimesView.frame
+                self.mainView.huntingTimesView.frame = CGRectOffset(frame, -20, 0)
+                self.mainView.huntingTimesView.alpha = 0.0
+            }) { (complete) -> Void in
+                let wFrame = self.mainView.huntingWeatherView.frame
+                self.mainView.huntingWeatherView.frame = CGRectOffset(wFrame, 20, 0)
+                self.mainView.huntingTimesView.frame = CGRectOffset(frame, 0, 0)
+                self.mainView.huntingTimesView.hidden = true
+                UIView.animateWithDuration(0.2, animations: { () -> Void in
+                    self.mainView.huntingWeatherView.hidden = false
+                    self.mainView.huntingWeatherView.alpha  = 1.0
+                    self.mainView.huntingWeatherView.frame  = CGRectOffset(wFrame, 0, 0)
+                }) { (complete) -> Void in
+                    self.animating = false
+                }
+            }
+        }
+    }
+    
+    func slideInDailyView(completion: ((complete: Bool) -> Void)?) {
+        if !animating && self.mainView.huntingTimesView.hidden {
+            animating = true
+            let frame = self.mainView.huntingWeatherView.frame
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                self.mainView.huntingWeatherView.frame = CGRectOffset(frame, 20, 0)
+                self.mainView.huntingWeatherView.alpha = 0.0
+                }) { (complete) -> Void in
+                    let wFrame = self.mainView.huntingTimesView.frame
+                    self.mainView.huntingTimesView.frame = CGRectOffset(wFrame, -20, 0)
+                    self.mainView.huntingWeatherView.frame = CGRectOffset(frame, 0, 0)
+                    self.mainView.huntingWeatherView.hidden = true
+                    UIView.animateWithDuration(0.2, animations: { () -> Void in
+                        self.mainView.huntingTimesView.hidden = false
+                        self.mainView.huntingTimesView.alpha  = 1.0
+                        self.mainView.huntingTimesView.frame  = CGRectOffset(wFrame, 0, 0)
+                    }) { (complete) -> Void in
+                        self.animating = false
+                    }
+            }
+        }
+    }
+    
     func showSwipeHint() {
         if !animating {
             animating = true

@@ -9,19 +9,22 @@
 import UIKit
 
 class MainView : UIView {
-    let bgImageView      : TiltImageView
-    let shadowView       : ShadowView
-    let countdownLabel   : CountdownView
-    let dateLabel        : UILabel
-    let downArrow        : UIImageView
-    let upArrow          : UIImageView
-    let dateTimeScroller : ScrollLineView
-    let huntingTimesView : HuntingTimesView
-    let monthColumnView  : ColumnView
-    let stateLabel       : UILabel
-    let datepickerLabel  : UILabel
-    let messageLabel     : MessageView
-    let menuIcon         : MenuIconView
+    let bgImageView        : TiltImageView
+    let shadowView         : ShadowView
+    let countdownLabel     : CountdownView
+    let dateLabel          : UILabel
+    let downArrow          : UIImageView
+    let upArrow            : UIImageView
+    let dateTimeScroller   : ScrollLineView
+    let huntingTimesView   : HuntingTimesView
+    let huntingWeatherView : HuntingWeatherView
+    let monthColumnView    : ColumnView
+    let stateLabel         : UILabel
+    let datepickerLabel    : UILabel
+    let messageLabel       : MessageView
+    let menuIcon           : MenuIconView
+    
+    let timeLineHeight   : Int = 200
     
     override init(frame: CGRect) {
         let bgImage = UIImage(named: UserSettings.getBackgroundImage())!
@@ -39,19 +42,23 @@ class MainView : UIView {
         countdownLabel = CountdownView(frame: CGRectMake(0, 55, frame.width, 120))
         countdownLabel.alpha = 0.0
         
-        dateLabel             = createLabel("", CGRectMake(0, 185, frame.width, 30), 18)
+        dateLabel             = createLabel("", CGRectMake(0, 200, frame.width, 30), 18)
         dateLabel.alpha       = 0.0
         datepickerLabel       = createLabel("", CGRectMake(0, 60, frame.width, 120), 48)
         datepickerLabel.alpha = 0.0
         
-        huntingTimesView = HuntingTimesView(frame: CGRectMake(0, 210, frame.width, frame.height - 260))
+        huntingTimesView = HuntingTimesView(frame: CGRectMake(0, 230, frame.width, frame.height - 285))
         huntingTimesView.alpha = 0.0
         
-        dateTimeScroller = ScrollLineView(frame: CGRectMake(frame.width / 2, 220, 1, frame.height - 260))
+        huntingWeatherView = HuntingWeatherView(frame: CGRectMake(0, 240, frame.width, frame.height - 285))
+        huntingWeatherView.alpha  = 0.0
+        huntingWeatherView.hidden = true
+        
+        dateTimeScroller = ScrollLineView(frame: CGRectMake(frame.width / 2, 230, 1, frame.height - 285))
         dateTimeScroller.alpha           = 0.0
         dateTimeScroller.animateDuration = DAY_TRANSITION_TIME
         
-        monthColumnView = ColumnView(labels: ["September", "October", "November", "December"], frame: CGRectMake(0, 220, frame.width / 2.0 - 10, frame.height - 260))
+        monthColumnView = ColumnView(labels: ["September", "October", "November", "December"], frame: CGRectMake(0, 230, frame.width / 2.0 - 10, frame.height - 285))
         monthColumnView.setTextAlignment(NSTextAlignment.Right)
         monthColumnView.alpha  = 0.0
         monthColumnView.hidden = true
@@ -81,6 +88,7 @@ class MainView : UIView {
         addSubview(dateLabel)
         addSubview(datepickerLabel)
         addSubview(huntingTimesView)
+        addSubview(huntingWeatherView)
         addSubview(dateTimeScroller)
         addSubview(monthColumnView)
         addSubview(downArrow)

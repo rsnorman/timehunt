@@ -9,11 +9,10 @@
 import UIKit
 
 class HuntingTimeProgress {
-    var huntingDay         : HuntingDay
+    var huntingDay         : HuntingDay!
     let huntingTimesColumn : ColumnView
     
-    init(huntingDay: HuntingDay, huntingTimesColumn: ColumnView) {
-        self.huntingDay = huntingDay
+    init(huntingTimesColumn: ColumnView) {
         self.huntingTimesColumn = huntingTimesColumn
     }
     
