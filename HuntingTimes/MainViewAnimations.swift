@@ -135,6 +135,7 @@ class MainViewAnimations : NSObject {
                     self.mainView.huntingWeatherView.hidden = false
                     self.mainView.huntingWeatherView.alpha  = 1.0
                     self.mainView.huntingWeatherView.frame  = CGRectOffset(wFrame, 0, 0)
+                    self.mainView.highlightWeather()
                 }) { (complete) -> Void in
                     self.animating = false
                 }
@@ -158,6 +159,7 @@ class MainViewAnimations : NSObject {
                         self.mainView.huntingTimesView.hidden = false
                         self.mainView.huntingTimesView.alpha  = 1.0
                         self.mainView.huntingTimesView.frame  = CGRectOffset(wFrame, 0, 0)
+                        self.mainView.highlightTimes()
                     }) { (complete) -> Void in
                         self.animating = false
                     }

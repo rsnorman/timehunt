@@ -23,6 +23,8 @@ class MainView : UIView {
     let datepickerLabel    : UILabel
     let messageLabel       : MessageView
     let menuIcon           : MenuIconView
+    let timeDot            : UIView
+    let weatherDot         : UIView
     
     let timeLineHeight   : Int = 200
     
@@ -77,7 +79,20 @@ class MainView : UIView {
         
         menuIcon       = MenuIconView(frame: CGRectMake(0, 15, 60, 60))
         menuIcon.alpha = 0
-
+        
+        timeDot = UIView(frame: CGRectMake(frame.width / 2 - 13.5, frame.height - 25, 8, 8))
+        timeDot.backgroundColor    = UIColor.whiteColor()
+        timeDot.layer.cornerRadius = 4
+        timeDot.layer.borderColor  = UIColor.whiteColor().CGColor
+        timeDot.layer.borderWidth  = 0.5
+        timeDot.alpha        = 0.5
+        
+        weatherDot = UIView(frame: CGRectMake(frame.width / 2 + 6.5, frame.height - 25, 8, 8))
+        weatherDot.layer.cornerRadius = 4
+        weatherDot.layer.borderColor  = UIColor.whiteColor().CGColor
+        weatherDot.layer.borderWidth  = 0.5
+        weatherDot.alpha        = 0.5
+        
         super.init(frame: frame)
         
         addSubview(bgImageView)
@@ -94,6 +109,8 @@ class MainView : UIView {
         addSubview(downArrow)
         addSubview(upArrow)
         addSubview(menuIcon)
+        addSubview(timeDot)
+        addSubview(weatherDot)
     }
     
     func setDelegate(viewController: ViewController) {
@@ -109,6 +126,8 @@ class MainView : UIView {
         countdownLabel.alpha   = 0
         dateLabel.alpha        = 0
         huntingTimesView.alpha = 0.0
+        weatherDot.alpha = 0.0
+        timeDot.alpha    = 0.0
         
         if hideIndicator {
             dateTimeScroller.positionIndicator.alpha = 0
@@ -122,6 +141,8 @@ class MainView : UIView {
         huntingTimesView.alpha = 1.0
         dateTimeScroller.alpha = 0.7
         menuIcon.alpha         = 1.0
+        weatherDot.alpha       = 0.5
+        timeDot.alpha          = 0.5
         dateTimeScroller.positionIndicator.alpha = 0.7
     }
     
@@ -158,6 +179,16 @@ class MainView : UIView {
     func resetHints() {
         downArrow.frame = CGRectOffset(downArrow.frame, 0, -10)
         upArrow.frame   = CGRectOffset(upArrow.frame, 0, 10)
+    }
+    
+    func highlightWeather() {
+        timeDot.backgroundColor    = UIColor.clearColor()
+        weatherDot.backgroundColor = UIColor.whiteColor()
+    }
+    
+    func highlightTimes() {
+        weatherDot.backgroundColor = UIColor.clearColor()
+        timeDot.backgroundColor    = UIColor.whiteColor()
     }
 
     required init(coder aDecoder: NSCoder) {
