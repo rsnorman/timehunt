@@ -13,6 +13,7 @@ class TimesViewController : UIViewController, CountdownViewDelegate, HuntingTime
     var timesView: TimesView!
     var huntingDay : HuntingDay
     var huntingTimesProgress : HuntingTimeProgress!
+    var huntingTimesView : HuntingTimesView!
     
     init(huntingDay: HuntingDay) {
         self.huntingDay = huntingDay
@@ -30,11 +31,9 @@ class TimesViewController : UIViewController, CountdownViewDelegate, HuntingTime
     
     func setDay(huntingDay: HuntingDay) {
         self.huntingDay = huntingDay
-        timesView.huntingTimesView.setDay(huntingDay)
+        timesView.huntingColumnsView.setDay(huntingDay)
         timesView.dateLabel.text = currentTime().toDateString()
         huntingTimesProgress.huntingDay = huntingDay
-        timesView.huntingTimesView.setDay(huntingDay)
-        timesView.dateLabel.text = currentTime().toDateString()
         
         setCountdownTime()
         setNotifications()
@@ -44,9 +43,12 @@ class TimesViewController : UIViewController, CountdownViewDelegate, HuntingTime
         timesView = TimesView(frame: self.view.frame)
         timesView.messageLabel.delegate = self
         timesView.countdownLabel.delegate = self
-        timesView.huntingTimesView.delegate = self
+
         
-        huntingTimesProgress = HuntingTimeProgress(huntingTimesColumn: timesView.huntingTimesView.timeColumnView)
+        huntingTimesView = timesView.huntingColumnsView as HuntingTimesView
+        huntingTimesView.delegate = self
+        
+        huntingTimesProgress = HuntingTimeProgress(huntingTimesColumn: huntingTimesView.timeColumnView)
         
         setDay(huntingDay)
         
@@ -74,21 +76,21 @@ class TimesViewController : UIViewController, CountdownViewDelegate, HuntingTime
     
     func didAddNotification(notificationable: NotificationInterface, notification: Notification) {
         timesView.messageLabel.addMessage(notification.getMessage())
-        timesView.huntingTimesView.addNotificationIcon(notificationable.userInfo()["time"] as NSDate)
+        huntingTimesView.addNotificationIcon(notificationable.userInfo()["time"] as NSDate)
     }
     
     func didRemoveAllNotifications(notificationable: NotificationInterface) {
         let event = notificationable.userInfo()["event"] as String
         let time  = notificationable.userInfo()["time"] as NSDate
         timesView.messageLabel.addMessage("Removed All \(event) Notifications")
-        timesView.huntingTimesView.removeNotificationIcons(time)
+        huntingTimesView.removeNotificationIcons(time)
     }
     
     func didReceiveNotification(userInfo: [NSObject : AnyObject]) {
         let event = userInfo["event"] as String
         let time  = userInfo["time"] as NSDate
         
-        timesView.huntingTimesView.removeNotificationIcon(time, event: event)
+        huntingTimesView.removeNotificationIcon(time, event: event)
         
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
@@ -131,11 +133,11 @@ class TimesViewController : UIViewController, CountdownViewDelegate, HuntingTime
     }
     
     func setNotifications() {
-        timesView.huntingTimesView.removeAllNotifications()
+        huntingTimesView.removeAllNotifications()
         for (index, time) in enumerate(huntingDay.allTimes()) {
             let notifications = NotificationManager.sharedInstance.getAllNotificationsForKey(time.key())
             for notification in notifications {
-                timesView.huntingTimesView.addNotificationIcon(time.time, animate: false)
+                huntingTimesView.addNotificationIcon(time.time, animate: false)
             }
         }
     }
@@ -150,10 +152,10 @@ class TimesViewController : UIViewController, CountdownViewDelegate, HuntingTime
         
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.timesView.alpha = 0
-            self.timesView.huntingTimesView.frame = CGRectOffset(self.timesView.huntingTimesView.frame, 0, yOffset)
+            self.huntingTimesView.frame = CGRectOffset(self.huntingTimesView.frame, 0, yOffset)
         }) { (complete) -> Void in
             
-            self.timesView.huntingTimesView.frame = CGRectOffset(self.timesView.huntingTimesView.frame, 0, yOffset * -2)
+            self.huntingTimesView.frame = CGRectOffset(self.huntingTimesView.frame, 0, yOffset * -2)
             if let completionHandler = completion {
                 completionHandler(reversing: reverse)
             }
@@ -166,7 +168,7 @@ class TimesViewController : UIViewController, CountdownViewDelegate, HuntingTime
         
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.timesView.alpha = 1
-            self.timesView.huntingTimesView.frame = CGRectOffset(self.timesView.huntingTimesView.frame, 0, yOffset)
+            self.huntingTimesView.frame = CGRectOffset(self.huntingTimesView.frame, 0, yOffset)
             }) { (complete) -> Void in
                 
                 if let completionHandler = completion {

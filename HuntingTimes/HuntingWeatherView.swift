@@ -8,13 +8,12 @@
 
 import UIKit
 
-class HuntingWeatherView : UIView {
+class HuntingWeatherView : HuntingColumnsView {
     var weatherColumnView : ColumnView!
     let timeColumnView    : ColumnView
     let padding           : CGFloat = 15
-    var huntingDay        : HuntingDay!
     
-    override init(frame: CGRect) {
+    required init(frame: CGRect) {
         timeColumnView = ColumnView(labels: [], frame: CGRectMake(0, 0, frame.width / 2.0 - padding, frame.height))
         timeColumnView.setTextAlignment(NSTextAlignment.Right)
         
@@ -22,9 +21,14 @@ class HuntingWeatherView : UIView {
         
         addSubview(timeColumnView)
     }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
-    func setDay(huntingDay: HuntingDay) {
-        self.huntingDay = huntingDay
+    override func setDay(huntingDay: HuntingDay) {
+        super.setDay(huntingDay)
+        
         timeColumnView.setLabels([huntingDay.startTime.toTimeString(), huntingDay.sunriseTime.toTimeString(), huntingDay.sunsetTime.toTimeString(), huntingDay.endTime.toTimeString()])
         
         setTemperatures(huntingDay.weather)
@@ -44,9 +48,5 @@ class HuntingWeatherView : UIView {
         weatherColumnView = ColumnView(labels: temperatures, frame: CGRectMake(frame.width / 2.0 + padding, 0, frame.width / 2.0 - padding, frame.height))
         weatherColumnView.setTextAlignment(NSTextAlignment.Left)
         addSubview(weatherColumnView)
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

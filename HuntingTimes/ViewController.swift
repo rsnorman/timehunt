@@ -142,6 +142,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, ScrollLi
                 self.huntingSeason.nextDay()
                 self.huntingSeason.fetchDay({ (huntingDay) -> () in
                     self.timesViewController.setDay(huntingDay)
+                    self.weatherViewController.setDay(huntingDay)
                     self.timesViewController.finishChangingDay(reverse: reverse)
                 })
             }
@@ -155,6 +156,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, ScrollLi
                 self.huntingSeason.previousDay()
                 self.huntingSeason.fetchDay({ (huntingDay) -> () in
                     self.timesViewController.setDay(huntingDay)
+                    self.weatherViewController.setDay(huntingDay)
                     self.timesViewController.finishChangingDay(reverse: reverse)
                 })
             }

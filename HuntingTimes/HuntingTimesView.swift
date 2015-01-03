@@ -12,16 +12,15 @@ protocol HuntingTimesViewDelegate {
     func didTapHuntingTime(huntingTime: HuntingTime)
 }
 
-class HuntingTimesView : UIView {
+class HuntingTimesView : HuntingColumnsView {
     let eventColumnView   : ColumnView
     let timeColumnView    : ColumnView
     let padding           : CGFloat = 15
     let events            : [String] = ["Start", "Sunrise", "Sunset", "Stop"]
-    var huntingDay        : HuntingDay!
     var delegate          : HuntingTimesViewDelegate!
     var notificationIcons : [String : [UIView]]
     
-    override init(frame: CGRect) {
+    required init(frame: CGRect) {
         eventColumnView = ColumnView(labels: events, frame: CGRectMake(0, 0, frame.width / 2.0 - padding, frame.height))
         eventColumnView.setTextAlignment(NSTextAlignment.Right)
         
@@ -40,6 +39,10 @@ class HuntingTimesView : UIView {
         
         addSubview(eventColumnView)
         addSubview(timeColumnView)
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func didTapEvent(sender: UITapGestureRecognizer) {
@@ -156,8 +159,9 @@ class HuntingTimesView : UIView {
         notificationIcons = [:]
     }
     
-    func setDay(huntingDay: HuntingDay) {
-        self.huntingDay = huntingDay
+    override func setDay(huntingDay: HuntingDay) {
+        super.setDay(huntingDay)
+        
         timeColumnView.setLabels([huntingDay.startTime.toTimeString(), huntingDay.sunriseTime.toTimeString(), huntingDay.sunsetTime.toTimeString(), huntingDay.endTime.toTimeString()])
         removeAllNotifications()
         
@@ -166,9 +170,5 @@ class HuntingTimesView : UIView {
             view.userInteractionEnabled = true
             view.addGestureRecognizer(tapGesture)
         }
-    }
-
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
