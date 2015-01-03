@@ -209,23 +209,39 @@
 		4C46BE451A204840005BB796 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				4C5B10FC1A589AE90077DFFD /* Pages */,
+				4C5B10FB1A589AB40077DFFD /* Columns */,
 				4C46BE461A20484F005BB796 /* ShadowView.swift */,
 				4C46BE4A1A20667B005BB796 /* TiltImageView.swift */,
 				4C46BE4C1A20D7D1005BB796 /* CountdownView.swift */,
 				4C6EE1A11A242C5C00305115 /* ScrollLineView.swift */,
-				4C6EE1A31A24323D00305115 /* ColumnView.swift */,
-				4C6EE1A51A24477200305115 /* HuntingTimesView.swift */,
-				4C64369E1A3AAA6700017338 /* HuntingWeatherView.swift */,
 				4CDE49421A282934002CF42A /* MessageView.swift */,
 				4C8987F21A290D35001B7B74 /* MainView.swift */,
 				4C8987F41A291FDC001B7B74 /* MainViewAnimations.swift */,
 				4C20E7341A2FE825008A9F5B /* MenuIconView.swift */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
+		4C5B10FB1A589AB40077DFFD /* Columns */ = {
+			isa = PBXGroup;
+			children = (
+				4C6EE1A31A24323D00305115 /* ColumnView.swift */,
+				4C5B10F91A58940A0077DFFD /* HuntingColumnsView.swift */,
+				4C6EE1A51A24477200305115 /* HuntingTimesView.swift */,
+				4C64369E1A3AAA6700017338 /* HuntingWeatherView.swift */,
+			);
+			name = Columns;
+			sourceTree = "<group>";
+		};
+		4C5B10FC1A589AE90077DFFD /* Pages */ = {
+			isa = PBXGroup;
+			children = (
 				4C5B10EF1A585E580077DFFD /* WeatherPageView.swift */,
 				4C5B10F31A585EBB0077DFFD /* TimesPageView.swift */,
 				4C5B10F71A5890BE0077DFFD /* HuntingPageView.swift */,
-				4C5B10F91A58940A0077DFFD /* HuntingColumnsView.swift */,
 			);
-			name = Interface;
+			name = Pages;
 			sourceTree = "<group>";
 		};
 		4C6436A01A3AB69500017338 /* AFNetworking */ = {

@@ -8,30 +8,12 @@
 
 import Foundation
 
-class WeatherViewController : UIViewController {
-    var weatherView: WeatherView!
-    var huntingDay : HuntingDay
-    
+class WeatherViewController : HuntingPageController {
     init(huntingDay: HuntingDay) {
-        self.huntingDay = huntingDay
-        super.init(nibName: nil, bundle: nil)
+        super.init(huntingDay: huntingDay, huntingPageClass: WeatherView.self)
     }
-    
+
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidLoad() {
-        weatherView = WeatherView(frame: self.view.frame)
-        setDay(huntingDay)
-        
-        self.view = weatherView
-        
-        super.viewDidLoad()
-    }
-    
-    func setDay(huntingDay: HuntingDay) {
-        self.huntingDay = huntingDay
-        weatherView.huntingColumnsView.setDay(huntingDay)
     }
 }

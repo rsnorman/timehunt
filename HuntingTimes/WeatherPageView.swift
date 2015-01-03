@@ -9,7 +9,7 @@
 import Foundation
 
 class WeatherView : HuntingPageView {    
-    init(frame: CGRect) {
+    required init(frame: CGRect) {
         super.init(frame: frame, huntingColumnsClass: HuntingWeatherView.self)
     }
 

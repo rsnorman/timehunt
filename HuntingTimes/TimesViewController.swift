@@ -9,15 +9,12 @@
 import Foundation
 import AudioToolbox
 
-class TimesViewController : UIViewController, CountdownViewDelegate, HuntingTimesViewDelegate, NotificationManagerDelegate, MessageViewDelegate {
-    var timesView: TimesView!
-    var huntingDay : HuntingDay
+class TimesViewController : HuntingPageController, CountdownViewDelegate, HuntingTimesViewDelegate, NotificationManagerDelegate, MessageViewDelegate {
     var huntingTimesProgress : HuntingTimeProgress!
     var huntingTimesView : HuntingTimesView!
     
     init(huntingDay: HuntingDay) {
-        self.huntingDay = huntingDay
-        super.init(nibName: nil, bundle: nil)
+        super.init(huntingDay: huntingDay, huntingPageClass: TimesView.self)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "setCountdownTime", name: UIApplicationDidBecomeActiveNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "setNotifications", name: UIApplicationDidBecomeActiveNotification, object: nil)
@@ -29,10 +26,10 @@ class TimesViewController : UIViewController, CountdownViewDelegate, HuntingTime
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setDay(huntingDay: HuntingDay) {
-        self.huntingDay = huntingDay
-        timesView.huntingColumnsView.setDay(huntingDay)
-        timesView.dateLabel.text = currentTime().toDateString()
+    override func didSetDay(huntingDay: HuntingDay) {
+        super.didSetDay(huntingDay)
+        
+        huntingPageView.dateLabel.text  = currentTime().toDateString()
         huntingTimesProgress.huntingDay = huntingDay
         
         setCountdownTime()
@@ -40,22 +37,17 @@ class TimesViewController : UIViewController, CountdownViewDelegate, HuntingTime
     }
     
     override func viewDidLoad() {
-        timesView = TimesView(frame: self.view.frame)
-        timesView.messageLabel.delegate = self
-        timesView.countdownLabel.delegate = self
+        super.viewDidLoad()
+   
+        huntingPageView.messageLabel.delegate = self
+        (huntingPageView as TimesView).countdownLabel.delegate = self
 
-        
-        huntingTimesView = timesView.huntingColumnsView as HuntingTimesView
+        huntingTimesView = huntingPageView.huntingColumnsView as HuntingTimesView
         huntingTimesView.delegate = self
         
         huntingTimesProgress = HuntingTimeProgress(huntingTimesColumn: huntingTimesView.timeColumnView)
         
-        setDay(huntingDay)
-        
-        self.view = timesView
         self.view.alpha = 0
-        
-        super.viewDidLoad()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -67,22 +59,22 @@ class TimesViewController : UIViewController, CountdownViewDelegate, HuntingTime
     }
     
     func willShowMessage() {
-        timesView.countdownLabel.alpha = 0.0
+        (huntingPageView as TimesView).countdownLabel.alpha = 0.0
     }
     
     func didHideMessage() {
-        timesView.countdownLabel.alpha = 1.0
+        (huntingPageView as TimesView).countdownLabel.alpha = 1.0
     }
     
     func didAddNotification(notificationable: NotificationInterface, notification: Notification) {
-        timesView.messageLabel.addMessage(notification.getMessage())
+        huntingPageView.messageLabel.addMessage(notification.getMessage())
         huntingTimesView.addNotificationIcon(notificationable.userInfo()["time"] as NSDate)
     }
     
     func didRemoveAllNotifications(notificationable: NotificationInterface) {
         let event = notificationable.userInfo()["event"] as String
         let time  = notificationable.userInfo()["time"] as NSDate
-        timesView.messageLabel.addMessage("Removed All \(event) Notifications")
+        huntingPageView.messageLabel.addMessage("Removed All \(event) Notifications")
         huntingTimesView.removeNotificationIcons(time)
     }
     
@@ -96,12 +88,12 @@ class TimesViewController : UIViewController, CountdownViewDelegate, HuntingTime
     }
     
     func setCountdownTime() {
-        timesView.countdownLabel.stopCountdown()
+        (huntingPageView as TimesView).countdownLabel.stopCountdown()
         if !huntingDay.isEnded() {
-            timesView.countdownLabel.startCountdown(currentTime().time)
-            timesView.stateLabel.text = currentTime().event
+            (huntingPageView as TimesView).countdownLabel.startCountdown(currentTime().time)
+            huntingPageView.stateLabel.text = currentTime().event
         } else {
-            timesView.stateLabel.text = ""
+            huntingPageView.stateLabel.text = ""
 //            mainView.dateTimeScroller.setPosition(huntingTimesProgress.getProgressPercent(), animate: true)
         }
     }
@@ -112,14 +104,14 @@ class TimesViewController : UIViewController, CountdownViewDelegate, HuntingTime
     
     func willFinishCountdown() {
         UIView.animateWithDuration(0.5, delay: 0.9, options: nil, animations: { () -> Void in
-            self.timesView.countdownLabel.alpha = 0.0
+            (self.huntingPageView as TimesView).countdownLabel.alpha = 0.0
             }, completion: nil)
     }
     
     func didFinishCountdown() {
         setCountdownTime()
         UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.timesView.countdownLabel.alpha = 1.0
+            (self.huntingPageView as TimesView).countdownLabel.alpha = 1.0
         })
     }
     
@@ -139,41 +131,6 @@ class TimesViewController : UIViewController, CountdownViewDelegate, HuntingTime
             for notification in notifications {
                 huntingTimesView.addNotificationIcon(time.time, animate: false)
             }
-        }
-    }
-    
-    func currentTime() -> HuntingTime {
-        return huntingDay.getCurrentTime()
-    }
-    
-    func startChangingDay(reverse: Bool = false, completion: ((reversing: Bool) -> Void)? = nil) {
-        let labelOffset : CGFloat = 10.0
-        let yOffset = reverse ? labelOffset * -1 : labelOffset
-        
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.timesView.alpha = 0
-            self.huntingTimesView.frame = CGRectOffset(self.huntingTimesView.frame, 0, yOffset)
-        }) { (complete) -> Void in
-            
-            self.huntingTimesView.frame = CGRectOffset(self.huntingTimesView.frame, 0, yOffset * -2)
-            if let completionHandler = completion {
-                completionHandler(reversing: reverse)
-            }
-        }
-    }
-    
-    func finishChangingDay(reverse: Bool = false, completion: ((reversing: Bool) -> Void)? = nil) {
-        let labelOffset: CGFloat = 10.0
-        let yOffset = reverse ? labelOffset * -1 : labelOffset
-        
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.timesView.alpha = 1
-            self.huntingTimesView.frame = CGRectOffset(self.huntingTimesView.frame, 0, yOffset)
-            }) { (complete) -> Void in
-                
-                if let completionHandler = completion {
-                    completionHandler(reversing: reverse)
-                }
         }
     }
 }

@@ -9,12 +9,13 @@
 import Foundation
 
 class HuntingPageController : UIViewController {
-    var huntingPageView : HuntingPageView
-    var huntingDay      : HuntingDay
+    var huntingPageView  : HuntingPageView!
+    var huntingDay       : HuntingDay
+    let huntingPageClass : HuntingPageView.Type
     
-    init(huntingDay: HuntingDay, huntingPageView: HuntingPageView) {
-        self.huntingDay      = huntingDay
-        self.huntingPageView = huntingPageView
+    init(huntingDay: HuntingDay, huntingPageClass: HuntingPageView.Type) {
+        self.huntingDay       = huntingDay
+        self.huntingPageClass = huntingPageClass
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -23,16 +24,58 @@ class HuntingPageController : UIViewController {
     }
     
     override func viewDidLoad() {
-        setDay(huntingDay)
+        let frame = view.frame
+        huntingPageView = huntingPageClass(frame: frame)
         self.view = huntingPageView
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        setDay(huntingDay)
+        super.viewWillAppear(animated)
+    }
+    
     func didSetDay(huntingDay: HuntingDay) {
         self.huntingDay = huntingDay
+        huntingPageView?.huntingColumnsView.setDay(huntingDay)
     }
     
     func setDay(huntingDay: HuntingDay) {
         didSetDay(huntingDay)
+    }
+    
+    func currentTime() -> HuntingTime {
+        return huntingDay.getCurrentTime()
+    }
+    
+    func startChangingDay(reverse: Bool = false, completion: ((reversing: Bool) -> Void)? = nil) {
+        let labelOffset : CGFloat = 10.0
+        let yOffset = reverse ? labelOffset * -1 : labelOffset
+        
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.huntingPageView.alpha = 0
+            self.huntingPageView.huntingColumnsView.frame = CGRectOffset(self.huntingPageView.huntingColumnsView.frame, 0, yOffset)
+            }) { (complete) -> Void in
+                
+                self.huntingPageView.huntingColumnsView.frame = CGRectOffset(self.huntingPageView.huntingColumnsView.frame, 0, yOffset * -2)
+                if let completionHandler = completion {
+                    completionHandler(reversing: reverse)
+                }
+        }
+    }
+    
+    func finishChangingDay(reverse: Bool = false, completion: ((reversing: Bool) -> Void)? = nil) {
+        let labelOffset: CGFloat = 10.0
+        let yOffset = reverse ? labelOffset * -1 : labelOffset
+        
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.huntingPageView.alpha = 1
+            self.huntingPageView.huntingColumnsView.frame = CGRectOffset(self.huntingPageView.huntingColumnsView.frame, 0, yOffset)
+            }) { (complete) -> Void in
+                
+                if let completionHandler = completion {
+                    completionHandler(reversing: reverse)
+                }
+        }
     }
 }
