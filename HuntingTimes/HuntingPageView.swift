@@ -10,7 +10,6 @@ import Foundation
 
 class HuntingPageView : UIView {
     let huntingColumnsView : HuntingColumnsView
-    let dateLabel          : UILabel
     let stateLabel         : UILabel
     let messageLabel       : MessageView
     
@@ -20,13 +19,11 @@ class HuntingPageView : UIView {
         messageLabel = MessageView(frame: CGRectMake(10, 75, frame.width - 20, 100))
         stateLabel = createLabel("", CGRectMake(0, 30, frame.width, 40), 16)
         stateLabel.font = UIFont(name: "HelveticaNeue", size: 16)
-        dateLabel = createLabel("", CGRectMake(0, 200, frame.width, 30), 18)
         
         super.init(frame: frame)
         
         addSubview(messageLabel)
         addSubview(stateLabel)
-        addSubview(dateLabel)
         addSubview(huntingColumnsView)
     }
     

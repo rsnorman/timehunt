@@ -8,23 +8,22 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIPageViewControllerDataSource, ScrollLineViewDelegate, MenuIconViewDelegate, MenuControllerDelegate, FCLocationManagerDelegate {
+class ViewController: UIViewController, UIPageViewControllerDataSource, ScrollLineViewDelegate, MenuIconViewDelegate, MenuControllerDelegate, FCLocationManagerDelegate, UIPageViewControllerDelegate {
     
     var pageViewController : UIPageViewController?
-    var huntingControllers : [UIViewController]?
+    var huntingControllers : [HuntingPageController]?
     var currentIndex : Int = 0
     
     var mainView : MainView!
     var animator : MainViewAnimations!
     
     var menuController : MenuController!
-    var timesViewController : TimesViewController!
-    var weatherViewController : WeatherViewController!
+    var timesPageController : TimesPageController!
+    var temperaturePageController : TemperaturePageController!
     
     var startScrollPosition  : CGPoint!
     var huntingSeason        : HuntingSeason!
     var locationManager      : FCLocationManager!
-    var currentDay           : HuntingDay!
 
     override func viewDidLoad() {
         
@@ -50,6 +49,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, ScrollLi
         
         pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
         pageViewController!.dataSource = self
+        pageViewController!.delegate = self
         pageViewController!.view.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
         
         addChildViewController(pageViewController!)
@@ -60,7 +60,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, ScrollLi
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController?
     {
-        if var index = find(huntingControllers!, viewController) {
+        if var index = find(huntingControllers!, viewController as HuntingPageController) {
             if index == 0 {
                 return nil
             }
@@ -76,7 +76,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, ScrollLi
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController?
     {
-        if var index = find(huntingControllers!, viewController) {
+        if var index = find(huntingControllers!, viewController as HuntingPageController) {
             index++
             
             if (index == self.huntingControllers!.count) {
@@ -97,9 +97,9 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, ScrollLi
         }
         
         if index == 0 {
-            return timesViewController
+            return timesPageController
         } else {
-            return weatherViewController
+            return temperaturePageController
         }
     }
     
@@ -111,6 +111,20 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, ScrollLi
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int
     {
         return 0
+    }
+    
+    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [AnyObject]) {
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
+            self.mainView.dateTimeScroller.alpha = 0
+            self.mainView.dateLabel.alpha = 0
+        })
+    }
+    
+    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
+        UIView.animateWithDuration(0.8, animations: { () -> Void in
+            self.mainView.dateTimeScroller.alpha = 1
+            self.mainView.dateLabel.alpha = 1
+        })
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -137,13 +151,14 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, ScrollLi
     
     func showNextDate() {
         if !huntingSeason.closingDay() {
-            timesViewController.startChangingDay(reverse: true) { (reverse) -> Void in
+            timesPageController.startChangingDay(reverse: true) { (reverse) -> Void in
                 self.mainView.dateTimeScroller.setPosition(1, animate: true)
                 self.huntingSeason.nextDay()
                 self.huntingSeason.fetchDay({ (huntingDay) -> () in
-                    self.timesViewController.setDay(huntingDay)
-                    self.weatherViewController.setDay(huntingDay)
-                    self.timesViewController.finishChangingDay(reverse: reverse)
+                    self.mainView.dateLabel.text  = huntingDay.getCurrentTime().toDateString()
+                    self.timesPageController.setDay(huntingDay)
+                    self.temperaturePageController.setDay(huntingDay)
+                    self.timesPageController.finishChangingDay(reverse: reverse)
                 })
             }
         }
@@ -151,13 +166,14 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, ScrollLi
     
     func showPreviousDate() {
         if !huntingSeason.openingDay() {
-            timesViewController.startChangingDay(reverse: false) { (reverse) -> Void in
+            timesPageController.startChangingDay(reverse: false) { (reverse) -> Void in
                 self.mainView.dateTimeScroller.setPosition(0, animate: true)
                 self.huntingSeason.previousDay()
                 self.huntingSeason.fetchDay({ (huntingDay) -> () in
-                    self.timesViewController.setDay(huntingDay)
-                    self.weatherViewController.setDay(huntingDay)
-                    self.timesViewController.finishChangingDay(reverse: reverse)
+                    self.mainView.dateLabel.text  = huntingDay.getCurrentTime().toDateString()
+                    self.timesPageController.setDay(huntingDay)
+                    self.temperaturePageController.setDay(huntingDay)
+                    self.timesPageController.finishChangingDay(reverse: reverse)
                 })
             }
         }
@@ -198,10 +214,11 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, ScrollLi
         huntingSeason = HuntingSeason(location: location)
         mainView.dateTimeScroller.markCurrentPosition(huntingSeason.percentComplete())
         
-        huntingSeason.fetchDay { (huntingDay) -> () in            
-            self.timesViewController = TimesViewController(huntingDay: huntingDay)
-            self.weatherViewController = WeatherViewController(huntingDay: huntingDay)
-            self.huntingControllers = [self.timesViewController, self.weatherViewController]
+        huntingSeason.fetchDay { (huntingDay) -> () in
+            self.mainView.dateLabel.text  = huntingDay.getCurrentTime().toDateString()
+            self.timesPageController = TimesPageController(huntingDay: huntingDay)
+            self.temperaturePageController = TemperaturePageController(huntingDay: huntingDay)
+            self.huntingControllers = [self.timesPageController, self.temperaturePageController]
             
             let startingViewController: UIViewController = self.viewControllerAtIndex(0)!
             let viewControllers: NSArray = [startingViewController]

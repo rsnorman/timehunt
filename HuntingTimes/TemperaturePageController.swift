@@ -8,9 +8,9 @@
 
 import Foundation
 
-class WeatherViewController : HuntingPageController {
+class TemperaturePageController : HuntingPageController {
     init(huntingDay: HuntingDay) {
-        super.init(huntingDay: huntingDay, huntingPageClass: WeatherView.self)
+        super.init(huntingDay: huntingDay, huntingPageClass: TemperaturePage.self)
     }
 
     required init(coder aDecoder: NSCoder) {

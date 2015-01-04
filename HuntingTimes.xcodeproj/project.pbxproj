@@ -17,21 +17,21 @@
 		4C46BE471A20484F005BB796 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE461A20484F005BB796 /* ShadowView.swift */; };
 		4C46BE491A206294005BB796 /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE481A206294005BB796 /* Delay.swift */; };
 		4C46BE4B1A20667B005BB796 /* TiltImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE4A1A20667B005BB796 /* TiltImageView.swift */; };
-		4C46BE4D1A20D7D1005BB796 /* CountdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE4C1A20D7D1005BB796 /* CountdownView.swift */; };
+		4C46BE4D1A20D7D1005BB796 /* CountdownLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE4C1A20D7D1005BB796 /* CountdownLabel.swift */; };
 		4C46BE521A2117EC005BB796 /* HuntingSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE511A2117EC005BB796 /* HuntingSeason.swift */; };
 		4C46BE541A21190C005BB796 /* hunting-times.csv in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE531A21190C005BB796 /* hunting-times.csv */; };
 		4C46BE561A211F2C005BB796 /* down-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE551A211F2C005BB796 /* down-arrow@2x.png */; };
 		4C46BE581A21200B005BB796 /* up-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE571A21200B005BB796 /* up-arrow@2x.png */; };
 		4C56B3CD1A26D2CC00B8BD82 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C56B3CC1A26D2CC00B8BD82 /* NotificationManager.swift */; };
-		4C5B10EE1A585E260077DFFD /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B10ED1A585E260077DFFD /* WeatherViewController.swift */; };
-		4C5B10F01A585E580077DFFD /* WeatherPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B10EF1A585E580077DFFD /* WeatherPageView.swift */; };
-		4C5B10F21A585E9B0077DFFD /* TimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B10F11A585E9B0077DFFD /* TimesViewController.swift */; };
-		4C5B10F41A585EBB0077DFFD /* TimesPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B10F31A585EBB0077DFFD /* TimesPageView.swift */; };
+		4C5B10EE1A585E260077DFFD /* TemperaturePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B10ED1A585E260077DFFD /* TemperaturePageController.swift */; };
+		4C5B10F01A585E580077DFFD /* TemperaturePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B10EF1A585E580077DFFD /* TemperaturePage.swift */; };
+		4C5B10F21A585E9B0077DFFD /* TimesPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B10F11A585E9B0077DFFD /* TimesPageController.swift */; };
+		4C5B10F41A585EBB0077DFFD /* TimesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B10F31A585EBB0077DFFD /* TimesPage.swift */; };
 		4C5B10F61A588FA10077DFFD /* HuntingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B10F51A588FA10077DFFD /* HuntingPageController.swift */; };
 		4C5B10F81A5890BE0077DFFD /* HuntingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B10F71A5890BE0077DFFD /* HuntingPageView.swift */; };
 		4C5B10FA1A58940A0077DFFD /* HuntingColumnsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B10F91A58940A0077DFFD /* HuntingColumnsView.swift */; };
 		4C64369D1A37F79600017338 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64369C1A37F79600017338 /* UserSettings.swift */; };
-		4C64369F1A3AAA6700017338 /* HuntingWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64369E1A3AAA6700017338 /* HuntingWeatherView.swift */; };
+		4C64369F1A3AAA6700017338 /* TemperatureColumns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64369E1A3AAA6700017338 /* TemperatureColumns.swift */; };
 		4C6436B41A3AB69500017338 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6436A21A3AB69500017338 /* AFHTTPRequestOperation.m */; };
 		4C6436B51A3AB69500017338 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6436A41A3AB69500017338 /* AFHTTPRequestOperationManager.m */; };
 		4C6436B61A3AB69500017338 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6436A61A3AB69500017338 /* AFHTTPSessionManager.m */; };
@@ -48,7 +48,7 @@
 		4C6436CD1A3AB9DB00017338 /* FCLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6436CC1A3AB9DB00017338 /* FCLocationManager.m */; };
 		4C6EE1A21A242C5C00305115 /* ScrollLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A11A242C5C00305115 /* ScrollLineView.swift */; };
 		4C6EE1A41A24323D00305115 /* ColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A31A24323D00305115 /* ColumnView.swift */; };
-		4C6EE1A61A24477200305115 /* HuntingTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A51A24477200305115 /* HuntingTimesView.swift */; };
+		4C6EE1A61A24477200305115 /* TimesColumns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A51A24477200305115 /* TimesColumns.swift */; };
 		4C6EE1A81A2452DB00305115 /* dark-forest@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A71A2452DB00305115 /* dark-forest@2x.jpg */; };
 		4C6EE1AA1A24533E00305115 /* leaves-forest@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A91A24533E00305115 /* leaves-forest@2x.jpg */; };
 		4C6EE1AC1A2590F100305115 /* HuntingTimeProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1AB1A2590F100305115 /* HuntingTimeProgress.swift */; };
@@ -93,21 +93,21 @@
 		4C46BE461A20484F005BB796 /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		4C46BE481A206294005BB796 /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
 		4C46BE4A1A20667B005BB796 /* TiltImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TiltImageView.swift; sourceTree = "<group>"; };
-		4C46BE4C1A20D7D1005BB796 /* CountdownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountdownView.swift; sourceTree = "<group>"; };
+		4C46BE4C1A20D7D1005BB796 /* CountdownLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountdownLabel.swift; sourceTree = "<group>"; };
 		4C46BE511A2117EC005BB796 /* HuntingSeason.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingSeason.swift; sourceTree = "<group>"; };
 		4C46BE531A21190C005BB796 /* hunting-times.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "hunting-times.csv"; sourceTree = "<group>"; };
 		4C46BE551A211F2C005BB796 /* down-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down-arrow@2x.png"; sourceTree = "<group>"; };
 		4C46BE571A21200B005BB796 /* up-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up-arrow@2x.png"; sourceTree = "<group>"; };
 		4C56B3CC1A26D2CC00B8BD82 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		4C5B10ED1A585E260077DFFD /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
-		4C5B10EF1A585E580077DFFD /* WeatherPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherPageView.swift; sourceTree = "<group>"; };
-		4C5B10F11A585E9B0077DFFD /* TimesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimesViewController.swift; sourceTree = "<group>"; };
-		4C5B10F31A585EBB0077DFFD /* TimesPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimesPageView.swift; sourceTree = "<group>"; };
+		4C5B10ED1A585E260077DFFD /* TemperaturePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemperaturePageController.swift; sourceTree = "<group>"; };
+		4C5B10EF1A585E580077DFFD /* TemperaturePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemperaturePage.swift; sourceTree = "<group>"; };
+		4C5B10F11A585E9B0077DFFD /* TimesPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimesPageController.swift; sourceTree = "<group>"; };
+		4C5B10F31A585EBB0077DFFD /* TimesPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimesPage.swift; sourceTree = "<group>"; };
 		4C5B10F51A588FA10077DFFD /* HuntingPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingPageController.swift; sourceTree = "<group>"; };
 		4C5B10F71A5890BE0077DFFD /* HuntingPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingPageView.swift; sourceTree = "<group>"; };
 		4C5B10F91A58940A0077DFFD /* HuntingColumnsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingColumnsView.swift; sourceTree = "<group>"; };
 		4C64369C1A37F79600017338 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
-		4C64369E1A3AAA6700017338 /* HuntingWeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingWeatherView.swift; sourceTree = "<group>"; };
+		4C64369E1A3AAA6700017338 /* TemperatureColumns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemperatureColumns.swift; sourceTree = "<group>"; };
 		4C6436A11A3AB69500017338 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		4C6436A21A3AB69500017338 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		4C6436A31A3AB69500017338 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -139,7 +139,7 @@
 		4C6436CC1A3AB9DB00017338 /* FCLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCLocationManager.m; sourceTree = "<group>"; };
 		4C6EE1A11A242C5C00305115 /* ScrollLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollLineView.swift; sourceTree = "<group>"; };
 		4C6EE1A31A24323D00305115 /* ColumnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnView.swift; sourceTree = "<group>"; };
-		4C6EE1A51A24477200305115 /* HuntingTimesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingTimesView.swift; sourceTree = "<group>"; };
+		4C6EE1A51A24477200305115 /* TimesColumns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimesColumns.swift; sourceTree = "<group>"; };
 		4C6EE1A71A2452DB00305115 /* dark-forest@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "dark-forest@2x.jpg"; sourceTree = "<group>"; };
 		4C6EE1A91A24533E00305115 /* leaves-forest@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "leaves-forest@2x.jpg"; sourceTree = "<group>"; };
 		4C6EE1AB1A2590F100305115 /* HuntingTimeProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingTimeProgress.swift; sourceTree = "<group>"; };
@@ -209,11 +209,9 @@
 		4C46BE451A204840005BB796 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				4C5B10FC1A589AE90077DFFD /* Pages */,
-				4C5B10FB1A589AB40077DFFD /* Columns */,
+				4C6EE1A31A24323D00305115 /* ColumnView.swift */,
 				4C46BE461A20484F005BB796 /* ShadowView.swift */,
 				4C46BE4A1A20667B005BB796 /* TiltImageView.swift */,
-				4C46BE4C1A20D7D1005BB796 /* CountdownView.swift */,
 				4C6EE1A11A242C5C00305115 /* ScrollLineView.swift */,
 				4CDE49421A282934002CF42A /* MessageView.swift */,
 				4C8987F21A290D35001B7B74 /* MainView.swift */,
@@ -223,25 +221,35 @@
 			name = Interface;
 			sourceTree = "<group>";
 		};
-		4C5B10FB1A589AB40077DFFD /* Columns */ = {
+		4C5B10FD1A59A1AD0077DFFD /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				4C6EE1A31A24323D00305115 /* ColumnView.swift */,
+				4C5B10F51A588FA10077DFFD /* HuntingPageController.swift */,
+				4C5B10F71A5890BE0077DFFD /* HuntingPageView.swift */,
 				4C5B10F91A58940A0077DFFD /* HuntingColumnsView.swift */,
-				4C6EE1A51A24477200305115 /* HuntingTimesView.swift */,
-				4C64369E1A3AAA6700017338 /* HuntingWeatherView.swift */,
 			);
-			name = Columns;
+			name = Shared;
 			sourceTree = "<group>";
 		};
-		4C5B10FC1A589AE90077DFFD /* Pages */ = {
+		4C5B10FE1A59A20D0077DFFD /* Times */ = {
 			isa = PBXGroup;
 			children = (
-				4C5B10EF1A585E580077DFFD /* WeatherPageView.swift */,
-				4C5B10F31A585EBB0077DFFD /* TimesPageView.swift */,
-				4C5B10F71A5890BE0077DFFD /* HuntingPageView.swift */,
+				4C5B10F11A585E9B0077DFFD /* TimesPageController.swift */,
+				4C5B10F31A585EBB0077DFFD /* TimesPage.swift */,
+				4C6EE1A51A24477200305115 /* TimesColumns.swift */,
+				4C46BE4C1A20D7D1005BB796 /* CountdownLabel.swift */,
 			);
-			name = Pages;
+			name = Times;
+			sourceTree = "<group>";
+		};
+		4C5B10FF1A59A2280077DFFD /* Temperature */ = {
+			isa = PBXGroup;
+			children = (
+				4C5B10ED1A585E260077DFFD /* TemperaturePageController.swift */,
+				4C5B10EF1A585E580077DFFD /* TemperaturePage.swift */,
+				4C64369E1A3AAA6700017338 /* TemperatureColumns.swift */,
+			);
+			name = Temperature;
 			sourceTree = "<group>";
 		};
 		4C6436A01A3AB69500017338 /* AFNetworking */ = {
@@ -322,9 +330,9 @@
 				4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */,
 				4CA156DF1A20413C00F95BA2 /* ViewController.swift */,
 				4C20E7361A2FF12F008A9F5B /* MenuController.swift */,
-				4C5B10F51A588FA10077DFFD /* HuntingPageController.swift */,
-				4C5B10ED1A585E260077DFFD /* WeatherViewController.swift */,
-				4C5B10F11A585E9B0077DFFD /* TimesViewController.swift */,
+				4C5B10FE1A59A20D0077DFFD /* Times */,
+				4C5B10FF1A59A2280077DFFD /* Temperature */,
+				4C5B10FD1A59A1AD0077DFFD /* Shared */,
 				4C46BE451A204840005BB796 /* Interface */,
 				4C46BE421A2046F3005BB796 /* Services */,
 				4CA156E11A20413C00F95BA2 /* Main.storyboard */,
@@ -502,7 +510,7 @@
 				4C46BE4B1A20667B005BB796 /* TiltImageView.swift in Sources */,
 				4CC2EF231A4C8D2E00D74496 /* JSONFileWriter.swift in Sources */,
 				4C6436C61A3AB69E00017338 /* Forecastr.m in Sources */,
-				4C46BE4D1A20D7D1005BB796 /* CountdownView.swift in Sources */,
+				4C46BE4D1A20D7D1005BB796 /* CountdownLabel.swift in Sources */,
 				4C6436CD1A3AB9DB00017338 /* FCLocationManager.m in Sources */,
 				4C6436B61A3AB69500017338 /* AFHTTPSessionManager.m in Sources */,
 				4C6EE1AC1A2590F100305115 /* HuntingTimeProgress.swift in Sources */,
@@ -519,13 +527,13 @@
 				4CA156DB1A20413C00F95BA2 /* AppDelegate.swift in Sources */,
 				4C6436B91A3AB69500017338 /* AFURLConnectionOperation.m in Sources */,
 				4C6436C71A3AB69E00017338 /* ForecastrAPIClient.m in Sources */,
-				4C64369F1A3AAA6700017338 /* HuntingWeatherView.swift in Sources */,
+				4C64369F1A3AAA6700017338 /* TemperatureColumns.swift in Sources */,
 				4C7EFBF21A509ACB006B2DEF /* Temperature.swift in Sources */,
 				4C6436BA1A3AB69500017338 /* AFURLRequestSerialization.m in Sources */,
 				4CDE49451A282B3B002CF42A /* InterfaceHelper.swift in Sources */,
-				4C5B10F41A585EBB0077DFFD /* TimesPageView.swift in Sources */,
-				4C5B10F21A585E9B0077DFFD /* TimesViewController.swift in Sources */,
-				4C5B10EE1A585E260077DFFD /* WeatherViewController.swift in Sources */,
+				4C5B10F41A585EBB0077DFFD /* TimesPage.swift in Sources */,
+				4C5B10F21A585E9B0077DFFD /* TimesPageController.swift in Sources */,
+				4C5B10EE1A585E260077DFFD /* TemperaturePageController.swift in Sources */,
 				4C46BE491A206294005BB796 /* Delay.swift in Sources */,
 				4C5B10FA1A58940A0077DFFD /* HuntingColumnsView.swift in Sources */,
 				4C8987F51A291FDC001B7B74 /* MainViewAnimations.swift in Sources */,
@@ -535,9 +543,9 @@
 				4C46BE441A2046FE005BB796 /* StatusBarUpdater.swift in Sources */,
 				4C7EFBF91A509CEC006B2DEF /* DailyWeather.swift in Sources */,
 				4C6436B71A3AB69500017338 /* AFNetworkReachabilityManager.m in Sources */,
-				4C5B10F01A585E580077DFFD /* WeatherPageView.swift in Sources */,
+				4C5B10F01A585E580077DFFD /* TemperaturePage.swift in Sources */,
 				4C3D49AA1A28E71700AFF111 /* Constants.swift in Sources */,
-				4C6EE1A61A24477200305115 /* HuntingTimesView.swift in Sources */,
+				4C6EE1A61A24477200305115 /* TimesColumns.swift in Sources */,
 				4C3D49A41A28347800AFF111 /* HuntingDay.swift in Sources */,
 				4C20E7351A2FE825008A9F5B /* MenuIconView.swift in Sources */,
 				4C46BE471A20484F005BB796 /* ShadowView.swift in Sources */,

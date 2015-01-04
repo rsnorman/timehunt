@@ -8,9 +8,9 @@
 
 import Foundation
 
-class WeatherView : HuntingPageView {    
+class TemperaturePage : HuntingPageView {
     required init(frame: CGRect) {
-        super.init(frame: frame, huntingColumnsClass: HuntingWeatherView.self)
+        super.init(frame: frame, huntingColumnsClass: TemperatureColumns.self)
     }
 
     required init(coder aDecoder: NSCoder) {

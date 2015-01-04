@@ -17,6 +17,7 @@ class MainView : UIView {
     let monthColumnView    : ColumnView
     let datepickerLabel    : UILabel
     let menuIcon           : MenuIconView
+    let dateLabel          : UILabel
     
     let timeLineHeight   : Int = 200
     
@@ -32,6 +33,8 @@ class MainView : UIView {
         dateTimeScroller = ScrollLineView(frame: CGRectMake(frame.width / 2, 230, 1, frame.height - 285))
         dateTimeScroller.alpha           = 0.0
         dateTimeScroller.animateDuration = DAY_TRANSITION_TIME
+        
+        dateLabel = createLabel("", CGRectMake(0, 200, frame.width, 30), 18)
         
         monthColumnView = ColumnView(labels: ["September", "October", "November", "December"], frame: CGRectMake(0, 230, frame.width / 2.0 - 10, frame.height - 285))
         monthColumnView.setTextAlignment(NSTextAlignment.Right)
@@ -59,6 +62,7 @@ class MainView : UIView {
         addSubview(shadowView)
         addSubview(datepickerLabel)
         addSubview(dateTimeScroller)
+        addSubview(dateLabel)
         addSubview(monthColumnView)
         addSubview(downArrow)
         addSubview(upArrow)

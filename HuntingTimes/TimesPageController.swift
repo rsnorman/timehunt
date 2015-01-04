@@ -9,12 +9,12 @@
 import Foundation
 import AudioToolbox
 
-class TimesViewController : HuntingPageController, CountdownViewDelegate, HuntingTimesViewDelegate, NotificationManagerDelegate, MessageViewDelegate {
+class TimesPageController : HuntingPageController, CountdownViewDelegate, TimesColumnsDelegate, NotificationManagerDelegate, MessageViewDelegate {
     var huntingTimesProgress : HuntingTimeProgress!
-    var huntingTimesView : HuntingTimesView!
+    var huntingTimesView : TimesColumns!
     
     init(huntingDay: HuntingDay) {
-        super.init(huntingDay: huntingDay, huntingPageClass: TimesView.self)
+        super.init(huntingDay: huntingDay, huntingPageClass: TimesPage.self)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "setCountdownTime", name: UIApplicationDidBecomeActiveNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "setNotifications", name: UIApplicationDidBecomeActiveNotification, object: nil)
@@ -29,7 +29,6 @@ class TimesViewController : HuntingPageController, CountdownViewDelegate, Huntin
     override func didSetDay(huntingDay: HuntingDay) {
         super.didSetDay(huntingDay)
         
-        huntingPageView.dateLabel.text  = currentTime().toDateString()
         huntingTimesProgress.huntingDay = huntingDay
         
         setCountdownTime()
@@ -40,12 +39,12 @@ class TimesViewController : HuntingPageController, CountdownViewDelegate, Huntin
         super.viewDidLoad()
    
         huntingPageView.messageLabel.delegate = self
-        (huntingPageView as TimesView).countdownLabel.delegate = self
+        (huntingPageView as TimesPage).countdownLabel.delegate = self
 
-        huntingTimesView = huntingPageView.huntingColumnsView as HuntingTimesView
+        huntingTimesView = huntingPageView.huntingColumnsView as TimesColumns
         huntingTimesView.delegate = self
         
-        huntingTimesProgress = HuntingTimeProgress(huntingTimesColumn: huntingTimesView.timeColumnView)
+        huntingTimesProgress = HuntingTimeProgress(huntingTimesColumn: huntingTimesView.rightColumnView)
         
         self.view.alpha = 0
     }
@@ -59,11 +58,11 @@ class TimesViewController : HuntingPageController, CountdownViewDelegate, Huntin
     }
     
     func willShowMessage() {
-        (huntingPageView as TimesView).countdownLabel.alpha = 0.0
+        (huntingPageView as TimesPage).countdownLabel.alpha = 0.0
     }
     
     func didHideMessage() {
-        (huntingPageView as TimesView).countdownLabel.alpha = 1.0
+        (huntingPageView as TimesPage).countdownLabel.alpha = 1.0
     }
     
     func didAddNotification(notificationable: NotificationInterface, notification: Notification) {
@@ -88,9 +87,9 @@ class TimesViewController : HuntingPageController, CountdownViewDelegate, Huntin
     }
     
     func setCountdownTime() {
-        (huntingPageView as TimesView).countdownLabel.stopCountdown()
+        (huntingPageView as TimesPage).countdownLabel.stopCountdown()
         if !huntingDay.isEnded() {
-            (huntingPageView as TimesView).countdownLabel.startCountdown(currentTime().time)
+            (huntingPageView as TimesPage).countdownLabel.startCountdown(currentTime().time)
             huntingPageView.stateLabel.text = currentTime().event
         } else {
             huntingPageView.stateLabel.text = ""
@@ -104,14 +103,14 @@ class TimesViewController : HuntingPageController, CountdownViewDelegate, Huntin
     
     func willFinishCountdown() {
         UIView.animateWithDuration(0.5, delay: 0.9, options: nil, animations: { () -> Void in
-            (self.huntingPageView as TimesView).countdownLabel.alpha = 0.0
+            (self.huntingPageView as TimesPage).countdownLabel.alpha = 0.0
             }, completion: nil)
     }
     
     func didFinishCountdown() {
         setCountdownTime()
         UIView.animateWithDuration(0.5, animations: { () -> Void in
-            (self.huntingPageView as TimesView).countdownLabel.alpha = 1.0
+            (self.huntingPageView as TimesPage).countdownLabel.alpha = 1.0
         })
     }
     
