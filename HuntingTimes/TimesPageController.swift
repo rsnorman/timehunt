@@ -10,7 +10,6 @@ import Foundation
 import AudioToolbox
 
 class TimesPageController : HuntingPageController, CountdownViewDelegate, TimesColumnsDelegate, NotificationManagerDelegate, MessageViewDelegate {
-    var huntingTimesProgress : HuntingTimeProgress!
     var huntingTimesView : TimesColumns!
     
     init(huntingDay: HuntingDay) {
@@ -29,10 +28,12 @@ class TimesPageController : HuntingPageController, CountdownViewDelegate, TimesC
     override func didSetDay(huntingDay: HuntingDay) {
         super.didSetDay(huntingDay)
         
-        huntingTimesProgress.huntingDay = huntingDay
-        
         setCountdownTime()
         setNotifications()
+    }
+    
+    override func getTimesColumn() -> ColumnView {
+        return huntingPageView.huntingColumnsView.rightColumnView
     }
     
     override func viewDidLoad() {
@@ -43,8 +44,6 @@ class TimesPageController : HuntingPageController, CountdownViewDelegate, TimesC
 
         huntingTimesView = huntingPageView.huntingColumnsView as TimesColumns
         huntingTimesView.delegate = self
-        
-        huntingTimesProgress = HuntingTimeProgress(huntingTimesColumn: huntingTimesView.rightColumnView)
         
         self.view.alpha = 0
     }

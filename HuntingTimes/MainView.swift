@@ -13,11 +13,9 @@ class MainView : UIView {
     let shadowView         : ShadowView
     let downArrow          : UIImageView
     let upArrow            : UIImageView
-    let dateTimeScroller   : ScrollLineView
-    let monthColumnView    : ColumnView
-    let datepickerLabel    : UILabel
+    let dateTimeScroller   : DateLineScroller
     let menuIcon           : MenuIconView
-    let dateLabel          : UILabel
+    let datePickerIcon     : DatePickerIcon
     
     let timeLineHeight   : Int = 200
     
@@ -27,19 +25,8 @@ class MainView : UIView {
         shadowView = ShadowView(frame: frame)
         shadowView.setDarkness(0.5)
         
-        datepickerLabel       = createLabel("", CGRectMake(0, 60, frame.width, 120), 48)
-        datepickerLabel.alpha = 0.0
-        
-        dateTimeScroller = ScrollLineView(frame: CGRectMake(frame.width / 2, 230, 1, frame.height - 285))
+        dateTimeScroller = DateLineScroller(frame: CGRectMake(0, 210, frame.width, frame.height - 265))
         dateTimeScroller.alpha           = 0.0
-        dateTimeScroller.animateDuration = DAY_TRANSITION_TIME
-        
-        dateLabel = createLabel("", CGRectMake(0, 200, frame.width, 30), 18)
-        
-        monthColumnView = ColumnView(labels: ["September", "October", "November", "December"], frame: CGRectMake(0, 230, frame.width / 2.0 - 10, frame.height - 285))
-        monthColumnView.setTextAlignment(NSTextAlignment.Right)
-        monthColumnView.alpha  = 0.0
-        monthColumnView.hidden = true
         
         let downArrowImage  = UIImage(named: "down-arrow")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         downArrow           = UIImageView(image: downArrowImage)
@@ -56,48 +43,29 @@ class MainView : UIView {
         menuIcon       = MenuIconView(frame: CGRectMake(0, 15, 60, 60))
         menuIcon.alpha = 0
         
+        datePickerIcon       = DatePickerIcon(frame: CGRectMake(frame.width - 60, 15, 60, 60))
+        datePickerIcon.alpha = 0
+        
         super.init(frame: frame)
         
         addSubview(bgImageView)
         addSubview(shadowView)
-        addSubview(datepickerLabel)
         addSubview(dateTimeScroller)
-        addSubview(dateLabel)
-        addSubview(monthColumnView)
         addSubview(downArrow)
         addSubview(upArrow)
         addSubview(menuIcon)
+        addSubview(datePickerIcon)
     }
     
     func setDelegate(viewController: MainViewController) {
-        dateTimeScroller.delegate = viewController
-        menuIcon.delegate         = viewController
-    }
-    
-    func hideDailyView(hideIndicator: Bool = true) {
-        if hideIndicator {
-            dateTimeScroller.positionIndicator.alpha = 0
-        }
+        menuIcon.delegate       = viewController
+        datePickerIcon.delegate = viewController
     }
     
     func show() {
         dateTimeScroller.alpha = 0.7
         menuIcon.alpha         = 1.0
-        dateTimeScroller.positionIndicator.alpha = 0.7
-    }
-    
-    func isDatePickerVisible() -> Bool {
-        return monthColumnView.hidden
-    }
-    
-    func showDatePicker() {
-        monthColumnView.alpha = 1.0
-        datepickerLabel.alpha = 1.0
-    }
-    
-    func hideDatePicker() {
-        monthColumnView.alpha = 0.0
-        datepickerLabel.alpha = 0.0
+        datePickerIcon.alpha   = 1.0
     }
     
     func showHints() {

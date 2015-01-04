@@ -9,9 +9,10 @@
 import Foundation
 
 class HuntingPageController : UIViewController {
-    var huntingPageView  : HuntingPageView!
-    var huntingDay       : HuntingDay
-    let huntingPageClass : HuntingPageView.Type
+    var huntingPageView      : HuntingPageView!
+    var huntingDay           : HuntingDay
+    let huntingPageClass     : HuntingPageView.Type
+    var huntingTimesProgress : HuntingTimeProgress!
     
     init(huntingDay: HuntingDay, huntingPageClass: HuntingPageView.Type) {
         self.huntingDay       = huntingDay
@@ -27,6 +28,9 @@ class HuntingPageController : UIViewController {
         let frame = view.frame
         huntingPageView = huntingPageClass(frame: frame)
         self.view = huntingPageView
+        
+        huntingTimesProgress = HuntingTimeProgress(huntingTimesColumn: getTimesColumn())
+        
         super.viewDidLoad()
     }
     
@@ -38,6 +42,7 @@ class HuntingPageController : UIViewController {
     func didSetDay(huntingDay: HuntingDay) {
         self.huntingDay = huntingDay
         huntingPageView?.huntingColumnsView.setDay(huntingDay)
+        huntingTimesProgress?.huntingDay = huntingDay
     }
     
     func setDay(huntingDay: HuntingDay) {
@@ -46,6 +51,14 @@ class HuntingPageController : UIViewController {
     
     func currentTime() -> HuntingTime {
         return huntingDay.getCurrentTime()
+    }
+    
+    func currentProgress() -> CGFloat {
+        return huntingTimesProgress.getProgressPercent()
+    }
+    
+    func getTimesColumn() -> ColumnView {
+        return huntingPageView.huntingColumnsView.leftColumnView
     }
     
     func startChangingDay(reverse: Bool = false, completion: ((reversing: Bool) -> Void)? = nil) {

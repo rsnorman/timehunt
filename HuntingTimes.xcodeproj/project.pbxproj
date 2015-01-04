@@ -30,6 +30,9 @@
 		4C5B10F61A588FA10077DFFD /* HuntingPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B10F51A588FA10077DFFD /* HuntingPageController.swift */; };
 		4C5B10F81A5890BE0077DFFD /* HuntingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B10F71A5890BE0077DFFD /* HuntingPageView.swift */; };
 		4C5B10FA1A58940A0077DFFD /* HuntingColumnsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B10F91A58940A0077DFFD /* HuntingColumnsView.swift */; };
+		4C5B11031A59BE0E0077DFFD /* DateLineScroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B11021A59BE0E0077DFFD /* DateLineScroller.swift */; };
+		4C5B11061A59D8B70077DFFD /* DatePickerIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B11051A59D8B70077DFFD /* DatePickerIcon.swift */; };
+		4C5B11081A59E7D00077DFFD /* DatePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B11071A59E7D00077DFFD /* DatePickerController.swift */; };
 		4C64369D1A37F79600017338 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64369C1A37F79600017338 /* UserSettings.swift */; };
 		4C64369F1A3AAA6700017338 /* TemperatureColumns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64369E1A3AAA6700017338 /* TemperatureColumns.swift */; };
 		4C6436B41A3AB69500017338 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6436A21A3AB69500017338 /* AFHTTPRequestOperation.m */; };
@@ -105,6 +108,9 @@
 		4C5B10F51A588FA10077DFFD /* HuntingPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingPageController.swift; sourceTree = "<group>"; };
 		4C5B10F71A5890BE0077DFFD /* HuntingPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingPageView.swift; sourceTree = "<group>"; };
 		4C5B10F91A58940A0077DFFD /* HuntingColumnsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingColumnsView.swift; sourceTree = "<group>"; };
+		4C5B11021A59BE0E0077DFFD /* DateLineScroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateLineScroller.swift; sourceTree = "<group>"; };
+		4C5B11051A59D8B70077DFFD /* DatePickerIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerIcon.swift; sourceTree = "<group>"; };
+		4C5B11071A59E7D00077DFFD /* DatePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
 		4C64369C1A37F79600017338 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		4C64369E1A3AAA6700017338 /* TemperatureColumns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemperatureColumns.swift; sourceTree = "<group>"; };
 		4C6436A11A3AB69500017338 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -261,8 +267,18 @@
 			children = (
 				4CA156DF1A20413C00F95BA2 /* MainViewController.swift */,
 				4C8987F21A290D35001B7B74 /* MainView.swift */,
+				4C5B11021A59BE0E0077DFFD /* DateLineScroller.swift */,
 			);
 			name = Main;
+			sourceTree = "<group>";
+		};
+		4C5B11041A59D8960077DFFD /* DatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				4C5B11051A59D8B70077DFFD /* DatePickerIcon.swift */,
+				4C5B11071A59E7D00077DFFD /* DatePickerController.swift */,
+			);
+			name = DatePicker;
 			sourceTree = "<group>";
 		};
 		4C6436A01A3AB69500017338 /* AFNetworking */ = {
@@ -342,6 +358,7 @@
 				4C3D49A91A28E71700AFF111 /* Constants.swift */,
 				4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */,
 				4C5B11011A59AA8B0077DFFD /* Main */,
+				4C5B11041A59D8960077DFFD /* DatePicker */,
 				4C5B11001A59A9F60077DFFD /* Menu */,
 				4C5B10FE1A59A20D0077DFFD /* Times */,
 				4C5B10FF1A59A2280077DFFD /* Temperature */,
@@ -535,6 +552,8 @@
 				4C6436B81A3AB69500017338 /* AFSecurityPolicy.m in Sources */,
 				4C6436BB1A3AB69500017338 /* AFURLResponseSerialization.m in Sources */,
 				4C3D49A61A28545800AFF111 /* HuntingTime.swift in Sources */,
+				4C5B11061A59D8B70077DFFD /* DatePickerIcon.swift in Sources */,
+				4C5B11081A59E7D00077DFFD /* DatePickerController.swift in Sources */,
 				4C46BE521A2117EC005BB796 /* HuntingSeason.swift in Sources */,
 				4C6EE1A41A24323D00305115 /* ColumnView.swift in Sources */,
 				4CA156DB1A20413C00F95BA2 /* AppDelegate.swift in Sources */,
@@ -561,6 +580,7 @@
 				4C3D49A41A28347800AFF111 /* HuntingDay.swift in Sources */,
 				4C20E7351A2FE825008A9F5B /* MenuIconView.swift in Sources */,
 				4C46BE471A20484F005BB796 /* ShadowView.swift in Sources */,
+				4C5B11031A59BE0E0077DFFD /* DateLineScroller.swift in Sources */,
 				4C7EFBF41A509CA8006B2DEF /* HourlyParser.swift in Sources */,
 				4C5B10F81A5890BE0077DFFD /* HuntingPageView.swift in Sources */,
 				4C64369D1A37F79600017338 /* UserSettings.swift in Sources */,

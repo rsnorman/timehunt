@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UIPageViewControllerDataSource, ScrollLineViewDelegate, MenuIconViewDelegate, MenuControllerDelegate, FCLocationManagerDelegate, UIPageViewControllerDelegate {
+class MainViewController: UIViewController, UIPageViewControllerDataSource, ScrollLineViewDelegate, MenuIconViewDelegate, MenuControllerDelegate, FCLocationManagerDelegate, UIPageViewControllerDelegate, DatePickerIconDelegate {
     
     var pageViewController : UIPageViewController?
     var huntingControllers : [HuntingPageController]?
@@ -17,6 +17,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Scro
     var mainView : MainView!
     
     var menuController : MenuController!
+    var datePickerController : DatePickerController!
     var timesPageController : TimesPageController!
     var temperaturePageController : TemperaturePageController!
     
@@ -29,6 +30,8 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Scro
         menuController = MenuController()
         menuController.delegate = self
         menuController.selectedBackground = UserSettings.getBackgroundImage()
+        
+        datePickerController = DatePickerController()
         
         super.viewDidLoad()
         view.alpha = 0
@@ -82,15 +85,21 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Scro
         if !huntingSeason.closingDay() {
             let pageController = pageViewController!.viewControllers[0] as HuntingPageController
             
+            self.mainView.dateTimeScroller.setProgress(1, animate: true)
+            self.mainView.dateTimeScroller.hideIndicator(setProgress: 0)
+            
             pageController.startChangingDay(reverse: true) { (reverse) -> Void in
-                self.mainView.dateTimeScroller.setPosition(1, animate: true)
                 self.huntingSeason.nextDay()
                 self.huntingSeason.fetchDay({ (huntingDay) -> () in
-                    self.mainView.dateLabel.text  = huntingDay.getCurrentTime().toDateString()
+
                     
                     for page in self.huntingControllers! {
                         page.setDay(huntingDay)
                     }
+                    
+                    self.mainView.dateTimeScroller.setDate(huntingDay.getCurrentTime().time)
+                    self.mainView.dateTimeScroller.setProgress(pageController.currentProgress(), animate: true)
+                    self.mainView.dateTimeScroller.showIndicator()
 
                     pageController.finishChangingDay(reverse: reverse)
                 })
@@ -102,15 +111,20 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Scro
         if !huntingSeason.openingDay() {
             let pageController = pageViewController!.viewControllers[0] as HuntingPageController
             
+            self.mainView.dateTimeScroller.setProgress(0, animate: true)
+            self.mainView.dateTimeScroller.hideIndicator(setProgress: 1)
+            
             pageController.startChangingDay(reverse: false) { (reverse) -> Void in
-                self.mainView.dateTimeScroller.setPosition(0, animate: true)
                 self.huntingSeason.previousDay()
                 self.huntingSeason.fetchDay({ (huntingDay) -> () in
-                    self.mainView.dateLabel.text  = huntingDay.getCurrentTime().toDateString()
                     
                     for page in self.huntingControllers! {
                         page.setDay(huntingDay)
                     }
+                    
+                    self.mainView.dateTimeScroller.setDate(huntingDay.getCurrentTime().time)
+                    self.mainView.dateTimeScroller.setProgress(pageController.currentProgress(), animate: true)
+                    self.mainView.dateTimeScroller.showIndicator()
                     
                     pageController.finishChangingDay(reverse: reverse)
                 })
@@ -144,6 +158,30 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Scro
         }
     }
     
+    func didOpenDatePicker() {
+        addChildViewController(datePickerController)
+        datePickerController.view.alpha = 0
+        mainView.insertSubview(datePickerController.view, belowSubview: mainView.datePickerIcon)
+        
+        datePickerController.setDate(huntingSeason.currentDay().getCurrentTime().time)
+        
+        UIView.animateWithDuration(0.5, animations: {() -> Void in
+            self.datePickerController.view.alpha = 1
+            self.pageViewController!.view.alpha = 0
+            self.mainView.dateTimeScroller.setProgress(self.huntingSeason.percentComplete(), animate: false)
+            self.mainView.dateTimeScroller.showCurrentProgress()
+        })
+    }
+    
+    func didCloseDatePicker() {
+        UIView.animateWithDuration(0.5, animations: {() -> Void in
+            self.datePickerController.view.alpha = 0
+            self.pageViewController!.view.alpha  = 1
+            self.mainView.dateTimeScroller.hideCurrentProgress()
+            self.mainView.dateTimeScroller.setProgress((self.pageViewController!.viewControllers[0] as HuntingPageController).currentProgress(), animate: false)
+        })
+    }
+    
     func didSelectBackground(backgroundImage: String) {
         mainView.bgImageView.setImage(UIImage(named: backgroundImage)!)
         UserSettings.setBackgroundImage(backgroundImage)
@@ -151,17 +189,21 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Scro
     
     func didAcquireLocation(location: CLLocation!) {
         huntingSeason = HuntingSeason(location: location)
-        mainView.dateTimeScroller.markCurrentPosition(huntingSeason.percentComplete())
+        mainView.dateTimeScroller.markCurrentProgress(huntingSeason.percentComplete())
         
         huntingSeason.fetchDay { (huntingDay) -> () in
-            self.mainView.dateLabel.text  = huntingDay.getCurrentTime().toDateString()
+            
             self.timesPageController = TimesPageController(huntingDay: huntingDay)
             self.temperaturePageController = TemperaturePageController(huntingDay: huntingDay)
+            
             self.huntingControllers = [self.timesPageController, self.temperaturePageController]
             
             let startingViewController: UIViewController = self.viewControllerAtIndex(0)!
             let viewControllers: NSArray = [startingViewController]
             self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
+            
+            self.mainView.dateTimeScroller.setProgress((startingViewController as HuntingPageController).currentProgress(), animate: true)
+            self.mainView.dateTimeScroller.setDate(huntingDay.getCurrentTime().time)
         }
     }
     
@@ -172,7 +214,6 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Scro
 
     /* End Delegate Methods*/
 
-    
     
     /* Gestures */
     
@@ -241,14 +282,12 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Scro
     func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [AnyObject]) {
         UIView.animateWithDuration(0.2, animations: { () -> Void in
             self.mainView.dateTimeScroller.alpha = 0
-            self.mainView.dateLabel.alpha = 0
         })
     }
     
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
         UIView.animateWithDuration(0.8, animations: { () -> Void in
             self.mainView.dateTimeScroller.alpha = 1
-            self.mainView.dateLabel.alpha = 1
         })
     }
 }
