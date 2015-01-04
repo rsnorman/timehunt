@@ -59,10 +59,9 @@
 		4C7EFBF91A509CEC006B2DEF /* DailyWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7EFBF81A509CEC006B2DEF /* DailyWeather.swift */; };
 		4C7EFBFB1A50A14C006B2DEF /* WeatherParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7EFBFA1A50A14C006B2DEF /* WeatherParser.swift */; };
 		4C8987F31A290D35001B7B74 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8987F21A290D35001B7B74 /* MainView.swift */; };
-		4C8987F51A291FDC001B7B74 /* MainViewAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8987F41A291FDC001B7B74 /* MainViewAnimations.swift */; };
 		4CA156DB1A20413C00F95BA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */; };
 		4CA156DE1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DC1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld */; };
-		4CA156E01A20413C00F95BA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DF1A20413C00F95BA2 /* ViewController.swift */; };
+		4CA156E01A20413C00F95BA2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156DF1A20413C00F95BA2 /* MainViewController.swift */; };
 		4CA156E31A20413C00F95BA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA156E11A20413C00F95BA2 /* Main.storyboard */; };
 		4CA156E51A20413C00F95BA2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CA156E41A20413C00F95BA2 /* Images.xcassets */; };
 		4CA156F41A20413C00F95BA2 /* HuntingTimesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA156F31A20413C00F95BA2 /* HuntingTimesTests.swift */; };
@@ -150,12 +149,11 @@
 		4C7EFBF81A509CEC006B2DEF /* DailyWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyWeather.swift; sourceTree = "<group>"; };
 		4C7EFBFA1A50A14C006B2DEF /* WeatherParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherParser.swift; sourceTree = "<group>"; };
 		4C8987F21A290D35001B7B74 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		4C8987F41A291FDC001B7B74 /* MainViewAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewAnimations.swift; sourceTree = "<group>"; };
 		4CA156D51A20413C00F95BA2 /* HuntingTimes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HuntingTimes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CA156D91A20413C00F95BA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CA156DD1A20413C00F95BA2 /* HuntingTimes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HuntingTimes.xcdatamodel; sourceTree = "<group>"; };
-		4CA156DF1A20413C00F95BA2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4CA156DF1A20413C00F95BA2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4CA156E21A20413C00F95BA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4CA156E41A20413C00F95BA2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4CA156ED1A20413C00F95BA2 /* HuntingTimesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HuntingTimesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,9 +212,6 @@
 				4C46BE4A1A20667B005BB796 /* TiltImageView.swift */,
 				4C6EE1A11A242C5C00305115 /* ScrollLineView.swift */,
 				4CDE49421A282934002CF42A /* MessageView.swift */,
-				4C8987F21A290D35001B7B74 /* MainView.swift */,
-				4C8987F41A291FDC001B7B74 /* MainViewAnimations.swift */,
-				4C20E7341A2FE825008A9F5B /* MenuIconView.swift */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -250,6 +245,24 @@
 				4C64369E1A3AAA6700017338 /* TemperatureColumns.swift */,
 			);
 			name = Temperature;
+			sourceTree = "<group>";
+		};
+		4C5B11001A59A9F60077DFFD /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				4C20E7361A2FF12F008A9F5B /* MenuController.swift */,
+				4C20E7341A2FE825008A9F5B /* MenuIconView.swift */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		4C5B11011A59AA8B0077DFFD /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				4CA156DF1A20413C00F95BA2 /* MainViewController.swift */,
+				4C8987F21A290D35001B7B74 /* MainView.swift */,
+			);
+			name = Main;
 			sourceTree = "<group>";
 		};
 		4C6436A01A3AB69500017338 /* AFNetworking */ = {
@@ -328,8 +341,8 @@
 				4C6436CA1A3AB7CF00017338 /* TimeHunt-Bridging-Header.h */,
 				4C3D49A91A28E71700AFF111 /* Constants.swift */,
 				4CA156DA1A20413C00F95BA2 /* AppDelegate.swift */,
-				4CA156DF1A20413C00F95BA2 /* ViewController.swift */,
-				4C20E7361A2FF12F008A9F5B /* MenuController.swift */,
+				4C5B11011A59AA8B0077DFFD /* Main */,
+				4C5B11001A59A9F60077DFFD /* Menu */,
 				4C5B10FE1A59A20D0077DFFD /* Times */,
 				4C5B10FF1A59A2280077DFFD /* Temperature */,
 				4C5B10FD1A59A1AD0077DFFD /* Shared */,
@@ -502,7 +515,7 @@
 			files = (
 				4C6436B41A3AB69500017338 /* AFHTTPRequestOperation.m in Sources */,
 				4C6436C51A3AB69E00017338 /* Forecastr+CLLocation.m in Sources */,
-				4CA156E01A20413C00F95BA2 /* ViewController.swift in Sources */,
+				4CA156E01A20413C00F95BA2 /* MainViewController.swift in Sources */,
 				4C7EFBFB1A50A14C006B2DEF /* WeatherParser.swift in Sources */,
 				4C20E7371A2FF12F008A9F5B /* MenuController.swift in Sources */,
 				4CC2EF261A4C966300D74496 /* SunriseSunset.swift in Sources */,
@@ -536,7 +549,6 @@
 				4C5B10EE1A585E260077DFFD /* TemperaturePageController.swift in Sources */,
 				4C46BE491A206294005BB796 /* Delay.swift in Sources */,
 				4C5B10FA1A58940A0077DFFD /* HuntingColumnsView.swift in Sources */,
-				4C8987F51A291FDC001B7B74 /* MainViewAnimations.swift in Sources */,
 				4C6436B51A3AB69500017338 /* AFHTTPRequestOperationManager.m in Sources */,
 				4C5B10F61A588FA10077DFFD /* HuntingPageController.swift in Sources */,
 				4C6EE1AE1A25967C00305115 /* DateTimeHelper.swift in Sources */,

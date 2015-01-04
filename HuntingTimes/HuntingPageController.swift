@@ -52,7 +52,7 @@ class HuntingPageController : UIViewController {
         let labelOffset : CGFloat = 10.0
         let yOffset = reverse ? labelOffset * -1 : labelOffset
         
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
+        UIView.animateWithDuration(DAY_TRANSITION_TIME, animations: { () -> Void in
             self.huntingPageView.alpha = 0
             self.huntingPageView.huntingColumnsView.frame = CGRectOffset(self.huntingPageView.huntingColumnsView.frame, 0, yOffset)
             }) { (complete) -> Void in
@@ -68,7 +68,7 @@ class HuntingPageController : UIViewController {
         let labelOffset: CGFloat = 10.0
         let yOffset = reverse ? labelOffset * -1 : labelOffset
         
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
+        UIView.animateWithDuration(DAY_TRANSITION_TIME, animations: { () -> Void in
             self.huntingPageView.alpha = 1
             self.huntingPageView.huntingColumnsView.frame = CGRectOffset(self.huntingPageView.huntingColumnsView.frame, 0, yOffset)
             }) { (complete) -> Void in

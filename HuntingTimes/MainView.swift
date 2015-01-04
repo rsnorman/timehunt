@@ -69,7 +69,7 @@ class MainView : UIView {
         addSubview(menuIcon)
     }
     
-    func setDelegate(viewController: ViewController) {
+    func setDelegate(viewController: MainViewController) {
         dateTimeScroller.delegate = viewController
         menuIcon.delegate         = viewController
     }

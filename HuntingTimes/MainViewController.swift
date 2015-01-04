@@ -8,14 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIPageViewControllerDataSource, ScrollLineViewDelegate, MenuIconViewDelegate, MenuControllerDelegate, FCLocationManagerDelegate, UIPageViewControllerDelegate {
+class MainViewController: UIViewController, UIPageViewControllerDataSource, ScrollLineViewDelegate, MenuIconViewDelegate, MenuControllerDelegate, FCLocationManagerDelegate, UIPageViewControllerDelegate {
     
     var pageViewController : UIPageViewController?
     var huntingControllers : [HuntingPageController]?
     var currentIndex : Int = 0
     
     var mainView : MainView!
-    var animator : MainViewAnimations!
     
     var menuController : MenuController!
     var timesPageController : TimesPageController!
@@ -38,7 +37,6 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, ScrollLi
         mainView.setDelegate(self)
         view.addSubview(mainView)
         
-        animator = MainViewAnimations(mainView: mainView)
         addDateGestures()
         
         locationManager = FCLocationManager.sharedManager() as FCLocationManager
@@ -56,75 +54,6 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, ScrollLi
         pageViewController!.view.alpha = 0
         mainView.insertSubview(pageViewController!.view, belowSubview: mainView.menuIcon)
         pageViewController!.didMoveToParentViewController(self)
-    }
-    
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController?
-    {
-        if var index = find(huntingControllers!, viewController as HuntingPageController) {
-            if index == 0 {
-                return nil
-            }
-            
-            index--
-            
-            return viewControllerAtIndex(index)
-        } else {
-            return nil
-        }
-        
-    }
-    
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController?
-    {
-        if var index = find(huntingControllers!, viewController as HuntingPageController) {
-            index++
-            
-            if (index == self.huntingControllers!.count) {
-                return nil
-            }
-            
-            return viewControllerAtIndex(index)
-        } else {
-            return nil
-        }
-    }
-    
-    func viewControllerAtIndex(index: Int) -> UIViewController?
-    {
-        if self.huntingControllers!.count == 0 || index >= self.huntingControllers!.count
-        {
-            return nil
-        }
-        
-        if index == 0 {
-            return timesPageController
-        } else {
-            return temperaturePageController
-        }
-    }
-    
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int
-    {
-        return self.huntingControllers!.count
-    }
-    
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int
-    {
-        return 0
-    }
-    
-    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [AnyObject]) {
-        UIView.animateWithDuration(0.2, animations: { () -> Void in
-            self.mainView.dateTimeScroller.alpha = 0
-            self.mainView.dateLabel.alpha = 0
-        })
-    }
-    
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
-        UIView.animateWithDuration(0.8, animations: { () -> Void in
-            self.mainView.dateTimeScroller.alpha = 1
-            self.mainView.dateLabel.alpha = 1
-        })
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -151,14 +80,19 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, ScrollLi
     
     func showNextDate() {
         if !huntingSeason.closingDay() {
-            timesPageController.startChangingDay(reverse: true) { (reverse) -> Void in
+            let pageController = pageViewController!.viewControllers[0] as HuntingPageController
+            
+            pageController.startChangingDay(reverse: true) { (reverse) -> Void in
                 self.mainView.dateTimeScroller.setPosition(1, animate: true)
                 self.huntingSeason.nextDay()
                 self.huntingSeason.fetchDay({ (huntingDay) -> () in
                     self.mainView.dateLabel.text  = huntingDay.getCurrentTime().toDateString()
-                    self.timesPageController.setDay(huntingDay)
-                    self.temperaturePageController.setDay(huntingDay)
-                    self.timesPageController.finishChangingDay(reverse: reverse)
+                    
+                    for page in self.huntingControllers! {
+                        page.setDay(huntingDay)
+                    }
+
+                    pageController.finishChangingDay(reverse: reverse)
                 })
             }
         }
@@ -166,14 +100,19 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, ScrollLi
     
     func showPreviousDate() {
         if !huntingSeason.openingDay() {
-            timesPageController.startChangingDay(reverse: false) { (reverse) -> Void in
+            let pageController = pageViewController!.viewControllers[0] as HuntingPageController
+            
+            pageController.startChangingDay(reverse: false) { (reverse) -> Void in
                 self.mainView.dateTimeScroller.setPosition(0, animate: true)
                 self.huntingSeason.previousDay()
                 self.huntingSeason.fetchDay({ (huntingDay) -> () in
                     self.mainView.dateLabel.text  = huntingDay.getCurrentTime().toDateString()
-                    self.timesPageController.setDay(huntingDay)
-                    self.temperaturePageController.setDay(huntingDay)
-                    self.timesPageController.finishChangingDay(reverse: reverse)
+                    
+                    for page in self.huntingControllers! {
+                        page.setDay(huntingDay)
+                    }
+                    
+                    pageController.finishChangingDay(reverse: reverse)
                 })
             }
         }
@@ -245,11 +184,72 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, ScrollLi
         let previousDateGesture       = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
         previousDateGesture.direction = .Down
         view.addGestureRecognizer(previousDateGesture)
-        
-        let hintTapGesture  = UITapGestureRecognizer(target: animator, action: "showSwipeHint")
-        view.addGestureRecognizer(hintTapGesture)
+//        
+//        let hintTapGesture  = UITapGestureRecognizer(target: animator, action: "showSwipeHint")
+//        view.addGestureRecognizer(hintTapGesture)
     }
     
     /* End Gestures */
+    
+    
+    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+        if var index = find(huntingControllers!, viewController as HuntingPageController) {
+            if index == 0 {
+                return nil
+            }
+            
+            index--
+            
+            return viewControllerAtIndex(index)
+        } else {
+            return nil
+        }
+        
+    }
+    
+    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+        if var index = find(huntingControllers!, viewController as HuntingPageController) {
+            index++
+            
+            if (index == self.huntingControllers!.count) {
+                return nil
+            }
+            
+            return viewControllerAtIndex(index)
+        } else {
+            return nil
+        }
+    }
+    
+    func viewControllerAtIndex(index: Int) -> UIViewController? {
+        if self.huntingControllers!.count == 0 || index >= self.huntingControllers!.count
+        {
+            return nil
+        }
+        
+        return huntingControllers![index]
+    }
+    
+    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+        return self.huntingControllers!.count
+    }
+    
+    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+        return 0
+    }
+    
+    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [AnyObject]) {
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
+            self.mainView.dateTimeScroller.alpha = 0
+            self.mainView.dateLabel.alpha = 0
+        })
+    }
+    
+    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
+        UIView.animateWithDuration(0.8, animations: { () -> Void in
+            self.mainView.dateTimeScroller.alpha = 1
+            self.mainView.dateLabel.alpha = 1
+        })
+    }
 }
 
