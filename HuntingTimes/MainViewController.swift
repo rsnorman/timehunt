@@ -306,12 +306,16 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [AnyObject]) {
         UIView.animateWithDuration(0.2, animations: { () -> Void in
             self.mainView.dateTimeScroller.alpha = 0
+            self.mainView.datePickerIcon.alpha = 0
+            self.mainView.menuIcon.alpha = 0
         })
     }
     
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
         UIView.animateWithDuration(0.8, animations: { () -> Void in
             self.mainView.dateTimeScroller.alpha = 1
+            self.mainView.datePickerIcon.alpha = 1
+            self.mainView.menuIcon.alpha = 1
         })
     }
 }
