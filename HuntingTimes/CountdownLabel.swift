@@ -14,7 +14,7 @@ protocol CountdownViewDelegate {
     func didTickCountdown()
 }
 
-class CountdownView : UILabel {
+class CountdownLabel : UILabel {
     var countdownToTime : NSDate!
     var delegate        : CountdownViewDelegate!
     var timer           : NSTimer!

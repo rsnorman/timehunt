@@ -61,15 +61,15 @@ class WeatherParser: NSObject {
     func parse(weatherJSON: [String:AnyObject]) {
         dailyWeather = []
         let hourlyWeatherParser = HourlyWeatherParser(weatherJSON: weatherJSON)
-        
         for dayData in dailyData(weatherJSON) {
             let date = NSDate(timeIntervalSince1970: dayData["time"] as NSTimeInterval)
             let hourlyWeather = hourlyWeatherParser.onDate(date)
-            println(dayData)
-            
-            println("Hour weather count: \(hourlyWeather.count) on \(date)")
-            
-            dailyWeather.append(DailyWeather(hourlyWeather: hourlyWeather, on: date))
+            if isToday(date) {
+                let currentWeather: [String : AnyObject] = weatherJSON["currently"] as [String : AnyObject]
+                dailyWeather.append(DailyWeather(currentWeather: currentWeather, hourlyWeather: hourlyWeather, on: date))
+            } else {
+                dailyWeather.append(DailyWeather(currentWeather: dayData, hourlyWeather: hourlyWeather, on: date))
+            }
         }
     }
     
@@ -81,8 +81,8 @@ class WeatherParser: NSObject {
     }
     
     func dailyData(weatherJSON: [String : AnyObject]) -> [[String : AnyObject]] {
-        if let hourly = weatherJSON["daily"] as? [String : AnyObject] {
-            return hourly["data"] as [[String : AnyObject]]!
+        if let daily = weatherJSON["daily"] as? [String : AnyObject] {
+            return daily["data"] as [[String : AnyObject]]!
         } else {
             return []
         }

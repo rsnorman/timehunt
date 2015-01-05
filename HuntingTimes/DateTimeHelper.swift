@@ -39,3 +39,13 @@ func clearTime(dateTime: NSDate) -> NSDate {
     let calendar = NSCalendar.currentCalendar()
     return calendar.dateBySettingHour(0, minute: 0, second: 0, ofDate: dateTime, options: nil)!
 }
+
+func isToday(date: NSDate) -> Bool {
+    let cal = NSCalendar.currentCalendar()
+    var components = cal.components((NSCalendarUnit.CalendarUnitEra|NSCalendarUnit.CalendarUnitYear|NSCalendarUnit.CalendarUnitMonth|NSCalendarUnit.CalendarUnitDay), fromDate: NSDate())
+    let today = cal.dateFromComponents(components)
+    components = cal.components((NSCalendarUnit.CalendarUnitEra|NSCalendarUnit.CalendarUnitYear|NSCalendarUnit.CalendarUnitMonth|NSCalendarUnit.CalendarUnitDay), fromDate: date)
+    let otherDate = cal.dateFromComponents(components)
+    
+    return today!.isEqualToDate(otherDate!)
+}

@@ -11,20 +11,11 @@ import UIKit
 class MainView : UIView {
     let bgImageView        : TiltImageView
     let shadowView         : ShadowView
-    let countdownLabel     : CountdownView
-    let dateLabel          : UILabel
     let downArrow          : UIImageView
     let upArrow            : UIImageView
-    let dateTimeScroller   : ScrollLineView
-    let huntingTimesView   : HuntingTimesView
-    let huntingWeatherView : HuntingWeatherView
-    let monthColumnView    : ColumnView
-    let stateLabel         : UILabel
-    let datepickerLabel    : UILabel
-    let messageLabel       : MessageView
+    let dateTimeScroller   : DateLineScroller
     let menuIcon           : MenuIconView
-    let timeDot            : UIView
-    let weatherDot         : UIView
+    let datePickerIcon     : DatePickerIcon
     
     let timeLineHeight   : Int = 200
     
@@ -34,36 +25,8 @@ class MainView : UIView {
         shadowView = ShadowView(frame: frame)
         shadowView.setDarkness(0.5)
         
-        messageLabel = MessageView(frame: CGRectMake(10, 75, frame.width - 20, 100))
-        messageLabel.alpha    = 0.0
-        
-        stateLabel = createLabel("", CGRectMake(0, 30, frame.width, 40), 16)
-        stateLabel.font = UIFont(name: "HelveticaNeue", size: 16)
-        stateLabel.alpha = 0.0
-        
-        countdownLabel = CountdownView(frame: CGRectMake(0, 55, frame.width, 120))
-        countdownLabel.alpha = 0.0
-        
-        dateLabel             = createLabel("", CGRectMake(0, 200, frame.width, 30), 18)
-        dateLabel.alpha       = 0.0
-        datepickerLabel       = createLabel("", CGRectMake(0, 60, frame.width, 120), 48)
-        datepickerLabel.alpha = 0.0
-        
-        huntingTimesView = HuntingTimesView(frame: CGRectMake(0, 230, frame.width, frame.height - 285))
-        huntingTimesView.alpha = 0.0
-        
-        huntingWeatherView = HuntingWeatherView(frame: CGRectMake(0, 240, frame.width, frame.height - 285))
-        huntingWeatherView.alpha  = 0.0
-        huntingWeatherView.hidden = true
-        
-        dateTimeScroller = ScrollLineView(frame: CGRectMake(frame.width / 2, 230, 1, frame.height - 285))
+        dateTimeScroller = DateLineScroller(frame: CGRectMake(0, 210, frame.width, frame.height - 265))
         dateTimeScroller.alpha           = 0.0
-        dateTimeScroller.animateDuration = DAY_TRANSITION_TIME
-        
-        monthColumnView = ColumnView(labels: ["September", "October", "November", "December"], frame: CGRectMake(0, 230, frame.width / 2.0 - 10, frame.height - 285))
-        monthColumnView.setTextAlignment(NSTextAlignment.Right)
-        monthColumnView.alpha  = 0.0
-        monthColumnView.hidden = true
         
         let downArrowImage  = UIImage(named: "down-arrow")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         downArrow           = UIImageView(image: downArrowImage)
@@ -80,84 +43,30 @@ class MainView : UIView {
         menuIcon       = MenuIconView(frame: CGRectMake(0, 15, 60, 60))
         menuIcon.alpha = 0
         
-        timeDot = UIView(frame: CGRectMake(frame.width / 2 - 13.5, frame.height - 25, 8, 8))
-        timeDot.backgroundColor    = UIColor.whiteColor()
-        timeDot.layer.cornerRadius = 4
-        timeDot.layer.borderColor  = UIColor.whiteColor().CGColor
-        timeDot.layer.borderWidth  = 0.5
-        timeDot.alpha        = 0.5
-        
-        weatherDot = UIView(frame: CGRectMake(frame.width / 2 + 6.5, frame.height - 25, 8, 8))
-        weatherDot.layer.cornerRadius = 4
-        weatherDot.layer.borderColor  = UIColor.whiteColor().CGColor
-        weatherDot.layer.borderWidth  = 0.5
-        weatherDot.alpha        = 0.5
+        datePickerIcon       = DatePickerIcon(frame: CGRectMake(frame.width - 60, 15, 60, 60))
+        datePickerIcon.alpha = 0
         
         super.init(frame: frame)
         
         addSubview(bgImageView)
         addSubview(shadowView)
-        addSubview(messageLabel)
-        addSubview(stateLabel)
-        addSubview(countdownLabel)
-        addSubview(dateLabel)
-        addSubview(datepickerLabel)
-        addSubview(huntingTimesView)
-        addSubview(huntingWeatherView)
         addSubview(dateTimeScroller)
-        addSubview(monthColumnView)
         addSubview(downArrow)
         addSubview(upArrow)
+        addSubview(datePickerIcon)
         addSubview(menuIcon)
-        addSubview(timeDot)
-        addSubview(weatherDot)
     }
     
-    func setDelegate(viewController: ViewController) {
-        messageLabel.delegate     = viewController
-        countdownLabel.delegate   = viewController
-        huntingTimesView.delegate = viewController
-        dateTimeScroller.delegate = viewController
+    func setDelegate(viewController: MainViewController) {
         menuIcon.delegate         = viewController
+        datePickerIcon.delegate   = viewController
+        dateTimeScroller.delegate = viewController
     }
     
-    func hideDailyView(hideIndicator: Bool = true) {
-        stateLabel.alpha       = 0
-        countdownLabel.alpha   = 0
-        dateLabel.alpha        = 0
-        huntingTimesView.alpha = 0.0
-        weatherDot.alpha = 0.0
-        timeDot.alpha    = 0.0
-        
-        if hideIndicator {
-            dateTimeScroller.positionIndicator.alpha = 0
-        }
-    }
-    
-    func showDailyView() {
-        stateLabel.alpha       = 1.0
-        countdownLabel.alpha   = 1.0
-        dateLabel.alpha        = 1.0
-        huntingTimesView.alpha = 1.0
+    func show() {
         dateTimeScroller.alpha = 0.7
         menuIcon.alpha         = 1.0
-        weatherDot.alpha       = 0.5
-        timeDot.alpha          = 0.5
-        dateTimeScroller.positionIndicator.alpha = 0.7
-    }
-    
-    func isDatePickerVisible() -> Bool {
-        return monthColumnView.hidden
-    }
-    
-    func showDatePicker() {
-        monthColumnView.alpha = 1.0
-        datepickerLabel.alpha = 1.0
-    }
-    
-    func hideDatePicker() {
-        monthColumnView.alpha = 0.0
-        datepickerLabel.alpha = 0.0
+        datePickerIcon.alpha   = 1.0
     }
     
     func showHints() {
@@ -179,16 +88,6 @@ class MainView : UIView {
     func resetHints() {
         downArrow.frame = CGRectOffset(downArrow.frame, 0, -10)
         upArrow.frame   = CGRectOffset(upArrow.frame, 0, 10)
-    }
-    
-    func highlightWeather() {
-        timeDot.backgroundColor    = UIColor.clearColor()
-        weatherDot.backgroundColor = UIColor.whiteColor()
-    }
-    
-    func highlightTimes() {
-        weatherDot.backgroundColor = UIColor.clearColor()
-        timeDot.backgroundColor    = UIColor.whiteColor()
     }
 
     required init(coder aDecoder: NSCoder) {
