@@ -12,16 +12,21 @@ class HuntingPageView : UIView {
     let huntingColumnsView : HuntingColumnsView
     let stateLabel         : UILabel
     let messageLabel       : MessageView
+    let mainLabel          : UILabel
     
     init(frame: CGRect, huntingColumnsClass: HuntingColumnsView.Type) {
         self.huntingColumnsView = huntingColumnsClass(frame: CGRectMake(0, 230, frame.width, frame.height - 285))
         
+        mainLabel = createLabel("", CGRectMake(0, 55, frame.width, 120), 60)
+        
         messageLabel = MessageView(frame: CGRectMake(10, 75, frame.width - 20, 100))
+        messageLabel.alpha = 0
         stateLabel = createLabel("", CGRectMake(0, 30, frame.width, 40), 16)
         stateLabel.font = UIFont(name: "HelveticaNeue", size: 16)
         
         super.init(frame: frame)
         
+        addSubview(mainLabel)
         addSubview(messageLabel)
         addSubview(stateLabel)
         addSubview(huntingColumnsView)

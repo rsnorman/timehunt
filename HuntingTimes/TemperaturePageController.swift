@@ -16,4 +16,16 @@ class TemperaturePageController : HuntingPageController {
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func didSetDay(huntingDay: HuntingDay) {
+        super.didSetDay(huntingDay)
+        
+        if huntingDay.weather.hasCurrent() {
+            huntingPageView.stateLabel.text = "Current Temperature"
+            huntingPageView.mainLabel.text = "\(huntingDay.weather.currentTemperature())°"
+        } else {
+            huntingPageView.stateLabel.text = "Low/High Temperature"
+            huntingPageView.mainLabel.text = "\(huntingDay.weather.lowTemperature())° / \(huntingDay.weather.highTemperature())°"
+        }
+    }
 }

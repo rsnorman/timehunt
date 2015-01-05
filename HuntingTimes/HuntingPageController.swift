@@ -27,7 +27,9 @@ class HuntingPageController : UIViewController {
     override func viewDidLoad() {
         let frame = view.frame
         huntingPageView = huntingPageClass(frame: frame)
+        huntingPageView.stateLabel.text = "Temperature"
         self.view = huntingPageView
+        
         
         huntingTimesProgress = HuntingTimeProgress(huntingTimesColumn: getTimesColumn())
         

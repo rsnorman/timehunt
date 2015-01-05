@@ -17,7 +17,6 @@ class HourlyWeatherParser {
         for hourData in hourlyData(weatherJSON) {
             let temperature: Double = hourData["temperature"] as Double
             let hourTime   : NSDate = NSDate(timeIntervalSince1970: hourData["time"] as NSTimeInterval)
-            println("Temperature = \(temperature) at \(hourTime)")
             
             hourlyWeather.append(HourlyWeather(temperature: temperature, at: hourTime))
         }

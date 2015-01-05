@@ -9,16 +9,17 @@
 import Foundation
 
 class DailyWeather {
-    let hourlyWeather : [HourlyWeather]
-    let date          : NSDate
+    let currentWeather : [String : AnyObject]
+    let hourlyWeather  : [HourlyWeather]
+    let date           : NSDate
     
-    init(hourlyWeather: [HourlyWeather], on: NSDate) {
-        self.hourlyWeather = hourlyWeather
-        self.date          = on
+    init(currentWeather: [String: AnyObject], hourlyWeather: [HourlyWeather], on: NSDate) {
+        self.currentWeather = currentWeather
+        self.hourlyWeather  = hourlyWeather
+        self.date           = on
     }
     
     func temperatureAt(time: NSDate) -> Double {
-        println("Hourly Weather Count: \(hourlyWeather.count) on: \(time)")
         for hourWeather in hourlyWeather {
             let timeComparison = time.compare(hourWeather.time)
             if timeComparison == NSComparisonResult.OrderedAscending || timeComparison == NSComparisonResult.OrderedSame {
@@ -27,5 +28,21 @@ class DailyWeather {
         }
         
         return 0.0
+    }
+    
+    func hasCurrent() -> Bool {
+        return isToday(date)
+    }
+    
+    func currentTemperature() -> Int {
+        return Int(round(currentWeather["temperature"] as Double))
+    }
+    
+    func lowTemperature() -> Int {
+        return Int(round(currentWeather["temperatureMin"] as Double))
+    }
+    
+    func highTemperature() -> Int {
+        return Int(round(currentWeather["temperatureMax"] as Double))
     }
 }
