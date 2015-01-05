@@ -53,13 +53,14 @@ class MainView : UIView {
         addSubview(dateTimeScroller)
         addSubview(downArrow)
         addSubview(upArrow)
-        addSubview(menuIcon)
         addSubview(datePickerIcon)
+        addSubview(menuIcon)
     }
     
     func setDelegate(viewController: MainViewController) {
-        menuIcon.delegate       = viewController
-        datePickerIcon.delegate = viewController
+        menuIcon.delegate         = viewController
+        datePickerIcon.delegate   = viewController
+        dateTimeScroller.delegate = viewController
     }
     
     func show() {

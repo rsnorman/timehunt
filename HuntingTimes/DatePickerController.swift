@@ -8,9 +8,15 @@
 
 import Foundation
 
+protocol DatePickerControllerDelegate {
+    func didScrollDates(position: CGFloat)
+}
+
 class DatePickerController: UIViewController {
-    var monthColumnView    : ColumnView!
-    var datepickerLabel    : UILabel!
+    var monthColumnView : ColumnView!
+    var datepickerLabel : UILabel!
+    var delegate        : DatePickerControllerDelegate!
+    var startScrollY  : CGFloat!
     
     override func viewDidLoad() {
         let frame = view.frame
@@ -24,6 +30,27 @@ class DatePickerController: UIViewController {
         
         view.addSubview(datepickerLabel)
         view.addSubview(monthColumnView)
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: "scrollDates:")
+        view.addGestureRecognizer(panGesture)
+        
+        view.userInteractionEnabled = true
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        startScrollY = 0
+    }
+    
+    func scrollDates(recognizer:UIPanGestureRecognizer) {
+        let translation = recognizer.translationInView(view)
+        
+        if recognizer.state == UIGestureRecognizerState.Began {
+            startScrollY = 0
+        } else {
+            delegate?.didScrollDates(translation.y - startScrollY)
+            startScrollY = translation.y
+        }
     }
     
     func setDate(date: NSDate) {

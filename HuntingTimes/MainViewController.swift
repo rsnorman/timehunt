@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UIPageViewControllerDataSource, ScrollLineViewDelegate, MenuIconViewDelegate, MenuControllerDelegate, FCLocationManagerDelegate, UIPageViewControllerDelegate, DatePickerIconDelegate {
+class MainViewController: UIViewController, UIPageViewControllerDataSource, DateLineScrollerDelegate, MenuIconViewDelegate, MenuControllerDelegate, FCLocationManagerDelegate, UIPageViewControllerDelegate, DatePickerIconDelegate, DatePickerControllerDelegate {
     
     var pageViewController : UIPageViewController?
     var huntingControllers : [HuntingPageController]?
@@ -32,6 +32,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Scro
         menuController.selectedBackground = UserSettings.getBackgroundImage()
         
         datePickerController = DatePickerController()
+        datePickerController.delegate = self
         
         super.viewDidLoad()
         view.alpha = 0
@@ -55,7 +56,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Scro
         
         addChildViewController(pageViewController!)
         pageViewController!.view.alpha = 0
-        mainView.insertSubview(pageViewController!.view, belowSubview: mainView.menuIcon)
+        mainView.insertSubview(pageViewController!.view, belowSubview: mainView.datePickerIcon)
         pageViewController!.didMoveToParentViewController(self)
     }
     
@@ -137,11 +138,11 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Scro
     
     /* Delegate Methods */
     
-    func didPositionIndicator(percent: CGFloat) {
+    func didChangeProgress(percent: CGFloat) {
         let totalDays  = huntingSeason.length()
         let currentDay = Int(round(CGFloat(totalDays - 1) * percent))
         huntingSeason.setCurrentDay(currentDay)
-//        mainView.datepickerLabel.text = currentTime().toDateString()
+        mainView.dateTimeScroller.setDate(huntingSeason.currentDay().getCurrentTime().time)
     }
     
     func didOpenMenu() {
@@ -176,10 +177,26 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Scro
     func didCloseDatePicker() {
         UIView.animateWithDuration(0.5, animations: {() -> Void in
             self.datePickerController.view.alpha = 0
-            self.pageViewController!.view.alpha  = 1
             self.mainView.dateTimeScroller.hideCurrentProgress()
-            self.mainView.dateTimeScroller.setProgress((self.pageViewController!.viewControllers[0] as HuntingPageController).currentProgress(), animate: false)
-        })
+            
+        }) {(complete) -> Void in
+            self.huntingSeason.fetchDay({ (huntingDay) -> () in
+                for page in self.huntingControllers! {
+                    page.setDay(huntingDay)
+                }
+                
+                UIView.animateWithDuration(0.5, animations: {() -> Void in
+                    let pageController = self.pageViewController!.viewControllers[0] as HuntingPageController
+                    self.mainView.dateTimeScroller.setProgress(pageController.currentProgress(), animate: false)
+                    self.mainView.dateTimeScroller.showIndicator()
+                    self.pageViewController!.view.alpha = 1
+                })
+            })
+        }
+    }
+    
+    func didScrollDates(position: CGFloat) {
+        self.mainView.dateTimeScroller.setOffsetProgress(position)
     }
     
     func didSelectBackground(backgroundImage: String) {

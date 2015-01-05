@@ -72,12 +72,14 @@ class DatePickerIcon : UIView {
         let hourHand = UIView(frame: CGRectMake(0, 0, frame.width, frame.height))
         let hourLine = UIView(frame: CGRectMake(frame.width / 2, frame.height / 2, frame.width / 2 - 6, 1))
         hourLine.backgroundColor = .whiteColor()
+        hourLine.layer.allowsEdgeAntialiasing = true
         hourHand.addSubview(hourLine)
         hourHand.transform = CGAffineTransformRotate(hourHand.transform, CGFloat(M_PI * 0.1))
         timeView.addSubview(hourHand)
         
         let minuteHand = UIView(frame: CGRectMake(0, 0, frame.width, frame.height))
         let minuteLine = UIView(frame: CGRectMake(frame.width / 2, frame.height / 2, frame.width / 2 - 3, 1))
+        minuteLine.layer.allowsEdgeAntialiasing = true
         minuteLine.backgroundColor = .whiteColor()
         minuteHand.addSubview(minuteLine)
         minuteHand.transform = CGAffineTransformRotate(minuteHand.transform, CGFloat(M_PI * 0.6))

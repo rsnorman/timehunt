@@ -8,9 +8,14 @@
 
 import Foundation
 
-class DateLineScroller: UIView {
+protocol DateLineScrollerDelegate {
+    func didChangeProgress(percent: CGFloat)
+}
+
+class DateLineScroller: UIView, ScrollLineViewDelegate {
     let scrollLine : ScrollLineView
     let dateLabel  : UILabel
+    var delegate   : DateLineScrollerDelegate!
     
     override init(frame: CGRect) {
         scrollLine = ScrollLineView(frame: CGRectMake(frame.width / 2, 25, 1, frame.height - 25))
@@ -20,6 +25,8 @@ class DateLineScroller: UIView {
         dateLabel.alpha = 1
         
         super.init(frame: frame)
+        
+        scrollLine.delegate = self
         
         addSubview(scrollLine)
         addSubview(dateLabel)
@@ -35,6 +42,10 @@ class DateLineScroller: UIView {
     
     func setProgress(percent: CGFloat, animate: Bool) {
         scrollLine.setPosition(percent, animate: animate)
+    }
+    
+    func setOffsetProgress(amount: CGFloat) {
+        scrollLine.setOffsetPosition(amount)
     }
     
     func markCurrentProgress(progress: CGFloat) {
@@ -61,5 +72,9 @@ class DateLineScroller: UIView {
         UIView.animateWithDuration(DAY_TRANSITION_TIME, animations: { () -> Void in
             self.scrollLine.positionIndicator.alpha = 1
         })
+    }
+    
+    func didPositionIndicator(percent: CGFloat) {
+        delegate?.didChangeProgress(percent)
     }
 }
