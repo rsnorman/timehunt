@@ -9,8 +9,13 @@
 import Foundation
 import AudioToolbox
 
+protocol TimesPageControllerDelegate {
+    func didTickCountdown()
+}
+
 class TimesPageController : HuntingPageController, CountdownViewDelegate, TimesColumnsDelegate, NotificationManagerDelegate, MessageViewDelegate {
     var huntingTimesView : TimesColumns!
+    var delegate         : TimesPageControllerDelegate!
     
     init(huntingDay: HuntingDay) {
         super.init(huntingDay: huntingDay, huntingPageClass: TimesPage.self)
@@ -92,12 +97,11 @@ class TimesPageController : HuntingPageController, CountdownViewDelegate, TimesC
             huntingPageView.stateLabel.text = currentTime().event
         } else {
             huntingPageView.stateLabel.text = ""
-//            mainView.dateTimeScroller.setPosition(huntingTimesProgress.getProgressPercent(), animate: true)
         }
     }
     
     func didTickCountdown() {
-//        mainView.dateTimeScroller.setPosition(huntingTimesProgress.getProgressPercent(), animate: true)
+        delegate?.didTickCountdown()
     }
     
     func willFinishCountdown() {

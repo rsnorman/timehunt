@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UIPageViewControllerDataSource, DateLineScrollerDelegate, MenuIconViewDelegate, MenuControllerDelegate, FCLocationManagerDelegate, UIPageViewControllerDelegate, DatePickerIconDelegate, DatePickerControllerDelegate {
+class MainViewController: UIViewController, UIPageViewControllerDataSource, DateLineScrollerDelegate, MenuIconViewDelegate, MenuControllerDelegate, FCLocationManagerDelegate, UIPageViewControllerDelegate, DatePickerIconDelegate, DatePickerControllerDelegate, TimesPageControllerDelegate {
     
     var pageViewController : UIPageViewController?
     var huntingControllers : [HuntingPageController]?
@@ -211,6 +211,8 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         huntingSeason.fetchDay { (huntingDay) -> () in
             
             self.timesPageController = TimesPageController(huntingDay: huntingDay)
+            self.timesPageController.delegate = self
+
             self.temperaturePageController = TemperaturePageController(huntingDay: huntingDay)
             
             self.huntingControllers = [self.timesPageController, self.temperaturePageController]
@@ -226,6 +228,11 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     
     func didFailToAcquireLocationWithErrorMsg(errorMsg: String!) {
         println("Failed to aquire location!!!!")
+    }
+    
+    func didTickCountdown() {
+        let pageController = pageViewController!.viewControllers[0] as HuntingPageController
+        mainView.dateTimeScroller.setProgress(pageController.currentProgress(), animate: true)
     }
 
 
