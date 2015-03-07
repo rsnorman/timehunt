@@ -12,6 +12,8 @@ class DailyWeather {
     let currentWeather : [String : AnyObject]
     let hourlyWeather  : [HourlyWeather]
     let date           : NSDate
+    var sunrise        : NSDate!
+    var sunset         : NSDate!
     
     init(currentWeather: [String: AnyObject], hourlyWeather: [HourlyWeather], on: NSDate) {
         self.currentWeather = currentWeather

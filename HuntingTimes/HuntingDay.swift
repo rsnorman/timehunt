@@ -9,10 +9,11 @@
 import UIKit
 
 class HuntingDay {
-    let startTime    : HuntingTime
-    let endTime      : HuntingTime
-    let sunriseTime  : HuntingTime
-    let sunsetTime   : HuntingTime
+    let date         : NSDate
+    var startTime    : HuntingTime!
+    var endTime      : HuntingTime!
+    var sunriseTime  : HuntingTime!
+    var sunsetTime   : HuntingTime!
     lazy var dayBeginning : HuntingTime = {
         return HuntingTime(time: NSCalendar.currentCalendar().dateBySettingHour(0, minute: 0, second: 0, ofDate: self.startTime.time, options: nil)!, event: "DayStart")
     }()
@@ -22,19 +23,34 @@ class HuntingDay {
     
     var weather : DailyWeather!
     
-    init(startTime: NSDate, endTime: NSDate) {
-        self.startTime = HuntingTime(time: startTime, event: "Start")
-        self.endTime   = HuntingTime(time: endTime, event: "Stop")
-        sunriseTime    = HuntingTime(time: startTime.dateByAddingTimeInterval(60 * 30), event: "Sunrise")
-        sunsetTime     = HuntingTime(time: endTime.dateByAddingTimeInterval(60 * 30 * -1), event: "Sunset")
+    init(date: NSDate) {
+        self.date = clearTime(date)
     }
     
-    init(sunriseTime: NSDate, sunsetTime: NSDate) {
+    func setSunriseSunset(sunriseTime: NSDate, sunsetTime: NSDate) {
         self.sunriseTime = HuntingTime(time: sunriseTime, event: "Sunrise")
         self.sunsetTime  = HuntingTime(time: sunsetTime, event: "Sunset")
         startTime        = HuntingTime(time: sunriseTime.dateByAddingTimeInterval(60 * 30 * -1), event: "Start")
         endTime          = HuntingTime(time: sunsetTime.dateByAddingTimeInterval(60 * 30), event: "Stop")
     }
+    
+//    convenience init(startTime: NSDate, endTime: NSDate) {
+//        self.init(date: startTime)
+//        
+//        self.startTime = HuntingTime(time: startTime, event: "Start")
+//        self.endTime   = HuntingTime(time: endTime, event: "Stop")
+//        sunriseTime    = HuntingTime(time: startTime.dateByAddingTimeInterval(60 * 30), event: "Sunrise")
+//        sunsetTime     = HuntingTime(time: endTime.dateByAddingTimeInterval(60 * 30 * -1), event: "Sunset")
+//    }
+//    
+//    convenience init(sunriseTime: NSDate, sunsetTime: NSDate) {
+//        self.init(date: sunriseTime)
+//        
+//        self.sunriseTime = HuntingTime(time: sunriseTime, event: "Sunrise")
+//        self.sunsetTime  = HuntingTime(time: sunsetTime, event: "Sunset")
+//        startTime        = HuntingTime(time: sunriseTime.dateByAddingTimeInterval(60 * 30 * -1), event: "Start")
+//        endTime          = HuntingTime(time: sunsetTime.dateByAddingTimeInterval(60 * 30), event: "Stop")
+//    }
     
     
     func allTimes() -> [HuntingTime] {

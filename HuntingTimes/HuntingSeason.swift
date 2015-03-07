@@ -15,37 +15,32 @@ protocol HuntingSeasonDelegate {
 
 class HuntingSeason {
     let dates             : [HuntingDay]
+    let startDate         : NSDate
+    let endDate           : NSDate
     var currentPosition   : Int!
     var delegate          : HuntingSeasonDelegate!
     var location          : CLLocation!
     
-    init() {
-        let path = NSBundle.mainBundle().pathForResource("hunting-times", ofType: "csv")
-        
-        let timesCSV = NSString(contentsOfFile: path!, encoding: NSUTF8StringEncoding, error: nil)
+    init(startDate: NSDate, endDate: NSDate) {
+        self.startDate = startDate
+        self.endDate   = endDate
         dates = []
         
-        let timeFormatter = NSDateFormatter()
-        timeFormatter.dateFormat = "YYYY-MM-d h:mm a"
-        
-        for dateLine in timesCSV?.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet()) as [String] {
-            let cells = dateLine.componentsSeparatedByString(",")
-            
-            let startTime = timeFormatter.dateFromString("\(cells[0]) \(cells[1]) AM")!
-            let endTime = timeFormatter.dateFromString("\(cells[0]) \(cells[2]) PM")!
-            
-            dates.append(HuntingDay(startTime: startTime, endTime: endTime))
+        var date = self.startDate
+        for index in 0...(differenceInDays(startDate, endDate) - 1) {
+            dates.append(HuntingDay(date: date))
+            date = addDay(date)
         }
         
         self.currentPosition = getCurrentPosition()
     }
     
-    convenience init(location: CLLocation) {
-        self.init()
+    convenience init(startDate: NSDate, endDate: NSDate, location: CLLocation) {
+        self.init(startDate: startDate, endDate: endDate)
         self.location = location
     }
     
-    func allDays() -> [HuntingDay] {
+    func allDays() -> [HuntingDay?] {
         return dates
     }
     
@@ -54,9 +49,11 @@ class HuntingSeason {
     }
     
     func fetchDay(completion: (huntingDay: HuntingDay) -> ()) {
-        WeatherParser.sharedInstance.fetch(location, date: currentDay().startTime.time, success: { (dailyWeather) -> () in
-            self.currentDay().weather = dailyWeather
-            completion(huntingDay: self.currentDay())
+        let currentHuntingDay = self.currentDay()
+        WeatherParser.sharedInstance.fetch(location, date: currentHuntingDay.date, success: { (dailyWeather) -> () in
+            currentHuntingDay.weather = dailyWeather
+            currentHuntingDay.setSunriseSunset(dailyWeather.sunrise!, sunsetTime: dailyWeather.sunset!)
+            completion(huntingDay: currentHuntingDay)
         }) { () -> () in
             
         }
@@ -97,20 +94,21 @@ class HuntingSeason {
     private
     
     func getCurrentPosition() -> Int {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-d"
-        let today = dateFormatter.stringFromDate(NSDate())
+        return 0
+//        let dateFormatter = NSDateFormatter()
+//        dateFormatter.dateFormat = "YYYY-MM-d"
+//        let today = dateFormatter.stringFromDate(NSDate())
         
-        if dates[0].startTime.timeIntervalSinceNow() > 0 {
-            return 0
-        } else if dates.last?.endTime.timeIntervalSinceNow() > 0 {
-            for (index, huntingDay) in enumerate(dates) {
-                if today == dateFormatter.stringFromDate(huntingDay.startTime.time) {
-                    return index
-                }
-            }
-        }
+//        if dates[0].startTime.timeIntervalSinceNow() > 0 {
+//            return 0
+//        } else if dates.last?.endTime.timeIntervalSinceNow() > 0 {
+//            for (index, huntingDay) in enumerate(dates) {
+//                if today == dateFormatter.stringFromDate(huntingDay.startTime.time) {
+//                    return index
+//                }
+//            }
+//        }
         
-        return dates.count - 1
+//        return dates.count - 1
     }
 }

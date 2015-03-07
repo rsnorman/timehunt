@@ -49,3 +49,21 @@ func isToday(date: NSDate) -> Bool {
     
     return today!.isEqualToDate(otherDate!)
 }
+
+func differenceInDays(date: NSDate, otherDate: NSDate) -> Int {
+    let calendar = NSCalendar.currentCalendar()
+    var fromDate : NSDate?
+    var toDate   : NSDate?
+    var duration : NSTimeInterval = 0
+    
+    calendar.rangeOfUnit(.DayCalendarUnit, startDate: &fromDate, interval: &duration, forDate: date)
+    calendar.rangeOfUnit(.DayCalendarUnit, startDate: &toDate, interval: &duration, forDate: otherDate)
+    
+    let difference = calendar.components(.DayCalendarUnit, fromDate: fromDate!, toDate: toDate!, options: NSCalendarOptions.allZeros)
+    
+    return difference.day
+}
+
+func addDay(date: NSDate) -> NSDate {
+    return date.dateByAddingTimeInterval(60*60*24)
+}

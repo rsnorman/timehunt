@@ -36,7 +36,7 @@ class WeatherParser: NSObject {
     
     func fetch(location: CLLocation, date : NSDate, success: (DailyWeather) -> (), failure: () -> ()) {
         var currentHourlyData: [HourlyWeather] = []
-        let dateString = formatDate(date)
+        let dateString = self.formatDate(date)
         
         forecastr.getForecastForLocation(location, time: NSNumber(double: date.timeIntervalSince1970), exclusions: nil, extend: nil, language: nil, success: { (json) -> Void in
             self.parse(json as [String: AnyObject])
@@ -44,6 +44,8 @@ class WeatherParser: NSObject {
             for dayWeather in self.dailyWeather {
                 if dateString == self.formatDate(dayWeather.date) {
                     success(dayWeather)
+                } else {
+                    failure()
                 }
             }
             
@@ -61,15 +63,26 @@ class WeatherParser: NSObject {
     func parse(weatherJSON: [String:AnyObject]) {
         dailyWeather = []
         let hourlyWeatherParser = HourlyWeatherParser(weatherJSON: weatherJSON)
+        
         for dayData in dailyData(weatherJSON) {
             let date = NSDate(timeIntervalSince1970: dayData["time"] as NSTimeInterval)
+            let sunrise = NSDate(timeIntervalSince1970: dayData["sunriseTime"] as NSTimeInterval)
+            let sunset  = NSDate(timeIntervalSince1970: dayData["sunsetTime"] as NSTimeInterval)
+            
             let hourlyWeather = hourlyWeatherParser.onDate(date)
+            var dayWeather : DailyWeather
+            
             if isToday(date) {
                 let currentWeather: [String : AnyObject] = weatherJSON["currently"] as [String : AnyObject]
-                dailyWeather.append(DailyWeather(currentWeather: currentWeather, hourlyWeather: hourlyWeather, on: date))
+                dayWeather = DailyWeather(currentWeather: currentWeather, hourlyWeather: hourlyWeather, on: date)
             } else {
-                dailyWeather.append(DailyWeather(currentWeather: dayData, hourlyWeather: hourlyWeather, on: date))
+                dayWeather = DailyWeather(currentWeather: dayData, hourlyWeather: hourlyWeather, on: date)
             }
+            
+            dayWeather.sunrise = sunrise
+            dayWeather.sunset = sunset
+            
+            dailyWeather.append(dayWeather)
         }
     }
     
@@ -77,7 +90,7 @@ class WeatherParser: NSObject {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFormatter.timeZone = NSTimeZone()
-        return dateFormatter.stringFromDate(date)
+        return dateFormatter.stringFromDate(clearTime(date))
     }
     
     func dailyData(weatherJSON: [String : AnyObject]) -> [[String : AnyObject]] {

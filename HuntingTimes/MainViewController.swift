@@ -205,7 +205,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     }
     
     func didAcquireLocation(location: CLLocation!) {
-        huntingSeason = HuntingSeason(location: location)
+        huntingSeason = HuntingSeason(startDate: HUNTING_SEASON_START_DATE, endDate: HUNTING_SEASON_END_DATE, location: location)
         mainView.dateTimeScroller.markCurrentProgress(huntingSeason.percentComplete())
         
         huntingSeason.fetchDay { (huntingDay) -> () in
