@@ -126,6 +126,14 @@ class DatePickerIcon : UIView {
         }
     }
     
+    func enable() {
+        datePickerOpenGesture.enabled = true
+    }
+    
+    func disable() {
+        datePickerOpenGesture.enabled = false
+    }
+    
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

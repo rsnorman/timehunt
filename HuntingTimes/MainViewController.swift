@@ -248,6 +248,9 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     }
     
     func getDayForLocation() {
+        hideErrorMessage()
+        mainView.datePickerIcon.disable()
+        
         huntingSeason.fetchDay { (error, huntingDay) -> () in
             if error == nil {
                 self.timesPageController = TimesPageController(huntingDay: huntingDay)
@@ -263,6 +266,8 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
                 
                 self.mainView.dateTimeScroller.setProgress((startingViewController as HuntingPageController).currentProgress(), animate: true)
                 self.mainView.dateTimeScroller.setDate(huntingDay.getCurrentTime().time)
+                
+                self.mainView.datePickerIcon.enable()
             } else {
                 self.showErrorMessage("getDayForLocation")
             }
