@@ -85,6 +85,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     func showNextDate() {
         if !huntingSeason.closingDay() {
             hideErrorMessage()
+            mainView.datePickerIcon.disable()
             
             mainView.dateTimeScroller.setProgress(1, animate: true)
             mainView.dateTimeScroller.hideIndicator(setProgress: 0)
@@ -101,6 +102,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     func showPreviousDate() {
         if !huntingSeason.openingDay() {
             hideErrorMessage()
+            mainView.datePickerIcon.disable()
             
             mainView.dateTimeScroller.setProgress(0, animate: true)
             mainView.dateTimeScroller.hideIndicator(setProgress: 1)
@@ -127,6 +129,8 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
             self.mainView.dateTimeScroller.setDate(huntingDay.getCurrentTime().time)
             self.mainView.dateTimeScroller.setProgress(getCurrentPage().currentProgress(), animate: true)
             self.mainView.dateTimeScroller.showIndicator()
+
+            self.mainView.datePickerIcon.enable()
             
             getCurrentPage().finishChangingDay(reverse: reverse)
         } else {
@@ -297,9 +301,6 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         let previousDateGesture       = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
         previousDateGesture.direction = .Down
         view.addGestureRecognizer(previousDateGesture)
-//        
-//        let hintTapGesture  = UITapGestureRecognizer(target: animator, action: "showSwipeHint")
-//        view.addGestureRecognizer(hintTapGesture)
     }
     
     /* End Gestures */
