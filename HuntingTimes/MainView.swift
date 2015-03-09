@@ -58,8 +58,8 @@ class MainView : UIView {
         addSubview(downArrow)
         addSubview(upArrow)
         addSubview(datePickerIcon)
-        addSubview(menuIcon)
         addSubview(errorMessage)
+        addSubview(menuIcon)
     }
     
     func setDelegate(viewController: MainViewController) {

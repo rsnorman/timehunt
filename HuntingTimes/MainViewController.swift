@@ -244,8 +244,11 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         
         mainView.dateTimeScroller.markCurrentProgress(huntingSeason.percentComplete())
         
+        getDayForLocation()
+    }
+    
+    func getDayForLocation() {
         huntingSeason.fetchDay { (error, huntingDay) -> () in
-            
             if error == nil {
                 self.timesPageController = TimesPageController(huntingDay: huntingDay)
                 self.timesPageController.delegate = self
@@ -261,7 +264,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
                 self.mainView.dateTimeScroller.setProgress((startingViewController as HuntingPageController).currentProgress(), animate: true)
                 self.mainView.dateTimeScroller.setDate(huntingDay.getCurrentTime().time)
             } else {
-//                self.showErrorMessage()
+                self.showErrorMessage("getDayForLocation")
             }
         }
     }
