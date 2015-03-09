@@ -92,20 +92,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
             pageController.startChangingDay(reverse: true) { (reverse) -> Void in
                 self.huntingSeason.nextDay()
                 self.huntingSeason.fetchDay({ (error, huntingDay) -> () in
-                    
-                    if error == nil {
-                        for page in self.huntingControllers! {
-                            page.setDay(huntingDay)
-                        }
-                        
-                        self.mainView.dateTimeScroller.setDate(huntingDay.getCurrentTime().time)
-                        self.mainView.dateTimeScroller.setProgress(pageController.currentProgress(), animate: true)
-                        self.mainView.dateTimeScroller.showIndicator()
-
-                        pageController.finishChangingDay(reverse: reverse)
-                    } else {
-                        self.showErrorMessage()
-                    }
+                   self.showDay(error, huntingDay: huntingDay, reverse: reverse)
                 })
             }
         }
@@ -113,39 +100,49 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     
     func showPreviousDate() {
         if !huntingSeason.openingDay() {
-            let pageController = pageViewController!.viewControllers[0] as HuntingPageController
-            
             self.mainView.dateTimeScroller.setProgress(0, animate: true)
             self.mainView.dateTimeScroller.hideIndicator(setProgress: 1)
             
-            pageController.startChangingDay(reverse: false) { (reverse) -> Void in
+            getCurrentPage().startChangingDay(reverse: false) { (reverse) -> Void in
                 self.huntingSeason.previousDay()
                 self.huntingSeason.fetchDay({ (error, huntingDay) -> () in
-                    
-                    if error == nil {
-                        for page in self.huntingControllers! {
-                            page.setDay(huntingDay)
-                        }
-                        
-                        self.mainView.dateTimeScroller.setDate(huntingDay.getCurrentTime().time)
-                        self.mainView.dateTimeScroller.setProgress(pageController.currentProgress(), animate: true)
-                        self.mainView.dateTimeScroller.showIndicator()
-                        
-                        pageController.finishChangingDay(reverse: reverse)
-                    } else {
-                        self.showErrorMessage()
-                    }
+                    self.showDay(error, huntingDay: huntingDay, reverse: reverse)
                 })
             }
         }
     }
     
-    func showErrorMessage() {
-        println("Could not load hunting weather data")
+    func getCurrentPage() -> HuntingPageController {
+        return pageViewController!.viewControllers[0] as HuntingPageController
+    }
+    
+    func showDay(error: NSError?, huntingDay: HuntingDay, reverse: Bool) {
+        if error == nil {
+            for page in self.huntingControllers! {
+                page.setDay(huntingDay)
+            }
+            
+            self.mainView.dateTimeScroller.setDate(huntingDay.getCurrentTime().time)
+            self.mainView.dateTimeScroller.setProgress(getCurrentPage().currentProgress(), animate: true)
+            self.mainView.dateTimeScroller.showIndicator()
+            
+            getCurrentPage().finishChangingDay(reverse: reverse)
+        } else {
+            self.showErrorMessage(reverse ? "showNextDate" : "showPreviousDate")
+        }
+    }
+    
+    func showErrorMessage(retryAction: Selector) {
+        mainView.errorMessage.setMessage("Could not load weather data\nTap to retry")
+        mainView.errorMessage.setRetryAction(self, action: retryAction)
+        
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.mainView.errorMessage.alpha = 1
+        })
     }
     
     func showLocationErrorMessage() {
-        println("Could not find location")
+        mainView.errorMessage.setMessage("Could not determine location\nTap to retry")
     }
     
     /* End Action Methods */
@@ -209,7 +206,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
                         self.pageViewController!.view.alpha = 1
                     })
                 } else {
-                    self.showErrorMessage()
+//                    self.showErrorMessage()
                 }
             })
         }
@@ -246,7 +243,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
                 self.mainView.dateTimeScroller.setProgress((startingViewController as HuntingPageController).currentProgress(), animate: true)
                 self.mainView.dateTimeScroller.setDate(huntingDay.getCurrentTime().time)
             } else {
-                self.showErrorMessage()
+//                self.showErrorMessage()
             }
         }
     }
@@ -258,20 +255,6 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     func didTickCountdown() {
         let pageController = pageViewController!.viewControllers[0] as HuntingPageController
         mainView.dateTimeScroller.setProgress(pageController.currentProgress(), animate: true)
-    }
-    
-    func willChangeDay(currentDay: HuntingDay) {
-        
-    }
-    
-    func didChangeDay(currentDay: HuntingDay) {
-        UIView.animateWithDuration(DAY_TRANSITION_TIME, animations: { () -> Void in
-            self.mainView.dateTimeScroller.dateLabel.alpha = 1
-        })
-    }
-    
-    func didFailChangeDay() {
-        
     }
 
 

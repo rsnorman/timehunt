@@ -71,6 +71,7 @@
 		4CC2EF261A4C966300D74496 /* SunriseSunset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC2EF251A4C966300D74496 /* SunriseSunset.swift */; };
 		4CDE49431A282934002CF42A /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDE49421A282934002CF42A /* MessageView.swift */; };
 		4CDE49451A282B3B002CF42A /* InterfaceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDE49441A282B3B002CF42A /* InterfaceHelper.swift */; };
+		83E8EECC1AAD4F1400B58086 /* ErrorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E8EECB1AAD4F1400B58086 /* ErrorMessageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +168,7 @@
 		4CC2EF251A4C966300D74496 /* SunriseSunset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunriseSunset.swift; sourceTree = "<group>"; };
 		4CDE49421A282934002CF42A /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		4CDE49441A282B3B002CF42A /* InterfaceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceHelper.swift; sourceTree = "<group>"; };
+		83E8EECB1AAD4F1400B58086 /* ErrorMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 				4C46BE4A1A20667B005BB796 /* TiltImageView.swift */,
 				4C6EE1A11A242C5C00305115 /* ScrollLineView.swift */,
 				4CDE49421A282934002CF42A /* MessageView.swift */,
+				83E8EECB1AAD4F1400B58086 /* ErrorMessageView.swift */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				4CC2EF231A4C8D2E00D74496 /* JSONFileWriter.swift in Sources */,
 				4C6436C61A3AB69E00017338 /* Forecastr.m in Sources */,
 				4C46BE4D1A20D7D1005BB796 /* CountdownLabel.swift in Sources */,
+				83E8EECC1AAD4F1400B58086 /* ErrorMessageView.swift in Sources */,
 				4C6436CD1A3AB9DB00017338 /* FCLocationManager.m in Sources */,
 				4C6436B61A3AB69500017338 /* AFHTTPSessionManager.m in Sources */,
 				4C6EE1AC1A2590F100305115 /* HuntingTimeProgress.swift in Sources */,
