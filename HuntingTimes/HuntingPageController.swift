@@ -64,7 +64,7 @@ class HuntingPageController : UIViewController {
     }
     
     func startChangingDay(reverse: Bool = false, completion: ((reversing: Bool) -> Void)? = nil) {
-//        if huntingPageView.alpha != 0 {
+        if huntingPageView.alpha != 0 {
             let labelOffset : CGFloat = 10.0
             let yOffset = reverse ? labelOffset * -1 : labelOffset
             
@@ -79,11 +79,11 @@ class HuntingPageController : UIViewController {
                         completionHandler(reversing: reverse)
                     }
             }
-//        } else {
-//            if let completionHandler = completion {
-//                completionHandler(reversing: reverse)
-//            }
-//        }
+        } else {
+            if let completionHandler = completion {
+                completionHandler(reversing: reverse)
+            }
+        }
     }
     
     func finishChangingDay(reverse: Bool = false, completion: ((reversing: Bool) -> Void)? = nil) {

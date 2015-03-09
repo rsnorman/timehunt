@@ -86,12 +86,10 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         if !huntingSeason.closingDay() {
             hideErrorMessage()
             
-            let pageController = pageViewController!.viewControllers[0] as HuntingPageController
+            mainView.dateTimeScroller.setProgress(1, animate: true)
+            mainView.dateTimeScroller.hideIndicator(setProgress: 0)
             
-            self.mainView.dateTimeScroller.setProgress(1, animate: true)
-            self.mainView.dateTimeScroller.hideIndicator(setProgress: 0)
-            
-            pageController.startChangingDay(reverse: true) { (reverse) -> Void in
+            getCurrentPage().startChangingDay(reverse: true) { (reverse) -> Void in
                 self.huntingSeason.nextDay()
                 self.huntingSeason.fetchDay({ (error, huntingDay) -> () in
                    self.showDay(error, huntingDay: huntingDay, reverse: reverse)
@@ -104,8 +102,8 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         if !huntingSeason.openingDay() {
             hideErrorMessage()
             
-            self.mainView.dateTimeScroller.setProgress(0, animate: true)
-            self.mainView.dateTimeScroller.hideIndicator(setProgress: 1)
+            mainView.dateTimeScroller.setProgress(0, animate: true)
+            mainView.dateTimeScroller.hideIndicator(setProgress: 1)
             
             getCurrentPage().startChangingDay(reverse: false) { (reverse) -> Void in
                 self.huntingSeason.previousDay()
@@ -140,6 +138,8 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         mainView.errorMessage.setMessage("Could not load weather data\nTap to retry")
         mainView.errorMessage.setRetryAction(self, action: retryAction)
         
+        pageViewController!.view.userInteractionEnabled = false
+        
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.mainView.errorMessage.alpha = 1
         })
@@ -149,12 +149,15 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         mainView.errorMessage.setMessage("Could not determine location\nTap to retry")
         mainView.errorMessage.setRetryAction(locationManager, action: "startUpdatedLocation")
         
+        pageViewController!.view.userInteractionEnabled = false
+        
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.mainView.errorMessage.alpha = 1
         })
     }
     
     func hideErrorMessage() {
+        pageViewController!.view.userInteractionEnabled = true
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.mainView.errorMessage.alpha = 0
         })
