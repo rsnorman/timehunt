@@ -51,9 +51,6 @@ class WeatherParser: NSObject {
             
             
         }) { (error, message) -> Void in
-            println(error)
-            println(message)
-            
             failure()
         }
     }

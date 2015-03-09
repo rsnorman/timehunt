@@ -11,6 +11,7 @@ import UIKit
 protocol HuntingSeasonDelegate {
     func willChangeDay(currentDay: HuntingDay)
     func didChangeDay(currentDay: HuntingDay)
+    func didFailChangeDay()
 }
 
 class HuntingSeason {
@@ -48,14 +49,17 @@ class HuntingSeason {
         return dates.count
     }
     
-    func fetchDay(completion: (huntingDay: HuntingDay) -> ()) {
+    func fetchDay(completion: (error: NSError?, huntingDay: HuntingDay) -> ()) {
         let currentHuntingDay = self.currentDay()
+        self.delegate?.willChangeDay(currentHuntingDay)
         WeatherParser.sharedInstance.fetch(location, date: currentHuntingDay.date, success: { (dailyWeather) -> () in
             currentHuntingDay.weather = dailyWeather
             currentHuntingDay.setSunriseSunset(dailyWeather.sunrise!, sunsetTime: dailyWeather.sunset!)
-            completion(huntingDay: currentHuntingDay)
+            completion(error: nil, huntingDay: currentHuntingDay)
+            self.delegate?.didChangeDay(currentHuntingDay)
         }) { () -> () in
-            
+            self.delegate?.didFailChangeDay()
+            completion(error: NSError(), huntingDay: currentHuntingDay)
         }
     }
     

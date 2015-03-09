@@ -16,6 +16,7 @@ class MainView : UIView {
     let dateTimeScroller   : DateLineScroller
     let menuIcon           : MenuIconView
     let datePickerIcon     : DatePickerIcon
+    let errorMessage       : ErrorMessageView
     
     let timeLineHeight   : Int = 200
     
@@ -46,6 +47,9 @@ class MainView : UIView {
         datePickerIcon       = DatePickerIcon(frame: CGRectMake(frame.width - 60, 15, 60, 60))
         datePickerIcon.alpha = 0
         
+        errorMessage = ErrorMessageView(frame: CGRectMake(15, 80, frame.width - 30, 100))
+        errorMessage.alpha = 0
+        
         super.init(frame: frame)
         
         addSubview(bgImageView)
@@ -54,6 +58,7 @@ class MainView : UIView {
         addSubview(downArrow)
         addSubview(upArrow)
         addSubview(datePickerIcon)
+        addSubview(errorMessage)
         addSubview(menuIcon)
     }
     
