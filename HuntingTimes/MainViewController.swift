@@ -84,6 +84,8 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     
     func showNextDate() {
         if !huntingSeason.closingDay() {
+            hideErrorMessage()
+            
             let pageController = pageViewController!.viewControllers[0] as HuntingPageController
             
             self.mainView.dateTimeScroller.setProgress(1, animate: true)
@@ -100,6 +102,8 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     
     func showPreviousDate() {
         if !huntingSeason.openingDay() {
+            hideErrorMessage()
+            
             self.mainView.dateTimeScroller.setProgress(0, animate: true)
             self.mainView.dateTimeScroller.hideIndicator(setProgress: 1)
             
@@ -143,6 +147,17 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     
     func showLocationErrorMessage() {
         mainView.errorMessage.setMessage("Could not determine location\nTap to retry")
+        mainView.errorMessage.setRetryAction(locationManager, action: "startUpdatedLocation")
+        
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.mainView.errorMessage.alpha = 1
+        })
+    }
+    
+    func hideErrorMessage() {
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.mainView.errorMessage.alpha = 0
+        })
     }
     
     /* End Action Methods */

@@ -54,17 +54,17 @@ class DateLineScroller: UIView, ScrollLineViewDelegate {
     
     func showCurrentProgress() {
         scrollLine.showCurrentPosition()
-        dateLabel.alpha = 1
+
     }
     
     func hideCurrentProgress() {
         scrollLine.hideCurrentPosition()
-        dateLabel.alpha = 0
     }
     
     func hideIndicator(setProgress progress: CGFloat) {
         UIView.animateWithDuration(DAY_TRANSITION_TIME, animations: { () -> Void in
-            self.hideCurrentProgress()
+            self.scrollLine.positionIndicator.alpha = 0
+            self.dateLabel.alpha = 0
         })  { (complete) -> Void in
             self.setProgress(progress, animate: false)
         }
@@ -72,7 +72,8 @@ class DateLineScroller: UIView, ScrollLineViewDelegate {
     
     func showIndicator() {
         UIView.animateWithDuration(DAY_TRANSITION_TIME, animations: { () -> Void in
-            self.showCurrentProgress()
+            self.scrollLine.positionIndicator.alpha = 1
+            self.dateLabel.alpha = 1
         })
     }
     
