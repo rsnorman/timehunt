@@ -18,7 +18,6 @@ class MainView : UIView {
     let datePickerIcon     : DatePickerIcon
     let errorMessage       : ErrorMessageView
     let loadingIndicator   : UIActivityIndicatorView
-    let loadingView        : UIView
     
     let timeLineHeight   : Int = 200
     
@@ -56,8 +55,6 @@ class MainView : UIView {
         loadingIndicator.center = errorMessage.center
         loadingIndicator.alpha = 0.0
         loadingIndicator.hidesWhenStopped = false
-        
-        loadingView = UIView(frame: loadingIndicator.frame)
         
         super.init(frame: frame)
         
