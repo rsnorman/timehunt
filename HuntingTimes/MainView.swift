@@ -17,6 +17,8 @@ class MainView : UIView {
     let menuIcon           : MenuIconView
     let datePickerIcon     : DatePickerIcon
     let errorMessage       : ErrorMessageView
+    let loadingIndicator   : UIActivityIndicatorView
+    let loadingView        : UIView
     
     let timeLineHeight   : Int = 200
     
@@ -44,22 +46,29 @@ class MainView : UIView {
         menuIcon       = MenuIconView(frame: CGRectMake(0, 15, 60, 60))
         menuIcon.alpha = 0
         
-        datePickerIcon       = DatePickerIcon(frame: CGRectMake(frame.width - 60, 15, 60, 60))
+        datePickerIcon = DatePickerIcon(frame: CGRectMake(frame.width - 60, 15, 60, 60))
         datePickerIcon.alpha = 0
         
         errorMessage = ErrorMessageView(frame: CGRectMake(15, 80, frame.width - 30, 100))
         errorMessage.alpha = 0
+        
+        loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+        loadingIndicator.center = errorMessage.center
+        loadingIndicator.alpha = 0.0
+        loadingIndicator.hidesWhenStopped = false
+        
+        loadingView = UIView(frame: loadingIndicator.frame)
         
         super.init(frame: frame)
         
         addSubview(bgImageView)
         addSubview(shadowView)
         addSubview(dateTimeScroller)
-        addSubview(downArrow)
-        addSubview(upArrow)
         addSubview(datePickerIcon)
         addSubview(errorMessage)
+        addSubview(loadingIndicator)
         addSubview(menuIcon)
+        
     }
     
     func setDelegate(viewController: MainViewController) {
@@ -93,6 +102,22 @@ class MainView : UIView {
     func resetHints() {
         downArrow.frame = CGRectOffset(downArrow.frame, 0, -10)
         upArrow.frame   = CGRectOffset(upArrow.frame, 0, 10)
+    }
+    
+    func startLoadingIndicator() {
+        self.loadingIndicator.startAnimating()
+        UIView.animateWithDuration(0.3, delay: 1.5, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+            self.loadingIndicator.alpha = 0.7
+        }) { (complete) -> Void in
+        }
+    }
+    
+    func stopLoadingIndicator() {
+        UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: { () -> Void in
+            self.loadingIndicator.alpha = 0
+        }) { (complete) -> Void in
+            self.loadingIndicator.stopAnimating()
+        }
     }
 
     required init(coder aDecoder: NSCoder) {

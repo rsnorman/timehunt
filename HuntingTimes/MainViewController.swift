@@ -39,13 +39,13 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         
         mainView = MainView(frame: view.frame)
         mainView.setDelegate(self)
+        mainView.datePickerIcon.disable()
         view.addSubview(mainView)
         
         addDateGestures()
         
         locationManager = FCLocationManager.sharedManager() as FCLocationManager
         locationManager.delegate = self
-        locationManager.startUpdatingLocation()
         
         huntingControllers = []
         
@@ -58,6 +58,8 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         pageViewController!.view.alpha = 0
         mainView.insertSubview(pageViewController!.view, belowSubview: mainView.datePickerIcon)
         pageViewController!.didMoveToParentViewController(self)
+        
+        findLocation()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -79,12 +81,19 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         })
     }
     
+    func findLocation() {
+        hideErrorMessage()
+        mainView.startLoadingIndicator()
+        locationManager.startUpdatingLocation()
+    }
+    
     
     /* Action Methods */
     
     func showNextDate() {
         if !huntingSeason.closingDay() {
             hideErrorMessage()
+            mainView.startLoadingIndicator()
             mainView.datePickerIcon.disable()
             
             mainView.dateTimeScroller.setProgress(1, animate: true)
@@ -102,6 +111,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     func showPreviousDate() {
         if !huntingSeason.openingDay() {
             hideErrorMessage()
+            mainView.startLoadingIndicator()
             mainView.datePickerIcon.disable()
             
             mainView.dateTimeScroller.setProgress(0, animate: true)
@@ -133,6 +143,8 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
             self.mainView.datePickerIcon.enable()
             
             getCurrentPage().finishChangingDay(reverse: reverse)
+            
+            mainView.stopLoadingIndicator()
         } else {
             self.showErrorMessage(reverse ? "showNextDate" : "showPreviousDate")
         }
@@ -141,6 +153,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     func showErrorMessage(retryAction: Selector) {
         mainView.errorMessage.setMessage("Could not load weather data\nTap to retry")
         mainView.errorMessage.setRetryAction(self, action: retryAction)
+        mainView.stopLoadingIndicator()
         
         pageViewController!.view.userInteractionEnabled = false
         
@@ -151,7 +164,8 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     
     func showLocationErrorMessage() {
         mainView.errorMessage.setMessage("Could not determine location\nTap to retry")
-        mainView.errorMessage.setRetryAction(locationManager, action: "startUpdatedLocation")
+        mainView.errorMessage.setRetryAction(self, action: "findLocation")
+        mainView.stopLoadingIndicator()
         
         pageViewController!.view.userInteractionEnabled = false
         
@@ -253,6 +267,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     
     func getDayForLocation() {
         hideErrorMessage()
+        mainView.startLoadingIndicator()
         mainView.datePickerIcon.disable()
         
         huntingSeason.fetchDay { (error, huntingDay) -> () in
@@ -272,6 +287,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
                 self.mainView.dateTimeScroller.setDate(huntingDay.getCurrentTime().time)
                 
                 self.mainView.datePickerIcon.enable()
+                self.mainView.stopLoadingIndicator()
             } else {
                 self.showErrorMessage("getDayForLocation")
             }
