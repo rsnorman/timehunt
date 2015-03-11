@@ -20,7 +20,7 @@ class SeasonColumnView : ColumnView {
             label.textColor         = .whiteColor()
             label.font              = UIFont(name: "HelveticaNeue-Thin", size: 22)
             label.sizeToFit()
-            label.center            = CGPointMake(label.center.x, index == 0 ? label.frame.height / 2 : frame.height)
+            label.center            = CGPointMake(label.center.x, index == 0 ? label.frame.height / 2 : frame.height - label.frame.height / 2)
             setPositionOfLabel(label)
             addSubview(label)
         }
