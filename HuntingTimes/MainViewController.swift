@@ -99,7 +99,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     
     func finishLoadingDate() {
         mainView.stopLoadingIndicator()
-        mainView.datePickerIcon.disable()
+        mainView.datePickerIcon.enable()
         nextDateGesture.enabled = true
         prevDateGesture.enabled = true
         pageViewController!.view.userInteractionEnabled = true
@@ -150,7 +150,6 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
             mainView.dateTimeScroller.setDate(huntingDay.getCurrentTime().time)
             mainView.dateTimeScroller.setProgress(getCurrentPage().currentProgress(), animate: true)
             mainView.dateTimeScroller.showIndicator()
-            mainView.datePickerIcon.enable()
             
             getCurrentPage().finishChangingDay(reverse: reverse)
             
@@ -195,7 +194,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         let totalDays  = huntingSeason.length()
         let currentDay = Int(round(CGFloat(totalDays - 1) * percent))
         huntingSeason.setCurrentDay(currentDay)
-        mainView.dateTimeScroller.setDate(huntingSeason.currentDay().getCurrentTime().time)
+        mainView.dateTimeScroller.setDate(huntingSeason.currentDay().date)
     }
     
     func didOpenMenu() {
@@ -216,8 +215,6 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         addChildViewController(datePickerController)
         datePickerController.view.alpha = 0
         mainView.insertSubview(datePickerController.view, belowSubview: mainView.datePickerIcon)
-        
-        datePickerController.setDate(huntingSeason.currentDay().getCurrentTime().time)
         
         UIView.animateWithDuration(0.5, animations: {() -> Void in
             self.datePickerController.view.alpha = 1
@@ -301,8 +298,10 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     }
     
     func didTickCountdown() {
-        let pageController = pageViewController!.viewControllers[0] as HuntingPageController
-        mainView.dateTimeScroller.setProgress(pageController.currentProgress(), animate: true)
+        if pageViewController!.view.alpha != 0 {
+            let pageController = pageViewController!.viewControllers[0] as HuntingPageController
+            mainView.dateTimeScroller.setProgress(pageController.currentProgress(), animate: true)
+        }
     }
 
 

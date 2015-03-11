@@ -25,7 +25,7 @@ class MainView : UIView {
         shadowView = ShadowView(frame: frame)
         shadowView.setDarkness(0.5)
         
-        dateTimeScroller = DateLineScroller(frame: CGRectMake(0, 210, frame.width, frame.height - 265))
+        dateTimeScroller = DateLineScroller(frame: CGRectMake(0, 190, frame.width, frame.height - 235))
         dateTimeScroller.alpha           = 0.0
         
         menuIcon       = MenuIconView(frame: CGRectMake(0, 15, 60, 60))

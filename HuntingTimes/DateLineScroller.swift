@@ -18,7 +18,7 @@ class DateLineScroller: UIView, ScrollLineViewDelegate {
     var delegate   : DateLineScrollerDelegate!
     
     override init(frame: CGRect) {
-        scrollLine = ScrollLineView(frame: CGRectMake(frame.width / 2, 25, 1, frame.height - 25))
+        scrollLine = ScrollLineView(frame: CGRectMake(frame.width / 2, 45, 1, frame.height - 45))
         scrollLine.animateDuration = DAY_TRANSITION_TIME
         
         dateLabel = createLabel("", CGRectMake(0, 0, frame.width, 20), 18)
