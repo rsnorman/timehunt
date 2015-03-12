@@ -18,19 +18,21 @@ class ScrollLineView : UIView {
     let currentPositionIndicator : UIView
     var animateDuration          : NSTimeInterval
     var delegate                 : ScrollLineViewDelegate!
+    let indicatorDiameter        : CGFloat = 11
+    let indicatorRadius          : CGFloat = 11 / 2
     
     override init(frame: CGRect) {
-        middleLine = UIView(frame: CGRectMake(frame.width / 2, 0, 1, frame.height))
+        middleLine = UIView(frame: CGRectMake(frame.width / 2, indicatorRadius, 1, frame.height - indicatorRadius))
         middleLine.backgroundColor = .whiteColor()
         
-        positionIndicator = UIView(frame: CGRectMake(frame.width / 2 - 5, 0, 11, 11))
-        positionIndicator.layer.cornerRadius = 5.5
+        positionIndicator = UIView(frame: CGRectMake(frame.width / 2 - indicatorRadius, 0, indicatorDiameter, indicatorDiameter))
+        positionIndicator.layer.cornerRadius = indicatorRadius
         positionIndicator.layer.borderColor  = UIColor.whiteColor().CGColor
         positionIndicator.layer.borderWidth  = 1
         positionIndicator.backgroundColor    = .whiteColor()
         
-        currentPositionIndicator = UIView(frame: CGRectMake(frame.width / 2 - 5, 0, 11, 11))
-        currentPositionIndicator.layer.cornerRadius = 5.5
+        currentPositionIndicator = UIView(frame: CGRectMake(frame.width / 2 - indicatorRadius, 0, indicatorDiameter, indicatorDiameter))
+        currentPositionIndicator.layer.cornerRadius = indicatorRadius
         currentPositionIndicator.layer.borderColor  = UIColor.whiteColor().CGColor
         currentPositionIndicator.layer.borderWidth  = 1
         currentPositionIndicator.backgroundColor    = UIColor(white: 1, alpha: 0.7)
@@ -57,16 +59,16 @@ class ScrollLineView : UIView {
     
     func positionIndicatorFromPercent(percent: CGFloat, notifyDelegate: Bool) {
         let pFrame = positionIndicator.frame
-        positionIndicator.frame = CGRectMake(pFrame.origin.x, frame.height * percent, pFrame.width, pFrame.height)
+        positionIndicator.frame = CGRectMake(pFrame.origin.x, (frame.height - indicatorRadius) * percent, pFrame.width, pFrame.height)
         
         if notifyDelegate {
-            delegate?.didPositionIndicator(pFrame.origin.y / frame.height)
+            delegate?.didPositionIndicator(pFrame.origin.y / (frame.height - indicatorRadius))
         }
     }
     
     func markCurrentPosition(percent: CGFloat) {
         let cpFrame = currentPositionIndicator.frame
-        currentPositionIndicator.frame = CGRectMake(cpFrame.origin.x, frame.height * percent, cpFrame.width, cpFrame.height)
+        currentPositionIndicator.frame = CGRectMake(cpFrame.origin.x, (frame.height - indicatorRadius) * percent, cpFrame.width, cpFrame.height)
     }
     
     func showCurrentPosition() {
