@@ -12,48 +12,45 @@ protocol DatePickerControllerDelegate {
     func didScrollDates(position: CGFloat)
 }
 
-class DatePickerController: UIViewController {
-    var monthColumnView : ColumnView!
-    var datepickerLabel : UILabel!
+class DatePickerController: UIViewController, UIScrollViewDelegate {
+    var monthColumnView : SeasonColumnView!
+    var datePickerLabel : UILabel!
     var delegate        : DatePickerControllerDelegate!
-    var startScrollY  : CGFloat!
+    var scrollView      : UIScrollView!
     
     override func viewDidLoad() {
         let frame = view.frame
         
-        datepickerLabel = createLabel("", CGRectMake(0, 60, frame.width, 120), 48)
+        datePickerLabel = createLabel("", CGRectMake(10, 60, frame.width - 20, 120), 36)
+        datePickerLabel.numberOfLines = 2
         
-        monthColumnView = ColumnView(labels: ["September", "October", "November", "December"], frame: CGRectMake(0, 230, frame.width / 2.0 - 10, frame.height - 285))
+        monthColumnView = SeasonColumnView(labels: ["Opening Day", "Closing Day"], frame: createPageViewRect(0, frame.width / 2.0 - 10))
         monthColumnView.setTextAlignment(NSTextAlignment.Right)
         
         view.backgroundColor = .clearColor()
-        
-        view.addSubview(datepickerLabel)
+        view.addSubview(datePickerLabel)
         view.addSubview(monthColumnView)
-        
-        let panGesture = UIPanGestureRecognizer(target: self, action: "scrollDates:")
-        view.addGestureRecognizer(panGesture)
-        
         view.userInteractionEnabled = true
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        startScrollY = 0
-    }
-    
-    func scrollDates(recognizer:UIPanGestureRecognizer) {
-        let translation = recognizer.translationInView(view)
         
-        if recognizer.state == UIGestureRecognizerState.Began {
-            startScrollY = 0
-        } else {
-            delegate?.didScrollDates(translation.y - startScrollY)
-            startScrollY = translation.y
-        }
+        datePickerLabel.text = "Michigan\nDeer Season"
+        
+        scrollView = UIScrollView(frame: createPageViewRect(0, frame.width))
+        scrollView.contentSize = CGSize(width: view.frame.width, height: scrollView.frame.height * 2)
+        scrollView.delegate = self
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+        view.addSubview(scrollView)
     }
     
-    func setDate(date: NSDate) {
-        datepickerLabel.text = dateToString(date)
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        var pos = scrollView.contentOffset.y
+        
+        if pos < 0 {
+            pos = 0
+        } else if pos > scrollView.frame.height {
+            pos = scrollView.frame.height
+        }
+        
+        delegate?.didScrollDates(pos / scrollView.frame.height)
     }
 }

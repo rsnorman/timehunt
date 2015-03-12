@@ -72,6 +72,7 @@
 		4CDE49431A282934002CF42A /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDE49421A282934002CF42A /* MessageView.swift */; };
 		4CDE49451A282B3B002CF42A /* InterfaceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDE49441A282B3B002CF42A /* InterfaceHelper.swift */; };
 		83E8EECC1AAD4F1400B58086 /* ErrorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E8EECB1AAD4F1400B58086 /* ErrorMessageView.swift */; };
+		83F4DEC21AAFF30A00ECD483 /* SeasonColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F4DEC11AAFF30A00ECD483 /* SeasonColumnView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +170,7 @@
 		4CDE49421A282934002CF42A /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		4CDE49441A282B3B002CF42A /* InterfaceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceHelper.swift; sourceTree = "<group>"; };
 		83E8EECB1AAD4F1400B58086 /* ErrorMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessageView.swift; sourceTree = "<group>"; };
+		83F4DEC11AAFF30A00ECD483 /* SeasonColumnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeasonColumnView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +280,7 @@
 			children = (
 				4C5B11051A59D8B70077DFFD /* DatePickerIcon.swift */,
 				4C5B11071A59E7D00077DFFD /* DatePickerController.swift */,
+				83F4DEC11AAFF30A00ECD483 /* SeasonColumnView.swift */,
 			);
 			name = DatePicker;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 				4C6EE1AC1A2590F100305115 /* HuntingTimeProgress.swift in Sources */,
 				4C7EFBF71A509CC4006B2DEF /* HourlyWeather.swift in Sources */,
 				4CDE49431A282934002CF42A /* MessageView.swift in Sources */,
+				83F4DEC21AAFF30A00ECD483 /* SeasonColumnView.swift in Sources */,
 				4CA156DE1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld in Sources */,
 				4C6436BC1A3AB69500017338 /* AFURLSessionManager.m in Sources */,
 				4C56B3CD1A26D2CC00B8BD82 /* NotificationManager.swift in Sources */,

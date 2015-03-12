@@ -15,7 +15,7 @@ class HuntingPageView : UIView {
     let mainLabel          : UILabel
     
     init(frame: CGRect, huntingColumnsClass: HuntingColumnsView.Type) {
-        self.huntingColumnsView = huntingColumnsClass(frame: CGRectMake(0, 230, frame.width, frame.height - 285))
+        self.huntingColumnsView = huntingColumnsClass(frame: createPageViewRect(0, frame.width))
         
         mainLabel = createLabel("", CGRectMake(0, 55, frame.width, 120), 60)
         

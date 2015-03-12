@@ -18,19 +18,21 @@ class ScrollLineView : UIView {
     let currentPositionIndicator : UIView
     var animateDuration          : NSTimeInterval
     var delegate                 : ScrollLineViewDelegate!
+    let indicatorDiameter        : CGFloat = 11
+    let indicatorRadius          : CGFloat = 11 / 2
     
     override init(frame: CGRect) {
-        middleLine = UIView(frame: CGRectMake(frame.width / 2, 0, 1, frame.height))
+        middleLine = UIView(frame: CGRectMake(frame.width / 2, indicatorRadius, 1, frame.height - indicatorRadius))
         middleLine.backgroundColor = .whiteColor()
         
-        positionIndicator = UIView(frame: CGRectMake(frame.width / 2 - 5, 0, 11, 11))
-        positionIndicator.layer.cornerRadius = 5.5
+        positionIndicator = UIView(frame: CGRectMake(frame.width / 2 - indicatorRadius, 0, indicatorDiameter, indicatorDiameter))
+        positionIndicator.layer.cornerRadius = indicatorRadius
         positionIndicator.layer.borderColor  = UIColor.whiteColor().CGColor
         positionIndicator.layer.borderWidth  = 1
         positionIndicator.backgroundColor    = .whiteColor()
         
-        currentPositionIndicator = UIView(frame: CGRectMake(frame.width / 2 - 5, 0, 11, 11))
-        currentPositionIndicator.layer.cornerRadius = 5.5
+        currentPositionIndicator = UIView(frame: CGRectMake(frame.width / 2 - indicatorRadius, 0, indicatorDiameter, indicatorDiameter))
+        currentPositionIndicator.layer.cornerRadius = indicatorRadius
         currentPositionIndicator.layer.borderColor  = UIColor.whiteColor().CGColor
         currentPositionIndicator.layer.borderWidth  = 1
         currentPositionIndicator.backgroundColor    = UIColor(white: 1, alpha: 0.7)
@@ -45,20 +47,28 @@ class ScrollLineView : UIView {
         addSubview(currentPositionIndicator)
     }
     
-    func setPosition(percent: CGFloat, animate: Bool = false) {
-        let frame = self.positionIndicator.frame
+    func setPosition(percent: CGFloat, animate: Bool = false, notifyDelegate: Bool = false) {
         if animate {
             UIView.animateWithDuration(animateDuration, animations: { () -> Void in
-                self.positionIndicator.frame = CGRectMake(frame.origin.x, self.frame.height * percent, frame.width, frame.height)
+                self.positionIndicatorFromPercent(percent, notifyDelegate: notifyDelegate)
             })
         } else {
-            positionIndicator.frame = CGRectMake(frame.origin.x, self.frame.height * percent, frame.width, frame.height)
+            positionIndicatorFromPercent(percent, notifyDelegate: notifyDelegate)
+        }
+    }
+    
+    func positionIndicatorFromPercent(percent: CGFloat, notifyDelegate: Bool) {
+        let pFrame = positionIndicator.frame
+        positionIndicator.frame = CGRectMake(pFrame.origin.x, (frame.height - indicatorRadius) * percent, pFrame.width, pFrame.height)
+        
+        if notifyDelegate {
+            delegate?.didPositionIndicator(pFrame.origin.y / (frame.height - indicatorRadius))
         }
     }
     
     func markCurrentPosition(percent: CGFloat) {
         let cpFrame = currentPositionIndicator.frame
-        currentPositionIndicator.frame = CGRectMake(cpFrame.origin.x, frame.height * percent, cpFrame.width, cpFrame.height)
+        currentPositionIndicator.frame = CGRectMake(cpFrame.origin.x, (frame.height - indicatorRadius) * percent, cpFrame.width, cpFrame.height)
     }
     
     func showCurrentPosition() {
@@ -67,25 +77,6 @@ class ScrollLineView : UIView {
     
     func hideCurrentPosition() {
         currentPositionIndicator.alpha = 0.0
-    }
-    
-    func setOffsetPosition(y: CGFloat) {
-        let piFrame = self.positionIndicator.frame
-        var yOffset = y
-        
-        if piFrame.origin.y + yOffset < 0 {
-            yOffset = piFrame.origin.y * -1
-        }
-        
-        if piFrame.origin.y + yOffset > frame.height {
-            yOffset = frame.height - piFrame.origin.y
-        }
-        
-        positionIndicator.frame = CGRectOffset(piFrame, 0, yOffset)
-        
-        if let del = delegate {
-            del.didPositionIndicator(piFrame.origin.y / frame.height)
-        }
     }
 
     required init(coder aDecoder: NSCoder) {

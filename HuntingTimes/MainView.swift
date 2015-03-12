@@ -11,8 +11,6 @@ import UIKit
 class MainView : UIView {
     let bgImageView        : TiltImageView
     let shadowView         : ShadowView
-    let downArrow          : UIImageView
-    let upArrow            : UIImageView
     let dateTimeScroller   : DateLineScroller
     let menuIcon           : MenuIconView
     let datePickerIcon     : DatePickerIcon
@@ -27,20 +25,8 @@ class MainView : UIView {
         shadowView = ShadowView(frame: frame)
         shadowView.setDarkness(0.5)
         
-        dateTimeScroller = DateLineScroller(frame: CGRectMake(0, 210, frame.width, frame.height - 265))
+        dateTimeScroller = DateLineScroller(frame: createPageViewRect(0, frame.width, topPadding: 50))
         dateTimeScroller.alpha           = 0.0
-        
-        let downArrowImage  = UIImage(named: "down-arrow")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        downArrow           = UIImageView(image: downArrowImage)
-        downArrow.center    = CGPointMake(frame.width / 2, frame.height - 20)
-        downArrow.tintColor = .whiteColor()
-        downArrow.alpha     = 0
-        
-        let upArrowImage  = UIImage(named: "up-arrow")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        upArrow           = UIImageView(image: upArrowImage)
-        upArrow.center    = CGPointMake(frame.width / 2, dateTimeScroller.frame.origin.y - 35)
-        upArrow.tintColor = .whiteColor()
-        upArrow.alpha     = 0
         
         menuIcon       = MenuIconView(frame: CGRectMake(0, 15, 60, 60))
         menuIcon.alpha = 0
@@ -78,27 +64,6 @@ class MainView : UIView {
         dateTimeScroller.alpha = 0.7
         menuIcon.alpha         = 1.0
         datePickerIcon.alpha   = 1.0
-    }
-    
-    func showHints() {
-        downArrow.frame = CGRectOffset(downArrow.frame, 0, 5)
-        downArrow.alpha = 0.7
-        
-        upArrow.frame = CGRectOffset(upArrow.frame, 0, -5)
-        upArrow.alpha = 0.7
-    }
-    
-    func hideHints() {
-        downArrow.frame = CGRectOffset(downArrow.frame, 0, 5)
-        downArrow.alpha = 0.0
-        
-        upArrow.frame = CGRectOffset(upArrow.frame, 0, -5)
-        upArrow.alpha = 0.0
-    }
-    
-    func resetHints() {
-        downArrow.frame = CGRectOffset(downArrow.frame, 0, -10)
-        upArrow.frame   = CGRectOffset(upArrow.frame, 0, 10)
     }
     
     func startLoadingIndicator() {
