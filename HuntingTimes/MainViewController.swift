@@ -214,6 +214,8 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     func didOpenDatePicker() {
         addChildViewController(datePickerController)
         datePickerController.view.alpha = 0
+        pageViewController!.view.userInteractionEnabled = false
+        
         mainView.insertSubview(datePickerController.view, belowSubview: mainView.datePickerIcon)
         
         UIView.animateWithDuration(0.5, animations: {() -> Void in
@@ -225,29 +227,38 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     }
     
     func didCloseDatePicker() {
+        pageViewController!.view.userInteractionEnabled = true
+        
         UIView.animateWithDuration(0.5, animations: {() -> Void in
             self.datePickerController.view.alpha = 0
             self.mainView.dateTimeScroller.hideCurrentProgress()
             
         }) {(complete) -> Void in
-            self.huntingSeason.fetchDay({ (error, huntingDay) -> () in
-                
-                if error == nil {
-                    for page in self.huntingControllers! {
-                        page.setDay(huntingDay)
-                    }
-                    
-                    UIView.animateWithDuration(0.5, animations: {() -> Void in
-                        let pageController = self.pageViewController!.viewControllers[0] as HuntingPageController
-                        self.mainView.dateTimeScroller.setProgress(pageController.currentProgress(), animate: false)
-                        self.mainView.dateTimeScroller.showIndicator()
-                        self.pageViewController!.view.alpha = 1
-                    })
-                } else {
-//                    self.showErrorMessage()
-                }
-            })
+            self.showSelectedDay()
         }
+    }
+    
+    func showSelectedDay() {
+        startLoadingDate()
+        
+        huntingSeason.fetchDay({ (error, huntingDay) -> () in
+            if error == nil {
+                for page in self.huntingControllers! {
+                    page.setDay(huntingDay)
+                }
+                
+                UIView.animateWithDuration(0.5, animations: {() -> Void in
+                    let pageController = self.pageViewController!.viewControllers[0] as HuntingPageController
+                    self.mainView.dateTimeScroller.setProgress(pageController.currentProgress(), animate: false)
+                    self.mainView.dateTimeScroller.showIndicator()
+                    self.pageViewController!.view.alpha = 1
+                })
+                
+                self.finishLoadingDate()
+            } else {
+                self.showErrorMessage("showSelectedDay")
+            }
+        })
     }
     
     func didScrollDates(percent: CGFloat) {
