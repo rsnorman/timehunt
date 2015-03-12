@@ -41,11 +41,7 @@ class DateLineScroller: UIView, ScrollLineViewDelegate {
     }
     
     func setProgress(percent: CGFloat, animate: Bool) {
-        scrollLine.setPosition(percent, animate: animate)
-    }
-    
-    func setOffsetProgress(amount: CGFloat) {
-        scrollLine.setOffsetPosition(amount)
+        scrollLine.setPosition(percent, animate: animate, notifyDelegate: true)
     }
     
     func markCurrentProgress(progress: CGFloat) {

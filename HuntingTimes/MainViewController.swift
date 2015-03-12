@@ -250,8 +250,8 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         }
     }
     
-    func didScrollDates(position: CGFloat) {
-        self.mainView.dateTimeScroller.setOffsetProgress(position)
+    func didScrollDates(percent: CGFloat) {
+        self.mainView.dateTimeScroller.setProgress(percent, animate: false)
     }
     
     func didSelectBackground(backgroundImage: String) {

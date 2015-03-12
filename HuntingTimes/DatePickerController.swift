@@ -17,7 +17,6 @@ class DatePickerController: UIViewController, UIScrollViewDelegate {
     var datePickerLabel : UILabel!
     var delegate        : DatePickerControllerDelegate!
     var scrollView      : UIScrollView!
-    var startScrollY    : CGFloat!
     
     override func viewDidLoad() {
         let frame = view.frame
@@ -29,44 +28,29 @@ class DatePickerController: UIViewController, UIScrollViewDelegate {
         monthColumnView.setTextAlignment(NSTextAlignment.Right)
         
         view.backgroundColor = .clearColor()
-        
         view.addSubview(datePickerLabel)
         view.addSubview(monthColumnView)
-        
-//        let panGesture = UIPanGestureRecognizer(target: self, action: "scrollDates:")
-//        view.addGestureRecognizer(panGesture)
-        
         view.userInteractionEnabled = true
         
         datePickerLabel.text = "Michigan\nDeer Season"
         
         scrollView = UIScrollView(frame: createPageViewRect(0, frame.width))
-        scrollView.contentSize = CGSize(width: view.frame.width, height: 3000)
-        scrollView.layer.borderColor = UIColor.whiteColor().CGColor
-        scrollView.layer.borderWidth = 1
+        scrollView.contentSize = CGSize(width: view.frame.width, height: scrollView.frame.height * 2)
         scrollView.delegate = self
-//        [tableView setShowsHorizontalScrollIndicator:NO];
-//        [tableView setShowsVerticalScrollIndicator:NO];
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
         view.addSubview(scrollView)
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        startScrollY = 0
-    }
-    
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        println(scrollView.contentOffset.y)
-    }
-    
-    func scrollDates(recognizer:UIPanGestureRecognizer) {
-        let translation = recognizer.translationInView(view)
+        var pos = scrollView.contentOffset.y
         
-        if recognizer.state == UIGestureRecognizerState.Began {
-            startScrollY = 0
-        } else {
-            delegate?.didScrollDates(translation.y - startScrollY)
-            startScrollY = translation.y
+        if pos < 0 {
+            pos = 0
+        } else if pos > scrollView.frame.height {
+            pos = scrollView.frame.height
         }
+        
+        delegate?.didScrollDates(pos / scrollView.frame.height)
     }
 }
