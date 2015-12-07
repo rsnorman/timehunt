@@ -34,25 +34,6 @@ class HuntingDay {
         endTime          = HuntingTime(time: sunsetTime.dateByAddingTimeInterval(60 * 30), event: "Stop")
     }
     
-//    convenience init(startTime: NSDate, endTime: NSDate) {
-//        self.init(date: startTime)
-//        
-//        self.startTime = HuntingTime(time: startTime, event: "Start")
-//        self.endTime   = HuntingTime(time: endTime, event: "Stop")
-//        sunriseTime    = HuntingTime(time: startTime.dateByAddingTimeInterval(60 * 30), event: "Sunrise")
-//        sunsetTime     = HuntingTime(time: endTime.dateByAddingTimeInterval(60 * 30 * -1), event: "Sunset")
-//    }
-//    
-//    convenience init(sunriseTime: NSDate, sunsetTime: NSDate) {
-//        self.init(date: sunriseTime)
-//        
-//        self.sunriseTime = HuntingTime(time: sunriseTime, event: "Sunrise")
-//        self.sunsetTime  = HuntingTime(time: sunsetTime, event: "Sunset")
-//        startTime        = HuntingTime(time: sunriseTime.dateByAddingTimeInterval(60 * 30 * -1), event: "Start")
-//        endTime          = HuntingTime(time: sunsetTime.dateByAddingTimeInterval(60 * 30), event: "Stop")
-//    }
-    
-    
     func allTimes() -> [HuntingTime] {
         return[startTime, sunriseTime, sunsetTime, endTime]
     }
