@@ -21,11 +21,11 @@ class TemperaturePageController : HuntingPageController {
         super.didSetDay(huntingDay)
         
         if huntingDay.weather.hasCurrent() {
-            huntingPageView.stateLabel.text = "Current Temperature"
-            huntingPageView.mainLabel.text = "\(huntingDay.weather.currentTemperature())°"
+            huntingPageView?.stateLabel.text = "Current Temperature"
+            huntingPageView?.mainLabel.text = "\(huntingDay.weather.currentTemperature())°"
         } else {
-            huntingPageView.stateLabel.text = "Low/High Temperature"
-            huntingPageView.mainLabel.text = "\(huntingDay.weather.lowTemperature())° / \(huntingDay.weather.highTemperature())°"
+            huntingPageView?.stateLabel.text = "Low/High Temperature"
+            huntingPageView?.mainLabel.text = "\(huntingDay.weather.lowTemperature())° / \(huntingDay.weather.highTemperature())°"
         }
     }
 }

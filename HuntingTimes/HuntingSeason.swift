@@ -94,21 +94,11 @@ class HuntingSeason {
     private
     
     func getCurrentPosition() -> Int {
-        return 0
-//        let dateFormatter = NSDateFormatter()
-//        dateFormatter.dateFormat = "YYYY-MM-d"
-//        let today = dateFormatter.stringFromDate(NSDate())
         
-//        if dates[0].startTime.timeIntervalSinceNow() > 0 {
-//            return 0
-//        } else if dates.last?.endTime.timeIntervalSinceNow() > 0 {
-//            for (index, huntingDay) in enumerate(dates) {
-//                if today == dateFormatter.stringFromDate(huntingDay.startTime.time) {
-//                    return index
-//                }
-//            }
-//        }
-        
-//        return dates.count - 1
+        if dates[0].date.timeIntervalSinceNow > 0 {
+            return 0
+        } else {
+            return differenceInDays(dates[0].date, NSDate())
+        }
     }
 }
