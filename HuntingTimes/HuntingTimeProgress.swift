@@ -17,8 +17,8 @@ class HuntingTimeProgress {
     }
     
     func getProgressPercent() -> CGFloat {
-        let lastTime = getLastTime(NSDate())
-        let nextTime = getNextTime(NSDate())
+        let lastTime = getLastTime(Date())
+        let nextTime = getNextTime(Date())
         
         if lastTime.event == nextTime.event {
             return huntingDay.dayBeginning.event == lastTime.event ? 0.0 : 1.0
@@ -27,19 +27,19 @@ class HuntingTimeProgress {
         var lastPoint : CGPoint?
         var nextPoint : CGPoint?
         
-        if isFirstTime(lastTime.time) {
-            lastPoint = CGPointMake(0, 0)
+        if isFirstTime(lastTime.time as Date) {
+            lastPoint = CGPoint(x: 0, y: 0)
             nextPoint = huntingTimesColumn.getPosition(nextTime.toTimeString())
-        } else if isLastTime(nextTime.time) {
+        } else if isLastTime(nextTime.time as Date) {
             lastPoint = huntingTimesColumn.getPosition(lastTime.toTimeString())
-            nextPoint = CGPointMake(0, huntingTimesColumn.frame.height)
+            nextPoint = CGPoint(x: 0, y: huntingTimesColumn.frame.height)
         } else {
             lastPoint = huntingTimesColumn.getPosition(lastTime.toTimeString())
             nextPoint = huntingTimesColumn.getPosition(nextTime.toTimeString())
         }
         
         let timeSinceNext = nextTime.timeIntervalSinceDate(lastTime.time)
-        let timeSinceNow  = NSDate().timeIntervalSinceDate(lastTime.time)
+        let timeSinceNow  = Date().timeIntervalSince(lastTime.time as Date)
         
         let percentOfTime = CGFloat(timeSinceNow / timeSinceNext)
         
@@ -52,26 +52,26 @@ class HuntingTimeProgress {
         }
     }
     
-    private
+    fileprivate
     
     func getHuntingTimes() -> [HuntingTime] {
         var times = huntingDay.allTimes()
-        times.insert(huntingDay.dayBeginning, atIndex: 0)
+        times.insert(huntingDay.dayBeginning, at: 0)
         times.append(huntingDay.dayEnd)
         
         return times
     }
     
-    func isFirstTime(time: NSDate) -> Bool {
-        return huntingDay.dayBeginning.time == time
+    func isFirstTime(_ time: Date) -> Bool {
+        return huntingDay.dayBeginning.time as Date == time
     }
     
-    func isLastTime(time: NSDate) -> Bool {
-        return huntingDay.dayEnd.time == time
+    func isLastTime(_ time: Date) -> Bool {
+        return huntingDay.dayEnd.time as Date == time
     }
     
-    func getLastTime(nextTime: NSDate) -> HuntingTime {
-        for time in getHuntingTimes().reverse() {
+    func getLastTime(_ nextTime: Date) -> HuntingTime {
+        for time in getHuntingTimes().reversed() {
             if time.timeIntervalSinceDate(nextTime) < 0 {
                 return time
             }
@@ -80,7 +80,7 @@ class HuntingTimeProgress {
         return getHuntingTimes().first!
     }
     
-    func getNextTime(nextTime: NSDate) -> HuntingTime {
+    func getNextTime(_ nextTime: Date) -> HuntingTime {
         for time in getHuntingTimes() {
             if time.timeIntervalSinceDate(nextTime) >= 0 {
                 return time

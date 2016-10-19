@@ -15,13 +15,13 @@ class HuntingPageView : UIView {
     let mainLabel          : UILabel
     
     init(frame: CGRect, huntingColumnsClass: HuntingColumnsView.Type) {
-        self.huntingColumnsView = huntingColumnsClass(frame: createPageViewRect(0, frame.width))
+        self.huntingColumnsView = huntingColumnsClass.init(frame: createPageViewRect(0, width: frame.width))
         
-        mainLabel = createLabel("", CGRectMake(0, 55, frame.width, 120), 60)
+        mainLabel = createLabel("", frame: CGRect(x: 0, y: 55, width: frame.width, height: 120), fontSize: 60)
         
-        messageLabel = MessageView(frame: CGRectMake(10, 75, frame.width - 20, 100))
+        messageLabel = MessageView(frame: CGRect(x: 10, y: 75, width: frame.width - 20, height: 100))
         messageLabel.alpha = 0
-        stateLabel = createLabel("", CGRectMake(0, 30, frame.width, 40), 16)
+        stateLabel = createLabel("", frame: CGRect(x: 0, y: 30, width: frame.width, height: 40), fontSize: 16)
         stateLabel.font = UIFont(name: "HelveticaNeue", size: 16)
         
         super.init(frame: frame)

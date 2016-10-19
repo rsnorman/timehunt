@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TimesColumnsDelegate {
-    func didTapHuntingTime(huntingTime: HuntingTime)
+    func didTapHuntingTime(_ huntingTime: HuntingTime)
 }
 
 class TimesColumns : HuntingColumnsView {
@@ -26,8 +26,8 @@ class TimesColumns : HuntingColumnsView {
         leftColumnView.setLabels(events)
         
         for view in leftColumnView.subviews as [UIView] {
-            let tapGesture = UITapGestureRecognizer(target: self, action: "didTapEvent:")
-            view.userInteractionEnabled = true
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(TimesColumns.didTapEvent(_:)))
+            view.isUserInteractionEnabled = true
             view.addGestureRecognizer(tapGesture)
         }
     }
@@ -36,9 +36,9 @@ class TimesColumns : HuntingColumnsView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func didTapEvent(sender: UITapGestureRecognizer) {
-        let loc   = sender.locationInView(self)
-        if let label = self.hitTest(loc, withEvent: nil) as? UILabel {
+    func didTapEvent(_ sender: UITapGestureRecognizer) {
+        let loc   = sender.location(in: self)
+        if let label = self.hitTest(loc, with: nil) as? UILabel {
             let event = label.text
             let time  = huntingDay.allTimes()[find(events, event!)!]
             
@@ -48,9 +48,9 @@ class TimesColumns : HuntingColumnsView {
         }
     }
     
-    func didTapTime(sender: UITapGestureRecognizer) {
-        let loc   = sender.locationInView(self)
-        if let label = self.hitTest(loc, withEvent: nil) as? UILabel {
+    func didTapTime(_ sender: UITapGestureRecognizer) {
+        let loc   = sender.location(in: self)
+        if let label = self.hitTest(loc, with: nil) as? UILabel {
             let timeString = label.text
             let timesString = huntingDay.allTimes().map {
                 $0.toTimeString()
@@ -64,7 +64,7 @@ class TimesColumns : HuntingColumnsView {
         }
     }
     
-    func getPositionOfTime(time: NSDate) -> Int? {
+    func getPositionOfTime(_ time: Date) -> Int? {
         if let day = huntingDay {
             let timesString = huntingDay.allTimes().map {
                 $0.toTimeString()
@@ -74,14 +74,14 @@ class TimesColumns : HuntingColumnsView {
         return nil
     }
     
-    func findEventLabelFromTime(time: NSDate) -> UILabel? {
+    func findEventLabelFromTime(_ time: Date) -> UILabel? {
         if let position = getPositionOfTime(time) {
             return leftColumnView.subviews[position] as? UILabel
         }
         return nil
     }
     
-    func addNotificationIcon(time: NSDate, animate: Bool = true) {
+    func addNotificationIcon(_ time: Date, animate: Bool = true) {
         if let label = findEventLabelFromTime(time) {
             let eventText = label.text!
 
@@ -90,8 +90,8 @@ class TimesColumns : HuntingColumnsView {
             }
             
             let xOffset                         = CGFloat(14 * notificationIcons[eventText]!.count) + 15
-            let notificationIcon                = UIView(frame: CGRectMake(label.frame.origin.x - xOffset, label.center.y - 3, 8, 8))
-            notificationIcon.backgroundColor    = .whiteColor()
+            let notificationIcon                = UIView(frame: CGRect(x: label.frame.origin.x - xOffset, y: label.center.y - 3, width: 8, height: 8))
+            notificationIcon.backgroundColor    = .white
             notificationIcon.layer.cornerRadius = 4
             notificationIcon.alpha              = 0.6
             
@@ -101,21 +101,21 @@ class TimesColumns : HuntingColumnsView {
             
             if animate {
                 notificationIcon.alpha = 0.0
-                notificationIcon.frame = CGRectOffset(notificationIcon.frame, -8, 0)
+                notificationIcon.frame = notificationIcon.frame.offsetBy(dx: -8, dy: 0)
                 
-                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                UIView.animate(withDuration: 0.3, animations: { () -> Void in
                     notificationIcon.alpha = 0.6
-                    notificationIcon.frame = CGRectOffset(notificationIcon.frame, 8, 0)
+                    notificationIcon.frame = notificationIcon.frame.offsetBy(dx: 8, dy: 0)
                 })
             }
         }
     }
     
-    func removeNotificationIcon(time: NSDate, event: String) {
+    func removeNotificationIcon(_ time: Date, event: String) {
         if let icons = notificationIcons[event] {
             if let removeIcon = icons.last {
-                UIView.animateWithDuration(0.3, animations: { () -> Void in
-                    removeIcon.frame = CGRectOffset(removeIcon.frame, 0, 15)
+                UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                    removeIcon.frame = removeIcon.frame.offsetBy(dx: 0, dy: 15)
                     removeIcon.alpha = 0.0
                     }, completion: { (complete) -> Void in
                         removeIcon.removeFromSuperview()
@@ -125,13 +125,13 @@ class TimesColumns : HuntingColumnsView {
         }
     }
     
-    func removeNotificationIcons(time: NSDate) {
+    func removeNotificationIcons(_ time: Date) {
         if let label = findEventLabelFromTime(time) {
             let eventText = label.text!
             if let icons = notificationIcons[eventText] {
-                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                UIView.animate(withDuration: 0.3, animations: { () -> Void in
                     for icon in icons {
-                        icon.frame = CGRectOffset(icon.frame, 0, 15)
+                        icon.frame = icon.frame.offsetBy(dx: 0, dy: 15)
                         icon.alpha = 0.0
                     }
                 }, completion: { (complete) -> Void in
@@ -150,15 +150,15 @@ class TimesColumns : HuntingColumnsView {
         notificationIcons = [:]
     }
     
-    override func setDay(huntingDay: HuntingDay) {
+    override func setDay(_ huntingDay: HuntingDay) {
         super.setDay(huntingDay)
         
         rightColumnView.setLabels([huntingDay.startTime.toTimeString(), huntingDay.sunriseTime.toTimeString(), huntingDay.sunsetTime.toTimeString(), huntingDay.endTime.toTimeString()])
         removeAllNotifications()
         
         for view in rightColumnView.subviews as [UIView] {
-            let tapGesture = UITapGestureRecognizer(target: self, action: "didTapTime:")
-            view.userInteractionEnabled = true
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(TimesColumns.didTapTime(_:)))
+            view.isUserInteractionEnabled = true
             view.addGestureRecognizer(tapGesture)
         }
     }

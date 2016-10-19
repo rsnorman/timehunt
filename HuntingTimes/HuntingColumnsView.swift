@@ -15,11 +15,11 @@ class HuntingColumnsView : UIView {
     let padding          : CGFloat = 15
     
     override required init(frame: CGRect) {
-        leftColumnView = ColumnView(labels: [], frame: CGRectMake(0, 0, frame.width / 2.0 - padding, frame.height))
-        leftColumnView.setTextAlignment(NSTextAlignment.Right)
+        leftColumnView = ColumnView(labels: [], frame: CGRect(x: 0, y: 0, width: frame.width / 2.0 - padding, height: frame.height))
+        leftColumnView.setColumnTextAlignment(NSTextAlignment.right)
         
-        rightColumnView = ColumnView(labels: [], frame: CGRectMake(frame.width / 2.0 + padding, 0, frame.width / 2.0 - padding, frame.height))
-        rightColumnView.setTextAlignment(NSTextAlignment.Left)
+        rightColumnView = ColumnView(labels: [], frame: CGRect(x: frame.width / 2.0 + padding, y: 0, width: frame.width / 2.0 - padding, height: frame.height))
+        rightColumnView.setColumnTextAlignment(NSTextAlignment.left)
         
         super.init(frame: frame)
         
@@ -31,7 +31,7 @@ class HuntingColumnsView : UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setDay(huntingDay: HuntingDay) {
+    func setDay(_ huntingDay: HuntingDay) {
         self.huntingDay = huntingDay
     }
 }

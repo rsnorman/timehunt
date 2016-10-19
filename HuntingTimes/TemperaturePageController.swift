@@ -17,7 +17,7 @@ class TemperaturePageController : HuntingPageController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func didSetDay(huntingDay: HuntingDay) {
+    override func didSetDay(_ huntingDay: HuntingDay) {
         super.didSetDay(huntingDay)
         
         if huntingDay.weather.hasCurrent() {

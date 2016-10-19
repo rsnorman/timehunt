@@ -10,9 +10,9 @@ import Foundation
 
 class HourlyWeather {
     let temperature : Double
-    let time        : NSDate
+    let time        : Date
     
-    init(temperature: Double, at: NSDate) {
+    init(temperature: Double, at: Date) {
         self.temperature = temperature
         self.time        = at
     }

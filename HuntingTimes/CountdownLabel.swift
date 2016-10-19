@@ -15,20 +15,20 @@ protocol CountdownViewDelegate {
 }
 
 class CountdownLabel : UILabel {
-    var countdownToTime : NSDate!
+    var countdownToTime : Date!
     var delegate        : CountdownViewDelegate!
-    var timer           : NSTimer!
+    var timer           : Timer!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         text          = ""
-        textColor     = .whiteColor()
+        textColor     = .white
         font          = UIFont(name: "HelveticaNeue-Thin", size: 48)
-        textAlignment = .Center
+        textAlignment = .center
         numberOfLines = 2
     }
     
-    func startCountdown(countdownToTime: NSDate) {
+    func startCountdown(_ countdownToTime: Date) {
         self.countdownToTime = countdownToTime
         updateCountdown()
     }
@@ -44,8 +44,8 @@ class CountdownLabel : UILabel {
     func updateCountdown() {
         let timeLeft = countdownToTime.timeIntervalSinceNow
         let hours    = Int(ceil(timeLeft / 60) / 60)
-        let minutes  = Int(ceil(timeLeft / 60) % 60)
-        let seconds  = Int(timeLeft % 60)
+        let minutes  = Int(ceil(timeLeft / 60).truncatingRemainder(dividingBy: 60))
+        let seconds  = Int(timeLeft.truncatingRemainder(dividingBy: 60))
         
         var countdownText = ""
         
@@ -77,10 +77,10 @@ class CountdownLabel : UILabel {
         }
         
         if (hours > 0 || minutes > 0 || seconds > 0) {
-            var delayInterval = NSTimeInterval(hours > 0 || minutes > 1 ? seconds + 1 : 1)
+            var delayInterval = TimeInterval(hours > 0 || minutes > 1 ? seconds + 1 : 1)
             delayInterval = delayInterval == 0 ? 60 : delayInterval
             
-            timer = NSTimer.scheduledTimerWithTimeInterval(delayInterval, target: self, selector: "updateCountdown", userInfo: nil, repeats: false)
+            timer = Timer.scheduledTimer(timeInterval: delayInterval, target: self, selector: #selector(CountdownLabel.updateCountdown), userInfo: nil, repeats: false)
             
             if hours == 0 && minutes == 1 && seconds == 1 {
                 if let del = delegate {

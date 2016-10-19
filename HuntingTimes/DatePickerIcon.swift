@@ -25,9 +25,9 @@ class DatePickerIcon : UIView {
     
     override init(frame: CGRect) {
         
-        borderView = UIView(frame: CGRectMake(padding, padding, frame.width - padding * 2, frame.height - padding * 2))
+        borderView = UIView(frame: CGRect(x: padding, y: padding, width: frame.width - padding * 2, height: frame.height - padding * 2))
         borderView.layer.cornerRadius = 5
-        borderView.layer.borderColor  = UIColor.whiteColor().CGColor
+        borderView.layer.borderColor  = UIColor.white.cgColor
         borderView.layer.borderWidth  = 1
         
         calendarView   = UIView(frame: borderView.frame)
@@ -44,94 +44,94 @@ class DatePickerIcon : UIView {
         addSubview(calendarView)
         addSubview(timeView)
         
-        datePickerOpenGesture = UITapGestureRecognizer(target: self, action: "datePickerOpen")
-        datePickerCloseGesture = UITapGestureRecognizer(target: self, action: "datePickerClose")
-        datePickerCloseGesture.enabled = false
+        datePickerOpenGesture = UITapGestureRecognizer(target: self, action: #selector(DatePickerIcon.datePickerOpen))
+        datePickerCloseGesture = UITapGestureRecognizer(target: self, action: #selector(DatePickerIcon.datePickerClose))
+        datePickerCloseGesture.isEnabled = false
         addGestureRecognizer(datePickerOpenGesture)
         addGestureRecognizer(datePickerCloseGesture)
     }
     
     func drawCalendar() {
         let frame   = calendarView.frame
-        let topLine = UIView(frame: CGRectMake(0, 10, frame.width, 1))
-        topLine.backgroundColor = .whiteColor()
+        let topLine = UIView(frame: CGRect(x: 0, y: 10, width: frame.width, height: 1))
+        topLine.backgroundColor = .white
         calendarView.addSubview(topLine)
         
-        let middleLine = UIView(frame: CGRectMake(4, ((frame.height - 10) / 3) + 10, frame.width - 8, 1))
-        middleLine.backgroundColor = .whiteColor()
+        let middleLine = UIView(frame: CGRect(x: 4, y: ((frame.height - 10) / 3) + 10, width: frame.width - 8, height: 1))
+        middleLine.backgroundColor = .white
         calendarView.addSubview(middleLine)
         
-        let bottomLine = UIView(frame: CGRectMake(4, ((frame.height - 10) / 3) * 2 + 10, frame.width - 8, 1))
-        bottomLine.backgroundColor = .whiteColor()
+        let bottomLine = UIView(frame: CGRect(x: 4, y: ((frame.height - 10) / 3) * 2 + 10, width: frame.width - 8, height: 1))
+        bottomLine.backgroundColor = .white
         calendarView.addSubview(bottomLine)
     }
     
     func drawTime() {
         let frame = timeView.frame
         
-        let hourHand = UIView(frame: CGRectMake(0, 0, frame.width, frame.height))
-        let hourLine = UIView(frame: CGRectMake(frame.width / 2, frame.height / 2, frame.width / 2 - 6, 1))
-        hourLine.backgroundColor = .whiteColor()
+        let hourHand = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
+        let hourLine = UIView(frame: CGRect(x: frame.width / 2, y: frame.height / 2, width: frame.width / 2 - 6, height: 1))
+        hourLine.backgroundColor = .white
         hourLine.layer.allowsEdgeAntialiasing = true
         hourHand.addSubview(hourLine)
-        hourHand.transform = CGAffineTransformRotate(hourHand.transform, CGFloat(M_PI * 0.1))
+        hourHand.transform = hourHand.transform.rotated(by: CGFloat(M_PI * 0.1))
         timeView.addSubview(hourHand)
         
-        let minuteHand = UIView(frame: CGRectMake(0, 0, frame.width, frame.height))
-        let minuteLine = UIView(frame: CGRectMake(frame.width / 2, frame.height / 2, frame.width / 2 - 3, 1))
+        let minuteHand = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
+        let minuteLine = UIView(frame: CGRect(x: frame.width / 2, y: frame.height / 2, width: frame.width / 2 - 3, height: 1))
         minuteLine.layer.allowsEdgeAntialiasing = true
-        minuteLine.backgroundColor = .whiteColor()
+        minuteLine.backgroundColor = .white
         minuteHand.addSubview(minuteLine)
-        minuteHand.transform = CGAffineTransformRotate(minuteHand.transform, CGFloat(M_PI * 0.6))
+        minuteHand.transform = minuteHand.transform.rotated(by: CGFloat(M_PI * 0.6))
         timeView.addSubview(minuteHand)
     }
     
     func datePickerOpen() {
-        datePickerCloseGesture.enabled  = false
+        datePickerCloseGesture.isEnabled  = false
         delegate?.didOpenDatePicker()
         
-        UIView.animateWithDuration(0.4, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions(), animations: { () -> Void in
             
             let animation = CABasicAnimation(keyPath: "cornerRadius")
             animation.fromValue = self.borderView.layer.cornerRadius
             animation.toValue   = self.borderView.frame.width / 2
-            self.borderView.layer.addAnimation(animation, forKey: "cornerRadius")
+            self.borderView.layer.add(animation, forKey: "cornerRadius")
             self.borderView.layer.cornerRadius = self.borderView.frame.width / 2
             
             self.calendarView.alpha = 0
             self.timeView.alpha = 1
             
             }) { (complete) -> Void in
-                self.datePickerCloseGesture.enabled = true
+                self.datePickerCloseGesture.isEnabled = true
         }
     }
     
     func datePickerClose() {
-        datePickerCloseGesture.enabled = false
+        datePickerCloseGesture.isEnabled = false
         delegate?.didCloseDatePicker()
         
-        UIView.animateWithDuration(0.4, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions(), animations: { () -> Void in
             
             let animation = CABasicAnimation(keyPath: "cornerRadius")
             animation.fromValue = self.borderView.frame.width / 2
             animation.toValue   = 5
-            self.borderView.layer.addAnimation(animation, forKey: "cornerRadius")
+            self.borderView.layer.add(animation, forKey: "cornerRadius")
             self.borderView.layer.cornerRadius = 5
             
             self.calendarView.alpha = 1
             self.timeView.alpha = 0
             
             }) { (complete) -> Void in
-                self.datePickerOpenGesture.enabled = true
+                self.datePickerOpenGesture.isEnabled = true
         }
     }
     
     func enable() {
-        datePickerOpenGesture.enabled = true
+        datePickerOpenGesture.isEnabled = true
     }
     
     func disable() {
-        datePickerOpenGesture.enabled = false
+        datePickerOpenGesture.isEnabled = false
     }
     
     required init(coder aDecoder: NSCoder) {

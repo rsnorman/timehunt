@@ -20,24 +20,24 @@ class MainView : UIView {
     let timeLineHeight   : Int = 200
     
     override init(frame: CGRect) {
-        let bgImage = UIImage(named: UserSettings.getBackgroundImage())!
+        let bgImage = UIImage(named: UserSettings.getBackgroundImage() as String)!
         bgImageView = TiltImageView(image: bgImage, frame: frame)
         shadowView = ShadowView(frame: frame)
         shadowView.setDarkness(0.5)
         
-        dateTimeScroller = DateLineScroller(frame: createPageViewRect(0, frame.width, topPadding: 50))
+        dateTimeScroller = DateLineScroller(frame: createPageViewRect(0, width: frame.width, topPadding: 50))
         dateTimeScroller.alpha           = 0.0
         
-        menuIcon       = MenuIconView(frame: CGRectMake(0, 15, 60, 60))
+        menuIcon       = MenuIconView(frame: CGRect(x: 0, y: 15, width: 60, height: 60))
         menuIcon.alpha = 0
         
-        datePickerIcon = DatePickerIcon(frame: CGRectMake(frame.width - 60, 15, 60, 60))
+        datePickerIcon = DatePickerIcon(frame: CGRect(x: frame.width - 60, y: 15, width: 60, height: 60))
         datePickerIcon.alpha = 0
         
-        errorMessage = ErrorMessageView(frame: CGRectMake(15, 80, frame.width - 30, 100))
+        errorMessage = ErrorMessageView(frame: CGRect(x: 15, y: 80, width: frame.width - 30, height: 100))
         errorMessage.alpha = 0
         
-        loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+        loadingIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
         loadingIndicator.center = errorMessage.center
         loadingIndicator.alpha = 0.0
         loadingIndicator.hidesWhenStopped = false
@@ -54,7 +54,7 @@ class MainView : UIView {
         
     }
     
-    func setDelegate(viewController: MainViewController) {
+    func setDelegate(_ viewController: MainViewController) {
         menuIcon.delegate         = viewController
         datePickerIcon.delegate   = viewController
         dateTimeScroller.delegate = viewController
@@ -68,14 +68,14 @@ class MainView : UIView {
     
     func startLoadingIndicator() {
         self.loadingIndicator.startAnimating()
-        UIView.animateWithDuration(0.3, delay: 1.5, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
+        UIView.animate(withDuration: 0.3, delay: 1.5, options: UIViewAnimationOptions.curveEaseIn, animations: { () -> Void in
             self.loadingIndicator.alpha = 0.7
         }) { (complete) -> Void in
         }
     }
     
     func stopLoadingIndicator() {
-        UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: { () -> Void in
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: { () -> Void in
             self.loadingIndicator.alpha = 0
         }) { (complete) -> Void in
             self.loadingIndicator.stopAnimating()

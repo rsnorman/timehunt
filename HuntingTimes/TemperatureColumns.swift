@@ -18,7 +18,7 @@ class TemperatureColumns : HuntingColumnsView {
         super.init(frame: frame)
     }
     
-    override func setDay(huntingDay: HuntingDay) {
+    override func setDay(_ huntingDay: HuntingDay) {
         super.setDay(huntingDay)
         
         leftColumnView.setLabels([huntingDay.startTime.toTimeString(), huntingDay.sunriseTime.toTimeString(), huntingDay.sunsetTime.toTimeString(), huntingDay.endTime.toTimeString()])
@@ -27,7 +27,7 @@ class TemperatureColumns : HuntingColumnsView {
     }
     
     
-    func setTemperatures(dailyWeather: DailyWeather) {
+    func setTemperatures(_ dailyWeather: DailyWeather) {
         let temperatures = ["\(Int(round(dailyWeather.temperatureAt(huntingDay.startTime.time))))°",
             "\(Int(round(dailyWeather.temperatureAt(huntingDay.sunriseTime.time))))°",
             "\(Int(round(dailyWeather.temperatureAt(huntingDay.sunsetTime.time))))°",

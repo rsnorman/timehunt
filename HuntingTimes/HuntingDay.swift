@@ -9,29 +9,29 @@
 import UIKit
 
 class HuntingDay {
-    let date         : NSDate
+    let date         : Date
     var startTime    : HuntingTime!
     var endTime      : HuntingTime!
     var sunriseTime  : HuntingTime!
     var sunsetTime   : HuntingTime!
     lazy var dayBeginning : HuntingTime = {
-        return HuntingTime(time: NSCalendar.currentCalendar().dateBySettingHour(0, minute: 0, second: 0, ofDate: self.startTime.time, options: nil)!, event: "DayStart")
+        return HuntingTime(time: Calendar.current.dateBySettingHour(0, minute: 0, second: 0, ofDate: self.startTime.time, options: nil)!, event: "DayStart")
     }()
     lazy var dayEnd : HuntingTime = {
-        return HuntingTime(time: NSCalendar.currentCalendar().dateBySettingHour(23, minute: 59, second: 59, ofDate: self.endTime.time, options: nil)!, event: "DayEnd")
+        return HuntingTime(time: Calendar.current.dateBySettingHour(23, minute: 59, second: 59, ofDate: self.endTime.time, options: nil)!, event: "DayEnd")
     }()
     
     var weather : DailyWeather!
     
-    init(date: NSDate) {
+    init(date: Date) {
         self.date = clearTime(date)
     }
     
-    func setSunriseSunset(sunriseTime: NSDate, sunsetTime: NSDate) {
+    func setSunriseSunset(_ sunriseTime: Date, sunsetTime: Date) {
         self.sunriseTime = HuntingTime(time: sunriseTime, event: "Sunrise")
         self.sunsetTime  = HuntingTime(time: sunsetTime, event: "Sunset")
-        startTime        = HuntingTime(time: sunriseTime.dateByAddingTimeInterval(60 * 30 * -1), event: "Start")
-        endTime          = HuntingTime(time: sunsetTime.dateByAddingTimeInterval(60 * 30), event: "Stop")
+        startTime        = HuntingTime(time: sunriseTime.addingTimeInterval(60 * 30 * -1), event: "Start")
+        endTime          = HuntingTime(time: sunsetTime.addingTimeInterval(60 * 30), event: "Stop")
     }
     
     func allTimes() -> [HuntingTime] {

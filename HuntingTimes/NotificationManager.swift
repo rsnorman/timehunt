@@ -9,42 +9,42 @@
 import UIKit
 
 protocol NotificationManagerDelegate {
-    func didAddNotification(notificationable: NotificationInterface, notification: Notification)
-    func didRemoveAllNotifications(notificationable: NotificationInterface)
-    func didReceiveNotification(userInfo: [NSObject : AnyObject])
+    func didAddNotification(_ notificationable: NotificationInterface, notification: Notification)
+    func didRemoveAllNotifications(_ notificationable: NotificationInterface)
+    func didReceiveNotification(_ userInfo: [AnyHashable: Any])
 }
 
 protocol NotificationInterface {
     func key() -> String
-    func alert(additionalAlertInterval: String) -> String
-    func message(additionalAlertInterval: String) -> String
-    func scheduleTime() -> NSDate
-    func userInfo() -> [NSObject : AnyObject]
+    func alert(_ additionalAlertInterval: String) -> String
+    func message(_ additionalAlertInterval: String) -> String
+    func scheduleTime() -> Date
+    func userInfo() -> [AnyHashable: Any]
 }
 
 class Notification {
     let notificationable   : NotificationInterface
-    let additionalInterval : NSTimeInterval
+    let additionalInterval : TimeInterval
     
-    init(notificationable: NotificationInterface, additionalInterval: NSTimeInterval) {
+    init(notificationable: NotificationInterface, additionalInterval: TimeInterval) {
         self.notificationable              = notificationable
         self.additionalInterval            = additionalInterval
         
         if canSchedule() {
             let localNotification              = UILocalNotification()
-            localNotification.fireDate         = notificationable.scheduleTime().dateByAddingTimeInterval(additionalInterval * -1)
+            localNotification.fireDate         = notificationable.scheduleTime().addingTimeInterval(additionalInterval * -1)
             localNotification.alertBody        = notificationable.alert(getTime())
             localNotification.alertAction      = "View Details"
             localNotification.soundName        = "silence.mp3"
             localNotification.userInfo         = notificationable.userInfo()
             localNotification.userInfo!["key"] = notificationable.key()
 
-            UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+            UIApplication.shared.scheduleLocalNotification(localNotification)
         }
     }
     
     func canSchedule() -> Bool {
-        return notificationable.scheduleTime().dateByAddingTimeInterval(additionalInterval * -1).timeIntervalSinceNow > 0
+        return notificationable.scheduleTime().addingTimeInterval(additionalInterval * -1).timeIntervalSinceNow > 0
     }
     
     func getTime() -> String {
@@ -70,14 +70,14 @@ class NotificationManager {
         return Static.instance
     }
     
-    func addDelegate(delegate: NotificationManagerDelegate) {
+    func addDelegate(_ delegate: NotificationManagerDelegate) {
         delegates.append(delegate)
     }
     
-    func addNotification(notificationable: NotificationInterface) {
+    func addNotification(_ notificationable: NotificationInterface) {
         if canAddNotificationsForKey(notificationable.key()) {
             let count = getAllNotificationsForKey(notificationable.key()).count
-            var additionalInterval : NSTimeInterval = 0
+            var additionalInterval : TimeInterval = 0
             if count == 1 {
                 additionalInterval = SECOND_NOTIFICATION_INTERVAL
             } else if count == 2 {
@@ -94,9 +94,9 @@ class NotificationManager {
         }
     }
     
-    func removeAllNotifications(notificationable: NotificationInterface) {
+    func removeAllNotifications(_ notificationable: NotificationInterface) {
         for notification in getAllNotificationsForKey(notificationable.key()) {
-            UIApplication.sharedApplication().cancelLocalNotification(notification)
+            UIApplication.shared.cancelLocalNotification(notification)
         }
         
         for del in delegates {
@@ -104,11 +104,11 @@ class NotificationManager {
         }
     }
     
-    func getAllNotificationsForKey(key: String) -> [UILocalNotification] {
+    func getAllNotificationsForKey(_ key: String) -> [UILocalNotification] {
         var notifications: [UILocalNotification] = []
         
-        for notification in UIApplication.sharedApplication().scheduledLocalNotifications as [UILocalNotification] {
-            if notification.userInfo?["key"] as String == key {
+        for notification in UIApplication.shared.scheduledLocalNotifications! as [UILocalNotification] {
+            if notification.userInfo?["key"] as! String == key {
                 notifications.append(notification)
             }
         }
@@ -116,17 +116,17 @@ class NotificationManager {
         return notifications as [UILocalNotification]
     }
     
-    func canAddNotificationsForKey(key: String) -> Bool {
+    func canAddNotificationsForKey(_ key: String) -> Bool {
         return getAllNotificationsForKey(key).count < MAX_NOTIFICATIONS
     }
     
-    func receivedNotification(notification: UILocalNotification) {
+    func receivedNotification(_ notification: UILocalNotification) {
         for del in delegates {
             del.didReceiveNotification(notification.userInfo!)
         }
     }
     
-    private
+    fileprivate
     
     init() {
         delegates = []

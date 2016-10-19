@@ -18,32 +18,32 @@ class TiltImageView: UIImageView {
         scrollView = UIScrollView(frame: frame)
         super.init(frame: frame)
         
-        var imageView = UIImageView(image: image)
-        var imageWidth = frame.height * image.size.width / image.size.height
-        imageView.frame = CGRectMake((frame.width - imageWidth) / 2, 0, imageWidth, scrollView.frame.height)
+        let imageView = UIImageView(image: image)
+        let imageWidth = frame.height * image.size.width / image.size.height
+        imageView.frame = CGRect(x: (frame.width - imageWidth) / 2, y: 0, width: imageWidth, height: scrollView.frame.height)
         scrollView.addSubview(imageView)
         addSubview(scrollView)
         
         initMotionManager()
     }
     
-    func setImage(image : UIImage) {
+    func setTiltImage(_ image : UIImage) {
         let currentSubviews = scrollView.subviews
         
-        var imageView = UIImageView(image: image)
-        var imageWidth = frame.height * image.size.width / image.size.height
-        imageView.frame = CGRectMake((frame.width - imageWidth) / 2, 0, imageWidth, scrollView.frame.height)
+        let imageView = UIImageView(image: image)
+        let imageWidth = frame.height * image.size.width / image.size.height
+        imageView.frame = CGRect(x: (frame.width - imageWidth) / 2, y: 0, width: imageWidth, height: scrollView.frame.height)
         imageView.alpha = 0.0
         scrollView.addSubview(imageView)
         
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
             self.scrollView.addSubview(imageView)
             imageView.alpha = 1.0
-        }) { (complete) -> Void in
+        }, completion: { (complete) -> Void in
             for view in currentSubviews as [UIView] {
                 view.removeFromSuperview()
             }
-        }
+        }) 
     }
     
     deinit {
@@ -51,16 +51,16 @@ class TiltImageView: UIImageView {
     }
     
     func initMotionManager() {
-        motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.currentQueue(), withHandler:{
+        motionManager.startDeviceMotionUpdates(to: OperationQueue.current!, withHandler:{
             deviceManager, error in
             
-            var xRotationRate = deviceManager.rotationRate.x
-            var yRotationRate = deviceManager.rotationRate.y
-            var zRotationRate = deviceManager.rotationRate.z
-            if (fabs(yRotationRate) > (fabs(xRotationRate) + fabs(zRotationRate)))
+            var xRotationRate = deviceManager?.rotationRate.x
+            var yRotationRate = deviceManager?.rotationRate.y
+            var zRotationRate = deviceManager?.rotationRate.z
+            if (fabs(yRotationRate!) > (fabs(xRotationRate!) + fabs(zRotationRate!)))
             {
                 let kRotationMultiplier = 0.4;
-                let invertedYRotationRate = yRotationRate * -1;
+                let invertedYRotationRate = yRotationRate! * -1;
                 
                 let interpretedXOffset = Double(self.scrollView.contentOffset.x) + (invertedYRotationRate * kRotationMultiplier)
                 let contentOffset = self.clampedContentOffsetForHorizontalOffset(CGFloat(interpretedXOffset))
@@ -75,13 +75,13 @@ class TiltImageView: UIImageView {
         })
     }
     
-    func clampedContentOffsetForHorizontalOffset(horizontalOffset: CGFloat) -> CGPoint {
-        let minimumXOffset: CGFloat = scrollView.contentSize.width - CGRectGetWidth(scrollView.bounds)
+    func clampedContentOffsetForHorizontalOffset(_ horizontalOffset: CGFloat) -> CGPoint {
+        let minimumXOffset: CGFloat = scrollView.contentSize.width - scrollView.bounds.width
         let maximumXOffset: CGFloat = minimumXOffset * -1
         let clampedXOffset = fmax(minimumXOffset, fmin(horizontalOffset, maximumXOffset))
         let centeredY: CGFloat = scrollView.contentOffset.y
         
-        return CGPointMake(clampedXOffset, centeredY)
+        return CGPoint(x: clampedXOffset, y: centeredY)
     }
     
     required init(coder aDecoder: NSCoder) {

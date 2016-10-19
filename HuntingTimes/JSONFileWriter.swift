@@ -9,39 +9,56 @@
 import UIKit
 
 class JSONFileWriter {
-    class func write(jsonData: [String : AnyObject], fileName: String) {
-        if let data = NSJSONSerialization.dataWithJSONObject(jsonData, options: NSJSONWritingOptions.PrettyPrinted, error: nil) {
-            let documentsDir = getFolder()!
-            let filePath = documentsDir.stringByAppendingPathComponent(fileName)
-            data.writeToFile(filePath, atomically: true)
-        }
-    }
-    
-    class func read(fileName: String) -> [String : AnyObject]? {
+    // TODO: Capture errors
+    class func write(_ jsonData: [String : AnyObject], fileName: String) {
+        let data = try! JSONSerialization.data(withJSONObject: jsonData, options: JSONSerialization.WritingOptions.prettyPrinted)
         let documentsDir = getFolder()!
-        let filePath = documentsDir.stringByAppendingPathComponent(fileName)
-        if let jsonFile = NSInputStream(fileAtPath: filePath) {
-            var error = NSErrorPointer.null()
-            jsonFile.open()
-            if let jsonDict: AnyObject = NSJSONSerialization.JSONObjectWithStream(jsonFile, options: NSJSONReadingOptions.allZeros, error: error) {
-                return jsonDict as? [String : AnyObject]
-            }
-            jsonFile.close()
+        guard let fileurl = NSURL(fileURLWithPath: documentsDir).appendingPathComponent(fileName) else {
+            //print error
+            return
         }
         
-        return nil
+        if FileManager.default.fileExists(atPath: fileurl.path) {
+            
+            let fileHandle = try! FileHandle(forWritingTo: fileurl)
+            fileHandle.seekToEndOfFile()
+            fileHandle.write(data)
+            fileHandle.closeFile()
+        } else {
+            // TODO: print error
+        }
     }
     
-    private
+    // TODO: Capture errors
+    class func read(_ fileName: String) -> [String : AnyObject]? {
+        let documentsDir = getFolder()!
+        guard let fileurl = NSURL(fileURLWithPath: documentsDir).appendingPathComponent(fileName) else {
+            // TODO: print error
+            return nil
+        }
+        guard let jsonFile = InputStream(url: fileurl) else {
+            return nil
+        }
+
+        jsonFile.open()
+        let jsonDict = try! JSONSerialization.jsonObject(with: jsonFile)
+        jsonFile.close()
+        
+        return jsonDict as? [String : AnyObject]
+    }
+    
+    fileprivate
     
     class func getFolder() -> String? {
-        let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
-        let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
-        if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true) {
-            if paths.count > 0 {
-                if let dirPath = paths[0] as? String {
-                    return dirPath
-                }
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask
+        guard let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true) as? [String] else {
+            return nil
+        }
+
+        if paths.count > 0 {
+            if let dirPath = paths[0] as? String {
+                return dirPath
             }
         }
         return nil

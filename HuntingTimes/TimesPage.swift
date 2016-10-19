@@ -12,7 +12,7 @@ class TimesPage : HuntingPageView {
     let countdownLabel : CountdownLabel
     
     required init(frame: CGRect) {
-        countdownLabel = CountdownLabel(frame: CGRectMake(0, 55, frame.width, 120))
+        countdownLabel = CountdownLabel(frame: CGRect(x: 0, y: 55, width: frame.width, height: 120))
         super.init(frame: frame, huntingColumnsClass: TimesColumns.self)
         messageLabel.alpha = 0.0
         addSubview(countdownLabel)

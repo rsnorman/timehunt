@@ -15,19 +15,19 @@ class HourlyWeatherParser {
         hourlyWeather = []
         
         for hourData in hourlyData(weatherJSON) {
-            let temperature: Double = hourData["temperature"] as Double
-            let hourTime   : NSDate = NSDate(timeIntervalSince1970: hourData["time"] as NSTimeInterval)
+            let temperature: Double = hourData["temperature"] as! Double
+            let hourTime   : Date = Date(timeIntervalSince1970: hourData["time"] as! TimeInterval)
             
             hourlyWeather.append(HourlyWeather(temperature: temperature, at: hourTime))
         }
     }
     
-    func onDate(date : NSDate) -> [HourlyWeather] {
+    func onDate(_ date : Date) -> [HourlyWeather] {
         var currentHourlyData: [HourlyWeather] = []
         let dateString = formatDate(date)
         
         for hourWeather in hourlyWeather {
-            if dateString == formatDate(hourWeather.time) {
+            if dateString == formatDate(hourWeather.time as Date) {
                 currentHourlyData.append(hourWeather)
             }
         }
@@ -35,18 +35,18 @@ class HourlyWeatherParser {
         return currentHourlyData
     }
     
-    private
+    fileprivate
     
-    func formatDate(date: NSDate) -> String {
-        let dateFormatter = NSDateFormatter()
+    func formatDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.timeZone = NSTimeZone()
-        return dateFormatter.stringFromDate(date)
+        dateFormatter.timeZone = TimeZone()
+        return dateFormatter.string(from: date)
     }
     
-    func hourlyData(weatherJSON: [String : AnyObject]) -> [[String : AnyObject]] {
+    func hourlyData(_ weatherJSON: [String : AnyObject]) -> [[String : AnyObject]] {
         if let hourly = weatherJSON["hourly"] as? [String : AnyObject] {
-            return hourly["data"] as [[String : AnyObject]]!
+            return hourly["data"] as! [[String : AnyObject]]!
         } else {
             return []
         }
