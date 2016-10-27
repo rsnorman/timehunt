@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MenuControllerDelegate {
-    func didSelectBackground(backgroundImage: String)
+    func didSelectBackground(_ backgroundImage: String)
 }
 
 class MenuController : UIViewController {
@@ -24,54 +24,56 @@ class MenuController : UIViewController {
         view.alpha = 0.0
         
         backgroundView = UIView(frame: view.frame)
-        backgroundView.backgroundColor = .blackColor()
+        backgroundView.backgroundColor = .black
         backgroundView.alpha           = 0.8
         view.addSubview(backgroundView)
         
-        let backgroundLabel = UILabel(frame: CGRectMake(0, 170, view.frame.width, 20))
+        let backgroundLabel = UILabel(frame: CGRect(x: 0, y: 170, width: view.frame.width, height: 20))
         backgroundLabel.text = "Choose Background"
-        backgroundLabel.textColor = .whiteColor()
-        backgroundLabel.font = UIFont.systemFontOfSize(18)
-        backgroundLabel.textAlignment = .Center
+        backgroundLabel.textColor = .white
+        backgroundLabel.font = UIFont.systemFont(ofSize: 18)
+        backgroundLabel.textAlignment = .center
         view.addSubview(backgroundLabel)
         
         imageViews = []
-        for (index, backgroundImage) in enumerate(backgroundImages) {
-            let imageView                     = UIImageView(frame: CGRectMake(10 + (115 * CGFloat(index)), 210, 70, 70))
+        var index = 0
+        for backgroundImage in backgroundImages {
+            let imageView                     = UIImageView(frame: CGRect(x: 10 + (115 * CGFloat(index)), y: 210, width: 70, height: 70))
             imageView.image                   = UIImage(named: backgroundImage)
-            imageView.layer.borderColor       = UIColor(white: 1, alpha: 1).CGColor
+            imageView.layer.borderColor       = UIColor(white: 1, alpha: 1).cgColor
             imageView.layer.borderWidth       = 2.0
             imageView.layer.cornerRadius      = 35
             imageView.clipsToBounds           = true
             imageView.accessibilityIdentifier = backgroundImage
-            imageView.userInteractionEnabled  = true
-            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "selectBackgroundImage:"))
+            imageView.isUserInteractionEnabled  = true
+            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(MenuController.selectBackgroundImage(_:))))
             imageViews.append(imageView)
             view.addSubview(imageView)
+            index += 1
         }
     }
     
-    override func viewDidAppear(animate: Bool) {
-        UIView.animateWithDuration(0.4) {
+    override func viewDidAppear(_ animate: Bool) {
+        UIView.animate(withDuration: 0.4, animations: {
             self.view.alpha = 1.0
             
             if let selectedBG = self.selectedBackground {
-                for (index, imageView) in enumerate(self.imageViews) {
-                    imageView.layer.borderColor  = UIColor(white: 1, alpha: selectedBG == imageView.accessibilityIdentifier ? 1 : 0.3).CGColor
+                for imageView in self.imageViews {
+                    imageView.layer.borderColor  = UIColor(white: 1, alpha: selectedBG == imageView.accessibilityIdentifier ? 1 : 0.3).cgColor
                 }
             }
-        }
+        }) 
     }
     
-    func selectBackgroundImage(sender : UITapGestureRecognizer) {
+    func selectBackgroundImage(_ sender : UITapGestureRecognizer) {
         if let view = sender.view {
             selectedBackground = view.accessibilityIdentifier
             
-            UIView.animateWithDuration(1.0) {
-                for (index, imageView) in enumerate(self.imageViews) {
-                    imageView.layer.borderColor  = UIColor(white: 1, alpha: self.selectedBackground == imageView.accessibilityIdentifier ? 1 : 0.3).CGColor
+            UIView.animate(withDuration: 1.0, animations: {
+                for imageView in self.imageViews {
+                    imageView.layer.borderColor  = UIColor(white: 1, alpha: self.selectedBackground == imageView.accessibilityIdentifier ? 1 : 0.3).cgColor
                 }
-            }
+            }) 
 
             delegate?.didSelectBackground(selectedBackground)
         }

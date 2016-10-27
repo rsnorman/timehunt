@@ -26,7 +26,7 @@ class HuntingPageController : UIViewController {
     
     override func viewDidLoad() {
         let frame = view.frame
-        huntingPageView = huntingPageClass(frame: frame)
+        huntingPageView = huntingPageClass.init(frame: frame)
         huntingPageView.stateLabel.text = "Temperature"
         self.view = huntingPageView
         
@@ -36,18 +36,18 @@ class HuntingPageController : UIViewController {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setDay(huntingDay)
         super.viewWillAppear(animated)
     }
     
-    func didSetDay(huntingDay: HuntingDay) {
+    func didSetDay(_ huntingDay: HuntingDay) {
         self.huntingDay = huntingDay
         huntingPageView?.huntingColumnsView.setDay(huntingDay)
         huntingTimesProgress?.huntingDay = huntingDay
     }
     
-    func setDay(huntingDay: HuntingDay) {
+    func setDay(_ huntingDay: HuntingDay) {
         didSetDay(huntingDay)
     }
     
@@ -63,41 +63,41 @@ class HuntingPageController : UIViewController {
         return huntingPageView.huntingColumnsView.leftColumnView
     }
     
-    func startChangingDay(reverse: Bool = false, completion: ((reversing: Bool) -> Void)? = nil) {
+    func startChangingDay(_ reverse: Bool = false, completion: ((_ reversing: Bool) -> Void)? = nil) {
         if huntingPageView.alpha != 0 {
             let labelOffset : CGFloat = 10.0
             let yOffset = reverse ? labelOffset * -1 : labelOffset
             
-            UIView.animateWithDuration(DAY_TRANSITION_TIME, animations: { () -> Void in
+            UIView.animate(withDuration: DAY_TRANSITION_TIME, animations: { () -> Void in
                 self.huntingPageView.alpha = 0
-                self.huntingPageView.huntingColumnsView.frame = CGRectOffset(self.huntingPageView.huntingColumnsView.frame, 0, yOffset)
+                self.huntingPageView.huntingColumnsView.frame = self.huntingPageView.huntingColumnsView.frame.offsetBy(dx: 0, dy: yOffset)
                 self.huntingPageView.messageLabel
-                }) { (complete) -> Void in
+                }, completion: { (complete) -> Void in
                     
-                    self.huntingPageView.huntingColumnsView.frame = CGRectOffset(self.huntingPageView.huntingColumnsView.frame, 0, yOffset * -2)
+                    self.huntingPageView.huntingColumnsView.frame = self.huntingPageView.huntingColumnsView.frame.offsetBy(dx: 0, dy: yOffset * -2)
                     if let completionHandler = completion {
-                        completionHandler(reversing: reverse)
+                        completionHandler(reverse)
                     }
-            }
+            }) 
         } else {
             if let completionHandler = completion {
-                completionHandler(reversing: reverse)
+                completionHandler(reverse)
             }
         }
     }
     
-    func finishChangingDay(reverse: Bool = false, completion: ((reversing: Bool) -> Void)? = nil) {
+    func finishChangingDay(_ reverse: Bool = false, completion: ((_ reversing: Bool) -> Void)? = nil) {
         let labelOffset: CGFloat = 10.0
         let yOffset = reverse ? labelOffset * -1 : labelOffset
         
-        UIView.animateWithDuration(DAY_TRANSITION_TIME, animations: { () -> Void in
+        UIView.animate(withDuration: DAY_TRANSITION_TIME, animations: { () -> Void in
             self.huntingPageView.alpha = 1
-            self.huntingPageView.huntingColumnsView.frame = CGRectOffset(self.huntingPageView.huntingColumnsView.frame, 0, yOffset)
-            }) { (complete) -> Void in
+            self.huntingPageView.huntingColumnsView.frame = self.huntingPageView.huntingColumnsView.frame.offsetBy(dx: 0, dy: yOffset)
+            }, completion: { (complete) -> Void in
                 
                 if let completionHandler = completion {
-                    completionHandler(reversing: reverse)
+                    completionHandler(reverse)
                 }
-        }
+        }) 
     }
 }

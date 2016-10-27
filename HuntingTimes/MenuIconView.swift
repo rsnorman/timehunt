@@ -27,16 +27,16 @@ class MenuIconView : UIView {
     var menuCloseGesture     : UITapGestureRecognizer!
     
     override init(frame: CGRect) {
-        topLine = UIView(frame: CGRectMake(lineHorizontalMargin + padding, lineVerticalMargin + padding - (lineHeight / 2), frame.width - ((lineHorizontalMargin + padding) * 2), lineHeight))
-        topLine.backgroundColor = .whiteColor()
+        topLine = UIView(frame: CGRect(x: lineHorizontalMargin + padding, y: lineVerticalMargin + padding - (lineHeight / 2), width: frame.width - ((lineHorizontalMargin + padding) * 2), height: lineHeight))
+        topLine.backgroundColor = .white
         topLine.layer.cornerRadius = lineHeight / 2
         
-        middleLine = UIView(frame: CGRectMake(lineHorizontalMargin + padding, frame.height / 2 - (lineHeight / 2), frame.width - ((lineHorizontalMargin + padding) * 2), lineHeight))
-        middleLine.backgroundColor = .whiteColor()
+        middleLine = UIView(frame: CGRect(x: lineHorizontalMargin + padding, y: frame.height / 2 - (lineHeight / 2), width: frame.width - ((lineHorizontalMargin + padding) * 2), height: lineHeight))
+        middleLine.backgroundColor = .white
         middleLine.layer.cornerRadius = lineHeight / 2
         
-        bottomLine = UIView(frame: CGRectMake(lineHorizontalMargin + padding, frame.height - (lineVerticalMargin + padding + (lineHeight / 2)), frame.width - ((lineHorizontalMargin + padding) * 2), lineHeight))
-        bottomLine.backgroundColor = .whiteColor()
+        bottomLine = UIView(frame: CGRect(x: lineHorizontalMargin + padding, y: frame.height - (lineVerticalMargin + padding + (lineHeight / 2)), width: frame.width - ((lineHorizontalMargin + padding) * 2), height: lineHeight))
+        bottomLine.backgroundColor = .white
         bottomLine.layer.cornerRadius = lineHeight / 2
         
         super.init(frame: frame)
@@ -45,55 +45,55 @@ class MenuIconView : UIView {
         addSubview(middleLine)
         addSubview(bottomLine)
         
-        menuOpenGesture = UITapGestureRecognizer(target: self, action: "menuOpen")
-        menuCloseGesture = UITapGestureRecognizer(target: self, action: "menuClose")
-        menuCloseGesture.enabled = false
+        menuOpenGesture = UITapGestureRecognizer(target: self, action: #selector(MenuIconView.menuOpen))
+        menuCloseGesture = UITapGestureRecognizer(target: self, action: #selector(MenuIconView.menuClose))
+        menuCloseGesture.isEnabled = false
         addGestureRecognizer(menuOpenGesture)
         addGestureRecognizer(menuCloseGesture)
     }
     
     func menuOpen() {
-        menuOpenGesture.enabled  = false
+        menuOpenGesture.isEnabled  = false
         delegate?.didOpenMenu()
         
-        UIView.animateWithDuration(0.4, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions(), animations: { () -> Void in
             let mFrame = self.middleLine.frame
-            self.middleLine.frame = CGRectMake(mFrame.origin.x, mFrame.origin.y, 0, mFrame.height)
+            self.middleLine.frame = CGRect(x: mFrame.origin.x, y: mFrame.origin.y, width: 0, height: mFrame.height)
             
             let tFrame = self.topLine.frame
-            self.topLine.frame = CGRectMake(self.padding, self.frame.height / 2 - (self.lineHeight / 2), self.frame.width - (self.padding * 2), tFrame.height)
-            self.topLine.transform = CGAffineTransformRotate(self.topLine.transform, CGFloat(M_PI * 0.75))
+            self.topLine.frame = CGRect(x: self.padding, y: self.frame.height / 2 - (self.lineHeight / 2), width: self.frame.width - (self.padding * 2), height: tFrame.height)
+            self.topLine.transform = self.topLine.transform.rotated(by: CGFloat(M_PI * 0.75))
             
             let bFrame = self.bottomLine.frame
-            self.bottomLine.frame = CGRectMake(self.padding, self.frame.height / 2 - (self.lineHeight / 2), self.frame.width - (self.padding * 2), bFrame.height)
-            self.bottomLine.transform = CGAffineTransformRotate(self.bottomLine.transform, CGFloat(M_PI * -0.75))
+            self.bottomLine.frame = CGRect(x: self.padding, y: self.frame.height / 2 - (self.lineHeight / 2), width: self.frame.width - (self.padding * 2), height: bFrame.height)
+            self.bottomLine.transform = self.bottomLine.transform.rotated(by: CGFloat(M_PI * -0.75))
         }) { (complete) -> Void in
-            self.menuCloseGesture.enabled = true
+            self.menuCloseGesture.isEnabled = true
         }
     }
     
     func menuClose() {
-        menuCloseGesture.enabled = false
+        menuCloseGesture.isEnabled = false
         delegate?.didCloseMenu()
         
         // Start rotation first so strange animation doesn't take place
-        UIView.animateWithDuration(0.4) {
-            self.topLine.transform = CGAffineTransformRotate(self.topLine.transform, CGFloat(M_PI * -0.75))
-            self.bottomLine.transform = CGAffineTransformRotate(self.bottomLine.transform, CGFloat(M_PI * 0.75))
-        }
+        UIView.animate(withDuration: 0.4, animations: {
+            self.topLine.transform = self.topLine.transform.rotated(by: CGFloat(M_PI * -0.75))
+            self.bottomLine.transform = self.bottomLine.transform.rotated(by: CGFloat(M_PI * 0.75))
+        }) 
         
-        UIView.animateWithDuration(0.4, delay: 0.0, options: .CurveEaseInOut, animations: { () -> Void in
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions(), animations: { () -> Void in
             let mFrame = self.middleLine.frame
-            self.middleLine.frame = CGRectMake(mFrame.origin.x, mFrame.origin.y, self.frame.width - ((self.lineHorizontalMargin + self.padding) * 2), mFrame.height)
+            self.middleLine.frame = CGRect(x: mFrame.origin.x, y: mFrame.origin.y, width: self.frame.width - ((self.lineHorizontalMargin + self.padding) * 2), height: mFrame.height)
 
             let tFrame = self.topLine.frame
-            self.topLine.frame = CGRectMake(self.lineHorizontalMargin + self.padding, self.lineVerticalMargin + self.padding - (self.lineHeight / 2), self.frame.width - ((self.lineHorizontalMargin + self.padding) * 2), tFrame.height)
+            self.topLine.frame = CGRect(x: self.lineHorizontalMargin + self.padding, y: self.lineVerticalMargin + self.padding - (self.lineHeight / 2), width: self.frame.width - ((self.lineHorizontalMargin + self.padding) * 2), height: tFrame.height)
             
             let bFrame = self.bottomLine.frame
-            self.bottomLine.frame = CGRectMake(self.lineHorizontalMargin + self.padding, self.frame.height - (self.lineVerticalMargin + self.padding + (self.lineHeight / 2)), self.frame.width - ((self.lineHorizontalMargin + self.padding) * 2), tFrame.height)
+            self.bottomLine.frame = CGRect(x: self.lineHorizontalMargin + self.padding, y: self.frame.height - (self.lineVerticalMargin + self.padding + (self.lineHeight / 2)), width: self.frame.width - ((self.lineHorizontalMargin + self.padding) * 2), height: tFrame.height)
             
         }) { (complete) -> Void in
-            self.menuOpenGesture.enabled = true
+            self.menuOpenGesture.isEnabled = true
         }
     }
 

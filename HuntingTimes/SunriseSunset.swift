@@ -9,20 +9,20 @@
 import Foundation
 
 class SunriseSunset {
-    let sunriseTime : NSDate
-    let sunsetTime  : NSDate
+    var sunriseTime : Date
+    var sunsetTime  : Date
     
     init(weatherJSON : [String : AnyObject]) {
-        sunriseTime = NSDate(timeIntervalSince1970: 0)
-        sunsetTime  = NSDate(timeIntervalSince1970: 0)
+        sunriseTime = Date(timeIntervalSince1970: 0)
+        sunsetTime  = Date(timeIntervalSince1970: 0)
         
         if let hourly = weatherJSON["daily"] as? [String : AnyObject] {
             if let dailyData = hourly["data"] as? [[String : AnyObject]] {
-                let sunriseSeconds: NSTimeInterval = dailyData[0]["sunriseTime"] as NSTimeInterval
-                let sunsetSeconds: NSTimeInterval  = dailyData[0]["sunsetTime"] as NSTimeInterval
+                let sunriseSeconds: TimeInterval = dailyData[0]["sunriseTime"] as! TimeInterval
+                let sunsetSeconds: TimeInterval  = dailyData[0]["sunsetTime"] as! TimeInterval
                 
-                sunriseTime = NSDate(timeIntervalSince1970: sunriseSeconds)
-                sunsetTime  = NSDate(timeIntervalSince1970: sunsetSeconds)
+                sunriseTime = Date(timeIntervalSince1970: sunriseSeconds)
+                sunsetTime  = Date(timeIntervalSince1970: sunsetSeconds)
             }
         }
     }

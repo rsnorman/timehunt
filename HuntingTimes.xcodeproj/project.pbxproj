@@ -15,7 +15,6 @@
 		4C46BE411A204686005BB796 /* forest@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4C46BE401A204686005BB796 /* forest@2x.jpg */; };
 		4C46BE441A2046FE005BB796 /* StatusBarUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE431A2046FE005BB796 /* StatusBarUpdater.swift */; };
 		4C46BE471A20484F005BB796 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE461A20484F005BB796 /* ShadowView.swift */; };
-		4C46BE491A206294005BB796 /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE481A206294005BB796 /* Delay.swift */; };
 		4C46BE4B1A20667B005BB796 /* TiltImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE4A1A20667B005BB796 /* TiltImageView.swift */; };
 		4C46BE4D1A20D7D1005BB796 /* CountdownLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE4C1A20D7D1005BB796 /* CountdownLabel.swift */; };
 		4C46BE521A2117EC005BB796 /* HuntingSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C46BE511A2117EC005BB796 /* HuntingSeason.swift */; };
@@ -94,7 +93,6 @@
 		4C46BE401A204686005BB796 /* forest@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "forest@2x.jpg"; sourceTree = "<group>"; };
 		4C46BE431A2046FE005BB796 /* StatusBarUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarUpdater.swift; sourceTree = "<group>"; };
 		4C46BE461A20484F005BB796 /* ShadowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
-		4C46BE481A206294005BB796 /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
 		4C46BE4A1A20667B005BB796 /* TiltImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TiltImageView.swift; sourceTree = "<group>"; };
 		4C46BE4C1A20D7D1005BB796 /* CountdownLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountdownLabel.swift; sourceTree = "<group>"; };
 		4C46BE511A2117EC005BB796 /* HuntingSeason.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingSeason.swift; sourceTree = "<group>"; };
@@ -198,7 +196,6 @@
 				4C6436BD1A3AB69E00017338 /* Forecastr */,
 				4C6436A01A3AB69500017338 /* AFNetworking */,
 				4C46BE431A2046FE005BB796 /* StatusBarUpdater.swift */,
-				4C46BE481A206294005BB796 /* Delay.swift */,
 				4C46BE511A2117EC005BB796 /* HuntingSeason.swift */,
 				4C6EE1AB1A2590F100305115 /* HuntingTimeProgress.swift */,
 				4C6EE1AD1A25967C00305115 /* DateTimeHelper.swift */,
@@ -470,15 +467,17 @@
 		4CA156CD1A20413C00F95BA2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Ryan Norman";
 				TargetAttributes = {
 					4CA156D41A20413C00F95BA2 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = ZH7Q4VCUAY;
+						LastSwiftMigration = 0800;
 					};
 					4CA156EC1A20413C00F95BA2 = {
 						CreatedOnToolsVersion = 6.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 4CA156D41A20413C00F95BA2;
 					};
 				};
@@ -570,7 +569,6 @@
 				4C5B10F41A585EBB0077DFFD /* TimesPage.swift in Sources */,
 				4C5B10F21A585E9B0077DFFD /* TimesPageController.swift in Sources */,
 				4C5B10EE1A585E260077DFFD /* TemperaturePageController.swift in Sources */,
-				4C46BE491A206294005BB796 /* Delay.swift in Sources */,
 				4C5B10FA1A58940A0077DFFD /* HuntingColumnsView.swift in Sources */,
 				4C6436B51A3AB69500017338 /* AFHTTPRequestOperationManager.m in Sources */,
 				4C5B10F61A588FA10077DFFD /* HuntingPageController.swift in Sources */,
@@ -635,15 +633,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -677,8 +679,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -686,6 +690,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -695,6 +700,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -706,8 +712,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = HuntingTimes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.timehunt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TimeHunt-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -718,8 +726,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = HuntingTimes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.timehunt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "TimeHunt-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -737,7 +747,9 @@
 				);
 				INFOPLIST_FILE = HuntingTimesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "norm.io.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HuntingTimes.app/HuntingTimes";
 			};
 			name = Debug;
@@ -752,7 +764,9 @@
 				);
 				INFOPLIST_FILE = HuntingTimesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "norm.io.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HuntingTimes.app/HuntingTimes";
 			};
 			name = Release;

@@ -14,21 +14,21 @@ class ErrorMessageView : UIView {
     var action       : Selector!
     
     override init(frame: CGRect) {
-        messageLabel = createLabel("Could not load hunting weather\nTap to retry", CGRectMake(0, 0, frame.width, frame.height), 22)
+        messageLabel = createLabel("Could not load hunting weather\nTap to retry", frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height), fontSize: 22)
         messageLabel.numberOfLines = 2
         
         super.init(frame: frame)
         
-        userInteractionEnabled = true
+        isUserInteractionEnabled = true
         
         addSubview(messageLabel)
     }
     
-    func setMessage(message: String) {
+    func setMessage(_ message: String) {
         messageLabel.text = message
     }
     
-    func setRetryAction(actionSource : AnyObject, action: Selector) {
+    func setRetryAction(_ actionSource : AnyObject, action: Selector) {
         gestureRecognizers = []
         let retryTap = UITapGestureRecognizer(target: actionSource, action: action)
         addGestureRecognizer(retryTap)

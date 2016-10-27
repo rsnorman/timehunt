@@ -9,14 +9,14 @@
 import Foundation
 
 class UserSettings {
-    class func setSetting(object: AnyObject, forKey: String) {
-        var userDefaults = NSUserDefaults.standardUserDefaults()
+    class func setSetting(_ object: AnyObject, forKey: String) {
+        let userDefaults = UserDefaults.standard
         userDefaults.setValue(object, forKey: forKey)
         userDefaults.synchronize()
     }
     
-    class func getSetting(key: String) -> AnyObject? {
-        return NSUserDefaults.standardUserDefaults().objectForKey(key)
+    class func getSetting(_ key: String) -> AnyObject? {
+        return UserDefaults.standard.object(forKey: key) as AnyObject?
     }
     
     class func getBackgroundImage() -> NSString {
@@ -27,7 +27,7 @@ class UserSettings {
         }
     }
     
-    class func setBackgroundImage(imageName: String) {
-        setSetting(imageName, forKey: "backgroundImage")
+    class func setBackgroundImage(_ imageName: String) {
+        setSetting(imageName as AnyObject, forKey: "backgroundImage")
     }
 }

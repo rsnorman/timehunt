@@ -20,8 +20,8 @@ class TimesPageController : HuntingPageController, CountdownViewDelegate, TimesC
     init(huntingDay: HuntingDay) {
         super.init(huntingDay: huntingDay, huntingPageClass: TimesPage.self)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setCountdownTime", name: UIApplicationDidBecomeActiveNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setNotifications", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(TimesPageController.setCountdownTime), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(TimesPageController.setNotifications), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         
         NotificationManager.sharedInstance.addDelegate(self)
     }
@@ -30,7 +30,7 @@ class TimesPageController : HuntingPageController, CountdownViewDelegate, TimesC
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func didSetDay(huntingDay: HuntingDay) {
+    override func didSetDay(_ huntingDay: HuntingDay) {
         super.didSetDay(huntingDay)
         
         setCountdownTime()
@@ -45,45 +45,45 @@ class TimesPageController : HuntingPageController, CountdownViewDelegate, TimesC
         super.viewDidLoad()
    
         huntingPageView.messageLabel.delegate = self
-        (huntingPageView as TimesPage).countdownLabel.delegate = self
+        (huntingPageView as! TimesPage).countdownLabel.delegate = self
 
-        huntingTimesView = huntingPageView.huntingColumnsView as TimesColumns
+        huntingTimesView = huntingPageView.huntingColumnsView as! TimesColumns
         huntingTimesView.delegate = self
         
         self.view.alpha = 0
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
+        UIView.animate(withDuration: 0.5, animations: { 
             self.view.alpha = 1
-        }, nil)
+        })
     }
     
     func willShowMessage() {
-        (huntingPageView as TimesPage).countdownLabel.alpha = 0.0
+        (huntingPageView as! TimesPage).countdownLabel.alpha = 0.0
     }
     
     func didHideMessage() {
-        (huntingPageView as TimesPage).countdownLabel.alpha = 1.0
+        (huntingPageView as! TimesPage).countdownLabel.alpha = 1.0
     }
     
-    func didAddNotification(notificationable: NotificationInterface, notification: Notification) {
+    func didAddNotification(_ notificationable: NotificationInterface, notification: Notification) {
         huntingPageView.messageLabel.addMessage(notification.getMessage())
-        huntingTimesView.addNotificationIcon(notificationable.userInfo()["time"] as NSDate)
+        huntingTimesView.addNotificationIcon(notificationable.userInfo()["time"] as! Date)
     }
     
-    func didRemoveAllNotifications(notificationable: NotificationInterface) {
-        let event = notificationable.userInfo()["event"] as String
-        let time  = notificationable.userInfo()["time"] as NSDate
+    func didRemoveAllNotifications(_ notificationable: NotificationInterface) {
+        let event = notificationable.userInfo()["event"] as! String
+        let time  = notificationable.userInfo()["time"] as! Date
         huntingPageView.messageLabel.addMessage("Removed All \(event) Notifications")
         huntingTimesView.removeNotificationIcons(time)
     }
     
-    func didReceiveNotification(userInfo: [NSObject : AnyObject]) {
-        let event = userInfo["event"] as String
-        let time  = userInfo["time"] as NSDate
+    func didReceiveNotification(_ userInfo: [AnyHashable: Any]) {
+        let event = userInfo["event"] as! String
+        let time  = userInfo["time"] as! Date
         
         huntingTimesView.removeNotificationIcon(time, event: event)
         
@@ -91,9 +91,9 @@ class TimesPageController : HuntingPageController, CountdownViewDelegate, TimesC
     }
     
     func setCountdownTime() {
-        (huntingPageView as TimesPage).countdownLabel.stopCountdown()
+        (huntingPageView as! TimesPage).countdownLabel.stopCountdown()
         if !huntingDay.isEnded() {
-            (huntingPageView as TimesPage).countdownLabel.startCountdown(currentTime().time)
+            (huntingPageView as! TimesPage).countdownLabel.startCountdown(currentTime().time)
             huntingPageView.stateLabel.text = currentTime().event
         } else {
             huntingPageView.stateLabel.text = ""
@@ -105,19 +105,19 @@ class TimesPageController : HuntingPageController, CountdownViewDelegate, TimesC
     }
     
     func willFinishCountdown() {
-        UIView.animateWithDuration(0.5, delay: 0.9, options: nil, animations: { () -> Void in
-            (self.huntingPageView as TimesPage).countdownLabel.alpha = 0.0
+        UIView.animate(withDuration: 0.5, delay: 0.9, animations: { () -> Void in
+            (self.huntingPageView as! TimesPage).countdownLabel.alpha = 0.0
             }, completion: nil)
     }
     
     func didFinishCountdown() {
         setCountdownTime()
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            (self.huntingPageView as TimesPage).countdownLabel.alpha = 1.0
+        UIView.animate(withDuration: 0.5, animations: { () -> Void in
+            (self.huntingPageView as! TimesPage).countdownLabel.alpha = 1.0
         })
     }
     
-    func didTapHuntingTime(huntingTime: HuntingTime) {
+    func didTapHuntingTime(_ huntingTime: HuntingTime) {
         let notificationManager = NotificationManager.sharedInstance
         if notificationManager.canAddNotificationsForKey(huntingTime.key()) {
             notificationManager.addNotification(huntingTime)
@@ -128,7 +128,7 @@ class TimesPageController : HuntingPageController, CountdownViewDelegate, TimesC
     
     func setNotifications() {
         huntingTimesView.removeAllNotifications()
-        for (index, time) in enumerate(huntingDay.allTimes()) {
+        for time in huntingDay.allTimes() {
             let notifications = NotificationManager.sharedInstance.getAllNotificationsForKey(time.key())
             for notification in notifications {
                 huntingTimesView.addNotificationIcon(time.time, animate: false)

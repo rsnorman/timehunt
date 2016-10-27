@@ -9,31 +9,31 @@
 import UIKit
 
 protocol ScrollLineViewDelegate {
-    func didPositionIndicator(percent: CGFloat)
+    func didPositionIndicator(_ percent: CGFloat)
 }
 
 class ScrollLineView : UIView {
     let middleLine               : UIView
     let positionIndicator        : UIView
     let currentPositionIndicator : UIView
-    var animateDuration          : NSTimeInterval
+    var animateDuration          : TimeInterval
     var delegate                 : ScrollLineViewDelegate!
     let indicatorDiameter        : CGFloat = 11
     let indicatorRadius          : CGFloat = 11 / 2
     
     override init(frame: CGRect) {
-        middleLine = UIView(frame: CGRectMake(frame.width / 2, indicatorRadius, 1, frame.height - indicatorRadius))
-        middleLine.backgroundColor = .whiteColor()
+        middleLine = UIView(frame: CGRect(x: frame.width / 2, y: indicatorRadius, width: 1, height: frame.height - indicatorRadius))
+        middleLine.backgroundColor = .white
         
-        positionIndicator = UIView(frame: CGRectMake(frame.width / 2 - indicatorRadius, 0, indicatorDiameter, indicatorDiameter))
+        positionIndicator = UIView(frame: CGRect(x: frame.width / 2 - indicatorRadius, y: 0, width: indicatorDiameter, height: indicatorDiameter))
         positionIndicator.layer.cornerRadius = indicatorRadius
-        positionIndicator.layer.borderColor  = UIColor.whiteColor().CGColor
+        positionIndicator.layer.borderColor  = UIColor.white.cgColor
         positionIndicator.layer.borderWidth  = 1
-        positionIndicator.backgroundColor    = .whiteColor()
+        positionIndicator.backgroundColor    = .white
         
-        currentPositionIndicator = UIView(frame: CGRectMake(frame.width / 2 - indicatorRadius, 0, indicatorDiameter, indicatorDiameter))
+        currentPositionIndicator = UIView(frame: CGRect(x: frame.width / 2 - indicatorRadius, y: 0, width: indicatorDiameter, height: indicatorDiameter))
         currentPositionIndicator.layer.cornerRadius = indicatorRadius
-        currentPositionIndicator.layer.borderColor  = UIColor.whiteColor().CGColor
+        currentPositionIndicator.layer.borderColor  = UIColor.white.cgColor
         currentPositionIndicator.layer.borderWidth  = 1
         currentPositionIndicator.backgroundColor    = UIColor(white: 1, alpha: 0.7)
         currentPositionIndicator.alpha              = 0.0
@@ -47,9 +47,9 @@ class ScrollLineView : UIView {
         addSubview(currentPositionIndicator)
     }
     
-    func setPosition(percent: CGFloat, animate: Bool = false, notifyDelegate: Bool = false) {
+    func setPosition(_ percent: CGFloat, animate: Bool = false, notifyDelegate: Bool = false) {
         if animate {
-            UIView.animateWithDuration(animateDuration, animations: { () -> Void in
+            UIView.animate(withDuration: animateDuration, animations: { () -> Void in
                 self.positionIndicatorFromPercent(percent, notifyDelegate: notifyDelegate)
             })
         } else {
@@ -57,18 +57,18 @@ class ScrollLineView : UIView {
         }
     }
     
-    func positionIndicatorFromPercent(percent: CGFloat, notifyDelegate: Bool) {
+    func positionIndicatorFromPercent(_ percent: CGFloat, notifyDelegate: Bool) {
         let pFrame = positionIndicator.frame
-        positionIndicator.frame = CGRectMake(pFrame.origin.x, (frame.height - indicatorRadius) * percent, pFrame.width, pFrame.height)
+        positionIndicator.frame = CGRect(x: pFrame.origin.x, y: (frame.height - indicatorRadius) * percent, width: pFrame.width, height: pFrame.height)
         
         if notifyDelegate {
             delegate?.didPositionIndicator(pFrame.origin.y / (frame.height - indicatorRadius))
         }
     }
     
-    func markCurrentPosition(percent: CGFloat) {
+    func markCurrentPosition(_ percent: CGFloat) {
         let cpFrame = currentPositionIndicator.frame
-        currentPositionIndicator.frame = CGRectMake(cpFrame.origin.x, (frame.height - indicatorRadius) * percent, cpFrame.width, cpFrame.height)
+        currentPositionIndicator.frame = CGRect(x: cpFrame.origin.x, y: (frame.height - indicatorRadius) * percent, width: cpFrame.width, height: cpFrame.height)
     }
     
     func showCurrentPosition() {

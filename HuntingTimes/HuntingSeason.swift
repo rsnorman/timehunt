@@ -9,34 +9,35 @@
 import UIKit
 
 protocol HuntingSeasonDelegate {
-    func willChangeDay(currentDay: HuntingDay)
-    func didChangeDay(currentDay: HuntingDay)
+    func willChangeDay(_ currentDay: HuntingDay)
+    func didChangeDay(_ currentDay: HuntingDay)
     func didFailChangeDay()
 }
 
 class HuntingSeason {
     let dates             : [HuntingDay]
-    let startDate         : NSDate
-    let endDate           : NSDate
+    let startDate         : Date
+    let endDate           : Date
     var currentPosition   : Int!
     var delegate          : HuntingSeasonDelegate!
     var location          : CLLocation!
     
-    init(startDate: NSDate, endDate: NSDate) {
+    init(startDate: Date, endDate: Date) {
         self.startDate = startDate
         self.endDate   = endDate
-        dates = []
+        var seasonDates: [HuntingDay] = []
         
         var date = self.startDate
-        for index in 0...(differenceInDays(startDate, endDate) - 1) {
-            dates.append(HuntingDay(date: date))
+        for index in 0...(differenceInDays(startDate, otherDate: endDate) - 1) {
+            seasonDates.append(HuntingDay(date: date))
             date = addDay(date)
         }
         
+        dates = seasonDates
         self.currentPosition = getCurrentPosition()
     }
     
-    convenience init(startDate: NSDate, endDate: NSDate, location: CLLocation) {
+    convenience init(startDate: Date, endDate: Date, location: CLLocation) {
         self.init(startDate: startDate, endDate: endDate)
         self.location = location
     }
@@ -49,17 +50,17 @@ class HuntingSeason {
         return dates.count
     }
     
-    func fetchDay(completion: (error: NSError?, huntingDay: HuntingDay) -> ()) {
+    func fetchDay(_ completion: @escaping (_ error: NSError?, _ huntingDay: HuntingDay) -> ()) {
         let currentHuntingDay = self.currentDay()
         self.delegate?.willChangeDay(currentHuntingDay)
         WeatherParser.sharedInstance.fetch(location, date: currentHuntingDay.date, success: { (dailyWeather) -> () in
             currentHuntingDay.weather = dailyWeather
             currentHuntingDay.setSunriseSunset(dailyWeather.sunrise!, sunsetTime: dailyWeather.sunset!)
-            completion(error: nil, huntingDay: currentHuntingDay)
+            completion(nil, currentHuntingDay)
             self.delegate?.didChangeDay(currentHuntingDay)
         }) { () -> () in
             self.delegate?.didFailChangeDay()
-            completion(error: NSError(), huntingDay: currentHuntingDay)
+            completion(NSError(), currentHuntingDay)
         }
     }
     
@@ -85,7 +86,7 @@ class HuntingSeason {
         return currentPosition == dates.count - 1
     }
     
-    func setCurrentDay(currentDay: Int) {
+    func setCurrentDay(_ currentDay: Int) {
         delegate?.willChangeDay(self.currentDay())
         currentPosition = currentDay
         delegate?.didChangeDay(self.currentDay())
@@ -95,14 +96,14 @@ class HuntingSeason {
         return CGFloat(currentPosition) / CGFloat(dates.count)
     }
     
-    private
+    fileprivate
     
     func getCurrentPosition() -> Int {
         
         if dates[0].date.timeIntervalSinceNow > 0 {
             return 0
         } else {
-            return differenceInDays(dates[0].date, NSDate())
+            return differenceInDays(dates[0].date, otherDate: Date())
         }
     }
 }

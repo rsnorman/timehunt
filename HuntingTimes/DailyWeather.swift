@@ -11,20 +11,20 @@ import Foundation
 class DailyWeather {
     let currentWeather : [String : AnyObject]
     let hourlyWeather  : [HourlyWeather]
-    let date           : NSDate
-    var sunrise        : NSDate!
-    var sunset         : NSDate!
+    let date           : Date
+    var sunrise        : Date!
+    var sunset         : Date!
     
-    init(currentWeather: [String: AnyObject], hourlyWeather: [HourlyWeather], on: NSDate) {
+    init(currentWeather: [String: AnyObject], hourlyWeather: [HourlyWeather], on: Date) {
         self.currentWeather = currentWeather
         self.hourlyWeather  = hourlyWeather
         self.date           = on
     }
     
-    func temperatureAt(time: NSDate) -> Double {
+    func temperatureAt(_ time: Date) -> Double {
         for hourWeather in hourlyWeather {
-            let timeComparison = time.compare(hourWeather.time)
-            if timeComparison == NSComparisonResult.OrderedAscending || timeComparison == NSComparisonResult.OrderedSame {
+            let timeComparison = time.compare(hourWeather.time as Date)
+            if timeComparison == ComparisonResult.orderedAscending || timeComparison == ComparisonResult.orderedSame {
                 return hourWeather.temperature
             }
         }
@@ -37,14 +37,14 @@ class DailyWeather {
     }
     
     func currentTemperature() -> Int {
-        return Int(round(currentWeather["temperature"] as Double))
+        return Int(round(currentWeather["temperature"] as! Double))
     }
     
     func lowTemperature() -> Int {
-        return Int(round(currentWeather["temperatureMin"] as Double))
+        return Int(round(currentWeather["temperatureMin"] as! Double))
     }
     
     func highTemperature() -> Int {
-        return Int(round(currentWeather["temperatureMax"] as Double))
+        return Int(round(currentWeather["temperatureMax"] as! Double))
     }
 }

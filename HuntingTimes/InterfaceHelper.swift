@@ -8,19 +8,19 @@
 
 import UIKit
 
-func createLabel(text: String, frame: CGRect, fontSize: CGFloat) -> UILabel {
+func createLabel(_ text: String, frame: CGRect, fontSize: CGFloat) -> UILabel {
     let label = UILabel(frame: frame)
     label.text = text
-    label.textColor = .whiteColor()
+    label.textColor = .white
     label.font = UIFont(name: "HelveticaNeue-Thin", size: fontSize)
-    label.textAlignment = .Center
+    label.textAlignment = .center
     
     return label
 }
 
-func createPageViewRect(x: CGFloat, width: CGFloat, topPadding: CGFloat = 0) -> CGRect {
+func createPageViewRect(_ x: CGFloat, width: CGFloat, topPadding: CGFloat = 0) -> CGRect {
     let bottomPadding: CGFloat = 30.0
     let topPosition: CGFloat = 225.0
     
-    return CGRectMake(x, topPosition - topPadding, width, UIScreen.mainScreen().bounds.height - (topPosition + bottomPadding - topPadding))
+    return CGRect(x: x, y: topPosition - topPadding, width: width, height: UIScreen.main.bounds.height - (topPosition + bottomPadding - topPadding))
 }

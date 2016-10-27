@@ -9,7 +9,7 @@
 import Foundation
 
 protocol DateLineScrollerDelegate {
-    func didChangeProgress(percent: CGFloat)
+    func didChangeProgress(_ percent: CGFloat)
 }
 
 class DateLineScroller: UIView, ScrollLineViewDelegate {
@@ -18,10 +18,10 @@ class DateLineScroller: UIView, ScrollLineViewDelegate {
     var delegate   : DateLineScrollerDelegate!
     
     override init(frame: CGRect) {
-        scrollLine = ScrollLineView(frame: CGRectMake(frame.width / 2, 45, 1, frame.height - 45))
+        scrollLine = ScrollLineView(frame: CGRect(x: frame.width / 2, y: 45, width: 1, height: frame.height - 45))
         scrollLine.animateDuration = DAY_TRANSITION_TIME
         
-        dateLabel = createLabel("", CGRectMake(0, 0, frame.width, 20), 18)
+        dateLabel = createLabel("", frame: CGRect(x: 0, y: 0, width: frame.width, height: 20), fontSize: 18)
         dateLabel.alpha = 1
         
         super.init(frame: frame)
@@ -36,15 +36,15 @@ class DateLineScroller: UIView, ScrollLineViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setDate(date: NSDate) {
+    func setDate(_ date: Date) {
         dateLabel.text = dateToString(date)
     }
     
-    func setProgress(percent: CGFloat, animate: Bool) {
+    func setProgress(_ percent: CGFloat, animate: Bool) {
         scrollLine.setPosition(percent, animate: animate, notifyDelegate: true)
     }
     
-    func markCurrentProgress(progress: CGFloat) {
+    func markCurrentProgress(_ progress: CGFloat) {
         scrollLine.markCurrentPosition(progress)
     }
     
@@ -58,22 +58,22 @@ class DateLineScroller: UIView, ScrollLineViewDelegate {
     }
     
     func hideIndicator(setProgress progress: CGFloat) {
-        UIView.animateWithDuration(DAY_TRANSITION_TIME, animations: { () -> Void in
+        UIView.animate(withDuration: DAY_TRANSITION_TIME, animations: { () -> Void in
             self.scrollLine.positionIndicator.alpha = 0
             self.dateLabel.alpha = 0
-        })  { (complete) -> Void in
+        }, completion: { (complete) -> Void in
             self.setProgress(progress, animate: false)
-        }
+        })  
     }
     
     func showIndicator() {
-        UIView.animateWithDuration(DAY_TRANSITION_TIME, animations: { () -> Void in
+        UIView.animate(withDuration: DAY_TRANSITION_TIME, animations: { () -> Void in
             self.scrollLine.positionIndicator.alpha = 1
             self.dateLabel.alpha = 1
         })
     }
     
-    func didPositionIndicator(percent: CGFloat) {
+    func didPositionIndicator(_ percent: CGFloat) {
         delegate?.didChangeProgress(percent)
     }
 }

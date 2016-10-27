@@ -9,20 +9,20 @@
 import Foundation
 
 struct HuntingTime : NotificationInterface {
-    let time  : NSDate
+    let time  : Date
     let event : String
     
-    init(time: NSDate, event: String) {
+    init(time: Date, event: String) {
         self.time  = time
         self.event = event
     }
     
-    func timeIntervalSinceNow() -> NSTimeInterval {
+    func timeIntervalSinceNow() -> TimeInterval {
         return self.time.timeIntervalSinceNow
     }
     
-    func timeIntervalSinceDate(date: NSDate) -> NSTimeInterval {
-        return time.timeIntervalSinceDate(date)
+    func timeIntervalSinceDate(_ date: Date) -> TimeInterval {
+        return time.timeIntervalSince(date)
     }
     
     func toTimeString() -> String {
@@ -33,7 +33,7 @@ struct HuntingTime : NotificationInterface {
         return dateToString(time)
     }
     
-    func alert(additionalAlertTime: String) -> String {
+    func alert(_ additionalAlertTime: String) -> String {
         if additionalAlertTime == "0 Minutes" {
             switch event {
             case "Start":
@@ -59,7 +59,7 @@ struct HuntingTime : NotificationInterface {
         }
     }
     
-    func message(additionalAlertTime: String) -> String {
+    func message(_ additionalAlertTime: String) -> String {
         if additionalAlertTime == "0 Minutes" {
             return "Added \(event) Notification"
         } else {
@@ -67,7 +67,7 @@ struct HuntingTime : NotificationInterface {
         }
     }
     
-    func scheduleTime() -> NSDate {
+    func scheduleTime() -> Date {
         return time
     }
     
@@ -75,7 +75,7 @@ struct HuntingTime : NotificationInterface {
         return "\(event):\(dateToString(clearTime(time), useRelativeString: false))"
     }
     
-    func userInfo() -> [NSObject : AnyObject] {
+    func userInfo() -> [AnyHashable: Any] {
         return [ "time" : time, "event" : event ]
     }
 }

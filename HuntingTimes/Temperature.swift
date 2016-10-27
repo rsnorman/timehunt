@@ -18,15 +18,15 @@ class TemperatureParser {
         hourlyTemperatures = []
         
         for hourData in hourlyData(weatherJSON) {
-            println(hourData)
+            // println(hourData)
         }
     }
     
-    private
+    fileprivate
     
-    func hourlyData(weatherJSON: [String : AnyObject]) -> [[String : AnyObject]] {
+    func hourlyData(_ weatherJSON: [String : AnyObject]) -> [[String : AnyObject]] {
         if let hourly = weatherJSON["hourly"] as? [String : AnyObject] {
-            return hourly["data"] as [[String : AnyObject]]!
+            return hourly["data"] as! [[String : AnyObject]]!
         } else {
             return []
         }

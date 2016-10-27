@@ -21,45 +21,45 @@ class MessageView : UILabel {
         messages = []
         super.init(frame: frame)
         numberOfLines = 2
-        textColor = .whiteColor()
+        textColor = .white
         font = UIFont(name: "HelveticaNeue-Thin", size: 30)
-        textAlignment = .Center
+        textAlignment = .center
     }
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addMessage(message: String) {
+    func addMessage(_ message: String) {
         messages.append(message)
         
         if messages.count == 1 {
-            UIView.animateWithDuration(0.2, animations: { () -> Void in
+            UIView.animate(withDuration: 0.2, animations: { () -> Void in
                 if let del = self.delegate {
                     del.willShowMessage()
                 }
-                }) { (complete) -> Void in
+                }, completion: { (complete) -> Void in
                     
                     self.showMessages(self.messages[0], completion: { () -> () in
-                        UIView.animateWithDuration(0.2, animations: { () -> Void in
+                        UIView.animate(withDuration: 0.2, animations: { () -> Void in
                             if let del = self.delegate {
                                 del.didHideMessage()
                             }
                         })
                     })
-            }
+            }) 
         }
     }
     
-    func showMessages(message: String, completion: () -> ()) {
+    func showMessages(_ message: String, completion: @escaping () -> ()) {
         text = message
-        UIView.animateWithDuration(0.2, animations: { () -> Void in
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
             self.alpha = 1.0
             }, completion: { (complete) -> Void in
-                UIView.animateWithDuration(0.2, delay: 1.0, options: nil, animations: { () -> Void in
+                UIView.animate(withDuration: 0.2, delay: 1.0, animations: { () -> Void in
                     self.alpha = 0.0
                     }, completion: { (complete) -> Void in
-                        self.messages.removeAtIndex(0)
+                        self.messages.remove(at: 0)
                         if !self.messages.isEmpty {
                             self.showMessages(self.messages[0], completion: completion)
                         } else {

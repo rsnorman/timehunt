@@ -9,7 +9,7 @@
 import Foundation
 
 protocol DatePickerControllerDelegate {
-    func didScrollDates(position: CGFloat)
+    func didScrollDates(_ position: CGFloat)
 }
 
 class DatePickerController: UIViewController, UIScrollViewDelegate {
@@ -21,20 +21,20 @@ class DatePickerController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         let frame = view.frame
         
-        datePickerLabel = createLabel("", CGRectMake(10, 60, frame.width - 20, 120), 36)
+        datePickerLabel = createLabel("", frame: CGRect(x: 10, y: 60, width: frame.width - 20, height: 120), fontSize: 36)
         datePickerLabel.numberOfLines = 2
         
-        monthColumnView = SeasonColumnView(labels: ["Opening Day", "Closing Day"], frame: createPageViewRect(0, frame.width / 2.0 - 10))
-        monthColumnView.setTextAlignment(NSTextAlignment.Right)
+        monthColumnView = SeasonColumnView(labels: ["Opening Day", "Closing Day"], frame: createPageViewRect(0, width: frame.width / 2.0 - 10))
+        monthColumnView.setColumnTextAlignment(NSTextAlignment.right)
         
-        view.backgroundColor = .clearColor()
+        view.backgroundColor = .clear
         view.addSubview(datePickerLabel)
         view.addSubview(monthColumnView)
-        view.userInteractionEnabled = true
+        view.isUserInteractionEnabled = true
         
         datePickerLabel.text = "Michigan\nDeer Season"
         
-        scrollView = UIScrollView(frame: createPageViewRect(0, frame.width))
+        scrollView = UIScrollView(frame: createPageViewRect(0, width: frame.width))
         scrollView.contentSize = CGSize(width: view.frame.width, height: scrollView.frame.height * 2)
         scrollView.delegate = self
         scrollView.showsHorizontalScrollIndicator = false
@@ -42,7 +42,7 @@ class DatePickerController: UIViewController, UIScrollViewDelegate {
         view.addSubview(scrollView)
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         var pos = scrollView.contentOffset.y
         
         if pos < 0 {

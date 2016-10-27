@@ -32,7 +32,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         
         menuController = MenuController()
         menuController.delegate = self
-        menuController.selectedBackground = UserSettings.getBackgroundImage()
+        menuController.selectedBackground = UserSettings.getBackgroundImage() as String!
         
         datePickerController = DatePickerController()
         datePickerController.delegate = self
@@ -47,34 +47,34 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         
         addDateGestures()
         
-        locationManager = FCLocationManager.sharedManager() as FCLocationManager
+        locationManager = FCLocationManager.sharedManager() as! FCLocationManager
         locationManager.delegate = self
         
         huntingControllers = []
         
-        pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+        pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pageViewController!.dataSource = self
         pageViewController!.delegate = self
-        pageViewController!.view.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
+        pageViewController!.view.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height);
         
         addChildViewController(pageViewController!)
         pageViewController!.view.alpha = 0
         mainView.insertSubview(pageViewController!.view, belowSubview: mainView.datePickerIcon)
-        pageViewController!.didMoveToParentViewController(self)
+        pageViewController!.didMove(toParentViewController: self)
         
         findLocation()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
+    override func viewDidAppear(_ animated: Bool) {
+        UIView.animate(withDuration: 0.5, animations: { () -> Void in
             self.view.alpha = 1
-        })  { (complete) -> Void in
+        }, completion: { (complete) -> Void in
             self.fadeInView()
-        }
+        })  
     }
     
     func fadeInView() {
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
             self.mainView.show()
             self.pageViewController!.view.alpha = 1
         })
@@ -92,17 +92,17 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         hideErrorMessage()
         mainView.startLoadingIndicator()
         mainView.datePickerIcon.disable()
-        nextDateGesture.enabled = false
-        prevDateGesture.enabled = false
-        pageViewController!.view.userInteractionEnabled = false
+        nextDateGesture.isEnabled = false
+        prevDateGesture.isEnabled = false
+        pageViewController!.view.isUserInteractionEnabled = false
     }
     
     func finishLoadingDate() {
         mainView.stopLoadingIndicator()
         mainView.datePickerIcon.enable()
-        nextDateGesture.enabled = true
-        prevDateGesture.enabled = true
-        pageViewController!.view.userInteractionEnabled = true
+        nextDateGesture.isEnabled = true
+        prevDateGesture.isEnabled = true
+        pageViewController!.view.isUserInteractionEnabled = true
     }
     
     func showNextDate() {
@@ -112,7 +112,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
             mainView.dateTimeScroller.setProgress(1, animate: true)
             mainView.dateTimeScroller.hideIndicator(setProgress: 0)
             
-            getCurrentPage().startChangingDay(reverse: true) { (reverse) -> Void in
+            getCurrentPage().startChangingDay(true) { (reverse) -> Void in
                 self.huntingSeason.nextDay()
                 self.huntingSeason.fetchDay({ (error, huntingDay) -> () in
                    self.showDay(error, huntingDay: huntingDay, reverse: reverse)
@@ -128,7 +128,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
             mainView.dateTimeScroller.setProgress(0, animate: true)
             mainView.dateTimeScroller.hideIndicator(setProgress: 1)
             
-            getCurrentPage().startChangingDay(reverse: false) { (reverse) -> Void in
+            getCurrentPage().startChangingDay(false) { (reverse) -> Void in
                 self.huntingSeason.previousDay()
                 self.huntingSeason.fetchDay({ (error, huntingDay) -> () in
                     self.showDay(error, huntingDay: huntingDay, reverse: reverse)
@@ -138,10 +138,10 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     }
     
     func getCurrentPage() -> HuntingPageController {
-        return pageViewController!.viewControllers[0] as HuntingPageController
+        return pageViewController!.viewControllers![0] as! HuntingPageController
     }
     
-    func showDay(error: NSError?, huntingDay: HuntingDay, reverse: Bool) {
+    func showDay(_ error: NSError?, huntingDay: HuntingDay, reverse: Bool) {
         if error == nil {
             for page in huntingControllers! {
                 page.setDay(huntingDay)
@@ -151,36 +151,36 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
             mainView.dateTimeScroller.setProgress(getCurrentPage().currentProgress(), animate: true)
             mainView.dateTimeScroller.showIndicator()
             
-            getCurrentPage().finishChangingDay(reverse: reverse)
+            getCurrentPage().finishChangingDay(reverse)
             
             finishLoadingDate()
         } else {
-            showErrorMessage(reverse ? "showNextDate" : "showPreviousDate")
+            showErrorMessage(reverse ? #selector(MainViewController.showNextDate) : #selector(MainViewController.showPreviousDate))
         }
     }
     
-    func showErrorMessage(retryAction: Selector) {
+    func showErrorMessage(_ retryAction: Selector) {
         mainView.errorMessage.setMessage("Could not load weather data\nTap to retry")
         mainView.errorMessage.setRetryAction(self, action: retryAction)
         mainView.stopLoadingIndicator()
         
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
+        UIView.animate(withDuration: 0.5, animations: { () -> Void in
             self.mainView.errorMessage.alpha = 1
         })
     }
     
     func showLocationErrorMessage() {
         mainView.errorMessage.setMessage("Could not determine location\nTap to retry")
-        mainView.errorMessage.setRetryAction(self, action: "findLocation")
+        mainView.errorMessage.setRetryAction(self, action: #selector(MainViewController.findLocation))
         mainView.stopLoadingIndicator()
         
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
+        UIView.animate(withDuration: 0.5, animations: { () -> Void in
             self.mainView.errorMessage.alpha = 1
         })
     }
     
     func hideErrorMessage() {
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
+        UIView.animate(withDuration: 0.5, animations: { () -> Void in
             self.mainView.errorMessage.alpha = 0
         })
     }
@@ -190,7 +190,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     
     /* Delegate Methods */
     
-    func didChangeProgress(percent: CGFloat) {
+    func didChangeProgress(_ percent: CGFloat) {
         let totalDays  = huntingSeason.length()
         let currentDay = Int(round(CGFloat(totalDays - 1) * percent))
         huntingSeason.setCurrentDay(currentDay)
@@ -203,22 +203,22 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     }
     
     func didCloseMenu() {
-        UIView.animateWithDuration(0.4, animations: { () -> Void in
+        UIView.animate(withDuration: 0.4, animations: { () -> Void in
             self.menuController.view.alpha = 0.0
-        }) { (complete) -> Void in
+        }, completion: { (complete) -> Void in
             self.menuController.view.removeFromSuperview()
             self.menuController.removeFromParentViewController()
-        }
+        }) 
     }
     
     func didOpenDatePicker() {
         addChildViewController(datePickerController)
         datePickerController.view.alpha = 0
-        pageViewController!.view.userInteractionEnabled = false
+        pageViewController!.view.isUserInteractionEnabled = false
         
         mainView.insertSubview(datePickerController.view, belowSubview: mainView.datePickerIcon)
         
-        UIView.animateWithDuration(0.5, animations: {() -> Void in
+        UIView.animate(withDuration: 0.5, animations: {() -> Void in
             self.datePickerController.view.alpha = 1
             self.pageViewController!.view.alpha = 0
             self.mainView.dateTimeScroller.setProgress(self.huntingSeason.percentComplete(), animate: false)
@@ -227,15 +227,15 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     }
     
     func didCloseDatePicker() {
-        pageViewController!.view.userInteractionEnabled = true
+        pageViewController!.view.isUserInteractionEnabled = true
         
-        UIView.animateWithDuration(0.5, animations: {() -> Void in
+        UIView.animate(withDuration: 0.5, animations: {() -> Void in
             self.datePickerController.view.alpha = 0
             self.mainView.dateTimeScroller.hideCurrentProgress()
             
-        }) {(complete) -> Void in
+        }, completion: {(complete) -> Void in
             self.showSelectedDay()
-        }
+        }) 
     }
     
     func showSelectedDay() {
@@ -247,8 +247,8 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
                     page.setDay(huntingDay)
                 }
                 
-                UIView.animateWithDuration(0.5, animations: {() -> Void in
-                    let pageController = self.pageViewController!.viewControllers[0] as HuntingPageController
+                UIView.animate(withDuration: 0.5, animations: {() -> Void in
+                    let pageController = self.pageViewController!.viewControllers?[0] as! HuntingPageController
                     self.mainView.dateTimeScroller.setProgress(pageController.currentProgress(), animate: false)
                     self.mainView.dateTimeScroller.showIndicator()
                     self.pageViewController!.view.alpha = 1
@@ -256,21 +256,21 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
                 
                 self.finishLoadingDate()
             } else {
-                self.showErrorMessage("showSelectedDay")
+                self.showErrorMessage(#selector(MainViewController.showSelectedDay))
             }
         })
     }
     
-    func didScrollDates(percent: CGFloat) {
+    func didScrollDates(_ percent: CGFloat) {
         self.mainView.dateTimeScroller.setProgress(percent, animate: false)
     }
     
-    func didSelectBackground(backgroundImage: String) {
-        mainView.bgImageView.setImage(UIImage(named: backgroundImage)!)
+    func didSelectBackground(_ backgroundImage: String) {
+        mainView.bgImageView.setTiltImage(UIImage(named: backgroundImage)!)
         UserSettings.setBackgroundImage(backgroundImage)
     }
     
-    func didAcquireLocation(location: CLLocation!) {
+    func didAcquireLocation(_ location: CLLocation!) {
         huntingSeason = HuntingSeason(startDate: HUNTING_SEASON_START_DATE, endDate: HUNTING_SEASON_END_DATE, location: location)
         
         mainView.dateTimeScroller.markCurrentProgress(huntingSeason.percentComplete())
@@ -292,25 +292,25 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
                 
                 let startingViewController: UIViewController = self.viewControllerAtIndex(0)!
                 let viewControllers: NSArray = [startingViewController]
-                self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
+                self.pageViewController!.setViewControllers(viewControllers as? [UIViewController], direction: .forward, animated: false, completion: nil)
                 
-                self.mainView.dateTimeScroller.setProgress((startingViewController as HuntingPageController).currentProgress(), animate: true)
+                self.mainView.dateTimeScroller.setProgress((startingViewController as! HuntingPageController).currentProgress(), animate: true)
                 self.mainView.dateTimeScroller.setDate(huntingDay.getCurrentTime().time)
                 
                 self.finishLoadingDate()
             } else {
-                self.showErrorMessage("getDayForLocation")
+                self.showErrorMessage(#selector(MainViewController.getDayForLocation))
             }
         }
     }
     
-    func didFailToAcquireLocationWithErrorMsg(errorMsg: String!) {
+    func didFailToAcquireLocationWithErrorMsg(_ errorMsg: String!) {
         self.showLocationErrorMessage()
     }
     
     func didTickCountdown() {
         if pageViewController!.view.alpha != 0 {
-            let pageController = pageViewController!.viewControllers[0] as HuntingPageController
+            let pageController = pageViewController!.viewControllers?[0] as! HuntingPageController
             mainView.dateTimeScroller.setProgress(pageController.currentProgress(), animate: true)
         }
     }
@@ -322,29 +322,29 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     /* Gestures */
     
     func addDateGestures() {
-        nextDateGesture = UISwipeGestureRecognizer(target: self, action: "showNextDate")
-        nextDateGesture.direction = .Up
+        nextDateGesture = UISwipeGestureRecognizer(target: self, action: #selector(MainViewController.showNextDate))
+        nextDateGesture.direction = .up
         view.addGestureRecognizer(nextDateGesture)
         
-        prevDateGesture = UISwipeGestureRecognizer(target: self, action: "showPreviousDate")
-        prevDateGesture.direction = .Down
+        prevDateGesture = UISwipeGestureRecognizer(target: self, action: #selector(MainViewController.showPreviousDate))
+        prevDateGesture.direction = .down
         view.addGestureRecognizer(prevDateGesture)
     }
     
     /* End Gestures */
     
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         if (huntingControllers?.count == 0) {
             return nil
         }
         
-        if var index = find(huntingControllers!, viewController as HuntingPageController) {
+        if var index = huntingControllers!.index(of: viewController as! HuntingPageController) {
             if index == 0 {
                 return nil
             }
             
-            index--
+            index -= 1
             
             return viewControllerAtIndex(index)
         } else {
@@ -353,13 +353,13 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         if (huntingControllers?.count == 0) {
             return nil
         }
         
-        if var index = find(huntingControllers!, viewController as HuntingPageController) {
-            index++
+        if var index = huntingControllers!.index(of: viewController as! HuntingPageController) {
+            index += 1
             
             if (index == self.huntingControllers!.count) {
                 return nil
@@ -371,7 +371,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         }
     }
     
-    func viewControllerAtIndex(index: Int) -> UIViewController? {
+    func viewControllerAtIndex(_ index: Int) -> UIViewController? {
         if self.huntingControllers!.count == 0 || index >= self.huntingControllers!.count
         {
             return nil
@@ -380,24 +380,24 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         return huntingControllers![index]
     }
     
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return self.huntingControllers!.count
     }
     
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return 0
     }
     
-    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [AnyObject]) {
-        UIView.animateWithDuration(0.2, animations: { () -> Void in
+    private func pageViewController(_ pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [AnyObject]) {
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
             self.mainView.dateTimeScroller.alpha = 0
             self.mainView.datePickerIcon.alpha = 0
             self.mainView.menuIcon.alpha = 0
         })
     }
     
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
-        UIView.animateWithDuration(0.8, animations: { () -> Void in
+    private func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
+        UIView.animate(withDuration: 0.8, animations: { () -> Void in
             self.mainView.dateTimeScroller.alpha = 1
             self.mainView.datePickerIcon.alpha = 1
             self.mainView.menuIcon.alpha = 1

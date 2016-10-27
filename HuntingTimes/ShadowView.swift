@@ -15,11 +15,11 @@ class ShadowView : UIView {
         setDarkness(0.4)
     }
     
-    func setDarkness(darkness: CGFloat) {
+    func setDarkness(_ darkness: CGFloat) {
         backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: darkness)
     }
     
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
     }
 }
