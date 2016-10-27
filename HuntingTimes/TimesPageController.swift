@@ -56,9 +56,9 @@ class TimesPageController : HuntingPageController, CountdownViewDelegate, TimesC
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
+        UIView.animate(withDuration: 0.5, animations: { 
             self.view.alpha = 1
-        }, nil)
+        })
     }
     
     func willShowMessage() {

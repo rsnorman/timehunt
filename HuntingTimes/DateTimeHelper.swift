@@ -37,31 +37,15 @@ func timeToString(_ dateTime: Date) -> String {
 
 func clearTime(_ dateTime: Date) -> Date {
     let calendar = Calendar.current
-    return calendar.dateBySettingHour(0, minute: 0, second: 0, ofDate: dateTime, options: nil)!
+    return calendar.date(bySettingHour: 0, minute: 0, second: 0, of: dateTime)!
 }
 
 func isToday(_ date: Date) -> Bool {
-    let cal = Calendar.current
-    var components = cal.components((NSCalendar.Unit.CalendarUnitEra|NSCalendar.Unit.CalendarUnitYear|NSCalendar.Unit.CalendarUnitMonth|NSCalendar.Unit.CalendarUnitDay), fromDate: Date())
-    let today = cal.dateFromComponents(components)
-    components = cal.components((NSCalendar.Unit.CalendarUnitEra|NSCalendar.Unit.CalendarUnitYear|NSCalendar.Unit.CalendarUnitMonth|NSCalendar.Unit.CalendarUnitDay), fromDate: date)
-    let otherDate = cal.dateFromComponents(components)
-    
-    return today!.isEqualToDate(otherDate!)
+    return Calendar.current.dateComponents([.day], from: date, to: Date()).day == 0
 }
 
 func differenceInDays(_ date: Date, otherDate: Date) -> Int {
-    let calendar = Calendar.current
-    var fromDate : Date?
-    var toDate   : Date?
-    var duration : TimeInterval = 0
-    
-    calendar.rangeOfUnit(.DayCalendarUnit, startDate: &fromDate, interval: &duration, forDate: date)
-    calendar.rangeOfUnit(.DayCalendarUnit, startDate: &toDate, interval: &duration, forDate: otherDate)
-    
-    let difference = calendar.components(.DayCalendarUnit, fromDate: fromDate!, toDate: toDate!, options: NSCalendar.Options.allZeros)
-    
-    return difference.day
+    return Calendar.current.dateComponents([.day], from: date, to: otherDate).day ?? 0
 }
 
 func addDay(_ date: Date) -> Date {

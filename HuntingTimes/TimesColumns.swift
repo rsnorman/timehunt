@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Swift
 
 protocol TimesColumnsDelegate {
     func didTapHuntingTime(_ huntingTime: HuntingTime)
@@ -40,7 +41,7 @@ class TimesColumns : HuntingColumnsView {
         let loc   = sender.location(in: self)
         if let label = self.hitTest(loc, with: nil) as? UILabel {
             let event = label.text
-            let time  = huntingDay.allTimes()[find(events, event!)!]
+            let time  = huntingDay.allTimes()[events.index(of: event!)!]
             
             if let del = delegate {
                 del.didTapHuntingTime(time)
@@ -55,8 +56,8 @@ class TimesColumns : HuntingColumnsView {
             let timesString = huntingDay.allTimes().map {
                 $0.toTimeString()
             }
-            let time  = huntingDay.allTimes()[find(timesString, timeString!)!]
-            let event = events[find(timesString, timeString!)!]
+            let time  = huntingDay.allTimes()[timesString.index(of: timeString!)!]
+            _ = events[timesString.index(of:timeString!)!]
                 
             if let del = delegate {
                 del.didTapHuntingTime(time)
@@ -65,11 +66,11 @@ class TimesColumns : HuntingColumnsView {
     }
     
     func getPositionOfTime(_ time: Date) -> Int? {
-        if let day = huntingDay {
+        if (huntingDay) != nil {
             let timesString = huntingDay.allTimes().map {
                 $0.toTimeString()
             }
-            return find(timesString, timeToString(time))
+            return timesString.index(of: timeToString(time))
         }
         return nil
     }

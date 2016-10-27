@@ -54,9 +54,9 @@ class TiltImageView: UIImageView {
         motionManager.startDeviceMotionUpdates(to: OperationQueue.current!, withHandler:{
             deviceManager, error in
             
-            var xRotationRate = deviceManager?.rotationRate.x
-            var yRotationRate = deviceManager?.rotationRate.y
-            var zRotationRate = deviceManager?.rotationRate.z
+            let xRotationRate = deviceManager?.rotationRate.x
+            let yRotationRate = deviceManager?.rotationRate.y
+            let zRotationRate = deviceManager?.rotationRate.z
             if (fabs(yRotationRate!) > (fabs(xRotationRate!) + fabs(zRotationRate!)))
             {
                 let kRotationMultiplier = 0.4;
@@ -66,11 +66,11 @@ class TiltImageView: UIImageView {
                 let contentOffset = self.clampedContentOffsetForHorizontalOffset(CGFloat(interpretedXOffset))
                 
                 let kMovementSmoothing = 0.3
-                UIView.animateWithDuration(kMovementSmoothing, delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState|UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
-                    self.scrollView.contentOffset = contentOffset
-                    }, completion: { (complete) -> Void in
-                        
-                })
+                
+                UIView.animate(withDuration: kMovementSmoothing, delay: 0.0, options: [.beginFromCurrentState, .curveEaseOut], animations: {
+                        self.scrollView.contentOffset = contentOffset
+                    })
+                
             }
         })
     }

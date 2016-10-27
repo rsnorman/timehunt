@@ -12,14 +12,16 @@ class HourlyWeatherParser {
     let hourlyWeather : [HourlyWeather]
     
     init(weatherJSON : [String : AnyObject]) {
-        hourlyWeather = []
+        var weather: [HourlyWeather] = []
         
-        for hourData in hourlyData(weatherJSON) {
+        for hourData in HourlyWeatherParser.hourlyData(weatherJSON) {
             let temperature: Double = hourData["temperature"] as! Double
             let hourTime   : Date = Date(timeIntervalSince1970: hourData["time"] as! TimeInterval)
             
-            hourlyWeather.append(HourlyWeather(temperature: temperature, at: hourTime))
+            weather.append(HourlyWeather(temperature: temperature, at: hourTime))
         }
+        
+        hourlyWeather = weather
     }
     
     func onDate(_ date : Date) -> [HourlyWeather] {
@@ -40,11 +42,11 @@ class HourlyWeatherParser {
     func formatDate(_ date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.timeZone = TimeZone()
+        dateFormatter.timeZone = TimeZone.ReferenceType.local
         return dateFormatter.string(from: date)
     }
     
-    func hourlyData(_ weatherJSON: [String : AnyObject]) -> [[String : AnyObject]] {
+    class func hourlyData(_ weatherJSON: [String : AnyObject]) -> [[String : AnyObject]] {
         if let hourly = weatherJSON["hourly"] as? [String : AnyObject] {
             return hourly["data"] as! [[String : AnyObject]]!
         } else {

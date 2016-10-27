@@ -16,16 +16,18 @@ let DAY_TRANSITION_TIME: TimeInterval = 0.5
 
 let HUNTING_SEASON_START_DATE: Date = {
     let currentCalendar = Calendar.current
-    let dateComponents  = currentCalendar.components(.YearCalendarUnit, fromDate: Date())
+    let unitFlags = Set<Calendar.Component>([.year])
+    var dateComponents  = currentCalendar.dateComponents(unitFlags, from: Date())
     dateComponents.month = 11
     dateComponents.day = 20
-    return currentCalendar.dateFromComponents(dateComponents)!
+    return currentCalendar.date(from: dateComponents)!
 }()
 
 let HUNTING_SEASON_END_DATE: Date = {
     let currentCalendar = Calendar.current
-    let dateComponents  = currentCalendar.components(.YearCalendarUnit, fromDate: Date())
+    let unitFlags = Set<Calendar.Component>([.year])
+    var dateComponents  = currentCalendar.dateComponents(unitFlags, from: Date())
     dateComponents.month = 12
     dateComponents.day = 31
-    return currentCalendar.dateFromComponents(dateComponents)!
+    return currentCalendar.date(from: dateComponents)!
 }()

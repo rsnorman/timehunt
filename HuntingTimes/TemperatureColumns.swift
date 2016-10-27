@@ -28,11 +28,15 @@ class TemperatureColumns : HuntingColumnsView {
     
     
     func setTemperatures(_ dailyWeather: DailyWeather) {
-        let temperatures = ["\(Int(round(dailyWeather.temperatureAt(huntingDay.startTime.time))))°",
-            "\(Int(round(dailyWeather.temperatureAt(huntingDay.sunriseTime.time))))°",
-            "\(Int(round(dailyWeather.temperatureAt(huntingDay.sunsetTime.time))))°",
-            "\(Int(round(dailyWeather.temperatureAt(huntingDay.endTime.time))))°"]
+        let temperatures = [temperatureString(for: dailyWeather, at: huntingDay.startTime),
+                            temperatureString(for: dailyWeather, at: huntingDay.sunriseTime),
+                            temperatureString(for: dailyWeather, at: huntingDay.sunsetTime),
+                            temperatureString(for: dailyWeather, at: huntingDay.endTime)]
         
         rightColumnView.setLabels(temperatures)
+    }
+    
+    func temperatureString(for dailyWeather: DailyWeather, at huntingTime: HuntingTime) -> String {
+        return "\(Int(round(dailyWeather.temperatureAt(huntingTime.time))))°"
     }
 }

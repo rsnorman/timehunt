@@ -130,9 +130,9 @@ class NotificationManager {
     
     init() {
         delegates = []
-        let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Sound
-        let settings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+//        let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Sound
+//        let settings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
+//        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
     }
 }
 
