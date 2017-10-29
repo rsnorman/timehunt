@@ -85,6 +85,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2FDE27DCD5F7095FE6B0B38A /* Pods-HuntingTimesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuntingTimesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HuntingTimesTests/Pods-HuntingTimesTests.release.xcconfig"; sourceTree = "<group>"; };
 		4C20E7341A2FE825008A9F5B /* MenuIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuIconView.swift; sourceTree = "<group>"; };
 		4C20E7361A2FF12F008A9F5B /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		4C3D49A31A28347800AFF111 /* HuntingDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingDay.swift; sourceTree = "<group>"; };
@@ -167,8 +168,11 @@
 		4CC2EF251A4C966300D74496 /* SunriseSunset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunriseSunset.swift; sourceTree = "<group>"; };
 		4CDE49421A282934002CF42A /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		4CDE49441A282B3B002CF42A /* InterfaceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceHelper.swift; sourceTree = "<group>"; };
+		5EA21EA48D1F0CCD57BB8B3B /* Pods-HuntingTimes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuntingTimes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HuntingTimes/Pods-HuntingTimes.debug.xcconfig"; sourceTree = "<group>"; };
 		83E8EECB1AAD4F1400B58086 /* ErrorMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessageView.swift; sourceTree = "<group>"; };
 		83F4DEC11AAFF30A00ECD483 /* SeasonColumnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeasonColumnView.swift; sourceTree = "<group>"; };
+		AFF67320ACFF6E8588A798F8 /* Pods-HuntingTimes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuntingTimes.release.xcconfig"; path = "Pods/Target Support Files/Pods-HuntingTimes/Pods-HuntingTimes.release.xcconfig"; sourceTree = "<group>"; };
+		DF2856ABCD4D8A7A7B19AA9A /* Pods-HuntingTimesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuntingTimesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HuntingTimesTests/Pods-HuntingTimesTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +193,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B0AAE7F84EE56E9F33405B5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5EA21EA48D1F0CCD57BB8B3B /* Pods-HuntingTimes.debug.xcconfig */,
+				AFF67320ACFF6E8588A798F8 /* Pods-HuntingTimes.release.xcconfig */,
+				DF2856ABCD4D8A7A7B19AA9A /* Pods-HuntingTimesTests.debug.xcconfig */,
+				2FDE27DCD5F7095FE6B0B38A /* Pods-HuntingTimesTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		4C46BE421A2046F3005BB796 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,6 +355,8 @@
 				4CA156D71A20413C00F95BA2 /* HuntingTimes */,
 				4CA156F01A20413C00F95BA2 /* HuntingTimesTests */,
 				4CA156D61A20413C00F95BA2 /* Products */,
+				3B0AAE7F84EE56E9F33405B5 /* Pods */,
+				FD5D1A36A3CCD3D41D85BA14 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -423,6 +440,13 @@
 			name = WeatherParsers;
 			sourceTree = "<group>";
 		};
+		FD5D1A36A3CCD3D41D85BA14 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -430,9 +454,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4CA156F71A20413C00F95BA2 /* Build configuration list for PBXNativeTarget "HuntingTimes" */;
 			buildPhases = (
+				2272B8B3C4C20054DC096D08 /* [CP] Check Pods Manifest.lock */,
 				4CA156D11A20413C00F95BA2 /* Sources */,
 				4CA156D21A20413C00F95BA2 /* Frameworks */,
 				4CA156D31A20413C00F95BA2 /* Resources */,
+				3CB31A915A1DEF05B3120D41 /* [CP] Embed Pods Frameworks */,
+				333E9BAA12FAB91CBC589495 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -447,9 +474,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4CA156FA1A20413C00F95BA2 /* Build configuration list for PBXNativeTarget "HuntingTimesTests" */;
 			buildPhases = (
+				F497AFA3C63382F8C52FFB9A /* [CP] Check Pods Manifest.lock */,
 				4CA156E91A20413C00F95BA2 /* Sources */,
 				4CA156EA1A20413C00F95BA2 /* Frameworks */,
 				4CA156EB1A20413C00F95BA2 /* Resources */,
+				B61D1B2A2397DA55E342EF03 /* [CP] Embed Pods Frameworks */,
+				7D6FDDFF3769CDF4095BF3AA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -525,6 +555,105 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2272B8B3C4C20054DC096D08 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HuntingTimes-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		333E9BAA12FAB91CBC589495 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HuntingTimes/Pods-HuntingTimes-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3CB31A915A1DEF05B3120D41 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HuntingTimes/Pods-HuntingTimes-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7D6FDDFF3769CDF4095BF3AA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HuntingTimesTests/Pods-HuntingTimesTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B61D1B2A2397DA55E342EF03 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HuntingTimesTests/Pods-HuntingTimesTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F497AFA3C63382F8C52FFB9A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HuntingTimesTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4CA156D11A20413C00F95BA2 /* Sources */ = {
@@ -707,6 +836,7 @@
 		};
 		4CA156F81A20413C00F95BA2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5EA21EA48D1F0CCD57BB8B3B /* Pods-HuntingTimes.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -721,6 +851,7 @@
 		};
 		4CA156F91A20413C00F95BA2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AFF67320ACFF6E8588A798F8 /* Pods-HuntingTimes.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -735,6 +866,7 @@
 		};
 		4CA156FB1A20413C00F95BA2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF2856ABCD4D8A7A7B19AA9A /* Pods-HuntingTimesTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -756,6 +888,7 @@
 		};
 		4CA156FC1A20413C00F95BA2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2FDE27DCD5F7095FE6B0B38A /* Pods-HuntingTimesTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
