@@ -60,15 +60,6 @@
 		836DAFF11FA95B3800B9E2FE /* NBUIKitSwiftGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836DAFF01FA95B3800B9E2FE /* NBUIKitSwiftGuard.swift */; };
 		83E8EECC1AAD4F1400B58086 /* ErrorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E8EECB1AAD4F1400B58086 /* ErrorMessageView.swift */; };
 		83F4DEC21AAFF30A00ECD483 /* SeasonColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F4DEC11AAFF30A00ECD483 /* SeasonColumnView.swift */; };
-		83FF11AD1FA9615200C57D8E /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF119B1FA9615100C57D8E /* AFURLConnectionOperation.m */; };
-		83FF11AE1FA9615200C57D8E /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF119F1FA9615100C57D8E /* AFHTTPRequestOperation.m */; };
-		83FF11AF1FA9615200C57D8E /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF11A21FA9615100C57D8E /* AFHTTPSessionManager.m */; };
-		83FF11B01FA9615200C57D8E /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF11A31FA9615100C57D8E /* AFURLSessionManager.m */; };
-		83FF11B11FA9615200C57D8E /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF11A51FA9615100C57D8E /* AFHTTPRequestOperationManager.m */; };
-		83FF11B21FA9615200C57D8E /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF11A71FA9615100C57D8E /* AFSecurityPolicy.m */; };
-		83FF11B31FA9615200C57D8E /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF11A81FA9615100C57D8E /* AFURLRequestSerialization.m */; };
-		83FF11B41FA9615200C57D8E /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF11AA1FA9615200C57D8E /* AFURLResponseSerialization.m */; };
-		83FF11B51FA9615200C57D8E /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF11AB1FA9615200C57D8E /* AFNetworkReachabilityManager.m */; };
 		B3B120AE7C5BF24E1E7C20F3 /* Pods_HuntingTimesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F96317D2E00FFC82F644C3 /* Pods_HuntingTimesTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -143,25 +134,6 @@
 		836DAFF01FA95B3800B9E2FE /* NBUIKitSwiftGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBUIKitSwiftGuard.swift; sourceTree = "<group>"; };
 		83E8EECB1AAD4F1400B58086 /* ErrorMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessageView.swift; sourceTree = "<group>"; };
 		83F4DEC11AAFF30A00ECD483 /* SeasonColumnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeasonColumnView.swift; sourceTree = "<group>"; };
-		83FF119A1FA9615100C57D8E /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
-		83FF119B1FA9615100C57D8E /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLConnectionOperation.m; path = AFNetworking/AFURLConnectionOperation.m; sourceTree = "<group>"; };
-		83FF119C1FA9615100C57D8E /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFSecurityPolicy.h; path = AFNetworking/AFSecurityPolicy.h; sourceTree = "<group>"; };
-		83FF119D1FA9615100C57D8E /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = AFNetworking/AFURLSessionManager.h; sourceTree = "<group>"; };
-		83FF119E1FA9615100C57D8E /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLRequestSerialization.h; path = AFNetworking/AFURLRequestSerialization.h; sourceTree = "<group>"; };
-		83FF119F1FA9615100C57D8E /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperation.m; path = AFNetworking/AFHTTPRequestOperation.m; sourceTree = "<group>"; };
-		83FF11A01FA9615100C57D8E /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperationManager.h; path = AFNetworking/AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
-		83FF11A11FA9615100C57D8E /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFNetworkReachabilityManager.h; path = AFNetworking/AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		83FF11A21FA9615100C57D8E /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPSessionManager.m; path = AFNetworking/AFHTTPSessionManager.m; sourceTree = "<group>"; };
-		83FF11A31FA9615100C57D8E /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = AFNetworking/AFURLSessionManager.m; sourceTree = "<group>"; };
-		83FF11A41FA9615100C57D8E /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPSessionManager.h; path = AFNetworking/AFHTTPSessionManager.h; sourceTree = "<group>"; };
-		83FF11A51FA9615100C57D8E /* AFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperationManager.m; path = AFNetworking/AFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
-		83FF11A61FA9615100C57D8E /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFNetworking.h; path = AFNetworking/AFNetworking.h; sourceTree = "<group>"; };
-		83FF11A71FA9615100C57D8E /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFSecurityPolicy.m; path = AFNetworking/AFSecurityPolicy.m; sourceTree = "<group>"; };
-		83FF11A81FA9615100C57D8E /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLRequestSerialization.m; path = AFNetworking/AFURLRequestSerialization.m; sourceTree = "<group>"; };
-		83FF11A91FA9615100C57D8E /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLConnectionOperation.h; path = AFNetworking/AFURLConnectionOperation.h; sourceTree = "<group>"; };
-		83FF11AA1FA9615200C57D8E /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLResponseSerialization.m; path = AFNetworking/AFURLResponseSerialization.m; sourceTree = "<group>"; };
-		83FF11AB1FA9615200C57D8E /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFNetworkReachabilityManager.m; path = AFNetworking/AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		83FF11AC1FA9615200C57D8E /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLResponseSerialization.h; path = AFNetworking/AFURLResponseSerialization.h; sourceTree = "<group>"; };
 		AFF67320ACFF6E8588A798F8 /* Pods-HuntingTimes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuntingTimes.release.xcconfig"; path = "Pods/Target Support Files/Pods-HuntingTimes/Pods-HuntingTimes.release.xcconfig"; sourceTree = "<group>"; };
 		BE0AFBE868D5426CCE886B84 /* Pods_HuntingTimes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HuntingTimes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF2856ABCD4D8A7A7B19AA9A /* Pods-HuntingTimesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuntingTimesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HuntingTimesTests/Pods-HuntingTimesTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -201,7 +173,6 @@
 		4C46BE421A2046F3005BB796 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				83FF11991FA9612A00C57D8E /* AFNetworking */,
 				4C7EFBF51A509CB1006B2DEF /* Weather */,
 				4C46BE431A2046FE005BB796 /* StatusBarUpdater.swift */,
 				4C6EE1AB1A2590F100305115 /* HuntingTimeProgress.swift */,
@@ -390,32 +361,6 @@
 				4C7EFBFA1A50A14C006B2DEF /* WeatherParser.swift */,
 			);
 			name = WeatherParsers;
-			sourceTree = "<group>";
-		};
-		83FF11991FA9612A00C57D8E /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				83FF119A1FA9615100C57D8E /* AFHTTPRequestOperation.h */,
-				83FF119F1FA9615100C57D8E /* AFHTTPRequestOperation.m */,
-				83FF11A01FA9615100C57D8E /* AFHTTPRequestOperationManager.h */,
-				83FF11A51FA9615100C57D8E /* AFHTTPRequestOperationManager.m */,
-				83FF11A41FA9615100C57D8E /* AFHTTPSessionManager.h */,
-				83FF11A21FA9615100C57D8E /* AFHTTPSessionManager.m */,
-				83FF11A61FA9615100C57D8E /* AFNetworking.h */,
-				83FF11A11FA9615100C57D8E /* AFNetworkReachabilityManager.h */,
-				83FF11AB1FA9615200C57D8E /* AFNetworkReachabilityManager.m */,
-				83FF119C1FA9615100C57D8E /* AFSecurityPolicy.h */,
-				83FF11A71FA9615100C57D8E /* AFSecurityPolicy.m */,
-				83FF11A91FA9615100C57D8E /* AFURLConnectionOperation.h */,
-				83FF119B1FA9615100C57D8E /* AFURLConnectionOperation.m */,
-				83FF119E1FA9615100C57D8E /* AFURLRequestSerialization.h */,
-				83FF11A81FA9615100C57D8E /* AFURLRequestSerialization.m */,
-				83FF11AC1FA9615200C57D8E /* AFURLResponseSerialization.h */,
-				83FF11AA1FA9615200C57D8E /* AFURLResponseSerialization.m */,
-				83FF119D1FA9615100C57D8E /* AFURLSessionManager.h */,
-				83FF11A31FA9615100C57D8E /* AFURLSessionManager.m */,
-			);
-			name = AFNetworking;
 			sourceTree = "<group>";
 		};
 		FD5D1A36A3CCD3D41D85BA14 /* Frameworks */ = {
@@ -644,24 +589,17 @@
 			files = (
 				4CA156E01A20413C00F95BA2 /* MainViewController.swift in Sources */,
 				4C7EFBFB1A50A14C006B2DEF /* WeatherParser.swift in Sources */,
-				83FF11AE1FA9615200C57D8E /* AFHTTPRequestOperation.m in Sources */,
 				4C20E7371A2FF12F008A9F5B /* MenuController.swift in Sources */,
 				4CC2EF261A4C966300D74496 /* SunriseSunset.swift in Sources */,
-				83FF11AD1FA9615200C57D8E /* AFURLConnectionOperation.m in Sources */,
-				83FF11B21FA9615200C57D8E /* AFSecurityPolicy.m in Sources */,
 				4C8987F31A290D35001B7B74 /* MainView.swift in Sources */,
 				4C46BE4B1A20667B005BB796 /* TiltImageView.swift in Sources */,
 				4CC2EF231A4C8D2E00D74496 /* JSONFileWriter.swift in Sources */,
-				83FF11B01FA9615200C57D8E /* AFURLSessionManager.m in Sources */,
-				83FF11B51FA9615200C57D8E /* AFNetworkReachabilityManager.m in Sources */,
 				4C46BE4D1A20D7D1005BB796 /* CountdownLabel.swift in Sources */,
-				83FF11B31FA9615200C57D8E /* AFURLRequestSerialization.m in Sources */,
 				83E8EECC1AAD4F1400B58086 /* ErrorMessageView.swift in Sources */,
 				836DAFF11FA95B3800B9E2FE /* NBUIKitSwiftGuard.swift in Sources */,
 				4C6EE1AC1A2590F100305115 /* HuntingTimeProgress.swift in Sources */,
 				4C7EFBF71A509CC4006B2DEF /* HourlyWeather.swift in Sources */,
 				4CDE49431A282934002CF42A /* MessageView.swift in Sources */,
-				83FF11B41FA9615200C57D8E /* AFURLResponseSerialization.m in Sources */,
 				83F4DEC21AAFF30A00ECD483 /* SeasonColumnView.swift in Sources */,
 				4CA156DE1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld in Sources */,
 				4C56B3CD1A26D2CC00B8BD82 /* NotificationManager.swift in Sources */,
@@ -676,7 +614,6 @@
 				4CDE49451A282B3B002CF42A /* InterfaceHelper.swift in Sources */,
 				4C5B10F41A585EBB0077DFFD /* TimesPage.swift in Sources */,
 				4C5B10F21A585E9B0077DFFD /* TimesPageController.swift in Sources */,
-				83FF11AF1FA9615200C57D8E /* AFHTTPSessionManager.m in Sources */,
 				4C5B10EE1A585E260077DFFD /* TemperaturePageController.swift in Sources */,
 				4C5B10FA1A58940A0077DFFD /* HuntingColumnsView.swift in Sources */,
 				4C5B10F61A588FA10077DFFD /* HuntingPageController.swift in Sources */,
@@ -692,7 +629,6 @@
 				4C5B11031A59BE0E0077DFFD /* DateLineScroller.swift in Sources */,
 				4C7EFBF41A509CA8006B2DEF /* HourlyParser.swift in Sources */,
 				4C5B10F81A5890BE0077DFFD /* HuntingPageView.swift in Sources */,
-				83FF11B11FA9615200C57D8E /* AFHTTPRequestOperationManager.m in Sources */,
 				4C64369D1A37F79600017338 /* UserSettings.swift in Sources */,
 				4C6EE1A21A242C5C00305115 /* ScrollLineView.swift in Sources */,
 			);

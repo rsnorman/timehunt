@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class HuntingPageView : UIView {
     let huntingColumnsView : HuntingColumnsView

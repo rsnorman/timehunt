@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class TemperaturePage : HuntingPageView {
     required init(frame: CGRect) {

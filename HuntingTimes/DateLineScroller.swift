@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol DateLineScrollerDelegate {
     func didChangeProgress(_ percent: CGFloat)
