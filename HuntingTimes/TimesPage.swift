@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class TimesPage : HuntingPageView {
     let countdownLabel : CountdownLabel

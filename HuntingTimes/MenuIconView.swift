@@ -62,11 +62,11 @@ class MenuIconView : UIView {
             
             let tFrame = self.topLine.frame
             self.topLine.frame = CGRect(x: self.padding, y: self.frame.height / 2 - (self.lineHeight / 2), width: self.frame.width - (self.padding * 2), height: tFrame.height)
-            self.topLine.transform = self.topLine.transform.rotated(by: CGFloat(M_PI * 0.75))
+            self.topLine.transform = self.topLine.transform.rotated(by: CGFloat(.pi * 0.75))
             
             let bFrame = self.bottomLine.frame
             self.bottomLine.frame = CGRect(x: self.padding, y: self.frame.height / 2 - (self.lineHeight / 2), width: self.frame.width - (self.padding * 2), height: bFrame.height)
-            self.bottomLine.transform = self.bottomLine.transform.rotated(by: CGFloat(M_PI * -0.75))
+            self.bottomLine.transform = self.bottomLine.transform.rotated(by: CGFloat(.pi * -0.75))
         }) { (complete) -> Void in
             self.menuCloseGesture.isEnabled = true
         }
@@ -78,8 +78,8 @@ class MenuIconView : UIView {
         
         // Start rotation first so strange animation doesn't take place
         UIView.animate(withDuration: 0.4, animations: {
-            self.topLine.transform = self.topLine.transform.rotated(by: CGFloat(M_PI * -0.75))
-            self.bottomLine.transform = self.bottomLine.transform.rotated(by: CGFloat(M_PI * 0.75))
+            self.topLine.transform = self.topLine.transform.rotated(by: CGFloat(.pi * -0.75))
+            self.bottomLine.transform = self.bottomLine.transform.rotated(by: CGFloat(.pi * 0.75))
         }) 
         
         UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions(), animations: { () -> Void in
@@ -89,7 +89,7 @@ class MenuIconView : UIView {
             let tFrame = self.topLine.frame
             self.topLine.frame = CGRect(x: self.lineHorizontalMargin + self.padding, y: self.lineVerticalMargin + self.padding - (self.lineHeight / 2), width: self.frame.width - ((self.lineHorizontalMargin + self.padding) * 2), height: tFrame.height)
             
-            let bFrame = self.bottomLine.frame
+//            let bFrame = self.bottomLine.frame
             self.bottomLine.frame = CGRect(x: self.lineHorizontalMargin + self.padding, y: self.frame.height - (self.lineVerticalMargin + self.padding + (self.lineHeight / 2)), width: self.frame.width - ((self.lineHorizontalMargin + self.padding) * 2), height: tFrame.height)
             
         }) { (complete) -> Void in

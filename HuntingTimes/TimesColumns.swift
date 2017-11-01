@@ -143,7 +143,7 @@ class TimesColumns : HuntingColumnsView {
     }
     
     func removeAllNotifications() {
-        for (event, nIcons) in notificationIcons {
+        for (_, nIcons) in notificationIcons {
             for nIcon in nIcons {
                 nIcon.removeFromSuperview()
             }

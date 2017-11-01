@@ -69,14 +69,12 @@ class HuntingSeason {
         return dates[currentPosition]
     }
     
-    func nextDay() -> HuntingDay {
+    func moveToNextDay() {
         currentPosition = currentPosition + 1
-        return currentDay()
     }
     
-    func previousDay() -> HuntingDay {
+    func moveToPreviousDay() {
         currentPosition = currentPosition - 1
-        return currentDay()
     }
     
     func openingDay() -> Bool {

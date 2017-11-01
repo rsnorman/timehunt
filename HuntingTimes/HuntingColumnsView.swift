@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class HuntingColumnsView : UIView {
     var huntingDay       : HuntingDay!

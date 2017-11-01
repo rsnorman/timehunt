@@ -116,7 +116,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
             mainView.dateTimeScroller.hideIndicator(setProgress: 0)
             
             getCurrentPage().startChangingDay(true) { (reverse) -> Void in
-                self.huntingSeason.nextDay()
+                self.huntingSeason.moveToNextDay()
                 self.huntingSeason.fetchDay({ (error, huntingDay) -> () in
                    self.showDay(error, huntingDay: huntingDay, reverse: reverse)
                 })
@@ -132,7 +132,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
             mainView.dateTimeScroller.hideIndicator(setProgress: 1)
             
             getCurrentPage().startChangingDay(false) { (reverse) -> Void in
-                self.huntingSeason.previousDay()
+                self.huntingSeason.moveToPreviousDay()
                 self.huntingSeason.fetchDay({ (error, huntingDay) -> () in
                     self.showDay(error, huntingDay: huntingDay, reverse: reverse)
                 })
