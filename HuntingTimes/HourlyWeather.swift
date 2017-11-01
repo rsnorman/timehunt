@@ -9,10 +9,10 @@
 import Foundation
 
 class HourlyWeather {
-    let temperature : Double
+    let temperature : Float
     let time        : Date
     
-    init(temperature: Double, at: Date) {
+    init(temperature: Float, at: Date) {
         self.temperature = temperature
         self.time        = at
     }

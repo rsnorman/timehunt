@@ -18,8 +18,8 @@ let HUNTING_SEASON_START_DATE: Date = {
     let currentCalendar = Calendar.current
     let unitFlags = Set<Calendar.Component>([.year])
     var dateComponents  = currentCalendar.dateComponents(unitFlags, from: Date())
-    dateComponents.month = 11
-    dateComponents.day = 20
+    dateComponents.month = 10
+    dateComponents.day = 31
     return currentCalendar.date(from: dateComponents)!
 }()
 

@@ -6,6 +6,7 @@ target 'HuntingTimes' do
   use_frameworks!
 
   # Pods for HuntingTimes
+  pod "ForecastIO"
 
   target 'HuntingTimesTests' do
     inherit! :search_paths

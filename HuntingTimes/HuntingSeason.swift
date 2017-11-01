@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 protocol HuntingSeasonDelegate {
     func willChangeDay(_ currentDay: HuntingDay)
@@ -28,7 +29,7 @@ class HuntingSeason {
         var seasonDates: [HuntingDay] = []
         
         var date = self.startDate
-        for index in 0...(differenceInDays(startDate, otherDate: endDate) - 1) {
+        for _ in 0...(differenceInDays(startDate, otherDate: endDate) - 1) {
             seasonDates.append(HuntingDay(date: date))
             date = addDay(date)
         }

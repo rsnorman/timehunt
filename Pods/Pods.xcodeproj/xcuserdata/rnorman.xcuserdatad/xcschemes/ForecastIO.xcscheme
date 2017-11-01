@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D8B6C70FD267CC7AB99FA2C73723AE74"
-               BuildableName = "Pods_HuntingTimesTests.framework"
-               BlueprintName = "Pods-HuntingTimesTests"
+               BlueprintIdentifier = "3F19738396425B89322D95E08B55C21F"
+               BuildableName = "ForecastIO.framework"
+               BlueprintName = "ForecastIO"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,9 +47,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D8B6C70FD267CC7AB99FA2C73723AE74"
-            BuildableName = "Pods_HuntingTimesTests.framework"
-            BlueprintName = "Pods-HuntingTimesTests"
+            BlueprintIdentifier = "3F19738396425B89322D95E08B55C21F"
+            BuildableName = "ForecastIO.framework"
+            BlueprintName = "ForecastIO"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

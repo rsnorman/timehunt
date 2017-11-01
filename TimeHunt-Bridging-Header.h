@@ -6,7 +6,4 @@
 //  Copyright (c) 2014 Ryan Norman. All rights reserved.
 //
 
-#import "Forecastr.h"
-#import "Forecastr+CLLocation.h"
-#import "FCLocationManager.h"
 #import "AFNetworking.h"

@@ -22,6 +22,8 @@
 	<string>3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Requires location to get sunrise/sunset and accurate weather conditions</string>
 	<key>NSLocationUsageDescription</key>
 	<string>To get the weather at your current location.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

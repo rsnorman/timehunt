@@ -7,16 +7,17 @@
 //
 
 import Foundation
+import ForecastIO
 
 class HourlyWeatherParser {
     let hourlyWeather : [HourlyWeather]
     
-    init(weatherJSON : [String : AnyObject]) {
+    init(hourlyWeatherData : [DataPoint]) {
         var weather: [HourlyWeather] = []
         
-        for hourData in HourlyWeatherParser.hourlyData(weatherJSON) {
-            let temperature: Double = hourData["temperature"] as! Double
-            let hourTime   : Date = Date(timeIntervalSince1970: hourData["time"] as! TimeInterval)
+        for hourData in hourlyWeatherData {
+            let temperature = hourData.temperature as! Float
+            let hourTime = hourData.time
             
             weather.append(HourlyWeather(temperature: temperature, at: hourTime))
         }

@@ -130,7 +130,7 @@ class TimesPageController : HuntingPageController, CountdownViewDelegate, TimesC
         huntingTimesView.removeAllNotifications()
         for time in huntingDay.allTimes() {
             let notifications = NotificationManager.sharedInstance.getAllNotificationsForKey(time.key())
-            for notification in notifications {
+            for _ in notifications {
                 huntingTimesView.addNotificationIcon(time.time, animate: false)
             }
         }
