@@ -52,14 +52,9 @@ class JSONFileWriter {
     class func getFolder() -> String? {
         let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
         let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask
-        guard let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true) as? [String] else {
-            return nil
-        }
-
+        let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
         if paths.count > 0 {
-            if let dirPath = paths[0] as? String {
-                return dirPath
-            }
+            return paths[0]
         }
         return nil
     }
