@@ -7,47 +7,101 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		45FE979D2EEEBA1AC3C448BA39A85824 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		59C1E9B8594E7AB20115DEF033BAC01A /* Pods-HuntingTimes-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CD85D43F6BFDA2FD52E725FF889CD8 /* Pods-HuntingTimes-dummy.m */; };
-		93E81818E3F2DB81B6DA9C54E28AF148 /* Pods-HuntingTimes-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DF138C93B4EC9E2E7731CA67C61B942E /* Pods-HuntingTimes-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		019D66AFEC4B101680E5872B874212E9 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6902705D11E7B858D13940CBD8B4FD /* Result.swift */; };
+		2AE59BE130AD1576163B169B7CFCA55D /* Flag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DB504AB8A9BB7EFF6C5DBE5587E4F8 /* Flag.swift */; };
+		333906F71F29BCAC86DE1E714928744D /* ForecastIO-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F3607351BF7AE99FADCD74B66E195D19 /* ForecastIO-dummy.m */; };
+		4D28B2C2D41AA509839523EA019B7BDF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		601F1B1C8DFA1E08F4DB3002EC888F82 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = C531BFD697DD449A65ECF896F71FAC09 /* Language.swift */; };
+		62D6A90AB568011348B4081CAC4C0DC8 /* Units.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5425878C620F423582EAAF95112D3106 /* Units.swift */; };
+		79665D5487255183B8D5C8D933506AEC /* Pods-HuntingTimes-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DF138C93B4EC9E2E7731CA67C61B942E /* Pods-HuntingTimes-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7FD87C63182D24135F437AF974F8E4B4 /* DataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27742FAA7A8F6B2ACE859A1D6FA2072 /* DataPoint.swift */; };
+		81851667331B1DF6174A558047BE1BEA /* ForecastIOError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B448DB0F005946D23B80C24251590FCA /* ForecastIOError.swift */; };
+		88D7419E7DF8410EBFAAD323562FD913 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F46572221E8D841270774FE81EBE8E5 /* Alert.swift */; };
+		901B537C50A75ED7D31FE2EA33F5659B /* ForecastIO-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 57D1703D9031689C17F26344C239FDF5 /* ForecastIO-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A94A8EF86B6036398558EDEC234F96B6 /* Pods-HuntingTimes-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CD85D43F6BFDA2FD52E725FF889CD8 /* Pods-HuntingTimes-dummy.m */; };
+		B5DA9DAF5453FC8FC2683C2C56C4E0BE /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E145886EFD7D671FA2580E8AB94D135E /* Icon.swift */; };
+		B7E25CFE205E1A00AB0A0614EE719B62 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A8115FAEB63C3AA42F246481865E0 /* Forecast.swift */; };
+		BD999B497F81FE4133BF13323869B10D /* DataBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 699F7AE1982B6D2FE1B9C1A9C41FD479 /* DataBlock.swift */; };
 		C8CFF8C0309B29D84B98F7B67438444E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		CDDD15FDF0EC7881F8C699274A123380 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		CFE641BFC14E301E1EE7C91A20DE362D /* Precipitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856CEBDD434EA4F898D236A38C3052CE /* Precipitation.swift */; };
 		D26337BB484557C7C8F202FCC73B1D53 /* Pods-HuntingTimesTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C323BEF24C1FF795E284DE0CEC207B59 /* Pods-HuntingTimesTests-dummy.m */; };
+		D588523B80B0D43F19BE9E3AC2A2F688 /* RequestMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D37E06F51A26365713A950B23EF9558 /* RequestMetadata.swift */; };
+		D7C4EB2DB6A5054C1CFB63922FDD022A /* DarkSkyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE83C53E4A09349A5AC3D70DF3B34A8 /* DarkSkyClient.swift */; };
 		F9A29F039264E3FD437F4FE2CB0D5F13 /* Pods-HuntingTimesTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A6E0DE7B1DE5851925D54056C1AC17 /* Pods-HuntingTimesTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4CED968E70AE29216786C1434BA0060D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3F19738396425B89322D95E08B55C21F;
+			remoteInfo = ForecastIO;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		174A304F6A8557F2FFA0C0CBCC1D4244 /* Pods-HuntingTimesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-HuntingTimesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1A29D95AADFD9351D1F36C24ACE5A163 /* Pods-HuntingTimes-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-HuntingTimes-resources.sh"; sourceTree = "<group>"; };
+		1D37E06F51A26365713A950B23EF9558 /* RequestMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RequestMetadata.swift; path = Source/RequestMetadata.swift; sourceTree = "<group>"; };
+		1F46572221E8D841270774FE81EBE8E5 /* Alert.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alert.swift; path = Source/Alert.swift; sourceTree = "<group>"; };
 		2753D83178EBCB03F394BE672309E4E7 /* Pods-HuntingTimesTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-HuntingTimesTests-resources.sh"; sourceTree = "<group>"; };
+		2F8FA6991D989F045A9EC007AE424116 /* Pods_HuntingTimesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HuntingTimesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40661A17BDD4409A3F482490FEC7C30D /* Pods-HuntingTimesTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-HuntingTimesTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		40C71B82F1D334970E1B76F7646D0B57 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42F44C33B0D443C739E3CBA47A319BA5 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E65B63CFCCAB246C0DAB6545451BB3C /* ForecastIO-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ForecastIO-prefix.pch"; sourceTree = "<group>"; };
+		5425878C620F423582EAAF95112D3106 /* Units.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Units.swift; path = Source/Units.swift; sourceTree = "<group>"; };
+		57D1703D9031689C17F26344C239FDF5 /* ForecastIO-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ForecastIO-umbrella.h"; sourceTree = "<group>"; };
+		5B6902705D11E7B858D13940CBD8B4FD /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
 		5E197A79DBB3AD2E6BDA8FBBA21EF2A1 /* Pods-HuntingTimesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-HuntingTimesTests.release.xcconfig"; sourceTree = "<group>"; };
+		5E47C300FF31248FE15A00F5FC580164 /* ForecastIO.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = ForecastIO.modulemap; sourceTree = "<group>"; };
 		5E84087C0F3152FFE922E93247E0EFFE /* Pods-HuntingTimesTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-HuntingTimesTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		699F7AE1982B6D2FE1B9C1A9C41FD479 /* DataBlock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DataBlock.swift; path = Source/DataBlock.swift; sourceTree = "<group>"; };
 		703D24E3D606126DEA4E2601186A7D96 /* Pods-HuntingTimes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-HuntingTimes.release.xcconfig"; sourceTree = "<group>"; };
-		8B464E84248F3B1E7391A804EC6DDC65 /* Pods_HuntingTimes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_HuntingTimes.framework; path = "Pods-HuntingTimes.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		856CEBDD434EA4F898D236A38C3052CE /* Precipitation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Precipitation.swift; path = Source/Precipitation.swift; sourceTree = "<group>"; };
+		89DB504AB8A9BB7EFF6C5DBE5587E4F8 /* Flag.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Flag.swift; path = Source/Flag.swift; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9FECC23567FC323A07C7074DE35C0353 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B38837252FBC445021D4A31BB0CF8482 /* Pods-HuntingTimes.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-HuntingTimes.modulemap"; sourceTree = "<group>"; };
+		AB67E773D560688198A693FEDF007EFF /* ForecastIO.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ForecastIO.xcconfig; sourceTree = "<group>"; };
+		B38837252FBC445021D4A31BB0CF8482 /* Pods-HuntingTimes.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-HuntingTimes.modulemap"; sourceTree = "<group>"; };
+		B448DB0F005946D23B80C24251590FCA /* ForecastIOError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ForecastIOError.swift; path = Source/ForecastIOError.swift; sourceTree = "<group>"; };
 		B929E3DF2A9CE5E3FE18819B8089EA43 /* Pods-HuntingTimesTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-HuntingTimesTests-frameworks.sh"; sourceTree = "<group>"; };
 		C323BEF24C1FF795E284DE0CEC207B59 /* Pods-HuntingTimesTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-HuntingTimesTests-dummy.m"; sourceTree = "<group>"; };
-		CA6E53A90538775A6B0E633103BE5953 /* Pods_HuntingTimesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_HuntingTimesTests.framework; path = "Pods-HuntingTimesTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C531BFD697DD449A65ECF896F71FAC09 /* Language.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Language.swift; path = Source/Language.swift; sourceTree = "<group>"; };
 		D0D4FA9C8C573B4C941B64ACFAC72B9F /* Pods-HuntingTimes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-HuntingTimes.debug.xcconfig"; sourceTree = "<group>"; };
 		D5EFF9B99EB4C5AC7EA97B4C8788B1B2 /* Pods-HuntingTimes-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-HuntingTimes-acknowledgements.plist"; sourceTree = "<group>"; };
+		DCE83C53E4A09349A5AC3D70DF3B34A8 /* DarkSkyClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DarkSkyClient.swift; path = Source/DarkSkyClient.swift; sourceTree = "<group>"; };
 		DDF1BB1F0BC00F9A43DFBD9631CD5038 /* Pods-HuntingTimes-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-HuntingTimes-acknowledgements.markdown"; sourceTree = "<group>"; };
 		DF138C93B4EC9E2E7731CA67C61B942E /* Pods-HuntingTimes-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-HuntingTimes-umbrella.h"; sourceTree = "<group>"; };
+		E07A8115FAEB63C3AA42F246481865E0 /* Forecast.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Forecast.swift; path = Source/Forecast.swift; sourceTree = "<group>"; };
+		E145886EFD7D671FA2580E8AB94D135E /* Icon.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Icon.swift; path = Source/Icon.swift; sourceTree = "<group>"; };
+		E27742FAA7A8F6B2ACE859A1D6FA2072 /* DataPoint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DataPoint.swift; path = Source/DataPoint.swift; sourceTree = "<group>"; };
 		E6247F660BBB34CB00EBF585DF58B0E4 /* Pods-HuntingTimes-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-HuntingTimes-frameworks.sh"; sourceTree = "<group>"; };
 		E7CD85D43F6BFDA2FD52E725FF889CD8 /* Pods-HuntingTimes-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-HuntingTimes-dummy.m"; sourceTree = "<group>"; };
+		ED4FF6945AE1635526AB8513C78CA47E /* ForecastIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ForecastIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3607351BF7AE99FADCD74B66E195D19 /* ForecastIO-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ForecastIO-dummy.m"; sourceTree = "<group>"; };
 		F5A6E0DE7B1DE5851925D54056C1AC17 /* Pods-HuntingTimesTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-HuntingTimesTests-umbrella.h"; sourceTree = "<group>"; };
-		FD5253CBBDD3B5EBE3818758B1293371 /* Pods-HuntingTimesTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-HuntingTimesTests.modulemap"; sourceTree = "<group>"; };
+		FA00CFA843AC21AF8B737C91A029C5EA /* Pods_HuntingTimes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HuntingTimes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD5253CBBDD3B5EBE3818758B1293371 /* Pods-HuntingTimesTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-HuntingTimesTests.modulemap"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2237B2327925EB5BBA1B3C364BD61213 /* Frameworks */ = {
+		7B5466B5754F846D2D5303F1D2698FC8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45FE979D2EEEBA1AC3C448BA39A85824 /* Foundation.framework in Frameworks */,
+				4D28B2C2D41AA509839523EA019B7BDF /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		982ACB4BA382807152083D6D8D9C083D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDDD15FDF0EC7881F8C699274A123380 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,12 +116,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		16AAE1EA0AC6541309B156A89E2E8298 /* ForecastIO */ = {
+			isa = PBXGroup;
+			children = (
+				1F46572221E8D841270774FE81EBE8E5 /* Alert.swift */,
+				DCE83C53E4A09349A5AC3D70DF3B34A8 /* DarkSkyClient.swift */,
+				699F7AE1982B6D2FE1B9C1A9C41FD479 /* DataBlock.swift */,
+				E27742FAA7A8F6B2ACE859A1D6FA2072 /* DataPoint.swift */,
+				89DB504AB8A9BB7EFF6C5DBE5587E4F8 /* Flag.swift */,
+				E07A8115FAEB63C3AA42F246481865E0 /* Forecast.swift */,
+				B448DB0F005946D23B80C24251590FCA /* ForecastIOError.swift */,
+				E145886EFD7D671FA2580E8AB94D135E /* Icon.swift */,
+				C531BFD697DD449A65ECF896F71FAC09 /* Language.swift */,
+				856CEBDD434EA4F898D236A38C3052CE /* Precipitation.swift */,
+				1D37E06F51A26365713A950B23EF9558 /* RequestMetadata.swift */,
+				5B6902705D11E7B858D13940CBD8B4FD /* Result.swift */,
+				5425878C620F423582EAAF95112D3106 /* Units.swift */,
+				C1E5024B01F1AB57F31EF3435E953A62 /* Support Files */,
+			);
+			path = ForecastIO;
+			sourceTree = "<group>";
+		};
+		223F1515A8E3251C88060C9F1A4F26CA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				16AAE1EA0AC6541309B156A89E2E8298 /* ForecastIO */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				BC6165008D73E10E59A8988CE034E1C0 /* Products */,
+				223F1515A8E3251C88060C9F1A4F26CA /* Pods */,
+				B74EF74BB6A06A0EA461CF6ACFAA3FB7 /* Products */,
 				8F424AFEE39A651FFDF74A0128339EF4 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
@@ -117,6 +201,16 @@
 			path = "Target Support Files/Pods-HuntingTimes";
 			sourceTree = "<group>";
 		};
+		B74EF74BB6A06A0EA461CF6ACFAA3FB7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ED4FF6945AE1635526AB8513C78CA47E /* ForecastIO.framework */,
+				FA00CFA843AC21AF8B737C91A029C5EA /* Pods_HuntingTimes.framework */,
+				2F8FA6991D989F045A9EC007AE424116 /* Pods_HuntingTimesTests.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,13 +219,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		BC6165008D73E10E59A8988CE034E1C0 /* Products */ = {
+		C1E5024B01F1AB57F31EF3435E953A62 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				8B464E84248F3B1E7391A804EC6DDC65 /* Pods_HuntingTimes.framework */,
-				CA6E53A90538775A6B0E633103BE5953 /* Pods_HuntingTimesTests.framework */,
+				5E47C300FF31248FE15A00F5FC580164 /* ForecastIO.modulemap */,
+				AB67E773D560688198A693FEDF007EFF /* ForecastIO.xcconfig */,
+				F3607351BF7AE99FADCD74B66E195D19 /* ForecastIO-dummy.m */,
+				4E65B63CFCCAB246C0DAB6545451BB3C /* ForecastIO-prefix.pch */,
+				57D1703D9031689C17F26344C239FDF5 /* ForecastIO-umbrella.h */,
+				40C71B82F1D334970E1B76F7646D0B57 /* Info.plist */,
 			);
-			name = Products;
+			name = "Support Files";
+			path = "../Target Support Files/ForecastIO";
 			sourceTree = "<group>";
 		};
 		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
@@ -145,11 +244,11 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		7B478A6829544E5442E6988E29812A58 /* Headers */ = {
+		75905B363D68ABF22566E29EBBE761D5 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93E81818E3F2DB81B6DA9C54E28AF148 /* Pods-HuntingTimes-umbrella.h in Headers */,
+				79665D5487255183B8D5C8D933506AEC /* Pods-HuntingTimes-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,24 +260,50 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA4A3E337AF3DDAB1EAE641FA7E0C009 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				901B537C50A75ED7D31FE2EA33F5659B /* ForecastIO-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		A418F7DEF33290BB39034464D72D2F64 /* Pods-HuntingTimes */ = {
+		3F19738396425B89322D95E08B55C21F /* ForecastIO */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 04327198964013A1137C1DB0EABDD70C /* Build configuration list for PBXNativeTarget "Pods-HuntingTimes" */;
+			buildConfigurationList = E057A4869B0EAAF5B844DA7D75290117 /* Build configuration list for PBXNativeTarget "ForecastIO" */;
 			buildPhases = (
-				550E4AD5801756F5EC7EDAF96391313F /* Sources */,
-				2237B2327925EB5BBA1B3C364BD61213 /* Frameworks */,
-				7B478A6829544E5442E6988E29812A58 /* Headers */,
+				6B59307687557A05B2C731F106D06CF2 /* Sources */,
+				7B5466B5754F846D2D5303F1D2698FC8 /* Frameworks */,
+				FA4A3E337AF3DDAB1EAE641FA7E0C009 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
+			name = ForecastIO;
+			productName = ForecastIO;
+			productReference = ED4FF6945AE1635526AB8513C78CA47E /* ForecastIO.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		766330D1168AADEAC457725A3F1B3EE7 /* Pods-HuntingTimes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 003A6148F1968AD04FBA82662C0D3895 /* Build configuration list for PBXNativeTarget "Pods-HuntingTimes" */;
+			buildPhases = (
+				5EEACCF2F087B49A236E23634A3F6FDA /* Sources */,
+				982ACB4BA382807152083D6D8D9C083D /* Frameworks */,
+				75905B363D68ABF22566E29EBBE761D5 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				278FACAE0B1FE4D666AD398F37475039 /* PBXTargetDependency */,
+			);
 			name = "Pods-HuntingTimes";
 			productName = "Pods-HuntingTimes";
-			productReference = 8B464E84248F3B1E7391A804EC6DDC65 /* Pods_HuntingTimes.framework */;
+			productReference = FA00CFA843AC21AF8B737C91A029C5EA /* Pods_HuntingTimes.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		D8B6C70FD267CC7AB99FA2C73723AE74 /* Pods-HuntingTimesTests */ = {
@@ -195,7 +320,7 @@
 			);
 			name = "Pods-HuntingTimesTests";
 			productName = "Pods-HuntingTimesTests";
-			productReference = CA6E53A90538775A6B0E633103BE5953 /* Pods_HuntingTimesTests.framework */;
+			productReference = 2F8FA6991D989F045A9EC007AE424116 /* Pods_HuntingTimesTests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -205,7 +330,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0900;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -215,22 +340,44 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = BC6165008D73E10E59A8988CE034E1C0 /* Products */;
+			productRefGroup = B74EF74BB6A06A0EA461CF6ACFAA3FB7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A418F7DEF33290BB39034464D72D2F64 /* Pods-HuntingTimes */,
+				3F19738396425B89322D95E08B55C21F /* ForecastIO */,
+				766330D1168AADEAC457725A3F1B3EE7 /* Pods-HuntingTimes */,
 				D8B6C70FD267CC7AB99FA2C73723AE74 /* Pods-HuntingTimesTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		550E4AD5801756F5EC7EDAF96391313F /* Sources */ = {
+		5EEACCF2F087B49A236E23634A3F6FDA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59C1E9B8594E7AB20115DEF033BAC01A /* Pods-HuntingTimes-dummy.m in Sources */,
+				A94A8EF86B6036398558EDEC234F96B6 /* Pods-HuntingTimes-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6B59307687557A05B2C731F106D06CF2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88D7419E7DF8410EBFAAD323562FD913 /* Alert.swift in Sources */,
+				D7C4EB2DB6A5054C1CFB63922FDD022A /* DarkSkyClient.swift in Sources */,
+				BD999B497F81FE4133BF13323869B10D /* DataBlock.swift in Sources */,
+				7FD87C63182D24135F437AF974F8E4B4 /* DataPoint.swift in Sources */,
+				2AE59BE130AD1576163B169B7CFCA55D /* Flag.swift in Sources */,
+				B7E25CFE205E1A00AB0A0614EE719B62 /* Forecast.swift in Sources */,
+				333906F71F29BCAC86DE1E714928744D /* ForecastIO-dummy.m in Sources */,
+				81851667331B1DF6174A558047BE1BEA /* ForecastIOError.swift in Sources */,
+				B5DA9DAF5453FC8FC2683C2C56C4E0BE /* Icon.swift in Sources */,
+				601F1B1C8DFA1E08F4DB3002EC888F82 /* Language.swift in Sources */,
+				CFE641BFC14E301E1EE7C91A20DE362D /* Precipitation.swift in Sources */,
+				D588523B80B0D43F19BE9E3AC2A2F688 /* RequestMetadata.swift in Sources */,
+				019D66AFEC4B101680E5872B874212E9 /* Result.swift in Sources */,
+				62D6A90AB568011348B4081CAC4C0DC8 /* Units.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,7 +391,50 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		278FACAE0B1FE4D666AD398F37475039 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ForecastIO;
+			target = 3F19738396425B89322D95E08B55C21F /* ForecastIO */;
+			targetProxy = 4CED968E70AE29216786C1434BA0060D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		1CC7B2F9B0EFD108B4D378A5A3562AA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0D4FA9C8C573B4C941B64ACFAC72B9F /* Pods-HuntingTimes.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-HuntingTimes/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-HuntingTimes/Pods-HuntingTimes.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_HuntingTimes;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		1D42551453DD6C499154FE036B90CD5F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -305,6 +495,103 @@
 			};
 			name = Debug;
 		};
+		3446EB5E106788446232B968425767E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB67E773D560688198A693FEDF007EFF /* ForecastIO.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ForecastIO/ForecastIO-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ForecastIO/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ForecastIO/ForecastIO.modulemap";
+				PRODUCT_NAME = ForecastIO;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3BA54572971704BAE9775C4E45D7EC27 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB67E773D560688198A693FEDF007EFF /* ForecastIO.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ForecastIO/ForecastIO-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ForecastIO/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ForecastIO/ForecastIO.modulemap";
+				PRODUCT_NAME = ForecastIO;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		46CA8806F9DD41C9C468A0B0BD2B8BCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 703D24E3D606126DEA4E2601186A7D96 /* Pods-HuntingTimes.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-HuntingTimes/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-HuntingTimes/Pods-HuntingTimes.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_HuntingTimes;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		8F41EDF9530944CCF53456D970C87A25 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5E197A79DBB3AD2E6BDA8FBBA21EF2A1 /* Pods-HuntingTimesTests.release.xcconfig */;
@@ -329,39 +616,6 @@
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Pods_HuntingTimesTests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		9D060427A9C953ED3A29C6061A77E664 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 703D24E3D606126DEA4E2601186A7D96 /* Pods-HuntingTimes.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-HuntingTimes/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-HuntingTimes/Pods-HuntingTimes.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_HuntingTimes;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -422,6 +676,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
@@ -458,46 +713,14 @@
 			};
 			name = Debug;
 		};
-		CF55D6EEC2C46DB2959D315E432EB31D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0D4FA9C8C573B4C941B64ACFAC72B9F /* Pods-HuntingTimes.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-HuntingTimes/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-HuntingTimes/Pods-HuntingTimes.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_HuntingTimes;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		04327198964013A1137C1DB0EABDD70C /* Build configuration list for PBXNativeTarget "Pods-HuntingTimes" */ = {
+		003A6148F1968AD04FBA82662C0D3895 /* Build configuration list for PBXNativeTarget "Pods-HuntingTimes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CF55D6EEC2C46DB2959D315E432EB31D /* Debug */,
-				9D060427A9C953ED3A29C6061A77E664 /* Release */,
+				1CC7B2F9B0EFD108B4D378A5A3562AA9 /* Debug */,
+				46CA8806F9DD41C9C468A0B0BD2B8BCD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -516,6 +739,15 @@
 			buildConfigurations = (
 				1D42551453DD6C499154FE036B90CD5F /* Debug */,
 				A796627992855501F9610EEA9E4DEA35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E057A4869B0EAAF5B844DA7D75290117 /* Build configuration list for PBXNativeTarget "ForecastIO" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3446EB5E106788446232B968425767E2 /* Debug */,
+				3BA54572971704BAE9775C4E45D7EC27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

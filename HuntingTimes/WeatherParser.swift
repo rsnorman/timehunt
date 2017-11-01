@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import CoreLocation
+import ForecastIO
 
 protocol WeatherParserDelegate {
     func weatherReceived()
@@ -15,9 +17,9 @@ protocol WeatherParserDelegate {
 
 class WeatherParser: NSObject {
     
-    let forecastr    : Forecastr
-    var dailyWeather : [DailyWeather]!
-    var delegate     : WeatherParserDelegate!
+    let darkSkyClient : DarkSkyClient
+    var dailyWeather  : [DailyWeather]!
+    var delegate      : WeatherParserDelegate!
     
     class var sharedInstance : WeatherParser {
         struct Static {
@@ -28,8 +30,7 @@ class WeatherParser: NSObject {
     
     override init() {
         
-        forecastr = Forecastr.sharedManager() as! Forecastr
-        forecastr.apiKey = "8ab15e9dc5a398ed2698ea831d1efb82"
+        darkSkyClient = DarkSkyClient(apiKey: "8ab15e9dc5a398ed2698ea831d1efb82")
         
         super.init()
     }
@@ -37,46 +38,67 @@ class WeatherParser: NSObject {
     func fetch(_ location: CLLocation, date : Date, success: @escaping (DailyWeather) -> (), failure: @escaping () -> ()) {
         let dateString = self.formatDate(date)
         
-        forecastr.getForecastFor(location, time: NSNumber(value: date.timeIntervalSince1970 as Double), exclusions: nil, extend: nil, language: nil, success: { (json) -> Void in
-            self.parse(json as! [String: AnyObject])
+        darkSkyClient.getForecast(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { result in
             
-            for dayWeather in self.dailyWeather {
-                if dateString == self.formatDate(dayWeather.date as Date) {
-                    success(dayWeather)
-                } else {
-                    failure()
-                }
+            switch result {
+            case .success(let currentForecast, _):
+                self.setDailyWeather(forecast: currentForecast)
+                success(self.dailyWeather[0])
+            case .failure(_):
+                failure()
             }
-            
-            
-        }) { (error, message) -> Void in
-            failure()
         }
     }
     
     fileprivate
     
-    func parse(_ weatherJSON: [String:AnyObject]) {
+//    func parse(_ weatherJSON: [String:AnyObject]) {
+//        dailyWeather = []
+//        let hourlyWeatherParser = HourlyWeatherParser(weatherJSON: weatherJSON)
+//
+//        for dayData in dailyData(weatherJSON) {
+//            let date = Date(timeIntervalSince1970: dayData["time"] as! TimeInterval)
+//            let sunrise = Date(timeIntervalSince1970: dayData["sunriseTime"] as! TimeInterval)
+//            let sunset  = Date(timeIntervalSince1970: dayData["sunsetTime"] as! TimeInterval)
+//
+//            let hourlyWeather = hourlyWeatherParser.onDate(date)
+//            var dayWeather : DailyWeather
+//
+//            if isToday(date) {
+//                let currentWeather: [String : AnyObject] = weatherJSON["currently"] as! [String : AnyObject]
+//                dayWeather = DailyWeather(currentWeather: currentWeather, hourlyWeather: hourlyWeather, on: date)
+//            } else {
+//                dayWeather = DailyWeather(currentWeather: dayData, hourlyWeather: hourlyWeather, on: date)
+//            }
+//
+//            dayWeather.sunrise = sunrise
+//            dayWeather.sunset = sunset
+//
+//            dailyWeather.append(dayWeather)
+//        }
+//    }
+    
+    func setDailyWeather(forecast: Forecast) {
         dailyWeather = []
-        let hourlyWeatherParser = HourlyWeatherParser(weatherJSON: weatherJSON)
-        
-        for dayData in dailyData(weatherJSON) {
-            let date = Date(timeIntervalSince1970: dayData["time"] as! TimeInterval)
-            let sunrise = Date(timeIntervalSince1970: dayData["sunriseTime"] as! TimeInterval)
-            let sunset  = Date(timeIntervalSince1970: dayData["sunsetTime"] as! TimeInterval)
-            
+        let hourlyWeatherParser = HourlyWeatherParser(hourlyWeatherData: forecast.hourly!.data)
+
+        for dailyData in forecast.daily!.data {
+            let date = dailyData.time
+            let sunrise = dailyData.sunriseTime
+            let sunset = dailyData.sunsetTime
+            var dayWeather: DailyWeather
             let hourlyWeather = hourlyWeatherParser.onDate(date)
-            var dayWeather : DailyWeather
             
-            if isToday(date) {
-                let currentWeather: [String : AnyObject] = weatherJSON["currently"] as! [String : AnyObject]
-                dayWeather = DailyWeather(currentWeather: currentWeather, hourlyWeather: hourlyWeather, on: date)
-            } else {
-                dayWeather = DailyWeather(currentWeather: dayData, hourlyWeather: hourlyWeather, on: date)
-            }
-            
+            dayWeather = DailyWeather(on: date)
+            dayWeather.hourlyWeather = hourlyWeather
             dayWeather.sunrise = sunrise
             dayWeather.sunset = sunset
+            
+            if isToday(date) {
+                dayWeather.currentWeather = forecast.currently
+            } else {
+                dayWeather.predictedWeather = dailyData
+            }
             
             dailyWeather.append(dayWeather)
         }

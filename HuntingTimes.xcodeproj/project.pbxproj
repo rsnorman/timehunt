@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09EBFB15575F755F5878C934 /* Pods_HuntingTimes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0AFBE868D5426CCE886B84 /* Pods_HuntingTimes.framework */; };
 		4C20E7351A2FE825008A9F5B /* MenuIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C20E7341A2FE825008A9F5B /* MenuIconView.swift */; };
 		4C20E7371A2FF12F008A9F5B /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C20E7361A2FF12F008A9F5B /* MenuController.swift */; };
 		4C3D49A41A28347800AFF111 /* HuntingDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3D49A31A28347800AFF111 /* HuntingDay.swift */; };
@@ -33,15 +34,6 @@
 		4C5B11081A59E7D00077DFFD /* DatePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5B11071A59E7D00077DFFD /* DatePickerController.swift */; };
 		4C64369D1A37F79600017338 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64369C1A37F79600017338 /* UserSettings.swift */; };
 		4C64369F1A3AAA6700017338 /* TemperatureColumns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64369E1A3AAA6700017338 /* TemperatureColumns.swift */; };
-		4C6436B41A3AB69500017338 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6436A21A3AB69500017338 /* AFHTTPRequestOperation.m */; };
-		4C6436B51A3AB69500017338 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6436A41A3AB69500017338 /* AFHTTPRequestOperationManager.m */; };
-		4C6436B61A3AB69500017338 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6436A61A3AB69500017338 /* AFHTTPSessionManager.m */; };
-		4C6436B71A3AB69500017338 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6436A91A3AB69500017338 /* AFNetworkReachabilityManager.m */; };
-		4C6436B81A3AB69500017338 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6436AB1A3AB69500017338 /* AFSecurityPolicy.m */; };
-		4C6436B91A3AB69500017338 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6436AD1A3AB69500017338 /* AFURLConnectionOperation.m */; };
-		4C6436BA1A3AB69500017338 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6436AF1A3AB69500017338 /* AFURLRequestSerialization.m */; };
-		4C6436BB1A3AB69500017338 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6436B11A3AB69500017338 /* AFURLResponseSerialization.m */; };
-		4C6436BC1A3AB69500017338 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6436B31A3AB69500017338 /* AFURLSessionManager.m */; };
 		4C6EE1A21A242C5C00305115 /* ScrollLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A11A242C5C00305115 /* ScrollLineView.swift */; };
 		4C6EE1A41A24323D00305115 /* ColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A31A24323D00305115 /* ColumnView.swift */; };
 		4C6EE1A61A24477200305115 /* TimesColumns.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6EE1A51A24477200305115 /* TimesColumns.swift */; };
@@ -65,8 +57,19 @@
 		4CC2EF261A4C966300D74496 /* SunriseSunset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC2EF251A4C966300D74496 /* SunriseSunset.swift */; };
 		4CDE49431A282934002CF42A /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDE49421A282934002CF42A /* MessageView.swift */; };
 		4CDE49451A282B3B002CF42A /* InterfaceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDE49441A282B3B002CF42A /* InterfaceHelper.swift */; };
+		836DAFF11FA95B3800B9E2FE /* NBUIKitSwiftGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836DAFF01FA95B3800B9E2FE /* NBUIKitSwiftGuard.swift */; };
 		83E8EECC1AAD4F1400B58086 /* ErrorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E8EECB1AAD4F1400B58086 /* ErrorMessageView.swift */; };
 		83F4DEC21AAFF30A00ECD483 /* SeasonColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F4DEC11AAFF30A00ECD483 /* SeasonColumnView.swift */; };
+		83FF11AD1FA9615200C57D8E /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF119B1FA9615100C57D8E /* AFURLConnectionOperation.m */; };
+		83FF11AE1FA9615200C57D8E /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF119F1FA9615100C57D8E /* AFHTTPRequestOperation.m */; };
+		83FF11AF1FA9615200C57D8E /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF11A21FA9615100C57D8E /* AFHTTPSessionManager.m */; };
+		83FF11B01FA9615200C57D8E /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF11A31FA9615100C57D8E /* AFURLSessionManager.m */; };
+		83FF11B11FA9615200C57D8E /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF11A51FA9615100C57D8E /* AFHTTPRequestOperationManager.m */; };
+		83FF11B21FA9615200C57D8E /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF11A71FA9615100C57D8E /* AFSecurityPolicy.m */; };
+		83FF11B31FA9615200C57D8E /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF11A81FA9615100C57D8E /* AFURLRequestSerialization.m */; };
+		83FF11B41FA9615200C57D8E /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF11AA1FA9615200C57D8E /* AFURLResponseSerialization.m */; };
+		83FF11B51FA9615200C57D8E /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF11AB1FA9615200C57D8E /* AFNetworkReachabilityManager.m */; };
+		B3B120AE7C5BF24E1E7C20F3 /* Pods_HuntingTimesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F96317D2E00FFC82F644C3 /* Pods_HuntingTimesTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +84,7 @@
 
 /* Begin PBXFileReference section */
 		2FDE27DCD5F7095FE6B0B38A /* Pods-HuntingTimesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuntingTimesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HuntingTimesTests/Pods-HuntingTimesTests.release.xcconfig"; sourceTree = "<group>"; };
+		35F96317D2E00FFC82F644C3 /* Pods_HuntingTimesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HuntingTimesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C20E7341A2FE825008A9F5B /* MenuIconView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuIconView.swift; sourceTree = "<group>"; };
 		4C20E7361A2FF12F008A9F5B /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		4C3D49A31A28347800AFF111 /* HuntingDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HuntingDay.swift; sourceTree = "<group>"; };
@@ -107,25 +111,6 @@
 		4C5B11071A59E7D00077DFFD /* DatePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
 		4C64369C1A37F79600017338 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		4C64369E1A3AAA6700017338 /* TemperatureColumns.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemperatureColumns.swift; sourceTree = "<group>"; };
-		4C6436A11A3AB69500017338 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
-		4C6436A21A3AB69500017338 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
-		4C6436A31A3AB69500017338 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
-		4C6436A41A3AB69500017338 /* AFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
-		4C6436A51A3AB69500017338 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
-		4C6436A61A3AB69500017338 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
-		4C6436A71A3AB69500017338 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		4C6436A81A3AB69500017338 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		4C6436A91A3AB69500017338 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		4C6436AA1A3AB69500017338 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
-		4C6436AB1A3AB69500017338 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
-		4C6436AC1A3AB69500017338 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
-		4C6436AD1A3AB69500017338 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
-		4C6436AE1A3AB69500017338 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
-		4C6436AF1A3AB69500017338 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
-		4C6436B01A3AB69500017338 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
-		4C6436B11A3AB69500017338 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
-		4C6436B21A3AB69500017338 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
-		4C6436B31A3AB69500017338 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		4C6436CA1A3AB7CF00017338 /* TimeHunt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "TimeHunt-Bridging-Header.h"; path = "../TimeHunt-Bridging-Header.h"; sourceTree = "<group>"; };
 		4C6EE1A11A242C5C00305115 /* ScrollLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollLineView.swift; sourceTree = "<group>"; };
 		4C6EE1A31A24323D00305115 /* ColumnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnView.swift; sourceTree = "<group>"; };
@@ -155,9 +140,30 @@
 		4CDE49421A282934002CF42A /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		4CDE49441A282B3B002CF42A /* InterfaceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceHelper.swift; sourceTree = "<group>"; };
 		5EA21EA48D1F0CCD57BB8B3B /* Pods-HuntingTimes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuntingTimes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HuntingTimes/Pods-HuntingTimes.debug.xcconfig"; sourceTree = "<group>"; };
+		836DAFF01FA95B3800B9E2FE /* NBUIKitSwiftGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBUIKitSwiftGuard.swift; sourceTree = "<group>"; };
 		83E8EECB1AAD4F1400B58086 /* ErrorMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessageView.swift; sourceTree = "<group>"; };
 		83F4DEC11AAFF30A00ECD483 /* SeasonColumnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeasonColumnView.swift; sourceTree = "<group>"; };
+		83FF119A1FA9615100C57D8E /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		83FF119B1FA9615100C57D8E /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLConnectionOperation.m; path = AFNetworking/AFURLConnectionOperation.m; sourceTree = "<group>"; };
+		83FF119C1FA9615100C57D8E /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFSecurityPolicy.h; path = AFNetworking/AFSecurityPolicy.h; sourceTree = "<group>"; };
+		83FF119D1FA9615100C57D8E /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = AFNetworking/AFURLSessionManager.h; sourceTree = "<group>"; };
+		83FF119E1FA9615100C57D8E /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLRequestSerialization.h; path = AFNetworking/AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		83FF119F1FA9615100C57D8E /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperation.m; path = AFNetworking/AFHTTPRequestOperation.m; sourceTree = "<group>"; };
+		83FF11A01FA9615100C57D8E /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperationManager.h; path = AFNetworking/AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
+		83FF11A11FA9615100C57D8E /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFNetworkReachabilityManager.h; path = AFNetworking/AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		83FF11A21FA9615100C57D8E /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPSessionManager.m; path = AFNetworking/AFHTTPSessionManager.m; sourceTree = "<group>"; };
+		83FF11A31FA9615100C57D8E /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = AFNetworking/AFURLSessionManager.m; sourceTree = "<group>"; };
+		83FF11A41FA9615100C57D8E /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPSessionManager.h; path = AFNetworking/AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		83FF11A51FA9615100C57D8E /* AFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperationManager.m; path = AFNetworking/AFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
+		83FF11A61FA9615100C57D8E /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFNetworking.h; path = AFNetworking/AFNetworking.h; sourceTree = "<group>"; };
+		83FF11A71FA9615100C57D8E /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFSecurityPolicy.m; path = AFNetworking/AFSecurityPolicy.m; sourceTree = "<group>"; };
+		83FF11A81FA9615100C57D8E /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLRequestSerialization.m; path = AFNetworking/AFURLRequestSerialization.m; sourceTree = "<group>"; };
+		83FF11A91FA9615100C57D8E /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLConnectionOperation.h; path = AFNetworking/AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		83FF11AA1FA9615200C57D8E /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLResponseSerialization.m; path = AFNetworking/AFURLResponseSerialization.m; sourceTree = "<group>"; };
+		83FF11AB1FA9615200C57D8E /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFNetworkReachabilityManager.m; path = AFNetworking/AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		83FF11AC1FA9615200C57D8E /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLResponseSerialization.h; path = AFNetworking/AFURLResponseSerialization.h; sourceTree = "<group>"; };
 		AFF67320ACFF6E8588A798F8 /* Pods-HuntingTimes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuntingTimes.release.xcconfig"; path = "Pods/Target Support Files/Pods-HuntingTimes/Pods-HuntingTimes.release.xcconfig"; sourceTree = "<group>"; };
+		BE0AFBE868D5426CCE886B84 /* Pods_HuntingTimes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HuntingTimes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF2856ABCD4D8A7A7B19AA9A /* Pods-HuntingTimesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuntingTimesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HuntingTimesTests/Pods-HuntingTimesTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,6 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09EBFB15575F755F5878C934 /* Pods_HuntingTimes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3B120AE7C5BF24E1E7C20F3 /* Pods_HuntingTimesTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,16 +201,16 @@
 		4C46BE421A2046F3005BB796 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				83FF11991FA9612A00C57D8E /* AFNetworking */,
 				4C7EFBF51A509CB1006B2DEF /* Weather */,
-				4C6436A01A3AB69500017338 /* AFNetworking */,
 				4C46BE431A2046FE005BB796 /* StatusBarUpdater.swift */,
-				4C46BE511A2117EC005BB796 /* HuntingSeason.swift */,
 				4C6EE1AB1A2590F100305115 /* HuntingTimeProgress.swift */,
+				4C3D49A51A28545800AFF111 /* HuntingTime.swift */,
+				4C3D49A31A28347800AFF111 /* HuntingDay.swift */,
+				4C46BE511A2117EC005BB796 /* HuntingSeason.swift */,
 				4C6EE1AD1A25967C00305115 /* DateTimeHelper.swift */,
 				4C56B3CC1A26D2CC00B8BD82 /* NotificationManager.swift */,
 				4CDE49441A282B3B002CF42A /* InterfaceHelper.swift */,
-				4C3D49A31A28347800AFF111 /* HuntingDay.swift */,
-				4C3D49A51A28545800AFF111 /* HuntingTime.swift */,
 				4C64369C1A37F79600017338 /* UserSettings.swift */,
 				4CC2EF221A4C8D2E00D74496 /* JSONFileWriter.swift */,
 			);
@@ -282,32 +290,6 @@
 			name = DatePicker;
 			sourceTree = "<group>";
 		};
-		4C6436A01A3AB69500017338 /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				4C6436A11A3AB69500017338 /* AFHTTPRequestOperation.h */,
-				4C6436A21A3AB69500017338 /* AFHTTPRequestOperation.m */,
-				4C6436A31A3AB69500017338 /* AFHTTPRequestOperationManager.h */,
-				4C6436A41A3AB69500017338 /* AFHTTPRequestOperationManager.m */,
-				4C6436A51A3AB69500017338 /* AFHTTPSessionManager.h */,
-				4C6436A61A3AB69500017338 /* AFHTTPSessionManager.m */,
-				4C6436A71A3AB69500017338 /* AFNetworking.h */,
-				4C6436A81A3AB69500017338 /* AFNetworkReachabilityManager.h */,
-				4C6436A91A3AB69500017338 /* AFNetworkReachabilityManager.m */,
-				4C6436AA1A3AB69500017338 /* AFSecurityPolicy.h */,
-				4C6436AB1A3AB69500017338 /* AFSecurityPolicy.m */,
-				4C6436AC1A3AB69500017338 /* AFURLConnectionOperation.h */,
-				4C6436AD1A3AB69500017338 /* AFURLConnectionOperation.m */,
-				4C6436AE1A3AB69500017338 /* AFURLRequestSerialization.h */,
-				4C6436AF1A3AB69500017338 /* AFURLRequestSerialization.m */,
-				4C6436B01A3AB69500017338 /* AFURLResponseSerialization.h */,
-				4C6436B11A3AB69500017338 /* AFURLResponseSerialization.m */,
-				4C6436B21A3AB69500017338 /* AFURLSessionManager.h */,
-				4C6436B31A3AB69500017338 /* AFURLSessionManager.m */,
-			);
-			path = AFNetworking;
-			sourceTree = "<group>";
-		};
 		4C7EFBF51A509CB1006B2DEF /* Weather */ = {
 			isa = PBXGroup;
 			children = (
@@ -321,6 +303,7 @@
 		4CA156CC1A20413C00F95BA2 = {
 			isa = PBXGroup;
 			children = (
+				836DAFF01FA95B3800B9E2FE /* NBUIKitSwiftGuard.swift */,
 				4CA156D71A20413C00F95BA2 /* HuntingTimes */,
 				4CA156F01A20413C00F95BA2 /* HuntingTimesTests */,
 				4CA156D61A20413C00F95BA2 /* Products */,
@@ -409,9 +392,37 @@
 			name = WeatherParsers;
 			sourceTree = "<group>";
 		};
+		83FF11991FA9612A00C57D8E /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				83FF119A1FA9615100C57D8E /* AFHTTPRequestOperation.h */,
+				83FF119F1FA9615100C57D8E /* AFHTTPRequestOperation.m */,
+				83FF11A01FA9615100C57D8E /* AFHTTPRequestOperationManager.h */,
+				83FF11A51FA9615100C57D8E /* AFHTTPRequestOperationManager.m */,
+				83FF11A41FA9615100C57D8E /* AFHTTPSessionManager.h */,
+				83FF11A21FA9615100C57D8E /* AFHTTPSessionManager.m */,
+				83FF11A61FA9615100C57D8E /* AFNetworking.h */,
+				83FF11A11FA9615100C57D8E /* AFNetworkReachabilityManager.h */,
+				83FF11AB1FA9615200C57D8E /* AFNetworkReachabilityManager.m */,
+				83FF119C1FA9615100C57D8E /* AFSecurityPolicy.h */,
+				83FF11A71FA9615100C57D8E /* AFSecurityPolicy.m */,
+				83FF11A91FA9615100C57D8E /* AFURLConnectionOperation.h */,
+				83FF119B1FA9615100C57D8E /* AFURLConnectionOperation.m */,
+				83FF119E1FA9615100C57D8E /* AFURLRequestSerialization.h */,
+				83FF11A81FA9615100C57D8E /* AFURLRequestSerialization.m */,
+				83FF11AC1FA9615200C57D8E /* AFURLResponseSerialization.h */,
+				83FF11AA1FA9615200C57D8E /* AFURLResponseSerialization.m */,
+				83FF119D1FA9615100C57D8E /* AFURLSessionManager.h */,
+				83FF11A31FA9615100C57D8E /* AFURLSessionManager.m */,
+			);
+			name = AFNetworking;
+			sourceTree = "<group>";
+		};
 		FD5D1A36A3CCD3D41D85BA14 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE0AFBE868D5426CCE886B84 /* Pods_HuntingTimes.framework */,
+				35F96317D2E00FFC82F644C3 /* Pods_HuntingTimesTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -466,7 +477,7 @@
 		4CA156CD1A20413C00F95BA2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Ryan Norman";
 				TargetAttributes = {
 					4CA156D41A20413C00F95BA2 = {
@@ -564,9 +575,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-HuntingTimes/Pods-HuntingTimes-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ForecastIO/ForecastIO.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ForecastIO.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -628,47 +642,47 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C6436B41A3AB69500017338 /* AFHTTPRequestOperation.m in Sources */,
 				4CA156E01A20413C00F95BA2 /* MainViewController.swift in Sources */,
 				4C7EFBFB1A50A14C006B2DEF /* WeatherParser.swift in Sources */,
+				83FF11AE1FA9615200C57D8E /* AFHTTPRequestOperation.m in Sources */,
 				4C20E7371A2FF12F008A9F5B /* MenuController.swift in Sources */,
 				4CC2EF261A4C966300D74496 /* SunriseSunset.swift in Sources */,
+				83FF11AD1FA9615200C57D8E /* AFURLConnectionOperation.m in Sources */,
+				83FF11B21FA9615200C57D8E /* AFSecurityPolicy.m in Sources */,
 				4C8987F31A290D35001B7B74 /* MainView.swift in Sources */,
 				4C46BE4B1A20667B005BB796 /* TiltImageView.swift in Sources */,
 				4CC2EF231A4C8D2E00D74496 /* JSONFileWriter.swift in Sources */,
+				83FF11B01FA9615200C57D8E /* AFURLSessionManager.m in Sources */,
+				83FF11B51FA9615200C57D8E /* AFNetworkReachabilityManager.m in Sources */,
 				4C46BE4D1A20D7D1005BB796 /* CountdownLabel.swift in Sources */,
+				83FF11B31FA9615200C57D8E /* AFURLRequestSerialization.m in Sources */,
 				83E8EECC1AAD4F1400B58086 /* ErrorMessageView.swift in Sources */,
-				4C6436B61A3AB69500017338 /* AFHTTPSessionManager.m in Sources */,
+				836DAFF11FA95B3800B9E2FE /* NBUIKitSwiftGuard.swift in Sources */,
 				4C6EE1AC1A2590F100305115 /* HuntingTimeProgress.swift in Sources */,
 				4C7EFBF71A509CC4006B2DEF /* HourlyWeather.swift in Sources */,
 				4CDE49431A282934002CF42A /* MessageView.swift in Sources */,
+				83FF11B41FA9615200C57D8E /* AFURLResponseSerialization.m in Sources */,
 				83F4DEC21AAFF30A00ECD483 /* SeasonColumnView.swift in Sources */,
 				4CA156DE1A20413C00F95BA2 /* HuntingTimes.xcdatamodeld in Sources */,
-				4C6436BC1A3AB69500017338 /* AFURLSessionManager.m in Sources */,
 				4C56B3CD1A26D2CC00B8BD82 /* NotificationManager.swift in Sources */,
-				4C6436B81A3AB69500017338 /* AFSecurityPolicy.m in Sources */,
-				4C6436BB1A3AB69500017338 /* AFURLResponseSerialization.m in Sources */,
 				4C3D49A61A28545800AFF111 /* HuntingTime.swift in Sources */,
 				4C5B11061A59D8B70077DFFD /* DatePickerIcon.swift in Sources */,
 				4C5B11081A59E7D00077DFFD /* DatePickerController.swift in Sources */,
 				4C46BE521A2117EC005BB796 /* HuntingSeason.swift in Sources */,
 				4C6EE1A41A24323D00305115 /* ColumnView.swift in Sources */,
 				4CA156DB1A20413C00F95BA2 /* AppDelegate.swift in Sources */,
-				4C6436B91A3AB69500017338 /* AFURLConnectionOperation.m in Sources */,
 				4C64369F1A3AAA6700017338 /* TemperatureColumns.swift in Sources */,
 				4C7EFBF21A509ACB006B2DEF /* Temperature.swift in Sources */,
-				4C6436BA1A3AB69500017338 /* AFURLRequestSerialization.m in Sources */,
 				4CDE49451A282B3B002CF42A /* InterfaceHelper.swift in Sources */,
 				4C5B10F41A585EBB0077DFFD /* TimesPage.swift in Sources */,
 				4C5B10F21A585E9B0077DFFD /* TimesPageController.swift in Sources */,
+				83FF11AF1FA9615200C57D8E /* AFHTTPSessionManager.m in Sources */,
 				4C5B10EE1A585E260077DFFD /* TemperaturePageController.swift in Sources */,
 				4C5B10FA1A58940A0077DFFD /* HuntingColumnsView.swift in Sources */,
-				4C6436B51A3AB69500017338 /* AFHTTPRequestOperationManager.m in Sources */,
 				4C5B10F61A588FA10077DFFD /* HuntingPageController.swift in Sources */,
 				4C6EE1AE1A25967C00305115 /* DateTimeHelper.swift in Sources */,
 				4C46BE441A2046FE005BB796 /* StatusBarUpdater.swift in Sources */,
 				4C7EFBF91A509CEC006B2DEF /* DailyWeather.swift in Sources */,
-				4C6436B71A3AB69500017338 /* AFNetworkReachabilityManager.m in Sources */,
 				4C5B10F01A585E580077DFFD /* TemperaturePage.swift in Sources */,
 				4C3D49AA1A28E71700AFF111 /* Constants.swift in Sources */,
 				4C6EE1A61A24477200305115 /* TimesColumns.swift in Sources */,
@@ -678,6 +692,7 @@
 				4C5B11031A59BE0E0077DFFD /* DateLineScroller.swift in Sources */,
 				4C7EFBF41A509CA8006B2DEF /* HourlyParser.swift in Sources */,
 				4C5B10F81A5890BE0077DFFD /* HuntingPageView.swift in Sources */,
+				83FF11B11FA9615200C57D8E /* AFHTTPRequestOperationManager.m in Sources */,
 				4C64369D1A37F79600017338 /* UserSettings.swift in Sources */,
 				4C6EE1A21A242C5C00305115 /* ScrollLineView.swift in Sources */,
 			);
@@ -721,14 +736,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -767,14 +788,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -806,6 +833,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = HuntingTimes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) -DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.timehunt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TimeHunt-Bridging-Header.h";
