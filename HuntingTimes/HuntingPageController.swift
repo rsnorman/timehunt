@@ -72,7 +72,7 @@ class HuntingPageController : UIViewController {
             UIView.animate(withDuration: DAY_TRANSITION_TIME, animations: { () -> Void in
                 self.huntingPageView.alpha = 0
                 self.huntingPageView.huntingColumnsView.frame = self.huntingPageView.huntingColumnsView.frame.offsetBy(dx: 0, dy: yOffset)
-                self.huntingPageView.messageLabel
+//                self.huntingPageView.messageLabel
                 }, completion: { (complete) -> Void in
                     
                     self.huntingPageView.huntingColumnsView.frame = self.huntingPageView.huntingColumnsView.frame.offsetBy(dx: 0, dy: yOffset * -2)

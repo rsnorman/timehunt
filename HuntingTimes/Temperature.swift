@@ -17,7 +17,7 @@ class TemperatureParser {
         dailyTemperature   = 0.0
         hourlyTemperatures = []
         
-        for hourData in hourlyData(weatherJSON) {
+        for _ in hourlyData(weatherJSON) {
             // println(hourData)
         }
     }

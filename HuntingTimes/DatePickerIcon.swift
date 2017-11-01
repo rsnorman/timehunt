@@ -74,7 +74,7 @@ class DatePickerIcon : UIView {
         hourLine.backgroundColor = .white
         hourLine.layer.allowsEdgeAntialiasing = true
         hourHand.addSubview(hourLine)
-        hourHand.transform = hourHand.transform.rotated(by: CGFloat(M_PI * 0.1))
+        hourHand.transform = hourHand.transform.rotated(by: CGFloat(.pi * 0.1))
         timeView.addSubview(hourHand)
         
         let minuteHand = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
@@ -82,7 +82,7 @@ class DatePickerIcon : UIView {
         minuteLine.layer.allowsEdgeAntialiasing = true
         minuteLine.backgroundColor = .white
         minuteHand.addSubview(minuteLine)
-        minuteHand.transform = minuteHand.transform.rotated(by: CGFloat(M_PI * 0.6))
+        minuteHand.transform = minuteHand.transform.rotated(by: CGFloat(.pi * 0.6))
         timeView.addSubview(minuteHand)
     }
     

@@ -36,7 +36,7 @@ class WeatherParser: NSObject {
     }
     
     func fetch(_ location: CLLocation, date : Date, success: @escaping (DailyWeather) -> (), failure: @escaping () -> ()) {
-        let dateString = self.formatDate(date)
+        let _ = self.formatDate(date) // Use this to get weather for date
         
         darkSkyClient.getForecast(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { result in
             

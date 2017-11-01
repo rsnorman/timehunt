@@ -47,7 +47,7 @@
 		1D37E06F51A26365713A950B23EF9558 /* RequestMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RequestMetadata.swift; path = Source/RequestMetadata.swift; sourceTree = "<group>"; };
 		1F46572221E8D841270774FE81EBE8E5 /* Alert.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alert.swift; path = Source/Alert.swift; sourceTree = "<group>"; };
 		2753D83178EBCB03F394BE672309E4E7 /* Pods-HuntingTimesTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-HuntingTimesTests-resources.sh"; sourceTree = "<group>"; };
-		2F8FA6991D989F045A9EC007AE424116 /* Pods_HuntingTimesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_HuntingTimesTests.framework; path = "Pods-HuntingTimesTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F8FA6991D989F045A9EC007AE424116 /* Pods_HuntingTimesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HuntingTimesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		40661A17BDD4409A3F482490FEC7C30D /* Pods-HuntingTimesTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-HuntingTimesTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		40C71B82F1D334970E1B76F7646D0B57 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42F44C33B0D443C739E3CBA47A319BA5 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,17 +56,17 @@
 		57D1703D9031689C17F26344C239FDF5 /* ForecastIO-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ForecastIO-umbrella.h"; sourceTree = "<group>"; };
 		5B6902705D11E7B858D13940CBD8B4FD /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
 		5E197A79DBB3AD2E6BDA8FBBA21EF2A1 /* Pods-HuntingTimesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-HuntingTimesTests.release.xcconfig"; sourceTree = "<group>"; };
-		5E47C300FF31248FE15A00F5FC580164 /* ForecastIO.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = ForecastIO.modulemap; sourceTree = "<group>"; };
+		5E47C300FF31248FE15A00F5FC580164 /* ForecastIO.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = ForecastIO.modulemap; sourceTree = "<group>"; };
 		5E84087C0F3152FFE922E93247E0EFFE /* Pods-HuntingTimesTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-HuntingTimesTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		699F7AE1982B6D2FE1B9C1A9C41FD479 /* DataBlock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DataBlock.swift; path = Source/DataBlock.swift; sourceTree = "<group>"; };
 		703D24E3D606126DEA4E2601186A7D96 /* Pods-HuntingTimes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-HuntingTimes.release.xcconfig"; sourceTree = "<group>"; };
 		856CEBDD434EA4F898D236A38C3052CE /* Precipitation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Precipitation.swift; path = Source/Precipitation.swift; sourceTree = "<group>"; };
 		89DB504AB8A9BB7EFF6C5DBE5587E4F8 /* Flag.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Flag.swift; path = Source/Flag.swift; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9FECC23567FC323A07C7074DE35C0353 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB67E773D560688198A693FEDF007EFF /* ForecastIO.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ForecastIO.xcconfig; sourceTree = "<group>"; };
-		B38837252FBC445021D4A31BB0CF8482 /* Pods-HuntingTimes.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-HuntingTimes.modulemap"; sourceTree = "<group>"; };
+		B38837252FBC445021D4A31BB0CF8482 /* Pods-HuntingTimes.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-HuntingTimes.modulemap"; sourceTree = "<group>"; };
 		B448DB0F005946D23B80C24251590FCA /* ForecastIOError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ForecastIOError.swift; path = Source/ForecastIOError.swift; sourceTree = "<group>"; };
 		B929E3DF2A9CE5E3FE18819B8089EA43 /* Pods-HuntingTimesTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-HuntingTimesTests-frameworks.sh"; sourceTree = "<group>"; };
 		C323BEF24C1FF795E284DE0CEC207B59 /* Pods-HuntingTimesTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-HuntingTimesTests-dummy.m"; sourceTree = "<group>"; };
@@ -81,11 +81,11 @@
 		E27742FAA7A8F6B2ACE859A1D6FA2072 /* DataPoint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DataPoint.swift; path = Source/DataPoint.swift; sourceTree = "<group>"; };
 		E6247F660BBB34CB00EBF585DF58B0E4 /* Pods-HuntingTimes-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-HuntingTimes-frameworks.sh"; sourceTree = "<group>"; };
 		E7CD85D43F6BFDA2FD52E725FF889CD8 /* Pods-HuntingTimes-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-HuntingTimes-dummy.m"; sourceTree = "<group>"; };
-		ED4FF6945AE1635526AB8513C78CA47E /* ForecastIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ForecastIO.framework; path = ForecastIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED4FF6945AE1635526AB8513C78CA47E /* ForecastIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ForecastIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3607351BF7AE99FADCD74B66E195D19 /* ForecastIO-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ForecastIO-dummy.m"; sourceTree = "<group>"; };
 		F5A6E0DE7B1DE5851925D54056C1AC17 /* Pods-HuntingTimesTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-HuntingTimesTests-umbrella.h"; sourceTree = "<group>"; };
-		FA00CFA843AC21AF8B737C91A029C5EA /* Pods_HuntingTimes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_HuntingTimes.framework; path = "Pods-HuntingTimes.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD5253CBBDD3B5EBE3818758B1293371 /* Pods-HuntingTimesTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-HuntingTimesTests.modulemap"; sourceTree = "<group>"; };
+		FA00CFA843AC21AF8B737C91A029C5EA /* Pods_HuntingTimes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HuntingTimes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD5253CBBDD3B5EBE3818758B1293371 /* Pods-HuntingTimesTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-HuntingTimesTests.modulemap"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +134,6 @@
 				5425878C620F423582EAAF95112D3106 /* Units.swift */,
 				C1E5024B01F1AB57F31EF3435E953A62 /* Support Files */,
 			);
-			name = ForecastIO;
 			path = ForecastIO;
 			sourceTree = "<group>";
 		};
@@ -331,7 +330,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0900;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -677,6 +676,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
