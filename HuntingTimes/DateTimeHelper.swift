@@ -41,7 +41,8 @@ func clearTime(_ dateTime: Date) -> Date {
 }
 
 func isToday(_ date: Date) -> Bool {
-    return Calendar.current.dateComponents([.day], from: date, to: Date()).day == 0
+    let currentDate = Date()
+    return Calendar.current.dateComponents([.day], from: date, to: currentDate).day == 0
 }
 
 func differenceInDays(_ date: Date, otherDate: Date) -> Int {
