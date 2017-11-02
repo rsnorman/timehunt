@@ -196,10 +196,10 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     /* Delegate Methods */
     
     func didChangeProgress(_ percent: CGFloat) {
-        let totalDays  = huntingSeason.length()
-        let currentDay = Int(round(CGFloat(totalDays - 1) * percent))
-        huntingSeason.setCurrentDay(currentDay)
-        mainView.dateTimeScroller.setDate(huntingSeason.currentDay().date)
+//        let totalDays  = huntingSeason.length()
+//        let currentDay = Int(round(CGFloat(totalDays - 1) * percent))
+//        huntingSeason.setCurrentDay(currentDay)
+//        mainView.dateTimeScroller.setDate(huntingSeason.currentDay().date)
     }
     
     func didOpenMenu() {
