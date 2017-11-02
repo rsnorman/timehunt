@@ -16,7 +16,7 @@ class HourlyWeatherParser {
         var weather: [HourlyWeather] = []
         
         for hourData in hourlyWeatherData {
-            let temperature = hourData.temperature as! Float
+            let temperature = hourData.temperature! as Float
             let hourTime = hourData.time
             
             weather.append(HourlyWeather(temperature: temperature, at: hourTime))

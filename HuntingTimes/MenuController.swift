@@ -65,7 +65,7 @@ class MenuController : UIViewController {
         }) 
     }
     
-    func selectBackgroundImage(_ sender : UITapGestureRecognizer) {
+    @objc func selectBackgroundImage(_ sender : UITapGestureRecognizer) {
         if let view = sender.view {
             selectedBackground = view.accessibilityIdentifier
             

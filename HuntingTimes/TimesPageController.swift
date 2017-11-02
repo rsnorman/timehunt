@@ -91,7 +91,7 @@ class TimesPageController : HuntingPageController, CountdownViewDelegate, TimesC
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
     
-    func setCountdownTime() {
+    @objc func setCountdownTime() {
         (huntingPageView as! TimesPage).countdownLabel.stopCountdown()
         if !huntingDay.isEnded() {
             (huntingPageView as! TimesPage).countdownLabel.startCountdown(currentTime().time)
@@ -127,7 +127,7 @@ class TimesPageController : HuntingPageController, CountdownViewDelegate, TimesC
         }
     }
     
-    func setNotifications() {
+    @objc func setNotifications() {
         huntingTimesView.removeAllNotifications()
         for time in huntingDay.allTimes() {
             let notifications = NotificationManager.sharedInstance.getAllNotificationsForKey(time.key())

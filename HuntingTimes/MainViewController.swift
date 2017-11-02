@@ -83,7 +83,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         })
     }
     
-    func findLocation() {
+    @objc func findLocation() {
         startLoadingDate()
         locationManager.startUpdatingLocation()
     }
@@ -108,7 +108,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         pageViewController!.view.isUserInteractionEnabled = true
     }
     
-    func showNextDate() {
+    @objc func showNextDate() {
         if !huntingSeason.closingDay() {
             startLoadingDate()
             
@@ -124,7 +124,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         }
     }
     
-    func showPreviousDate() {
+    @objc func showPreviousDate() {
         if !huntingSeason.openingDay() {
             startLoadingDate()
             
@@ -243,7 +243,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         }) 
     }
     
-    func showSelectedDay() {
+    @objc func showSelectedDay() {
         startLoadingDate()
         
         huntingSeason.fetchDay({ (error, huntingDay) -> () in
@@ -297,7 +297,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         getDayForLocation()
     }
     
-    func getDayForLocation() {
+    @objc func getDayForLocation() {
         startLoadingDate()
         
         huntingSeason.fetchDay { (error, huntingDay) -> () in

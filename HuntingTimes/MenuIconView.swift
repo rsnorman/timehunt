@@ -52,7 +52,7 @@ class MenuIconView : UIView {
         addGestureRecognizer(menuCloseGesture)
     }
     
-    func menuOpen() {
+    @objc func menuOpen() {
         menuOpenGesture.isEnabled  = false
         delegate?.didOpenMenu()
         
@@ -72,7 +72,7 @@ class MenuIconView : UIView {
         }
     }
     
-    func menuClose() {
+    @objc func menuClose() {
         menuCloseGesture.isEnabled = false
         delegate?.didCloseMenu()
         
