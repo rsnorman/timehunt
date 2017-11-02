@@ -98,11 +98,13 @@ class HuntingSeason {
     fileprivate
     
     func getCurrentPosition() -> Int {
-        
+        let diffDays: Int
+
         if dates[0].date.timeIntervalSinceNow > 0 {
-            return 0
+            diffDays = 0
         } else {
-            return differenceInDays(dates[0].date, otherDate: Date())
+            diffDays = differenceInDays(dates[0].date, otherDate: Date())
         }
+        return diffDays
     }
 }
