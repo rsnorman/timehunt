@@ -28,6 +28,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     
     var nextDateGesture : UISwipeGestureRecognizer!
     var prevDateGesture : UISwipeGestureRecognizer!
+    var viewingDatePicker : Bool!
 
     override func viewDidLoad() {
         
@@ -40,6 +41,8 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         
         super.viewDidLoad()
         view.alpha = 0
+        
+        viewingDatePicker = false
         
         mainView = MainView(frame: view.frame)
         mainView.setDelegate(self)
@@ -196,10 +199,14 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     /* Delegate Methods */
     
     func didChangeProgress(_ percent: CGFloat) {
-//        let totalDays  = huntingSeason.length()
-//        let currentDay = Int(round(CGFloat(totalDays - 1) * percent))
-//        huntingSeason.setCurrentDay(currentDay)
-//        mainView.dateTimeScroller.setDate(huntingSeason.currentDay().date)
+        if !viewingDatePicker {
+            return
+        }
+
+        let totalDays  = huntingSeason.length()
+        let currentDay = Int(round(CGFloat(totalDays - 1) * percent))
+        huntingSeason.setCurrentDay(currentDay)
+        mainView.dateTimeScroller.setDate(huntingSeason.currentDay().date)
     }
     
     func didOpenMenu() {
@@ -217,6 +224,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     }
     
     func didOpenDatePicker() {
+        viewingDatePicker = true
         addChildViewController(datePickerController)
         datePickerController.view.alpha = 0
         pageViewController!.view.isUserInteractionEnabled = false
@@ -240,6 +248,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
             
         }, completion: {(complete) -> Void in
             self.showSelectedDay()
+            self.viewingDatePicker = false
         }) 
     }
     
@@ -286,7 +295,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Could not find location")
+        self.showLocationErrorMessage()
     }
     
     @objc func getDayForLocation() {
@@ -314,10 +323,6 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
                 }
             }
         }
-    }
-    
-    func didFailToAcquireLocationWithErrorMsg(_ errorMsg: String!) {
-        self.showLocationErrorMessage()
     }
     
     func didTickCountdown() {
