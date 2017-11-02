@@ -41,7 +41,7 @@ class CountdownLabel : UILabel {
         text = "Ended"
     }
     
-    func updateCountdown() {
+    @objc func updateCountdown() {
         let timeLeft = countdownToTime.timeIntervalSinceNow
         let hours    = Int(ceil(timeLeft / 60) / 60)
         let minutes  = Int(ceil(timeLeft / 60).truncatingRemainder(dividingBy: 60))

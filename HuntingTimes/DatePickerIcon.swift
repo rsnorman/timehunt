@@ -86,7 +86,7 @@ class DatePickerIcon : UIView {
         timeView.addSubview(minuteHand)
     }
     
-    func datePickerOpen() {
+    @objc func datePickerOpen() {
         datePickerCloseGesture.isEnabled  = false
         delegate?.didOpenDatePicker()
         
@@ -106,7 +106,7 @@ class DatePickerIcon : UIView {
         }
     }
     
-    func datePickerClose() {
+    @objc func datePickerClose() {
         datePickerCloseGesture.isEnabled = false
         delegate?.didCloseDatePicker()
         

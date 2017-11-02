@@ -37,7 +37,7 @@ class TimesColumns : HuntingColumnsView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func didTapEvent(_ sender: UITapGestureRecognizer) {
+    @objc func didTapEvent(_ sender: UITapGestureRecognizer) {
         let loc   = sender.location(in: self)
         if let label = self.hitTest(loc, with: nil) as? UILabel {
             let event = label.text
@@ -49,7 +49,7 @@ class TimesColumns : HuntingColumnsView {
         }
     }
     
-    func didTapTime(_ sender: UITapGestureRecognizer) {
+    @objc func didTapTime(_ sender: UITapGestureRecognizer) {
         let loc   = sender.location(in: self)
         if let label = self.hitTest(loc, with: nil) as? UILabel {
             let timeString = label.text
