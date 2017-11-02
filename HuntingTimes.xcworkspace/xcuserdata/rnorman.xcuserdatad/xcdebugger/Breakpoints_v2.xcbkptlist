@@ -9,24 +9,8 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HuntingTimes/WeatherParser.swift"
-            timestampString = "531196725.517206"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "fetch(_:date:success:failure:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "HuntingTimes/MainViewController.swift"
-            timestampString = "531195030.143763"
+            timestampString = "531277870.739633"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "289"
@@ -42,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HuntingTimes/MainViewController.swift"
-            timestampString = "531195030.143806"
+            timestampString = "531277870.739711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "283"
@@ -58,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HuntingTimes/MainViewController.swift"
-            timestampString = "531195030.143841"
+            timestampString = "531277870.73976"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "88"
@@ -74,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HuntingTimes/MainViewController.swift"
-            timestampString = "531195030.143875"
+            timestampString = "531277870.739808"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "281"
@@ -90,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HuntingTimes/MainViewController.swift"
-            timestampString = "531195030.143908"
+            timestampString = "531277870.73985"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
+            startingLineNumber = "295"
+            endingLineNumber = "295"
             landmarkName = "getDayForLocation()"
             landmarkType = "7">
             <Locations>
@@ -138,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HuntingTimes/HuntingSeason.swift"
-            timestampString = "531195030.143944"
+            timestampString = "531277261.024808"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "63"
@@ -154,12 +138,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HuntingTimes/WeatherParser.swift"
-            timestampString = "531196725.517468"
+            timestampString = "531277870.73992"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "setDailyWeather(forecast:)"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "setDailyWeather(date:forecast:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -170,12 +154,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HuntingTimes/WeatherParser.swift"
-            timestampString = "531196725.517586"
+            timestampString = "531277870.740251"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "setDailyWeather(forecast:)"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "setDailyWeather(date:forecast:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -218,13 +202,125 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HuntingTimes/WeatherParser.swift"
-            timestampString = "531196725.517698"
+            timestampString = "531277870.74051"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "setDailyWeather(forecast:)"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "setDailyWeather(date:forecast:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HuntingTimes/WeatherParser.swift"
+            timestampString = "531277870.740767"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "fetch(_:date:success:failure:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "HuntingTimes.WeatherParser.fetch(__ObjC.CLLocation, date: Foundation.Date, success: (HuntingTimes.DailyWeather) -&gt; (), failure: () -&gt; ()) -&gt; ()"
+                  moduleName = "HuntingTimes"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rnorman/projects/personal/timehunt/HuntingTimes/WeatherParser.swift"
+                  timestampString = "531276803.231027"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "43">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (ForecastIO.Result&lt;ForecastIO.Forecast&gt;) -&gt; () in HuntingTimes.WeatherParser.fetch(__ObjC.CLLocation, date: Foundation.Date, success: (HuntingTimes.DailyWeather) -&gt; (), failure: () -&gt; ()) -&gt; ()"
+                  moduleName = "HuntingTimes"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rnorman/projects/personal/timehunt/HuntingTimes/WeatherParser.swift"
+                  timestampString = "531276803.234579"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "2098">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HuntingTimes/DateTimeHelper.swift"
+            timestampString = "531277870.741005"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "isToday(_:)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HuntingTimes/HuntingSeason.swift"
+            timestampString = "531277261.025351"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "fetchDay(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "HuntingTimes.HuntingSeason.fetchDay((Swift.Optional&lt;__ObjC.NSError&gt;, HuntingTimes.HuntingDay) -&gt; ()) -&gt; ()"
+                  moduleName = "HuntingTimes"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rnorman/projects/personal/timehunt/HuntingTimes/HuntingSeason.swift"
+                  timestampString = "531277261.105513"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "356">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (HuntingTimes.DailyWeather) -&gt; () in HuntingTimes.HuntingSeason.fetchDay((Swift.Optional&lt;__ObjC.NSError&gt;, HuntingTimes.HuntingDay) -&gt; ()) -&gt; ()"
+                  moduleName = "HuntingTimes"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rnorman/projects/personal/timehunt/HuntingTimes/HuntingSeason.swift"
+                  timestampString = "531277261.106824"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "33">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

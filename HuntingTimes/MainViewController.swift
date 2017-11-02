@@ -278,7 +278,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        huntingSeason = HuntingSeason(startDate: HUNTING_SEASON_START_DATE, endDate: HUNTING_SEASON_END_DATE, location: locations[0])
+        huntingSeason = HuntingSeason(startDate: Date(), endDate: HUNTING_SEASON_END_DATE, location: locations[0])
         
         mainView.dateTimeScroller.markCurrentProgress(huntingSeason.percentComplete())
         
@@ -287,14 +287,6 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Could not find location")
-    }
-    
-    func didAcquireLocation(_ location: CLLocation!) {
-        huntingSeason = HuntingSeason(startDate: HUNTING_SEASON_START_DATE, endDate: HUNTING_SEASON_END_DATE, location: location)
-        
-        mainView.dateTimeScroller.markCurrentProgress(huntingSeason.percentComplete())
-        
-        getDayForLocation()
     }
     
     @objc func getDayForLocation() {
