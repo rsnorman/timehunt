@@ -154,7 +154,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
                     page.setDay(huntingDay)
                 }
                 
-                self.mainView.dateTimeScroller.setDate(huntingDay.getCurrentTime().time)
+                self.mainView.dateTimeScroller.setDate(huntingDay.date)
                 self.mainView.dateTimeScroller.setProgress(self.getCurrentPage().currentProgress(), animate: true)
                 self.mainView.dateTimeScroller.showIndicator()
                 
@@ -316,7 +316,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
                     self.pageViewController!.setViewControllers(viewControllers as? [UIViewController], direction: .forward, animated: false, completion: nil)
                     
                     self.mainView.dateTimeScroller.setProgress((startingViewController as! HuntingPageController).currentProgress(), animate: true)
-                    self.mainView.dateTimeScroller.setDate(huntingDay.getCurrentTime().time)
+                    self.mainView.dateTimeScroller.setDate(huntingDay.date)
                     self.finishLoadingDate()
                 } else {
                     self.showErrorMessage(#selector(MainViewController.getDayForLocation))
