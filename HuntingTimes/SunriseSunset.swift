@@ -16,14 +16,12 @@ class SunriseSunset {
         sunriseTime = Date(timeIntervalSince1970: 0)
         sunsetTime  = Date(timeIntervalSince1970: 0)
         
-        if let hourly = weatherJSON["daily"] as? [String : AnyObject] {
-            if let dailyData = hourly["data"] as? [[String : AnyObject]] {
-                let sunriseSeconds: TimeInterval = dailyData[0]["sunriseTime"] as! TimeInterval
-                let sunsetSeconds: TimeInterval  = dailyData[0]["sunsetTime"] as! TimeInterval
-                
-                sunriseTime = Date(timeIntervalSince1970: sunriseSeconds)
-                sunsetTime  = Date(timeIntervalSince1970: sunsetSeconds)
-            }
-        }
+        guard let hourly = weatherJSON["daily"] else { return }
+        guard let dailyDatum = hourly["data"] as? [[String: Any]] else { return }
+        guard let sunriseSeconds = dailyDatum[0]["sunriseTime"] else { return }
+        guard let sunsetSeconds = dailyDatum[0]["sunsetTime"] else { return }
+        
+        sunriseTime = Date(timeIntervalSince1970: sunriseSeconds as! TimeInterval)
+        sunsetTime  = Date(timeIntervalSince1970: sunsetSeconds as! TimeInterval)
     }
 }

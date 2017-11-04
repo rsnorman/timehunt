@@ -52,9 +52,12 @@ class WeatherParser: NSObject {
     
     func setDailyWeather(date: Date, forecast: Forecast) {
         dailyWeather = []
-        let hourlyWeatherParser = HourlyWeatherParser(hourlyWeatherData: forecast.hourly!.data)
+        guard let hourlyForecast = forecast.hourly else { return }
+        guard let dailyForecast = forecast.daily else { return }
 
-        for dailyData in forecast.daily!.data {
+        let hourlyWeatherParser = HourlyWeatherParser(hourlyWeatherData: hourlyForecast.data)
+
+        for dailyData in dailyForecast.data {
             let sunrise = dailyData.sunriseTime
             let sunset = dailyData.sunsetTime
             var dayWeather: DailyWeather
@@ -83,10 +86,7 @@ class WeatherParser: NSObject {
     }
     
     func dailyData(_ weatherJSON: [String : AnyObject]) -> [[String : AnyObject]] {
-        if let daily = weatherJSON["daily"] as? [String : AnyObject] {
-            return daily["data"] as! [[String : AnyObject]]!
-        } else {
-            return []
-        }
+        guard let daily = weatherJSON["daily"] as? [String : AnyObject] else { return [] }
+        return daily["data"] as! [[String : AnyObject]]
     }
 }
