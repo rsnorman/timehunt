@@ -37,14 +37,23 @@ class DailyWeather {
     }
     
     func currentTemperature() -> Int {
-        return Int(round(currentWeather!.temperature! as Float))
+        guard let temperature = currentWeather!.temperature else {
+            return 0
+        }
+        return Int(temperature)
     }
     
     func lowTemperature() -> Int {
-        return Int(round(predictedWeather!.temperatureMin! as Float))
+        guard let lowTemp = predictedWeather!.temperatureMin else {
+            return 0
+        }
+        return Int(round(lowTemp))
     }
     
     func highTemperature() -> Int {
-        return Int(round(predictedWeather!.temperatureMax! as Float))
+        guard let highTemp = predictedWeather!.temperatureMax else {
+            return 0
+        }
+        return Int(round(highTemp))
     }
 }
