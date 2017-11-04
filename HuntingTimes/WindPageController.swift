@@ -27,10 +27,10 @@ class WindPageController : HuntingPageController {
         
         if huntingDay.weather.hasCurrent() {
             huntingPageView?.stateLabel.text = "Current Wind"
-            huntingPageView?.mainLabel.text = "\(huntingDay.weather.currentWind().speed)mph"
+            huntingPageView?.mainLabel.text = windToString(huntingDay.weather.currentWind())
         } else {
             huntingPageView?.stateLabel.text = "Average Wind"
-            huntingPageView?.mainLabel.text = "\(huntingDay.weather.currentWind().speed)mph"
+            huntingPageView?.mainLabel.text = windToString(huntingDay.weather.predictedWind())
         }
     }
 }

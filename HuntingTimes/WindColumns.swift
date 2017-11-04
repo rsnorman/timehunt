@@ -28,10 +28,10 @@ class WindColumns : HuntingColumnsView {
     
     
     func setWinds(_ dailyWeather: DailyWeather) {
-        let winds = ["\(Int(round(dailyWeather.windAt(huntingDay.startTime.time).speed)))mph",
-            "\(Int(round(dailyWeather.windAt(huntingDay.sunriseTime.time).speed)))mph",
-            "\(Int(round(dailyWeather.windAt(huntingDay.sunsetTime.time).speed)))mph",
-            "\(Int(round(dailyWeather.windAt(huntingDay.endTime.time).speed)))mph"]
+        let winds = [windToString(dailyWeather.windAt(huntingDay.startTime.time), full: false),
+            windToString(dailyWeather.windAt(huntingDay.sunriseTime.time), full: false),
+            windToString(dailyWeather.windAt(huntingDay.sunsetTime.time), full: false),
+            windToString(dailyWeather.windAt(huntingDay.endTime.time), full: false)]
         
         rightColumnView.setLabels(winds)
     }

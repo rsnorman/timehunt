@@ -57,6 +57,7 @@
 		4CC2EF261A4C966300D74496 /* SunriseSunset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC2EF251A4C966300D74496 /* SunriseSunset.swift */; };
 		4CDE49431A282934002CF42A /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDE49421A282934002CF42A /* MessageView.swift */; };
 		4CDE49451A282B3B002CF42A /* InterfaceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDE49441A282B3B002CF42A /* InterfaceHelper.swift */; };
+		8329CBCA1FADF0EB00C1EE65 /* WeatherHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8329CBC91FADF0EB00C1EE65 /* WeatherHelper.swift */; };
 		836DAFF11FA95B3800B9E2FE /* NBUIKitSwiftGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836DAFF01FA95B3800B9E2FE /* NBUIKitSwiftGuard.swift */; };
 		8371CC2A1FADE9BF00829676 /* Wind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8371CC291FADE9BF00829676 /* Wind.swift */; };
 		8371CC2D1FADEB6800829676 /* WindPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8371CC2C1FADEB6800829676 /* WindPageController.swift */; };
@@ -135,6 +136,7 @@
 		4CDE49421A282934002CF42A /* MessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		4CDE49441A282B3B002CF42A /* InterfaceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceHelper.swift; sourceTree = "<group>"; };
 		5EA21EA48D1F0CCD57BB8B3B /* Pods-HuntingTimes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuntingTimes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HuntingTimes/Pods-HuntingTimes.debug.xcconfig"; sourceTree = "<group>"; };
+		8329CBC91FADF0EB00C1EE65 /* WeatherHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHelper.swift; sourceTree = "<group>"; };
 		836DAFF01FA95B3800B9E2FE /* NBUIKitSwiftGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBUIKitSwiftGuard.swift; sourceTree = "<group>"; };
 		8371CC291FADE9BF00829676 /* Wind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wind.swift; sourceTree = "<group>"; };
 		8371CC2C1FADEB6800829676 /* WindPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindPageController.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				4CDE49441A282B3B002CF42A /* InterfaceHelper.swift */,
 				4C64369C1A37F79600017338 /* UserSettings.swift */,
 				4CC2EF221A4C8D2E00D74496 /* JSONFileWriter.swift */,
+				8329CBC91FADF0EB00C1EE65 /* WeatherHelper.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -619,6 +622,7 @@
 				836DAFF11FA95B3800B9E2FE /* NBUIKitSwiftGuard.swift in Sources */,
 				4C6EE1AC1A2590F100305115 /* HuntingTimeProgress.swift in Sources */,
 				8371CC2A1FADE9BF00829676 /* Wind.swift in Sources */,
+				8329CBCA1FADF0EB00C1EE65 /* WeatherHelper.swift in Sources */,
 				4C7EFBF71A509CC4006B2DEF /* HourlyWeather.swift in Sources */,
 				4CDE49431A282934002CF42A /* MessageView.swift in Sources */,
 				83F4DEC21AAFF30A00ECD483 /* SeasonColumnView.swift in Sources */,
