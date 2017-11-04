@@ -120,7 +120,7 @@ class TimesPageController : HuntingPageController, CountdownViewDelegate, TimesC
     
     func didTapHuntingTime(_ huntingTime: HuntingTime) {
         let notificationManager = NotificationManager.sharedInstance
-        if notificationManager.canAddNotificationsForKey(huntingTime.key()) {
+        if notificationManager.canAddNotifications(huntingTime) {
             notificationManager.addNotification(huntingTime)
         } else {
             notificationManager.removeAllNotifications(huntingTime)

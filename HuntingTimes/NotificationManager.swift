@@ -75,21 +75,11 @@ class NotificationManager {
     }
     
     func addNotification(_ notificationable: NotificationInterface) {
-        if canAddNotificationsForKey(notificationable.key()) {
-            let count = getAllNotificationsForKey(notificationable.key()).count
-            var additionalInterval : TimeInterval = 0
-            if count == 1 {
-                additionalInterval = SECOND_NOTIFICATION_INTERVAL
-            } else if count == 2 {
-                additionalInterval = THIRD_NOTIFICATION_INTERVAL
-            }
+        if canAddNotifications(notificationable) {
+            let notification = Notification(notificationable: notificationable, additionalInterval: getInterval(notificationable.key()))
             
-            let notification = Notification(notificationable: notificationable, additionalInterval: additionalInterval)
-            
-            if notification.canSchedule() {
-                for del in delegates {
-                    del.didAddNotification(notificationable, notification: notification)
-                }
+            for del in delegates {
+                del.didAddNotification(notificationable, notification: notification)
             }
         }
     }
@@ -116,8 +106,8 @@ class NotificationManager {
         return notifications as [UILocalNotification]
     }
     
-    func canAddNotificationsForKey(_ key: String) -> Bool {
-        return getAllNotificationsForKey(key).count < MAX_NOTIFICATIONS
+    func canAddNotifications(_ notificationable: NotificationInterface) -> Bool {
+        return getAllNotificationsForKey(notificationable.key()).count < MAX_NOTIFICATIONS && canSchedule(notificationable)
     }
     
     func receivedNotification(_ notification: UILocalNotification) {
@@ -125,9 +115,25 @@ class NotificationManager {
             del.didReceiveNotification(notification.userInfo!)
         }
     }
-    
+
     fileprivate
-    
+
+    func getInterval(_ key: String) -> TimeInterval {
+        let count = getAllNotificationsForKey(key).count
+        var additionalInterval : TimeInterval = 0
+        if count == 1 {
+            additionalInterval = SECOND_NOTIFICATION_INTERVAL
+        } else if count == 2 {
+            additionalInterval = THIRD_NOTIFICATION_INTERVAL
+        }
+
+        return additionalInterval
+    }
+
+    func canSchedule(_ notificationable: NotificationInterface) -> Bool {
+        return notificationable.scheduleTime().addingTimeInterval(getInterval(notificationable.key()) * -1).timeIntervalSinceNow > 0
+    }
+
     init() {
         delegates = []
 //        let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Sound
