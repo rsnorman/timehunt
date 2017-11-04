@@ -19,6 +19,8 @@ class MenuController : UIViewController {
     var imageViews         : [UIImageView]!
     var selectedBackground : String!
     var delegate           : MenuControllerDelegate!
+    let imageSize          : CGFloat = 70.0
+    let imageMargin        : CGFloat = 45.0
     
     override func viewDidLoad() {
         view.alpha = 0.0
@@ -37,8 +39,11 @@ class MenuController : UIViewController {
         
         imageViews = []
         var index = 0
+        let initialStartXPos = self.calcuateInitialStartXPos()
+
         for backgroundImage in backgroundImages {
-            let imageView                     = UIImageView(frame: CGRect(x: 10 + (115 * CGFloat(index)), y: 210, width: 70, height: 70))
+            let imageView                     = UIImageView(frame: CGRect(x: initialStartXPos + (imageMargin + imageSize) * CGFloat(index), y: 210, width: imageSize, height: imageSize))
+
             imageView.image                   = UIImage(named: backgroundImage)
             imageView.layer.borderColor       = UIColor(white: 1, alpha: 1).cgColor
             imageView.layer.borderWidth       = 2.0
@@ -77,5 +82,12 @@ class MenuController : UIViewController {
 
             delegate?.didSelectBackground(selectedBackground)
         }
+    }
+
+    fileprivate
+
+    func calcuateInitialStartXPos() -> CGFloat {
+        let imageCount = CGFloat(backgroundImages.count)
+        return (view.frame.width - (imageSize * imageCount + (imageMargin * (imageCount - 1)))) / 2.0
     }
 }
