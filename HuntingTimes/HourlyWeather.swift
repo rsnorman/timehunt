@@ -10,10 +10,14 @@ import Foundation
 
 class HourlyWeather {
     let temperature : Float
+    let windSpeed   : Float
+    let windBearing : Float
     let time        : Date
     
-    init(temperature: Float, at: Date) {
+    init(temperature: Float, windSpeed: Float, windBearing: Float, at: Date) {
         self.temperature = temperature
+        self.windSpeed   = windSpeed
+        self.windBearing = windBearing
         self.time        = at
     }
 }
