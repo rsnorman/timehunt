@@ -27,8 +27,8 @@ class HuntingSeason {
         self.startDate = startDate
         self.endDate   = endDate
         var seasonDates: [HuntingDay] = []
-        
-        var date = self.startDate
+        var date = clearTime(self.startDate)
+
         for _ in 0...(differenceInDays(startDate, otherDate: endDate) - 1) {
             seasonDates.append(HuntingDay(date: date))
             date = addDay(date)

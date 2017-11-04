@@ -15,18 +15,16 @@ class HuntingDay {
     var sunriseTime  : HuntingTime!
     var sunsetTime   : HuntingTime!
     lazy var dayBeginning : HuntingTime = {
-        let dayStartTime = Calendar.current.startOfDay(for: self.startTime.time)
-        return HuntingTime(time: dayStartTime, event: "DayStart")
+        return HuntingTime(time: self.date, event: "DayStart")
     }()
     lazy var dayEnd : HuntingTime = {
-        let dayStartTime = Calendar.current.startOfDay(for: self.startTime.time)
-        return HuntingTime(time: Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: dayStartTime)!, event: "DayEnd")
+        return HuntingTime(time: Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: self.date)!, event: "DayEnd")
     }()
     
     var weather : DailyWeather!
     
     init(date: Date) {
-        self.date = clearTime(date)
+        self.date = date
     }
     
     func setSunriseSunset(_ sunriseTime: Date, sunsetTime: Date) {
