@@ -22,6 +22,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     var timesPageController : TimesPageController!
     var temperaturePageController : TemperaturePageController!
     var windPageController : WindPageController!
+    var pressurePageController : PressurePageController!
     
     var startScrollPosition  : CGPoint!
     var huntingSeason        : HuntingSeason!
@@ -310,8 +311,9 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
                     
                     self.temperaturePageController = TemperaturePageController(huntingDay: huntingDay)
                     self.windPageController = WindPageController(huntingDay: huntingDay)
+                    self.pressurePageController = PressurePageController(huntingDay: huntingDay)
                     
-                    self.huntingControllers = [self.timesPageController, self.temperaturePageController, self.windPageController]
+                    self.huntingControllers = [self.timesPageController, self.temperaturePageController, self.windPageController, self.pressurePageController]
                     
                     let startingViewController: UIViewController = self.viewControllerAtIndex(0)!
                     let viewControllers: NSArray = [startingViewController]

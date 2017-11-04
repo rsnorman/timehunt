@@ -43,6 +43,17 @@ class DailyWeather {
         return Wind(speed: 0, bearing: 0)
     }
     
+    func pressureAt(_ time: Date) -> Pressure {
+        for hourWeather in hourlyWeather {
+            let timeComparison = time.compare(hourWeather.time as Date)
+            if timeComparison == ComparisonResult.orderedAscending || timeComparison == ComparisonResult.orderedSame {
+                return hourWeather.pressure
+            }
+        }
+        
+        return Pressure(atmospheres: 0)
+    }
+    
     func hasCurrent() -> Bool {
         return currentWeather != nil
     }
@@ -66,6 +77,20 @@ class DailyWeather {
             return Wind(speed: 0, bearing: 0)
         }
         return Wind(speed: windSpeed, bearing: windBearing)
+    }
+    
+    func currentPressure() -> Pressure {
+        guard let pressure = currentWeather!.pressure else {
+            return Pressure(atmospheres: 0)
+        }
+        return Pressure(atmospheres: pressure)
+    }
+    
+    func predictedPressure() -> Pressure {
+        guard let pressure = predictedWeather!.pressure else {
+            return Pressure(atmospheres: 0)
+        }
+        return Pressure(atmospheres: pressure)
     }
 
     func lowTemperature() -> Int {

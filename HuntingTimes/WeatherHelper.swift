@@ -36,3 +36,7 @@ func windToString(_ wind: Wind, full: Bool = true) -> String {
         return "\(Int(round(wind.speed))) \(direction)"
     }
 }
+
+func pressureToString(_ pressure: Pressure) -> String {
+    return "\(Int(round(pressure.atmospheres))) mb"
+}
