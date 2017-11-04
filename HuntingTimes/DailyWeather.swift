@@ -42,7 +42,35 @@ class DailyWeather {
         }
         return Int(temperature)
     }
-    
+
+    func currentWindSpeed() -> Int {
+        guard let windSpeed = currentWeather!.windSpeed else {
+            return 0
+        }
+        return Int(windSpeed)
+    }
+
+    func currentWindBearing() -> Int {
+        guard let windBearing = currentWeather!.windBearing else {
+            return 0
+        }
+        return Int(windBearing)
+    }
+
+    func predictedWindSpeed() -> Int {
+        guard let windSpeed = predictedWeather!.windSpeed else {
+            return 0
+        }
+        return Int(round(windSpeed))
+    }
+
+    func predictedWindBearing() -> Int {
+        guard let windBearing = predictedWeather!.windBearing else {
+            return 0
+        }
+        return Int(round(windBearing))
+    }
+
     func lowTemperature() -> Int {
         guard let lowTemp = predictedWeather!.temperatureMin else {
             return 0
