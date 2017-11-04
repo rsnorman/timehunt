@@ -32,6 +32,17 @@ class DailyWeather {
         return 0.0
     }
     
+    func windAt(_ time: Date) -> Wind {
+        for hourWeather in hourlyWeather {
+            let timeComparison = time.compare(hourWeather.time as Date)
+            if timeComparison == ComparisonResult.orderedAscending || timeComparison == ComparisonResult.orderedSame {
+                return hourWeather.wind
+            }
+        }
+        
+        return Wind(speed: 0, bearing: 0)
+    }
+    
     func hasCurrent() -> Bool {
         return currentWeather != nil
     }
@@ -43,32 +54,18 @@ class DailyWeather {
         return Int(temperature)
     }
 
-    func currentWindSpeed() -> Int {
-        guard let windSpeed = currentWeather!.windSpeed else {
-            return 0
+    func currentWind() -> Wind {
+        guard let windSpeed = currentWeather!.windSpeed, let windBearing = currentWeather!.windBearing else {
+            return Wind(speed: 0, bearing: 0)
         }
-        return Int(windSpeed)
+        return Wind(speed: windSpeed, bearing: windBearing)
     }
 
-    func currentWindBearing() -> Int {
-        guard let windBearing = currentWeather!.windBearing else {
-            return 0
+    func predictedWind() -> Wind {
+        guard let windSpeed = predictedWeather!.windSpeed, let windBearing = predictedWeather!.windBearing else {
+            return Wind(speed: 0, bearing: 0)
         }
-        return Int(windBearing)
-    }
-
-    func predictedWindSpeed() -> Int {
-        guard let windSpeed = predictedWeather!.windSpeed else {
-            return 0
-        }
-        return Int(round(windSpeed))
-    }
-
-    func predictedWindBearing() -> Int {
-        guard let windBearing = predictedWeather!.windBearing else {
-            return 0
-        }
-        return Int(round(windBearing))
+        return Wind(speed: windSpeed, bearing: windBearing)
     }
 
     func lowTemperature() -> Int {

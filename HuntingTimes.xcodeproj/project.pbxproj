@@ -58,6 +58,7 @@
 		4CDE49431A282934002CF42A /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDE49421A282934002CF42A /* MessageView.swift */; };
 		4CDE49451A282B3B002CF42A /* InterfaceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDE49441A282B3B002CF42A /* InterfaceHelper.swift */; };
 		836DAFF11FA95B3800B9E2FE /* NBUIKitSwiftGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836DAFF01FA95B3800B9E2FE /* NBUIKitSwiftGuard.swift */; };
+		8371CC2A1FADE9BF00829676 /* Wind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8371CC291FADE9BF00829676 /* Wind.swift */; };
 		83E8EECC1AAD4F1400B58086 /* ErrorMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E8EECB1AAD4F1400B58086 /* ErrorMessageView.swift */; };
 		83F4DEC21AAFF30A00ECD483 /* SeasonColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F4DEC11AAFF30A00ECD483 /* SeasonColumnView.swift */; };
 		B3B120AE7C5BF24E1E7C20F3 /* Pods_HuntingTimesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F96317D2E00FFC82F644C3 /* Pods_HuntingTimesTests.framework */; };
@@ -132,6 +133,7 @@
 		4CDE49441A282B3B002CF42A /* InterfaceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceHelper.swift; sourceTree = "<group>"; };
 		5EA21EA48D1F0CCD57BB8B3B /* Pods-HuntingTimes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuntingTimes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HuntingTimes/Pods-HuntingTimes.debug.xcconfig"; sourceTree = "<group>"; };
 		836DAFF01FA95B3800B9E2FE /* NBUIKitSwiftGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NBUIKitSwiftGuard.swift; sourceTree = "<group>"; };
+		8371CC291FADE9BF00829676 /* Wind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wind.swift; sourceTree = "<group>"; };
 		83E8EECB1AAD4F1400B58086 /* ErrorMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessageView.swift; sourceTree = "<group>"; };
 		83F4DEC11AAFF30A00ECD483 /* SeasonColumnView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeasonColumnView.swift; sourceTree = "<group>"; };
 		AFF67320ACFF6E8588A798F8 /* Pods-HuntingTimes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HuntingTimes.release.xcconfig"; path = "Pods/Target Support Files/Pods-HuntingTimes/Pods-HuntingTimes.release.xcconfig"; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				4CC2EF241A4C963F00D74496 /* WeatherParsers */,
 				4C7EFBF61A509CC4006B2DEF /* HourlyWeather.swift */,
 				4C7EFBF81A509CEC006B2DEF /* DailyWeather.swift */,
+				8371CC291FADE9BF00829676 /* Wind.swift */,
 			);
 			name = Weather;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				83E8EECC1AAD4F1400B58086 /* ErrorMessageView.swift in Sources */,
 				836DAFF11FA95B3800B9E2FE /* NBUIKitSwiftGuard.swift in Sources */,
 				4C6EE1AC1A2590F100305115 /* HuntingTimeProgress.swift in Sources */,
+				8371CC2A1FADE9BF00829676 /* Wind.swift in Sources */,
 				4C7EFBF71A509CC4006B2DEF /* HourlyWeather.swift in Sources */,
 				4CDE49431A282934002CF42A /* MessageView.swift in Sources */,
 				83F4DEC21AAFF30A00ECD483 /* SeasonColumnView.swift in Sources */,
