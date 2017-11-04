@@ -37,7 +37,7 @@ func timeToString(_ dateTime: Date) -> String {
 
 func clearTime(_ dateTime: Date) -> Date {
     let calendar = Calendar.current
-    return calendar.date(bySettingHour: 0, minute: 0, second: 0, of: dateTime)!
+    return calendar.startOfDay(for: dateTime)
 }
 
 func isToday(_ date: Date) -> Bool {
@@ -50,5 +50,5 @@ func differenceInDays(_ date: Date, otherDate: Date) -> Int {
 }
 
 func addDay(_ date: Date) -> Date {
-    return date.addingTimeInterval(60*60*24)
+    return Calendar.current.date(byAdding: .day, value: 1, to: date)!
 }
