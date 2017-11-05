@@ -62,7 +62,7 @@ class ScrollLineView : UIView {
         positionIndicator.frame = CGRect(x: pFrame.origin.x, y: (frame.height - indicatorRadius) * percent, width: pFrame.width, height: pFrame.height)
         
         if notifyDelegate {
-            delegate?.didPositionIndicator(pFrame.origin.y / (frame.height - indicatorRadius))
+            delegate?.didPositionIndicator(percent)
         }
     }
     
