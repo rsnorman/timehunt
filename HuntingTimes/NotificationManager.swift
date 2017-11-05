@@ -85,6 +85,10 @@ class NotificationManager {
     }
     
     func removeAllNotifications(_ notificationable: NotificationInterface) {
+        if getAllNotificationsForKey(notificationable.key()).count == 0 {
+            return
+        }
+
         for notification in getAllNotificationsForKey(notificationable.key()) {
             UIApplication.shared.cancelLocalNotification(notification)
         }
