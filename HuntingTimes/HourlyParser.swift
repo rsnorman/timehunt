@@ -17,11 +17,11 @@ class HourlyWeatherParser {
         
         for hourData in hourlyWeatherData {
             let hourTime = hourData.time
-            guard let temperature = hourData.temperature, let windSpeed = hourData.windSpeed, let windBearing = hourData.windBearing else {
-                weather.append(HourlyWeather(temperature: 0.0, windSpeed: 0.0, windBearing: 0.0, at: hourTime))
+            guard let temperature = hourData.temperature, let windSpeed = hourData.windSpeed, let windBearing = hourData.windBearing, let pressure = hourData.pressure else {
+                weather.append(HourlyWeather(temperature: 0.0, windSpeed: 0.0, windBearing: 0.0, pressure: 0.0, at: hourTime))
                 continue
             }
-            weather.append(HourlyWeather(temperature: temperature, windSpeed: windSpeed, windBearing: windBearing, at: hourTime))
+            weather.append(HourlyWeather(temperature: temperature, windSpeed: windSpeed, windBearing: windBearing, pressure: pressure, at: hourTime))
         }
         
         hourlyWeather = weather
