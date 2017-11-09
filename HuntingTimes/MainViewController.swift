@@ -55,7 +55,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         locationManager.requestAlwaysAuthorization()
         
         huntingControllers = []
