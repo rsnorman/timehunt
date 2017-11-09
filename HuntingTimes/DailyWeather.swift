@@ -55,7 +55,7 @@ class DailyWeather {
     }
     
     func hasCurrent() -> Bool {
-        return currentWeather != nil
+        return currentWeather != nil && isToday(date)
     }
     
     func currentTemperature() -> Int {
