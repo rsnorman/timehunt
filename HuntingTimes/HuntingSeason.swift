@@ -61,7 +61,7 @@ class HuntingSeason {
             self.delegate?.didChangeDay(currentHuntingDay)
         }) { () -> () in
             self.delegate?.didFailChangeDay()
-            completion(NSError(), currentHuntingDay)
+            completion(NSError.init(domain: "HuntingTimes", code: 1), currentHuntingDay)
         }
     }
     
