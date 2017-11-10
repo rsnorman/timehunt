@@ -290,11 +290,25 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        huntingSeason = HuntingSeason(startDate: Date(), endDate: HUNTING_SEASON_END_DATE, location: locations[0])
-        
-        mainView.dateTimeScroller.markCurrentProgress(huntingSeason.percentComplete())
-        
-        getDayForLocation()
+        if huntingSeason != nil {
+            huntingSeason.location = locations[0]
+            huntingSeason.fetchDay { (error, huntingDay) -> () in
+                DispatchQueue.main.async {
+                    if error == nil {
+                        self.timesPageController.setDay(huntingDay)
+                        self.temperaturePageController.setDay(huntingDay)
+                        self.windPageController.setDay(huntingDay)
+                        self.pressurePageController.setDay(huntingDay)
+                    } else {
+                        self.showErrorMessage(#selector(MainViewController.getDayForLocation))
+                    }
+                }
+            }
+        } else {
+            huntingSeason = HuntingSeason(startDate: Date(), endDate: HUNTING_SEASON_END_DATE, location: locations[0])
+            mainView.dateTimeScroller.markCurrentProgress(huntingSeason.percentComplete())
+            getDayForLocation()
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
