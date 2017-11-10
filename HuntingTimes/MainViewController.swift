@@ -114,7 +114,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     }
     
     @objc func showNextDate() {
-        if !huntingSeason.closingDay() {
+        if !viewingDatePicker && !huntingSeason.closingDay() {
             startLoadingDate()
             
             mainView.dateTimeScroller.setProgress(1, animate: true)
@@ -130,7 +130,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     }
     
     @objc func showPreviousDate() {
-        if !huntingSeason.openingDay() {
+        if !viewingDatePicker && !huntingSeason.openingDay() {
             startLoadingDate()
             
             mainView.dateTimeScroller.setProgress(0, animate: true)
