@@ -90,6 +90,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     
     @objc func findLocation() {
         startLoadingDate()
+        locationManager.distanceFilter = 1000
         locationManager.startUpdatingLocation()
     }
     
