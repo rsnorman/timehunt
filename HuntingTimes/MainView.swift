@@ -17,8 +17,6 @@ class MainView : UIView {
     let errorMessage       : ErrorMessageView
     let loadingIndicator   : UIActivityIndicatorView
     
-    let timeLineHeight   : Int = 200
-    
     override init(frame: CGRect) {
         let bgImage = UIImage(named: UserSettings.getBackgroundImage() as String)!
         bgImageView = TiltImageView(image: bgImage, frame: frame)
@@ -51,7 +49,11 @@ class MainView : UIView {
         addSubview(errorMessage)
         addSubview(loadingIndicator)
         addSubview(menuIcon)
-        
+    }
+    
+    func redrawDateScroller() {
+        let frame = dateTimeScroller.frame
+        dateTimeScroller.frame = createPageViewRect(0, width: frame.width, topPadding: 50)
     }
     
     func setDelegate(_ viewController: MainViewController) {

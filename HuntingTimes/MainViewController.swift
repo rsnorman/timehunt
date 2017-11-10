@@ -46,7 +46,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         
         viewingDatePicker = false
         
-        mainView = MainView(frame: view.frame)
+        mainView = MainView(frame: view.bounds)
         mainView.setDelegate(self)
         mainView.datePickerIcon.disable()
         view.addSubview(mainView)
@@ -63,7 +63,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         pageViewController!.dataSource = self
         pageViewController!.delegate = self
-        pageViewController!.view.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height);
+        pageViewController!.view.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: view.bounds.size.height);
         
         addChildViewController(pageViewController!)
         pageViewController!.view.alpha = 0
@@ -71,6 +71,13 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
         pageViewController!.didMove(toParentViewController: self)
         
         findLocation()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        mainView.frame = view.bounds
+        pageViewController!.view.frame = view.bounds
     }
     
     override func viewDidAppear(_ animated: Bool) {
