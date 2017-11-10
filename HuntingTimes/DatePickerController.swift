@@ -30,10 +30,10 @@ class DatePickerController: UIViewController, UIScrollViewDelegate {
         
         view.backgroundColor = .clear
         view.addSubview(datePickerLabel)
-        view.addSubview(monthColumnView)
+//        view.addSubview(monthColumnView)
         view.isUserInteractionEnabled = true
         
-        datePickerLabel.text = "Michigan\nDeer Season"
+        datePickerLabel.text = "Hunting Calendar"
         
         scrollView = UIScrollView(frame: createPageViewRect(0, width: frame.width))
         scrollView.contentSize = CGSize(width: view.frame.width, height: scrollView.frame.height * 2)
