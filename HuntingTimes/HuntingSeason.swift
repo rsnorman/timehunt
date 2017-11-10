@@ -70,10 +70,16 @@ class HuntingSeason {
     }
     
     func moveToNextDay() {
+        if (closingDay()) {
+            return
+        }
         currentPosition = currentPosition + 1
     }
     
     func moveToPreviousDay() {
+        if (openingDay()) {
+            return
+        }
         currentPosition = currentPosition - 1
     }
     
