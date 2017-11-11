@@ -130,13 +130,12 @@ class TimesColumns : HuntingColumnsView {
         if let label = findEventLabelFromTime(time) {
             let eventText = label.text!
             if let icons = notificationIcons[eventText] {
+                notificationIcons[eventText] = []
                 UIView.animate(withDuration: 0.3, animations: { () -> Void in
                     for icon in icons {
                         icon.frame = icon.frame.offsetBy(dx: 0, dy: 15)
                         icon.alpha = 0.0
                     }
-                }, completion: { (complete) -> Void in
-                    self.notificationIcons[eventText] = []
                 })
             }
         }
