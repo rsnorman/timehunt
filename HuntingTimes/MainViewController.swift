@@ -178,7 +178,7 @@ class MainViewController: UIViewController, UIPageViewControllerDataSource, Date
     }
     
     func showErrorMessage(_ retryAction: Selector) {
-        mainView.errorMessage.setMessage("Could not load weather data\nTap to retry")
+        mainView.errorMessage.setMessage("Could not load sunrise and sunset times\nTap to retry")
         mainView.errorMessage.setRetryAction(self, action: retryAction)
         mainView.stopLoadingIndicator()
         

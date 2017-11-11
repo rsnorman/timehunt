@@ -21,6 +21,7 @@ class MenuController : UIViewController {
     var delegate           : MenuControllerDelegate!
     let imageSize          : CGFloat = 70.0
     let imageMargin        : CGFloat = 45.0
+    var disclaimerLabel    : UILabel!
     
     override func viewDidLoad() {
         view.alpha = 0.0
@@ -56,6 +57,15 @@ class MenuController : UIViewController {
             view.addSubview(imageView)
             index += 1
         }
+        
+        disclaimerLabel = UILabel(frame: CGRect(x: 0, y: 500, width: view.frame.width, height: 30))
+        disclaimerLabel.text = "TimeHunt is meant to guide decisions around allowed hunting times. Please confer with all local regulations before hunting."
+        disclaimerLabel.textColor = .white
+        disclaimerLabel.font = UIFont.systemFont(ofSize: 12)
+        disclaimerLabel.lineBreakMode = .byWordWrapping
+        disclaimerLabel.numberOfLines = 0
+        disclaimerLabel.textAlignment = .center
+        view.addSubview(disclaimerLabel)
     }
     
     override func viewDidAppear(_ animate: Bool) {
